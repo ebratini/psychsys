@@ -35,8 +35,8 @@ public class ImageUtil {
 
     public static void main(String[] args) {
         args = new String[]{
-            "C:\\Users\\Edwin Bratini\\Pictures\\PsychSys\\busqueda rapida.png",
-            "C:\\Users\\Edwin Bratini\\Pictures\\PsychSys\\busqueda rapida.png"
+            "C:\\Users\\Edwin Bratini\\Pictures\\PsychSys\\pantalla inicial.png",
+            "C:\\Users\\Edwin Bratini\\Pictures\\PsychSys\\pantalla inicial.png"
         };
         BufferedImage bimImagetTransparented = makeColorTransparent(args[0], Color.white);
         saveImage(bimImagetTransparented, args[1]);
