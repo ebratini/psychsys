@@ -62,6 +62,7 @@ public class Login extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Log In");
         setModal(true);
+        setResizable(false);
 
         lblPsychSysLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/psych logo.png"))); // NOI18N
 

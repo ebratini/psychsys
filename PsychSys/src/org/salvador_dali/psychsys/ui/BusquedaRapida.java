@@ -77,6 +77,7 @@ public class BusquedaRapida extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Busqueda de Estudiantes");
         setModal(true);
+        setResizable(false);
 
         pnlOpBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones de Busqueda"));
         pnlOpBusqueda.setName("pnlOpBusqueda"); // NOI18N
@@ -178,7 +179,7 @@ public class BusquedaRapida extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(pnlOpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                         .addGap(10, 10, 10)
                         .addComponent(btnBuscar)))
                 .addContainerGap())
@@ -331,14 +332,8 @@ private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JLabel lblResultadosBusqueda;
     private javax.swing.JPanel pnlOpBusqueda;
     private javax.swing.JScrollPane scrEntidades;
-    private javax.swing.JLabel statusAnimationLabel;
-    private javax.swing.JLabel statusAnimationLabel1;
     private javax.swing.JLabel statusAnimationLabel2;
-    private javax.swing.JLabel statusMessageLabel;
-    private javax.swing.JLabel statusMessageLabel1;
     private javax.swing.JLabel statusMessageLabel2;
-    private javax.swing.JPanel statusPanel;
-    private javax.swing.JPanel statusPanel1;
     private javax.swing.JPanel statusPanel2;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
