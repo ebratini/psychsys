@@ -410,7 +410,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         //LookAndFeelSelector.printAvailableLAF();
         LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.WINDOWS);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setApplicationIcon(getResizableIconFromResource("/resources/imagenes/prebea_logo.png"));
+        setApplicationIcon(getResizableIconFromResource("/resources/images/psych logo2 65x65.png"));
         setPreferredSize(new Dimension(1100, 600));
         setLocationByPlatform(true);
         initJRibbon();
