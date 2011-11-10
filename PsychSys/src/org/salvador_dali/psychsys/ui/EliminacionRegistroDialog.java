@@ -23,20 +23,26 @@
  */
 
 /*
- * EliminacionRegistrosDialog.java
+ * EliminacionRegistroDialog.java
  *
  * Created on Nov 9, 2011, 12:45:12 PM
  */
 package org.salvador_dali.psychsys.ui;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class EliminacionRegistrosDialog extends javax.swing.JDialog {
+public class EliminacionRegistroDialog extends javax.swing.JDialog {
 
-    /** Creates new form EliminacionRegistrosDialog */
-    public EliminacionRegistrosDialog(java.awt.Frame parent, boolean modal) {
+    /** Creates new form EliminacionRegistroDialog */
+    public EliminacionRegistroDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -54,13 +60,13 @@ public class EliminacionRegistrosDialog extends javax.swing.JDialog {
         chkCambiarStatus = new javax.swing.JCheckBox();
         lblPsychSysLogo = new javax.swing.JLabel();
         btnSi = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        spnEntidadEliminar = new javax.swing.JScrollPane();
+        txaEntidadEliminar = new javax.swing.JTextArea();
         lblProgressBar = new javax.swing.JLabel();
         btnNo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Eliminar Registro [Estudiante]");
+        setTitle("Eliminar Registro [Estudiantes]");
         setModal(true);
         setResizable(false);
 
@@ -69,7 +75,7 @@ public class EliminacionRegistrosDialog extends javax.swing.JDialog {
         chkCambiarStatus.setSelected(true);
         chkCambiarStatus.setText("Solo cambiar status");
 
-        lblPsychSysLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/psych logo.png"))); // NOI18N
+        lblPsychSysLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/borrar estudiantes 65x65.png"))); // NOI18N
 
         btnSi.setText("Si");
         btnSi.addActionListener(new java.awt.event.ActionListener() {
@@ -78,14 +84,14 @@ public class EliminacionRegistrosDialog extends javax.swing.JDialog {
             }
         });
 
-        jTextArea1.setBackground(java.awt.SystemColor.control);
-        jTextArea1.setColumns(20);
-        jTextArea1.setEditable(false);
-        jTextArea1.setRows(3);
-        jTextArea1.setText("Id: 2010-10\nNombre: Bratini G., Edwin A.\nCurso: 4to de Media");
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setAutoscrolls(false);
-        jScrollPane1.setViewportView(jTextArea1);
+        txaEntidadEliminar.setBackground(java.awt.SystemColor.control);
+        txaEntidadEliminar.setColumns(20);
+        txaEntidadEliminar.setEditable(false);
+        txaEntidadEliminar.setRows(3);
+        txaEntidadEliminar.setText("Id: 2010-10\nNombre: Bratini G., Edwin A.\nCurso: 4to de Media");
+        txaEntidadEliminar.setWrapStyleWord(true);
+        txaEntidadEliminar.setAutoscrolls(false);
+        spnEntidadEliminar.setViewportView(txaEntidadEliminar);
 
         lblProgressBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
 
@@ -96,15 +102,18 @@ public class EliminacionRegistrosDialog extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblPsychSysLogo)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMensajeEliminacion)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblPsychSysLogo)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spnEntidadEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                            .addComponent(lblMensajeEliminacion)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
                         .addComponent(chkCambiarStatus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(lblProgressBar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,15 +129,20 @@ public class EliminacionRegistrosDialog extends javax.swing.JDialog {
                     .addComponent(lblPsychSysLogo)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMensajeEliminacion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spnEntidadEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSi, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addComponent(chkCambiarStatus))
-                    .addComponent(lblProgressBar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSi, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                            .addComponent(lblProgressBar))))
                 .addContainerGap())
         );
 
@@ -156,13 +170,13 @@ private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminacionRegistrosDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminacionRegistroDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminacionRegistrosDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminacionRegistroDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminacionRegistrosDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminacionRegistroDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminacionRegistrosDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminacionRegistroDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -170,7 +184,7 @@ private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                EliminacionRegistrosDialog dialog = new EliminacionRegistrosDialog(new javax.swing.JFrame(), true);
+                EliminacionRegistroDialog dialog = new EliminacionRegistroDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     @Override
@@ -182,14 +196,78 @@ private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
             }
         });
     }
+
+    public JButton getBtnNo() {
+        return btnNo;
+    }
+
+    public void setBtnNo(JButton btnNo) {
+        this.btnNo = btnNo;
+    }
+
+    public JButton getBtnSi() {
+        return btnSi;
+    }
+
+    public void setBtnSi(JButton btnSi) {
+        this.btnSi = btnSi;
+    }
+
+    public JCheckBox getChkCambiarStatus() {
+        return chkCambiarStatus;
+    }
+
+    public void setChkCambiarStatus(JCheckBox chkCambiarStatus) {
+        this.chkCambiarStatus = chkCambiarStatus;
+    }
+
+    public JLabel getLblMensajeEliminacion() {
+        return lblMensajeEliminacion;
+    }
+
+    public void setLblMensajeEliminacion(JLabel lblMensajeEliminacion) {
+        this.lblMensajeEliminacion = lblMensajeEliminacion;
+    }
+
+    public JLabel getLblProgressBar() {
+        return lblProgressBar;
+    }
+
+    public void setLblProgressBar(JLabel lblProgressBar) {
+        this.lblProgressBar = lblProgressBar;
+    }
+
+    public JLabel getLblPsychSysLogo() {
+        return lblPsychSysLogo;
+    }
+
+    public void setLblPsychSysLogo(JLabel lblPsychSysLogo) {
+        this.lblPsychSysLogo = lblPsychSysLogo;
+    }
+
+    public JScrollPane getSpnEntidadEliminar() {
+        return spnEntidadEliminar;
+    }
+
+    public void setSpnEntidadEliminar(JScrollPane spnEntidadEliminar) {
+        this.spnEntidadEliminar = spnEntidadEliminar;
+    }
+
+    public JTextArea getTxaEntidadEliminar() {
+        return txaEntidadEliminar;
+    }
+
+    public void setTxaEntidadEliminar(JTextArea txaEntidadEliminar) {
+        this.txaEntidadEliminar = txaEntidadEliminar;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNo;
     private javax.swing.JButton btnSi;
     private javax.swing.JCheckBox chkCambiarStatus;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblMensajeEliminacion;
     private javax.swing.JLabel lblProgressBar;
     private javax.swing.JLabel lblPsychSysLogo;
+    private javax.swing.JScrollPane spnEntidadEliminar;
+    private javax.swing.JTextArea txaEntidadEliminar;
     // End of variables declaration//GEN-END:variables
 }
