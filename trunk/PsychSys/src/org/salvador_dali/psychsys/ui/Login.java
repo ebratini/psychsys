@@ -29,6 +29,8 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import org.salvador_dali.psychsys.model.Usuario;
+
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
@@ -177,4 +179,12 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JPasswordField psfContrasenia;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    Usuario getUsuario() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    Object getTxtlNombreUsuario() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
