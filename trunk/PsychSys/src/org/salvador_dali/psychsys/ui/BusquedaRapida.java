@@ -66,7 +66,6 @@ public class BusquedaRapida extends javax.swing.JDialog {
         txtBusqueda = new javax.swing.JTextField();
         btnSeleccionar = new javax.swing.JButton();
         lblResultadosBusqueda = new javax.swing.JLabel();
-        lblProgressBar1 = new javax.swing.JLabel();
         statusPanel2 = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator2 = new javax.swing.JSeparator();
         statusMessageLabel2 = new javax.swing.JLabel();
@@ -158,8 +157,6 @@ public class BusquedaRapida extends javax.swing.JDialog {
 
         lblResultadosBusqueda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lblProgressBar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -172,14 +169,12 @@ public class BusquedaRapida extends javax.swing.JDialog {
                         .addComponent(lblEntidades)
                         .addGap(84, 84, 84)
                         .addComponent(lblResultadosBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
-                        .addComponent(lblProgressBar1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                         .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(pnlOpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                         .addGap(10, 10, 10)
                         .addComponent(btnBuscar)))
                 .addContainerGap())
@@ -200,14 +195,16 @@ public class BusquedaRapida extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblEntidades)
                         .addComponent(lblResultadosBusqueda))
-                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProgressBar1))
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrEntidades, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
+        statusMessageLabel2.setForeground(new java.awt.Color(0, 153, 51));
+
         statusAnimationLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        statusAnimationLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
 
         javax.swing.GroupLayout statusPanel2Layout = new javax.swing.GroupLayout(statusPanel2);
         statusPanel2.setLayout(statusPanel2Layout);
@@ -217,7 +214,7 @@ public class BusquedaRapida extends javax.swing.JDialog {
             .addGroup(statusPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 617, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 597, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel2)
                 .addContainerGap())
         );
@@ -225,26 +222,26 @@ public class BusquedaRapida extends javax.swing.JDialog {
             statusPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statusPanel2Layout.createSequentialGroup()
                 .addComponent(statusPanelSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(statusPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(statusPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(statusMessageLabel2)
                     .addComponent(statusAnimationLabel2))
-                .addGap(3, 3, 3))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(statusPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statusPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(statusPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -328,12 +325,17 @@ private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private javax.swing.JTable jtbEntidades;
     private javax.swing.JLabel lblEntidades;
     private javax.swing.JLabel lblProgressBar;
-    private javax.swing.JLabel lblProgressBar1;
     private javax.swing.JLabel lblResultadosBusqueda;
     private javax.swing.JPanel pnlOpBusqueda;
     private javax.swing.JScrollPane scrEntidades;
+    private javax.swing.JLabel statusAnimationLabel;
+    private javax.swing.JLabel statusAnimationLabel1;
     private javax.swing.JLabel statusAnimationLabel2;
+    private javax.swing.JLabel statusMessageLabel;
+    private javax.swing.JLabel statusMessageLabel1;
     private javax.swing.JLabel statusMessageLabel2;
+    private javax.swing.JPanel statusPanel;
+    private javax.swing.JPanel statusPanel1;
     private javax.swing.JPanel statusPanel2;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
