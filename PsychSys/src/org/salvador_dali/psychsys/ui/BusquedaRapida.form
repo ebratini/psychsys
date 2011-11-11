@@ -34,8 +34,8 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="statusPanel2" alignment="0" max="32767" attributes="1"/>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="statusPanel2" alignment="0" max="32767" attributes="1"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -43,7 +43,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Component id="jPanel1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="statusPanel2" min="-2" max="-2" attributes="0"/>
+              <Component id="statusPanel2" min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,15 +62,13 @@
                           <Component id="lblEntidades" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                           <Component id="lblResultadosBusqueda" min="-2" pref="263" max="-2" attributes="0"/>
-                          <EmptySpace pref="152" max="32767" attributes="0"/>
-                          <Component id="lblProgressBar1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace pref="190" max="32767" attributes="0"/>
                           <Component id="btnSeleccionar" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="pnlOpBusqueda" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtBusqueda" pref="337" max="32767" attributes="0"/>
+                          <Component id="txtBusqueda" pref="341" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -100,7 +98,6 @@
                           <Component id="lblResultadosBusqueda" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btnSeleccionar" min="-2" pref="24" max="-2" attributes="1"/>
-                      <Component id="lblProgressBar1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="scrEntidades" min="-2" pref="147" max="-2" attributes="0"/>
@@ -235,13 +232,6 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblProgressBar1">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/resources/images/circle progress bar 20x20.png"/>
-            </Property>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="statusPanel2">
@@ -253,7 +243,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="617" max="32767" attributes="0"/>
+                  <EmptySpace pref="597" max="32767" attributes="0"/>
                   <Component id="statusAnimationLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -263,12 +253,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="statusPanelSeparator2" min="-2" pref="2" max="-2" attributes="0"/>
-                  <EmptySpace pref="18" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="statusMessageLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="statusAnimationLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="statusMessageLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="statusAnimationLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -281,10 +271,18 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="statusMessageLabel2">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="statusAnimationLabel2">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="2"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/images/circle progress bar 20x20.png"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>

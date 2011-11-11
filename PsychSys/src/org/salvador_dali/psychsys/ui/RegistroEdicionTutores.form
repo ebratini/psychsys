@@ -3,7 +3,7 @@
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Registro de Tutores"/>
+    <Property name="title" type="java.lang.String" value="Registrar Tutor"/>
     <Property name="iconImage" type="java.awt.Image" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <Connection code="Toolkit.getDefaultToolkit().getImage(getClass().getResource(&quot;/resources/images/psych logo.png&quot;))" type="code"/>
     </Property>
@@ -27,9 +27,8 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="statusPanel" alignment="0" max="32767" attributes="1"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="650" max="32767" attributes="0"/>
+              <EmptySpace pref="500" max="32767" attributes="0"/>
               <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
@@ -40,6 +39,7 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
+          <Component id="statusPanel" alignment="0" max="32767" attributes="1"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -47,13 +47,13 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCancelar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="btnAceptar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="btnCancelar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="statusPanel" min="-2" max="-2" attributes="0"/>
+              <Component id="statusPanel" min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,58 +62,19 @@
     <Component class="javax.swing.JButton" name="btnAceptar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="btnCancelar"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="txtDni"/>
+        </Property>
       </Properties>
     </Component>
-    <Container class="javax.swing.JPanel" name="statusPanel">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="statusPanelSeparator" alignment="0" pref="824" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="804" max="32767" attributes="0"/>
-                  <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="statusPanelSeparator" min="-2" pref="2" max="-2" attributes="0"/>
-                  <EmptySpace pref="18" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="statusMessageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="statusAnimationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JSeparator" name="statusPanelSeparator">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="statusMessageLabel">
-        </Component>
-        <Component class="javax.swing.JLabel" name="statusAnimationLabel">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -128,17 +89,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="pnlTutInfoPersonal" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="pnlTutInfoContacto" min="-2" max="-2" attributes="1"/>
-                      <Group type="102" attributes="0">
-                          <Component id="lblRegStatus" pref="412" max="32767" attributes="1"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblProgressBar" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="pnlTutInfoContacto" alignment="0" max="32767" attributes="1"/>
+                      <Component id="pnlTutInfoPersonal" alignment="0" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -146,17 +101,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="1">
-                          <Component id="pnlTutInfoContacto" min="-2" max="-2" attributes="1"/>
-                          <EmptySpace pref="110" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblRegStatus" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblProgressBar" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Component id="pnlTutInfoPersonal" alignment="0" min="-2" max="-2" attributes="1"/>
-                  </Group>
+                  <Component id="pnlTutInfoPersonal" min="-2" max="-2" attributes="1"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="pnlTutInfoContacto" min="-2" max="-2" attributes="1"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -176,45 +123,56 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblGenero" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEstadoCivil" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDni" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTipoDni" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblSegundoNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPrimerApellido" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPrimerNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSegundoApellido" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNacionalidad" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtPrimerApellido" max="32767" attributes="1"/>
+                          <Component id="cmbTipoDni" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDni" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                          <Component id="txtPrimerNombre" alignment="0" pref="196" max="32767" attributes="1"/>
+                          <Component id="txtSegundoNombre" alignment="0" max="32767" attributes="1"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtNacionalidad" max="32767" attributes="1"/>
-                                  <Component id="txtSegundoApellido" max="32767" attributes="1"/>
-                                  <Component id="txtPrimerApellido" max="32767" attributes="1"/>
-                                  <Component id="cmbTipoDni" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtDni" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                                  <Component id="txtPrimerNombre" alignment="0" pref="196" max="32767" attributes="1"/>
-                                  <Component id="txtSegundoNombre" alignment="0" max="32767" attributes="1"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblPrimerNombreValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDniValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblPrimerNombreValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblPrimerApellidoValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblSegApellidoValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblNacionalidadValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblGeneroValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblEstadoCivilValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDniValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblTipoDniValMarker" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblGenero" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEstadoCivil" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSegundoApellido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNacionalidad" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtNacionalidad" max="32767" attributes="1"/>
+                                          <Component id="txtSegundoApellido" alignment="0" min="-2" pref="196" max="-2" attributes="1"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblSegApellidoValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblNacionalidadValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="cmbGenero" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbEstadoCivil" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="cmbGenero" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbEstadoCivil" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPrimerApellidoValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -222,57 +180,59 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblDniValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblTipoDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbTipoDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTipoDniValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPrimerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPrimerNombreValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblSegundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSegundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPrimerApellidoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSegApellidoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNacionalidadValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblGenero" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbGenero" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblGeneroValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblEstadoCivil" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbEstadoCivil" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEstadoCivilValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSegApellidoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNacionalidadValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblGenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbGenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblEstadoCivil" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbEstadoCivil" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDniValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblTipoDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbTipoDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblPrimerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPrimerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPrimerNombreValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblSegundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSegundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblPrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPrimerApellidoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -286,6 +246,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDni">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="cmbTipoDni"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTipoDni">
               <Properties>
@@ -301,6 +266,9 @@
                     <StringItem index="2" value="NSS"/>
                   </StringArray>
                 </Property>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtPrimerNombre"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblPrimerNombre">
@@ -309,6 +277,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrimerNombre">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtSegundoNombre"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPrimerNombreActionPerformed"/>
               </Events>
@@ -319,6 +292,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSegundoNombre">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtPrimerApellido"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblPrimerApellido">
               <Properties>
@@ -326,6 +304,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtPrimerApellido">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtSegundoApellido"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblSegundoApellido">
               <Properties>
@@ -333,6 +316,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtSegundoApellido">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtNacionalidad"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNacionalidad">
               <Properties>
@@ -340,6 +328,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNacionalidad">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="cmbGenero"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblGenero">
               <Properties>
@@ -354,6 +347,9 @@
                     <StringItem index="1" value="Femenino"/>
                   </StringArray>
                 </Property>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="cmbEstadoCivil"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblEstadoCivil">
@@ -364,13 +360,15 @@
             <Component class="javax.swing.JComboBox" name="cmbEstadoCivil">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
-                    <StringItem index="0" value="Seleccion"/>
-                    <StringItem index="1" value="Casado(a)"/>
-                    <StringItem index="2" value="Soltero(a)"/>
-                    <StringItem index="3" value="Divorciado(a)"/>
-                    <StringItem index="4" value="Viudo(a)"/>
+                  <StringArray count="4">
+                    <StringItem index="0" value="Casado(a)"/>
+                    <StringItem index="1" value="Soltero(a)"/>
+                    <StringItem index="2" value="Divorciado(a)"/>
+                    <StringItem index="3" value="Viudo(a)"/>
                   </StringArray>
+                </Property>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="ftfTelefono"/>
                 </Property>
               </Properties>
             </Component>
@@ -381,16 +379,6 @@
                 </Property>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="txtDni"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblTipoDniValMarker">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="ff" type="rgb"/>
-                </Property>
-                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="cmbTipoDni"/>
                 </Property>
               </Properties>
             </Component>
@@ -435,26 +423,6 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblGeneroValMarker">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="ff" type="rgb"/>
-                </Property>
-                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="cmbGenero"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblEstadoCivilValMarker">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="ff" type="rgb"/>
-                </Property>
-                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="cmbEstadoCivil"/>
-                </Property>
-              </Properties>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pnlTutInfoContacto">
@@ -494,7 +462,7 @@
                           </Group>
                           <Component id="ftfTelefono" min="-2" pref="155" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace pref="212" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -541,6 +509,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtEmail">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtDir1"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblDireccion">
               <Properties>
@@ -548,8 +521,18 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDir1">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtDir2"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDir2">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnAceptar"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTelMarker">
               <Properties>
@@ -592,19 +575,63 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="ftfTelefono">
+              <Properties>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtEmail"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lblRegStatus">
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="statusPanel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="statusPanelSeparator" alignment="0" pref="674" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="484" max="32767" attributes="0"/>
+                  <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="statusPanelSeparator" min="-2" pref="2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="statusMessageLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="statusAnimationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JSeparator" name="statusPanelSeparator">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="statusMessageLabel">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="99" red="0" type="rgb"/>
+              <Color blue="33" green="99" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Registro agregado exitosamente."/>
+            <Property name="text" type="java.lang.String" value="Tutor registrado exitosamente."/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblProgressBar">
+        <Component class="javax.swing.JLabel" name="statusAnimationLabel">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/resources/images/circle progress bar 20x20.png"/>
             </Property>
