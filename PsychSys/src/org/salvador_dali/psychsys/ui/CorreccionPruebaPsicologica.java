@@ -59,7 +59,7 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
         btnCorregir = new javax.swing.JButton();
         btnQuitar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tpnCorreccionPrueba = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         statusPanel = new javax.swing.JPanel();
@@ -135,7 +135,7 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
             .addGap(0, 392, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab1", jPanel3);
+        tpnCorreccionPrueba.addTab("Preview", jPanel3);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -148,7 +148,7 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
             .addGap(0, 392, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", jPanel4);
+        tpnCorreccionPrueba.addTab("Resultados", jPanel4);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,7 +158,7 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(tpnCorreccionPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -167,7 +167,7 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
+                    .addComponent(tpnCorreccionPrueba, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -283,10 +283,10 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JList lstPruebas;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JTabbedPane tpnCorreccionPrueba;
     // End of variables declaration//GEN-END:variables
 }
