@@ -106,10 +106,8 @@
                       <Component id="lblReferimientoValMarker" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Component id="btnBuscarEstudiante" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="lblReferimiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtReferimiento" alignment="0" max="32767" attributes="1"/>
-                          </Group>
+                          <Component id="txtReferimiento" alignment="0" max="32767" attributes="1"/>
+                          <Component id="lblReferimiento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
