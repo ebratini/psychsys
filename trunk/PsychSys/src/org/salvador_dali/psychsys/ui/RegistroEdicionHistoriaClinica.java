@@ -29,6 +29,8 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
@@ -49,17 +51,265 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        lblFecha = new javax.swing.JLabel();
+        ftfFecha = new javax.swing.JFormattedTextField();
+        lblEstudiante = new javax.swing.JLabel();
+        txtEstudiante = new javax.swing.JTextField();
+        btnBuscarEstudiante = new javax.swing.JButton();
+        lblEstudianteValMarker = new javax.swing.JLabel();
+        lblFechaValMarker = new javax.swing.JLabel();
+        pnlAntecedentesEscolaridad = new javax.swing.JPanel();
+        lblAntPersMadre = new javax.swing.JLabel();
+        btnRegistrarAntMadre = new javax.swing.JButton();
+        lblAntNeonatal = new javax.swing.JLabel();
+        btnRegistrarAntNeonatal = new javax.swing.JButton();
+        lblAntRecienNacido = new javax.swing.JLabel();
+        btnRegistrarAntRecienNacido = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnRegistrarAntPsicomotrizLenguaje = new javax.swing.JButton();
+        lblAntPsicosocialSexual = new javax.swing.JLabel();
+        btnRegistrarAntPsicosocialSexual = new javax.swing.JButton();
+        lblEscolaridad = new javax.swing.JLabel();
+        btnRegistrarEscolaridad = new javax.swing.JButton();
+        statusPanel = new javax.swing.JPanel();
+        javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
+        statusMessageLabel = new javax.swing.JLabel();
+        statusAnimationLabel = new javax.swing.JLabel();
+        btnAceptar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        pnlAntEscolaridadBody = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registrar Historia Clinica Infantil");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
+        setResizable(false);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Historia"));
+
+        lblFecha.setText("Fecha");
+
+        lblEstudiante.setText("Estudiante");
+
+        btnBuscarEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
+
+        lblEstudianteValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblEstudianteValMarker.setToolTipText("");
+
+        lblFechaValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblFechaValMarker.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFecha)
+                    .addComponent(lblEstudiante))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFechaValMarker)
+                    .addComponent(lblEstudianteValMarker))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFecha)
+                    .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFechaValMarker))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblEstudiante)
+                        .addComponent(txtEstudiante))
+                    .addComponent(lblEstudianteValMarker))
+                .addContainerGap())
+        );
+
+        pnlAntecedentesEscolaridad.setBorder(javax.swing.BorderFactory.createTitledBorder("Antecedentes y Escolaridad"));
+
+        lblAntPersMadre.setText("Antecedentes Personal Madre");
+
+        btnRegistrarAntMadre.setText("Registrar");
+
+        lblAntNeonatal.setText("Antecedentes Neonatal");
+
+        btnRegistrarAntNeonatal.setText("Registrar");
+
+        lblAntRecienNacido.setText("Antecedentes Recien Nacido");
+
+        btnRegistrarAntRecienNacido.setText("Registrar");
+
+        jLabel1.setText("Antecedentes Psicomotriz-Lenguaje");
+
+        btnRegistrarAntPsicomotrizLenguaje.setText("Registrar");
+
+        lblAntPsicosocialSexual.setText("Antecedentes Psicosocial-Sexual");
+
+        btnRegistrarAntPsicosocialSexual.setText("Registrar");
+
+        lblEscolaridad.setText("Escolaridad");
+
+        btnRegistrarEscolaridad.setText("Registrar");
+
+        javax.swing.GroupLayout pnlAntecedentesEscolaridadLayout = new javax.swing.GroupLayout(pnlAntecedentesEscolaridad);
+        pnlAntecedentesEscolaridad.setLayout(pnlAntecedentesEscolaridadLayout);
+        pnlAntecedentesEscolaridadLayout.setHorizontalGroup(
+            pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAntPsicosocialSexual)
+                    .addComponent(lblAntNeonatal)
+                    .addComponent(lblAntPersMadre)
+                    .addComponent(jLabel1)
+                    .addComponent(lblAntRecienNacido)
+                    .addComponent(lblEscolaridad))
+                .addGap(110, 110, 110)
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                        .addComponent(btnRegistrarAntMadre)
+                        .addContainerGap())
+                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                        .addComponent(btnRegistrarAntNeonatal)
+                        .addContainerGap())
+                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                        .addComponent(btnRegistrarAntRecienNacido)
+                        .addContainerGap())
+                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                        .addComponent(btnRegistrarAntPsicomotrizLenguaje)
+                        .addContainerGap())
+                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                        .addComponent(btnRegistrarAntPsicosocialSexual)
+                        .addContainerGap())
+                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                        .addComponent(btnRegistrarEscolaridad)
+                        .addContainerGap())))
+        );
+        pnlAntecedentesEscolaridadLayout.setVerticalGroup(
+            pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAntPersMadre)
+                    .addComponent(btnRegistrarAntMadre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAntNeonatal)
+                    .addComponent(btnRegistrarAntNeonatal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAntRecienNacido)
+                    .addComponent(btnRegistrarAntRecienNacido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnRegistrarAntPsicomotrizLenguaje))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAntPsicosocialSexual)
+                    .addComponent(btnRegistrarAntPsicosocialSexual))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrarEscolaridad)
+                    .addComponent(lblEscolaridad)))
+        );
+
+        statusMessageLabel.setForeground(new java.awt.Color(0, 153, 51));
+        statusMessageLabel.setText("Historia clinica registrada exitosamente.");
+
+        statusAnimationLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        statusAnimationLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
+
+        javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
+        statusPanel.setLayout(statusPanelLayout);
+        statusPanelLayout.setHorizontalGroup(
+            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+            .addGroup(statusPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(statusMessageLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addComponent(statusAnimationLabel)
+                .addContainerGap())
+        );
+        statusPanelLayout.setVerticalGroup(
+            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statusPanelLayout.createSequentialGroup()
+                .addComponent(statusPanelSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(statusMessageLabel)
+                    .addComponent(statusAnimationLabel))
+                .addContainerGap())
+        );
+
+        btnAceptar.setText("Aceptar");
+
+        btnCancelar.setText("Cancelar");
+
+        pnlAntEscolaridadBody.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        javax.swing.GroupLayout pnlAntEscolaridadBodyLayout = new javax.swing.GroupLayout(pnlAntEscolaridadBody);
+        pnlAntEscolaridadBody.setLayout(pnlAntEscolaridadBodyLayout);
+        pnlAntEscolaridadBodyLayout.setHorizontalGroup(
+            pnlAntEscolaridadBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 392, Short.MAX_VALUE)
+        );
+        pnlAntEscolaridadBodyLayout.setVerticalGroup(
+            pnlAntEscolaridadBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(248, Short.MAX_VALUE)
+                .addComponent(btnAceptar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancelar)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnlAntecedentesEscolaridad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlAntEscolaridadBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlAntecedentesEscolaridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlAntEscolaridadBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -76,7 +326,7 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -101,5 +351,32 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnBuscarEstudiante;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRegistrarAntMadre;
+    private javax.swing.JButton btnRegistrarAntNeonatal;
+    private javax.swing.JButton btnRegistrarAntPsicomotrizLenguaje;
+    private javax.swing.JButton btnRegistrarAntPsicosocialSexual;
+    private javax.swing.JButton btnRegistrarAntRecienNacido;
+    private javax.swing.JButton btnRegistrarEscolaridad;
+    private javax.swing.JFormattedTextField ftfFecha;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAntNeonatal;
+    private javax.swing.JLabel lblAntPersMadre;
+    private javax.swing.JLabel lblAntPsicosocialSexual;
+    private javax.swing.JLabel lblAntRecienNacido;
+    private javax.swing.JLabel lblEscolaridad;
+    private javax.swing.JLabel lblEstudiante;
+    private javax.swing.JLabel lblEstudianteValMarker;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblFechaValMarker;
+    private javax.swing.JPanel pnlAntEscolaridadBody;
+    private javax.swing.JPanel pnlAntecedentesEscolaridad;
+    private javax.swing.JLabel statusAnimationLabel;
+    private javax.swing.JLabel statusMessageLabel;
+    private javax.swing.JPanel statusPanel;
+    private javax.swing.JTextField txtEstudiante;
     // End of variables declaration//GEN-END:variables
 }
