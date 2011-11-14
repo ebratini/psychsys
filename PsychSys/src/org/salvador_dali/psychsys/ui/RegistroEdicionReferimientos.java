@@ -72,6 +72,8 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
         ftfFecha = new javax.swing.JFormattedTextField();
         lblFecha = new javax.swing.JLabel();
         lblFechaValMarker = new javax.swing.JLabel();
+        lblFechaValMarker1 = new javax.swing.JLabel();
+        lblAnioEscolarValMarker1 = new javax.swing.JLabel();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -128,6 +130,10 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
         lblFechaValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblFechaValMarker.setLabelFor(ftfFecha);
 
+        lblFechaValMarker1.setForeground(new java.awt.Color(255, 51, 51));
+
+        lblAnioEscolarValMarker1.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,23 +149,24 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
                     .addComponent(lblFecha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtEstudiante)
-                            .addComponent(txtReferidor, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ftfAnioEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2)
+                    .addComponent(txtReferidor)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblMotivoRefValMarker)
                     .addComponent(lblReferidorValMarker)
                     .addComponent(lblEstudianteValMarker)
                     .addComponent(lblAnioEscolarValMarker)
-                    .addComponent(lblFechaValMarker))
+                    .addComponent(lblFechaValMarker)
+                    .addComponent(lblFechaValMarker1)
+                    .addComponent(lblAnioEscolarValMarker1))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -168,24 +175,26 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblAnioEscolarValMarker)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblEstudianteValMarker))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblFecha)
                             .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFechaValMarker))
+                            .addComponent(lblFechaValMarker)
+                            .addComponent(lblFechaValMarker1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAnioEscolar)
-                            .addComponent(ftfAnioEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ftfAnioEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAnioEscolarValMarker1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblEstudiante)
-                                .addComponent(txtEstudiante))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblAnioEscolarValMarker)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblEstudianteValMarker)))
+                                .addComponent(txtEstudiante)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblReferidor)
@@ -195,9 +204,10 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMotivoReferimiento)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addComponent(lblMotivoReferimiento))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAccionesReferidor)))
@@ -317,10 +327,12 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
     private javax.swing.JLabel lblAccionesReferidor;
     private javax.swing.JLabel lblAnioEscolar;
     private javax.swing.JLabel lblAnioEscolarValMarker;
+    private javax.swing.JLabel lblAnioEscolarValMarker1;
     private javax.swing.JLabel lblEstudiante;
     private javax.swing.JLabel lblEstudianteValMarker;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFechaValMarker;
+    private javax.swing.JLabel lblFechaValMarker1;
     private javax.swing.JLabel lblMotivoRefValMarker;
     private javax.swing.JLabel lblMotivoReferimiento;
     private javax.swing.JLabel lblReferidor;
