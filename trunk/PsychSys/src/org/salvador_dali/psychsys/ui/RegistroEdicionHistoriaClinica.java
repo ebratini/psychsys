@@ -59,26 +59,40 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         btnBuscarEstudiante = new javax.swing.JButton();
         lblEstudianteValMarker = new javax.swing.JLabel();
         lblFechaValMarker = new javax.swing.JLabel();
-        pnlAntecedentesEscolaridad = new javax.swing.JPanel();
-        lblAntPersMadre = new javax.swing.JLabel();
-        btnRegistrarAntMadre = new javax.swing.JButton();
-        lblAntNeonatal = new javax.swing.JLabel();
-        btnRegistrarAntNeonatal = new javax.swing.JButton();
-        lblAntRecienNacido = new javax.swing.JLabel();
-        btnRegistrarAntRecienNacido = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        btnRegistrarAntPsicomotrizLenguaje = new javax.swing.JButton();
-        lblAntPsicosocialSexual = new javax.swing.JLabel();
-        btnRegistrarAntPsicosocialSexual = new javax.swing.JButton();
-        lblEscolaridad = new javax.swing.JLabel();
-        btnRegistrarEscolaridad = new javax.swing.JButton();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        pnlAntEscolaridadBody = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jPanel3 = new javax.swing.JPanel();
+        lblEmbarazo = new javax.swing.JLabel();
+        cmbEmbarazo = new javax.swing.JComboBox();
+        lblDuracionEmbarazo = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        lblMeses = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        cmbEmbarazo1 = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        cmbEmbarazo2 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList();
+        jLabel4 = new javax.swing.JLabel();
+        cmbEmbarazo3 = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cmbEmbarazo4 = new javax.swing.JComboBox();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Historia Clinica Infantil");
@@ -138,95 +152,6 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlAntecedentesEscolaridad.setBorder(javax.swing.BorderFactory.createTitledBorder("Antecedentes y Escolaridad"));
-
-        lblAntPersMadre.setText("Antecedentes Personal Madre");
-
-        btnRegistrarAntMadre.setText("Registrar");
-
-        lblAntNeonatal.setText("Antecedentes Neonatal");
-
-        btnRegistrarAntNeonatal.setText("Registrar");
-
-        lblAntRecienNacido.setText("Antecedentes Recien Nacido");
-
-        btnRegistrarAntRecienNacido.setText("Registrar");
-
-        jLabel1.setText("Antecedentes Psicomotriz-Lenguaje");
-
-        btnRegistrarAntPsicomotrizLenguaje.setText("Registrar");
-
-        lblAntPsicosocialSexual.setText("Antecedentes Psicosocial-Sexual");
-
-        btnRegistrarAntPsicosocialSexual.setText("Registrar");
-
-        lblEscolaridad.setText("Escolaridad");
-
-        btnRegistrarEscolaridad.setText("Registrar");
-
-        javax.swing.GroupLayout pnlAntecedentesEscolaridadLayout = new javax.swing.GroupLayout(pnlAntecedentesEscolaridad);
-        pnlAntecedentesEscolaridad.setLayout(pnlAntecedentesEscolaridadLayout);
-        pnlAntecedentesEscolaridadLayout.setHorizontalGroup(
-            pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAntPsicosocialSexual)
-                    .addComponent(lblAntNeonatal)
-                    .addComponent(lblAntPersMadre)
-                    .addComponent(jLabel1)
-                    .addComponent(lblAntRecienNacido)
-                    .addComponent(lblEscolaridad))
-                .addGap(110, 110, 110)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(btnRegistrarAntMadre)
-                        .addContainerGap())
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(btnRegistrarAntNeonatal)
-                        .addContainerGap())
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(btnRegistrarAntRecienNacido)
-                        .addContainerGap())
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(btnRegistrarAntPsicomotrizLenguaje)
-                        .addContainerGap())
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(btnRegistrarAntPsicosocialSexual)
-                        .addContainerGap())
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(btnRegistrarEscolaridad)
-                        .addContainerGap())))
-        );
-        pnlAntecedentesEscolaridadLayout.setVerticalGroup(
-            pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAntPersMadre)
-                    .addComponent(btnRegistrarAntMadre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAntNeonatal)
-                    .addComponent(btnRegistrarAntNeonatal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAntRecienNacido)
-                    .addComponent(btnRegistrarAntRecienNacido))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnRegistrarAntPsicomotrizLenguaje))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAntPsicosocialSexual)
-                    .addComponent(btnRegistrarAntPsicosocialSexual))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrarEscolaridad)
-                    .addComponent(lblEscolaridad)))
-        );
-
         statusMessageLabel.setForeground(new java.awt.Color(0, 153, 51));
         statusMessageLabel.setText("Historia clinica registrada exitosamente.");
 
@@ -237,11 +162,11 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -260,39 +185,180 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
 
         btnCancelar.setText("Cancelar");
 
-        pnlAntEscolaridadBody.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Antecedentes y Escolaridad"));
 
-        javax.swing.GroupLayout pnlAntEscolaridadBodyLayout = new javax.swing.GroupLayout(pnlAntEscolaridadBody);
-        pnlAntEscolaridadBody.setLayout(pnlAntEscolaridadBodyLayout);
-        pnlAntEscolaridadBodyLayout.setHorizontalGroup(
-            pnlAntEscolaridadBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 392, Short.MAX_VALUE)
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Antecedentes Personales Madre", "Antecedentes Neonatal", "Antecedentes Recien Nacido", "Antecedentes Psicomotriz-Lenguaje", "Antecedentes Psicosocial-Sexual", "Escolaridad" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setVisibleRowCount(6);
+        jScrollPane1.setViewportView(jList1);
+
+        jSplitPane1.setTopComponent(jScrollPane1);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Antecedentes Personales Madre"));
+
+        lblEmbarazo.setText("Embarazo");
+
+        cmbEmbarazo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Si", "No" }));
+
+        lblDuracionEmbarazo.setText("Duracion Embarazo");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        lblMeses.setText("Meses");
+
+        jLabel1.setText("Amenaza de Aborto");
+
+        cmbEmbarazo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Si", "No" }));
+
+        jLabel2.setText("Intento de Aborto");
+
+        cmbEmbarazo2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Si", "No" }));
+
+        jLabel3.setText("Habitos Toxicos");
+
+        jList2.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList2);
+
+        jList3.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(jList3);
+
+        jLabel4.setText("Enfermedades en Embarazo");
+
+        cmbEmbarazo3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Si", "No" }));
+
+        jLabel5.setText("Embarazo Deseado");
+
+        jLabel6.setText("Sexo Preferido");
+
+        cmbEmbarazo4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Si", "No" }));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane4.setViewportView(jTextArea1);
+
+        jLabel7.setText("Alteraciones Psiquicas");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(lblDuracionEmbarazo)
+                    .addComponent(lblEmbarazo)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbEmbarazo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(lblMeses))
+                    .addComponent(cmbEmbarazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEmbarazo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEmbarazo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(cmbEmbarazo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        pnlAntEscolaridadBodyLayout.setVerticalGroup(
-            pnlAntEscolaridadBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmbarazo)
+                    .addComponent(cmbEmbarazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDuracionEmbarazo)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMeses))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cmbEmbarazo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cmbEmbarazo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbEmbarazo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cmbEmbarazo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBounds(0, 0, 380, 360);
+        jLayeredPane1.add(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jSplitPane1.setRightComponent(jLayeredPane1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(248, Short.MAX_VALUE)
+                .addContainerGap(236, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelar)
-                .addContainerGap())
+                .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pnlAntecedentesEscolaridad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlAntEscolaridadBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -301,14 +367,12 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAntecedentesEscolaridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAntEscolaridadBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -354,26 +418,40 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnBuscarEstudiante;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnRegistrarAntMadre;
-    private javax.swing.JButton btnRegistrarAntNeonatal;
-    private javax.swing.JButton btnRegistrarAntPsicomotrizLenguaje;
-    private javax.swing.JButton btnRegistrarAntPsicosocialSexual;
-    private javax.swing.JButton btnRegistrarAntRecienNacido;
-    private javax.swing.JButton btnRegistrarEscolaridad;
+    private javax.swing.JComboBox cmbEmbarazo;
+    private javax.swing.JComboBox cmbEmbarazo1;
+    private javax.swing.JComboBox cmbEmbarazo2;
+    private javax.swing.JComboBox cmbEmbarazo3;
+    private javax.swing.JComboBox cmbEmbarazo4;
     private javax.swing.JFormattedTextField ftfFecha;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JList jList1;
+    private javax.swing.JList jList2;
+    private javax.swing.JList jList3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblAntNeonatal;
-    private javax.swing.JLabel lblAntPersMadre;
-    private javax.swing.JLabel lblAntPsicosocialSexual;
-    private javax.swing.JLabel lblAntRecienNacido;
-    private javax.swing.JLabel lblEscolaridad;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblDuracionEmbarazo;
+    private javax.swing.JLabel lblEmbarazo;
     private javax.swing.JLabel lblEstudiante;
     private javax.swing.JLabel lblEstudianteValMarker;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFechaValMarker;
-    private javax.swing.JPanel pnlAntEscolaridadBody;
-    private javax.swing.JPanel pnlAntecedentesEscolaridad;
+    private javax.swing.JLabel lblMeses;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
