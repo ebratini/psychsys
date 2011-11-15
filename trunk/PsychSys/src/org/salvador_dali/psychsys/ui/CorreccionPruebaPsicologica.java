@@ -125,18 +125,22 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addGap(0, 367, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 485, Short.MAX_VALUE)
         );
 
         tpnCorreccionPrueba.addTab("Preview", jPanel3);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         pnlResultadosDirectos.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultados Directos"));
 
@@ -144,7 +148,7 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
         pnlResultadosDirectos.setLayout(pnlResultadosDirectosLayout);
         pnlResultadosDirectosLayout.setHorizontalGroup(
             pnlResultadosDirectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
         pnlResultadosDirectosLayout.setVerticalGroup(
             pnlResultadosDirectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,11 +161,11 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
         pnlInterpretacion.setLayout(pnlInterpretacionLayout);
         pnlInterpretacionLayout.setHorizontalGroup(
             pnlInterpretacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
+            .addGap(0, 331, Short.MAX_VALUE)
         );
         pnlInterpretacionLayout.setVerticalGroup(
             pnlInterpretacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 308, Short.MAX_VALUE)
+            .addGap(0, 304, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
