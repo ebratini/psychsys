@@ -58,7 +58,6 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
         statusAnimationLabel = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblFecha = new javax.swing.JLabel();
         ftfFecha = new javax.swing.JFormattedTextField();
@@ -66,29 +65,35 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
         ftfAnioEscolar = new javax.swing.JFormattedTextField();
         lblReferimiento = new javax.swing.JLabel();
         txtReferimiento = new javax.swing.JTextField();
-        lblJuicioClinico = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txaJuicioClinico = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txaDiagnostico = new javax.swing.JTextArea();
-        lblDiagnostico = new javax.swing.JLabel();
-        rbnProvisional = new javax.swing.JRadioButton();
-        rbnDefinitivo = new javax.swing.JRadioButton();
         lblFechaValMarker = new javax.swing.JLabel();
         lblAnioEscolarValMarker = new javax.swing.JLabel();
         lblReferimientoValMarker = new javax.swing.JLabel();
-        lblJuicioClinicoValMarker = new javax.swing.JLabel();
-        lblDiagnosticoValMarker = new javax.swing.JLabel();
         btnBuscarEstudiante = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        lblTratamiento = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txaTratamiento = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txaResumenEvolucion = new javax.swing.JTextArea();
-        lblResumenEvolucion = new javax.swing.JLabel();
-        cmbEstadoCaso = new javax.swing.JComboBox();
         lblEstadoCaso = new javax.swing.JLabel();
+        cmbEstadoCaso = new javax.swing.JComboBox();
+        jPanel3 = new javax.swing.JPanel();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        lpnDetallesCaso = new javax.swing.JLayeredPane();
+        pnlAnalisisResPruebas = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaAnalisisResPruebas = new javax.swing.JTextArea();
+        pnlJuicioClinico = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txaJuicioClinico = new javax.swing.JTextArea();
+        pnlDiagnostico = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txaDiagnostico = new javax.swing.JTextArea();
+        pnlTratamiento = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txaTratamiento = new javax.swing.JTextArea();
+        pnlResumenEvolucion = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txaResumenEvolucion = new javax.swing.JTextArea();
+        pnlRecomendaciones = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        txaRecomendaciones = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar Caso");
@@ -96,7 +101,7 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
         setResizable(false);
 
         statusMessageLabel.setForeground(new java.awt.Color(0, 153, 51));
-        statusMessageLabel.setText("Prueba(s) corregidas exitosamente.");
+        statusMessageLabel.setText("Caso registrado exitosamente.");
 
         statusAnimationLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         statusAnimationLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
@@ -105,11 +110,11 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 631, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -125,12 +130,15 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblFecha.setText("Fecha");
 
@@ -138,36 +146,175 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
 
         lblReferimiento.setText("Referemiento");
 
-        lblJuicioClinico.setText("Juicio Clinico");
-
-        txaJuicioClinico.setColumns(20);
-        txaJuicioClinico.setRows(5);
-        jScrollPane1.setViewportView(txaJuicioClinico);
-
-        txaDiagnostico.setColumns(20);
-        txaDiagnostico.setRows(5);
-        jScrollPane2.setViewportView(txaDiagnostico);
-
-        lblDiagnostico.setText("Diagnostico");
-
-        bgpDiagnostico.add(rbnProvisional);
-        rbnProvisional.setSelected(true);
-        rbnProvisional.setText("Provisional");
-
-        bgpDiagnostico.add(rbnDefinitivo);
-        rbnDefinitivo.setText("Definitivo");
-
         lblFechaValMarker.setForeground(new java.awt.Color(255, 51, 51));
 
         lblAnioEscolarValMarker.setForeground(new java.awt.Color(255, 51, 51));
 
         lblReferimientoValMarker.setForeground(new java.awt.Color(255, 51, 51));
 
-        lblJuicioClinicoValMarker.setForeground(new java.awt.Color(255, 51, 51));
-
-        lblDiagnosticoValMarker.setForeground(new java.awt.Color(255, 51, 51));
-
         btnBuscarEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
+
+        lblEstadoCaso.setText("Estado del Caso");
+
+        cmbEstadoCaso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Abierto", "Cerrado", "Pendiente" }));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles Caso"));
+
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Analisis Resultados Pruebas Aplicadas", "Juicio Clinico", "Diagnostico", "Tratamiento", "Resumen Evolucion", "Recomendaciones" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setVisibleRowCount(6);
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jSplitPane1.setTopComponent(jScrollPane1);
+
+        pnlAnalisisResPruebas.setBorder(javax.swing.BorderFactory.createTitledBorder("Analisis Resultados Pruebas Aplicadas"));
+
+        txaAnalisisResPruebas.setColumns(20);
+        txaAnalisisResPruebas.setLineWrap(true);
+        txaAnalisisResPruebas.setRows(5);
+        jScrollPane2.setViewportView(txaAnalisisResPruebas);
+
+        javax.swing.GroupLayout pnlAnalisisResPruebasLayout = new javax.swing.GroupLayout(pnlAnalisisResPruebas);
+        pnlAnalisisResPruebas.setLayout(pnlAnalisisResPruebasLayout);
+        pnlAnalisisResPruebasLayout.setHorizontalGroup(
+            pnlAnalisisResPruebasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+        );
+        pnlAnalisisResPruebasLayout.setVerticalGroup(
+            pnlAnalisisResPruebasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+        );
+
+        pnlAnalisisResPruebas.setBounds(0, 0, 390, 250);
+        lpnDetallesCaso.add(pnlAnalisisResPruebas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        pnlJuicioClinico.setBorder(javax.swing.BorderFactory.createTitledBorder("Juicio Clinico"));
+
+        txaJuicioClinico.setColumns(20);
+        txaJuicioClinico.setLineWrap(true);
+        txaJuicioClinico.setRows(5);
+        jScrollPane3.setViewportView(txaJuicioClinico);
+
+        javax.swing.GroupLayout pnlJuicioClinicoLayout = new javax.swing.GroupLayout(pnlJuicioClinico);
+        pnlJuicioClinico.setLayout(pnlJuicioClinicoLayout);
+        pnlJuicioClinicoLayout.setHorizontalGroup(
+            pnlJuicioClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+        );
+        pnlJuicioClinicoLayout.setVerticalGroup(
+            pnlJuicioClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+        );
+
+        pnlJuicioClinico.setBounds(0, 0, 390, 250);
+        lpnDetallesCaso.add(pnlJuicioClinico, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        pnlDiagnostico.setBorder(javax.swing.BorderFactory.createTitledBorder("Diagnostico"));
+
+        txaDiagnostico.setColumns(20);
+        txaDiagnostico.setLineWrap(true);
+        txaDiagnostico.setRows(5);
+        jScrollPane4.setViewportView(txaDiagnostico);
+
+        javax.swing.GroupLayout pnlDiagnosticoLayout = new javax.swing.GroupLayout(pnlDiagnostico);
+        pnlDiagnostico.setLayout(pnlDiagnosticoLayout);
+        pnlDiagnosticoLayout.setHorizontalGroup(
+            pnlDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+        );
+        pnlDiagnosticoLayout.setVerticalGroup(
+            pnlDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+        );
+
+        pnlDiagnostico.setBounds(0, 0, 390, 250);
+        lpnDetallesCaso.add(pnlDiagnostico, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        pnlTratamiento.setBorder(javax.swing.BorderFactory.createTitledBorder("Tratamiento"));
+
+        txaTratamiento.setColumns(20);
+        txaTratamiento.setLineWrap(true);
+        txaTratamiento.setRows(5);
+        jScrollPane5.setViewportView(txaTratamiento);
+
+        javax.swing.GroupLayout pnlTratamientoLayout = new javax.swing.GroupLayout(pnlTratamiento);
+        pnlTratamiento.setLayout(pnlTratamientoLayout);
+        pnlTratamientoLayout.setHorizontalGroup(
+            pnlTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+        );
+        pnlTratamientoLayout.setVerticalGroup(
+            pnlTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+        );
+
+        pnlTratamiento.setBounds(0, 0, 390, 250);
+        lpnDetallesCaso.add(pnlTratamiento, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        pnlResumenEvolucion.setBorder(javax.swing.BorderFactory.createTitledBorder("Resumen Evolucion"));
+
+        txaResumenEvolucion.setColumns(20);
+        txaResumenEvolucion.setLineWrap(true);
+        txaResumenEvolucion.setRows(5);
+        jScrollPane6.setViewportView(txaResumenEvolucion);
+
+        javax.swing.GroupLayout pnlResumenEvolucionLayout = new javax.swing.GroupLayout(pnlResumenEvolucion);
+        pnlResumenEvolucion.setLayout(pnlResumenEvolucionLayout);
+        pnlResumenEvolucionLayout.setHorizontalGroup(
+            pnlResumenEvolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+        );
+        pnlResumenEvolucionLayout.setVerticalGroup(
+            pnlResumenEvolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+        );
+
+        pnlResumenEvolucion.setBounds(0, 0, 390, 250);
+        lpnDetallesCaso.add(pnlResumenEvolucion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        pnlRecomendaciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Recomendaciones"));
+
+        txaRecomendaciones.setColumns(20);
+        txaRecomendaciones.setLineWrap(true);
+        txaRecomendaciones.setRows(5);
+        jScrollPane7.setViewportView(txaRecomendaciones);
+
+        javax.swing.GroupLayout pnlRecomendacionesLayout = new javax.swing.GroupLayout(pnlRecomendaciones);
+        pnlRecomendaciones.setLayout(pnlRecomendacionesLayout);
+        pnlRecomendacionesLayout.setHorizontalGroup(
+            pnlRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+        );
+        pnlRecomendacionesLayout.setVerticalGroup(
+            pnlRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+        );
+
+        pnlRecomendaciones.setBounds(0, 0, 390, 250);
+        lpnDetallesCaso.add(pnlRecomendaciones, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jSplitPane1.setRightComponent(lpnDetallesCaso);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -175,39 +322,39 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAnioEscolar)
-                    .addComponent(lblDiagnostico)
-                    .addComponent(lblFecha)
-                    .addComponent(lblReferimiento)
-                    .addComponent(lblJuicioClinico))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(rbnProvisional)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbnDefinitivo))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtReferimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAnioEscolar)
+                                    .addComponent(lblFecha)
+                                    .addComponent(lblReferimiento))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ftfFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ftfAnioEscolar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblFechaValMarker)
-                            .addComponent(lblAnioEscolarValMarker)
-                            .addComponent(lblReferimientoValMarker)
-                            .addComponent(lblDiagnosticoValMarker)
-                            .addComponent(lblJuicioClinicoValMarker))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(txtReferimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(ftfAnioEscolar, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(ftfFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblFechaValMarker)
+                                    .addComponent(lblAnioEscolarValMarker)
+                                    .addComponent(lblReferimientoValMarker)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblEstadoCaso)
+                                .addGap(19, 19, 19)
+                                .addComponent(cmbEstadoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFecha)
                     .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,95 +367,16 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBuscarEstudiante, 0, 0, Short.MAX_VALUE)
+                    .addComponent(txtReferimiento)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblReferimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtReferimiento)
                         .addComponent(lblReferimientoValMarker)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblJuicioClinico)
-                    .addComponent(lblJuicioClinicoValMarker)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDiagnostico)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDiagnosticoValMarker))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbnProvisional)
-                    .addComponent(rbnDefinitivo))
-                .addGap(23, 23, 23))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        lblTratamiento.setText("Tratamiento");
-
-        txaTratamiento.setColumns(20);
-        txaTratamiento.setRows(5);
-        jScrollPane3.setViewportView(txaTratamiento);
-
-        txaResumenEvolucion.setColumns(20);
-        txaResumenEvolucion.setRows(5);
-        jScrollPane4.setViewportView(txaResumenEvolucion);
-
-        lblResumenEvolucion.setText("Resumen Evolucion");
-
-        cmbEstadoCaso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Abierto", "Cerrado", "Pendiente" }));
-
-        lblEstadoCaso.setText("Estado del Caso");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblResumenEvolucion)
-                    .addComponent(lblEstadoCaso)
-                    .addComponent(lblTratamiento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbEstadoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTratamiento)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblResumenEvolucion)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbEstadoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEstadoCaso))
-                .addContainerGap(97, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -316,24 +384,23 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(677, Short.MAX_VALUE)
-                .addComponent(btnAceptar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCancelar)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -343,6 +410,16 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+        lpnDetallesCaso.setComponentZOrder(pnlRecomendaciones, 0);
+        lpnDetallesCaso.repaint();
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,33 +464,38 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
     private javax.swing.JComboBox cmbEstadoCaso;
     private javax.swing.JFormattedTextField ftfAnioEscolar;
     private javax.swing.JFormattedTextField ftfFecha;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblAnioEscolar;
     private javax.swing.JLabel lblAnioEscolarValMarker;
-    private javax.swing.JLabel lblDiagnostico;
-    private javax.swing.JLabel lblDiagnosticoValMarker;
     private javax.swing.JLabel lblEstadoCaso;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFechaValMarker;
-    private javax.swing.JLabel lblJuicioClinico;
-    private javax.swing.JLabel lblJuicioClinicoValMarker;
     private javax.swing.JLabel lblReferimiento;
     private javax.swing.JLabel lblReferimientoValMarker;
-    private javax.swing.JLabel lblResumenEvolucion;
-    private javax.swing.JLabel lblTratamiento;
-    private javax.swing.JRadioButton rbnDefinitivo;
-    private javax.swing.JRadioButton rbnProvisional;
+    private javax.swing.JLayeredPane lpnDetallesCaso;
+    private javax.swing.JPanel pnlAnalisisResPruebas;
+    private javax.swing.JPanel pnlDiagnostico;
+    private javax.swing.JPanel pnlJuicioClinico;
+    private javax.swing.JPanel pnlRecomendaciones;
+    private javax.swing.JPanel pnlResumenEvolucion;
+    private javax.swing.JPanel pnlTratamiento;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JTextArea txaAnalisisResPruebas;
     private javax.swing.JTextArea txaDiagnostico;
     private javax.swing.JTextArea txaJuicioClinico;
+    private javax.swing.JTextArea txaRecomendaciones;
     private javax.swing.JTextArea txaResumenEvolucion;
     private javax.swing.JTextArea txaTratamiento;
     private javax.swing.JTextField txtReferimiento;
