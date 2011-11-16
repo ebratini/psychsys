@@ -112,7 +112,6 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblEsfinterAnal.setText("Esfinter Anal");
-        lblEsfinterAnal.setToolTipText("null");
 
         spnEsfinterAnal.setToolTipText("Edad que el niño(a) dejo de hacerse pupu");
 
@@ -135,7 +134,7 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
         txaCuriosidadSexualActual.setRows(5);
         jScrollPane1.setViewportView(txaCuriosidadSexualActual);
 
-        lblSuenio.setText("Suenño");
+        lblSuenio.setText("Sueño");
 
         txaSuenio.setColumns(20);
         txaSuenio.setLineWrap(true);

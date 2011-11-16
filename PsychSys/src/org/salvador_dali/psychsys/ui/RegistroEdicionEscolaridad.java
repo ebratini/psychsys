@@ -123,7 +123,7 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblEdadInicioEscolaridad.setText("Edad Inicio Escolariad");
+        lblEdadInicioEscolaridad.setText("Edad Inicio Escolaridad");
 
         cmbNivelEscolar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basica", "Media", "Pre-Primaria" }));
 
