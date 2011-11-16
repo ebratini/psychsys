@@ -75,9 +75,9 @@ public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
         lblResultados = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaResultados = new javax.swing.JTextArea();
-        lblDiagnostico = new javax.swing.JLabel();
+        lblInterpretacionPrueba = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txaInterpretacionPrueba = new javax.swing.JTextArea();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -97,7 +97,7 @@ public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
         pnlPreviewPrueba.setLayout(pnlPreviewPruebaLayout);
         pnlPreviewPruebaLayout.setHorizontalGroup(
             pnlPreviewPruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 373, Short.MAX_VALUE)
+            .addGap(0, 379, Short.MAX_VALUE)
         );
         pnlPreviewPruebaLayout.setVerticalGroup(
             pnlPreviewPruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +110,7 @@ public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,11 +199,11 @@ public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
         txaResultados.setRows(5);
         jScrollPane1.setViewportView(txaResultados);
 
-        lblDiagnostico.setText("Dagnostico");
+        lblInterpretacionPrueba.setText("Interpretacion");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane4.setViewportView(jTextArea1);
+        txaInterpretacionPrueba.setColumns(20);
+        txaInterpretacionPrueba.setRows(5);
+        jScrollPane4.setViewportView(txaInterpretacionPrueba);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,9 +218,11 @@ public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
                             .addComponent(lblNombrePrueba)
                             .addComponent(lblFechaAplicacion)
                             .addComponent(lblCaso)
-                            .addComponent(lblResultados))
+                            .addComponent(lblResultados)
+                            .addComponent(lblInterpretacionPrueba))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -232,12 +234,8 @@ public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblFechaAplicacionValMarker)
-                                    .addComponent(lblCasoValMarker)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblDiagnostico)
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                                    .addComponent(lblCasoValMarker))))))
+                .addGap(34, 34, 34)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -272,8 +270,8 @@ public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDiagnostico))
+                            .addComponent(lblInterpretacionPrueba)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -401,12 +399,11 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblCaso;
     private javax.swing.JLabel lblCasoValMarker;
-    private javax.swing.JLabel lblDiagnostico;
     private javax.swing.JLabel lblFechaAplicacion;
     private javax.swing.JLabel lblFechaAplicacionValMarker;
+    private javax.swing.JLabel lblInterpretacionPrueba;
     private javax.swing.JLabel lblNombrePrueba;
     private javax.swing.JLabel lblResultados;
     private javax.swing.JLabel lblUbicacionPrueba;
@@ -414,6 +411,7 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JTextArea txaInterpretacionPrueba;
     private javax.swing.JTextArea txaResultados;
     private javax.swing.JTextField txtCaso;
     // End of variables declaration//GEN-END:variables
