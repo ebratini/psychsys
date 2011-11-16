@@ -147,14 +147,15 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtTiempoLactancia" max="32767" attributes="1"/>
-                              <Component id="jRadioButton1" alignment="0" max="32767" attributes="1"/>
+                              <Component id="spnTiempoLactancia" alignment="1" max="32767" attributes="1"/>
+                              <Component id="jRadioButton1" alignment="1" max="32767" attributes="1"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblTiempoLactanciaValMarker" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButton2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTiempoLactanciaValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="lblProblemasEspeciales" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -174,7 +175,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblTiempoLactancia" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTiempoLactancia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="spnTiempoLactancia" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblTiempoLactanciaValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -214,11 +215,6 @@
             <Property name="text" type="java.lang.String" value="Tiempo Lactancia"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTiempoLactancia">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Tiempo lactancia en meses"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblProblemasEspeciales">
           <Properties>
             <Property name="text" type="java.lang.String" value="Problemas Especiales"/>
@@ -246,9 +242,11 @@
               <Color blue="33" green="33" red="ff" type="rgb"/>
             </Property>
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="txtTiempoLactancia"/>
+              <ComponentRef name="spnTiempoLactancia"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="spnTiempoLactancia">
         </Component>
       </SubComponents>
     </Container>

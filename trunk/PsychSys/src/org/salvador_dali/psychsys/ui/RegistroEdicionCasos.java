@@ -413,7 +413,7 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // TODO add your handling code here:
-        lpnDetallesCaso.setComponentZOrder(pnlRecomendaciones, 0);
+        lpnDetallesCaso.setComponentZOrder(pnlAnalisisResPruebas, 0);
         lpnDetallesCaso.repaint();
     }//GEN-LAST:event_jList1ValueChanged
 

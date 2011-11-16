@@ -62,11 +62,11 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         lblTiempoLactancia = new javax.swing.JLabel();
-        txtTiempoLactancia = new javax.swing.JTextField();
         lblProblemasEspeciales = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaProblemasEspeciales = new javax.swing.JTextArea();
         lblTiempoLactanciaValMarker = new javax.swing.JLabel();
+        spnTiempoLactancia = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Antecedentes Recien Nacido");
@@ -118,8 +118,6 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
 
         lblTiempoLactancia.setText("Tiempo Lactancia");
 
-        txtTiempoLactancia.setToolTipText("Tiempo lactancia en meses");
-
         lblProblemasEspeciales.setText("Problemas Especiales");
 
         txaProblemasEspeciales.setColumns(20);
@@ -128,7 +126,7 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
         jScrollPane1.setViewportView(txaProblemasEspeciales);
 
         lblTiempoLactanciaValMarker.setForeground(new java.awt.Color(255, 51, 51));
-        lblTiempoLactanciaValMarker.setLabelFor(txtTiempoLactancia);
+        lblTiempoLactanciaValMarker.setLabelFor(spnTiempoLactancia);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,12 +142,13 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
                             .addComponent(lblLactanciaMaterna))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTiempoLactancia)
-                            .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(spnTiempoLactancia, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTiempoLactanciaValMarker)
-                            .addComponent(jRadioButton2)))
+                            .addComponent(jRadioButton2)
+                            .addComponent(lblTiempoLactanciaValMarker))
+                        .addGap(2, 2, 2))
                     .addComponent(lblProblemasEspeciales))
                 .addContainerGap())
         );
@@ -164,7 +163,7 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTiempoLactancia)
-                    .addComponent(txtTiempoLactancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnTiempoLactancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTiempoLactanciaValMarker))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblProblemasEspeciales)
@@ -260,10 +259,10 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
     private javax.swing.JLabel lblProblemasEspeciales;
     private javax.swing.JLabel lblTiempoLactancia;
     private javax.swing.JLabel lblTiempoLactanciaValMarker;
+    private javax.swing.JSpinner spnTiempoLactancia;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
     private javax.swing.JTextArea txaProblemasEspeciales;
-    private javax.swing.JTextField txtTiempoLactancia;
     // End of variables declaration//GEN-END:variables
 }
