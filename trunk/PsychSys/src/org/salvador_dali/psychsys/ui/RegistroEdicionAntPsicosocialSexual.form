@@ -202,7 +202,6 @@
         <Component class="javax.swing.JLabel" name="lblEsfinterAnal">
           <Properties>
             <Property name="text" type="java.lang.String" value="Esfinter Anal"/>
-            <Property name="toolTipText" type="java.lang.String" value="null"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="spnEsfinterAnal">
@@ -263,7 +262,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="lblSuenio">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Suen&#xf1;o"/>
+            <Property name="text" type="java.lang.String" value="Sue&#xf1;o"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
