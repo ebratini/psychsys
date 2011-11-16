@@ -28,7 +28,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="587" max="32767" attributes="0"/>
+              <EmptySpace pref="595" max="32767" attributes="0"/>
               <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
@@ -95,7 +95,7 @@
                       <Component id="jPanel2" max="32767" attributes="1"/>
                       <Component id="pnlTutInfoContacto" alignment="0" min="-2" max="-2" attributes="1"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -139,7 +139,7 @@
                                   <Component id="txtSegundoNombre" alignment="0" max="32767" attributes="1"/>
                                   <Component id="txtPrimerNombre" alignment="0" max="32767" attributes="1"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="8" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="lblPrimerApellidoValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
@@ -152,6 +152,10 @@
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                              <Component id="lblNacionalidadValMarker" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblLugarEntreHermanos" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblLugarNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -160,9 +164,15 @@
                                   <Component id="lblGenero" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblPeso" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblTalla" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCursoActual" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="cmbCurso1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cmbNivelEscolar1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="ftfFechaNacimiento" min="-2" pref="120" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -190,12 +200,8 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lblNacionalidadValMarker" min="-2" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -292,6 +298,9 @@
                           <Component id="lblNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNacionalidadValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCursoActual" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbCurso1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbNivelEscolar1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -576,6 +585,38 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="lblCursoActual">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Curso Actual"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmbCurso1">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="8">
+                    <StringItem index="0" value="1"/>
+                    <StringItem index="1" value="2"/>
+                    <StringItem index="2" value="3"/>
+                    <StringItem index="3" value="4"/>
+                    <StringItem index="4" value="5"/>
+                    <StringItem index="5" value="6"/>
+                    <StringItem index="6" value="7"/>
+                    <StringItem index="7" value="8"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmbNivelEscolar1">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="3">
+                    <StringItem index="0" value="Basica"/>
+                    <StringItem index="1" value="Media"/>
+                    <StringItem index="2" value="Pre-Primaria"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pnlTutInfoContacto">
@@ -606,8 +647,8 @@
                           <Component id="ftfTelefono" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txtDir2" alignment="0" pref="316" max="32767" attributes="1"/>
-                                  <Component id="txtDir1" alignment="1" pref="316" max="32767" attributes="1"/>
+                                  <Component id="txtDir2" alignment="0" pref="299" max="32767" attributes="1"/>
+                                  <Component id="txtDir1" alignment="1" pref="299" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -673,7 +714,7 @@
             <Component class="javax.swing.JTextField" name="txtDir2">
               <Properties>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="cmbNivelEscolar"/>
+                  <ComponentRef name="default"/>
                 </Property>
               </Properties>
             </Component>
@@ -718,7 +759,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Informacion Escolar"/>
+                <TitledBorder title="Tutores"/>
               </Border>
             </Property>
           </Properties>
@@ -726,80 +767,37 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblCurso" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNivelEscolar" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmbNivelEscolar" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbCurso" min="-2" pref="65" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="135" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" alignment="0" pref="309" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNivelEscolar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbNivelEscolar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblCurso" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbCurso" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="43" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" alignment="0" pref="100" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lblNivelEscolar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nivel Escolar"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cmbNivelEscolar">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="Basica"/>
-                    <StringItem index="1" value="Media"/>
-                    <StringItem index="2" value="Pre-Primaria"/>
-                  </StringArray>
-                </Property>
-                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="cmbCurso"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblCurso">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Curso"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cmbCurso">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="8">
-                    <StringItem index="0" value="1"/>
-                    <StringItem index="1" value="2"/>
-                    <StringItem index="2" value="3"/>
-                    <StringItem index="3" value="4"/>
-                    <StringItem index="4" value="5"/>
-                    <StringItem index="5" value="6"/>
-                    <StringItem index="6" value="7"/>
-                    <StringItem index="7" value="8"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTable1">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="3" rowCount="1">
+                        <Column editable="true" title="Nombre Tutor" type="java.lang.Object">
+                          <Data value="Nuevo"/>
+                        </Column>
+                        <Column editable="true" title="Relacion Familiar" type="java.lang.Object"/>
+                        <Column editable="true" title="Opciones" type="java.lang.Object">
+                          <Data value="U D DA"/>
+                        </Column>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -809,11 +807,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="statusPanelSeparator" alignment="0" pref="761" max="32767" attributes="0"/>
+              <Component id="statusPanelSeparator" alignment="0" pref="769" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="546" max="32767" attributes="0"/>
+                  <EmptySpace pref="554" max="32767" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

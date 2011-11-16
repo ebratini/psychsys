@@ -92,6 +92,9 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         lblLugarNacimientoValMarker = new javax.swing.JLabel();
         lblTallaValMarker = new javax.swing.JLabel();
         lblPesoValMarker = new javax.swing.JLabel();
+        lblCursoActual = new javax.swing.JLabel();
+        cmbCurso1 = new javax.swing.JComboBox();
+        cmbNivelEscolar1 = new javax.swing.JComboBox();
         pnlTutInfoContacto = new javax.swing.JPanel();
         lblTelefono = new javax.swing.JLabel();
         lblDireccion = new javax.swing.JLabel();
@@ -103,10 +106,8 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         lblDir2ValMarker = new javax.swing.JLabel();
         ftfTelefono = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
-        lblNivelEscolar = new javax.swing.JLabel();
-        cmbNivelEscolar = new javax.swing.JComboBox();
-        lblCurso = new javax.swing.JLabel();
-        cmbCurso = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -217,6 +218,12 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         lblPesoValMarker.setLabelFor(txtPeso);
         lblPesoValMarker.setToolTipText("");
 
+        lblCursoActual.setText("Curso Actual");
+
+        cmbCurso1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
+
+        cmbNivelEscolar1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basica", "Media", "Pre-Primaria" }));
+
         javax.swing.GroupLayout pnlTutInfoPersonalLayout = new javax.swing.GroupLayout(pnlTutInfoPersonal);
         pnlTutInfoPersonal.setLayout(pnlTutInfoPersonalLayout);
         pnlTutInfoPersonalLayout.setHorizontalGroup(
@@ -245,7 +252,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                             .addComponent(txtNacionalidad, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtSegundoNombre, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPrimerNombre, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPrimerApellidoValMarker, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -254,6 +261,9 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lblNacionalidadValMarker))
+                    .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
                         .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblLugarEntreHermanos)
                             .addComponent(lblLugarNacimiento)
@@ -261,9 +271,14 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                             .addComponent(lblHermanos)
                             .addComponent(lblGenero)
                             .addComponent(lblPeso)
-                            .addComponent(lblTalla))
+                            .addComponent(lblTalla)
+                            .addComponent(lblCursoActual))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
+                                .addComponent(cmbCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbNivelEscolar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
                                 .addComponent(ftfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -283,10 +298,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                                 .addComponent(lblPesoValMarker))
                             .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))))
-                    .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(lblNacionalidadValMarker)))
+                                .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         pnlTutInfoPersonalLayout.setVerticalGroup(
@@ -363,7 +375,10 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                 .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNacionalidad)
                     .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNacionalidadValMarker))
+                    .addComponent(lblNacionalidadValMarker)
+                    .addComponent(lblCursoActual)
+                    .addComponent(cmbCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbNivelEscolar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -374,8 +389,6 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         lblDireccion.setText("Direccion");
 
         txtDir1.setNextFocusableComponent(txtDir2);
-
-        txtDir2.setNextFocusableComponent(cmbNivelEscolar);
 
         lblTelMarker.setForeground(new java.awt.Color(255, 51, 51));
 
@@ -404,8 +417,8 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                     .addComponent(ftfTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
                         .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDir2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                            .addComponent(txtDir1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE))
+                            .addComponent(txtDir2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                            .addComponent(txtDir1, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTelMarker)
@@ -438,44 +451,27 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Escolar"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tutores"));
 
-        lblNivelEscolar.setText("Nivel Escolar");
-
-        cmbNivelEscolar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basica", "Media", "Pre-Primaria" }));
-        cmbNivelEscolar.setNextFocusableComponent(cmbCurso);
-
-        lblCurso.setText("Curso");
-
-        cmbCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Nuevo", null, "U D DA"}
+            },
+            new String [] {
+                "Nombre Tutor", "Relacion Familiar", "Opciones"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblCurso)
-                    .addComponent(lblNivelEscolar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbNivelEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(135, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNivelEscolar)
-                    .addComponent(cmbNivelEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCurso)
-                    .addComponent(cmbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -501,7 +497,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlTutInfoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         statusMessageLabel.setForeground(new java.awt.Color(0, 153, 51));
@@ -514,11 +510,11 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 546, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 554, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -542,7 +538,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(587, Short.MAX_VALUE)
+                .addContainerGap(595, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -611,16 +607,18 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JComboBox cmbCurso;
+    private javax.swing.JComboBox cmbCurso1;
     private javax.swing.JComboBox cmbGenero;
-    private javax.swing.JComboBox cmbNivelEscolar;
+    private javax.swing.JComboBox cmbNivelEscolar1;
     private javax.swing.JComboBox cmbTipoDni;
     private javax.swing.JFormattedTextField ftfFechaNacimiento;
     private javax.swing.JFormattedTextField ftfTelefono;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblApodo;
-    private javax.swing.JLabel lblCurso;
+    private javax.swing.JLabel lblCursoActual;
     private javax.swing.JLabel lblDir1ValMarker;
     private javax.swing.JLabel lblDir2ValMarker;
     private javax.swing.JLabel lblDireccion;
@@ -636,7 +634,6 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JLabel lblLugarNacimientoValMarker;
     private javax.swing.JLabel lblNacionalidad;
     private javax.swing.JLabel lblNacionalidadValMarker;
-    private javax.swing.JLabel lblNivelEscolar;
     private javax.swing.JLabel lblPeso;
     private javax.swing.JLabel lblPesoValMarker;
     private javax.swing.JLabel lblPrimerApellido;
