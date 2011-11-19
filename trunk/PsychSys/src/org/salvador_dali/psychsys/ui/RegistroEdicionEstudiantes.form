@@ -28,26 +28,24 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="595" max="32767" attributes="0"/>
+              <EmptySpace pref="597" max="32767" attributes="0"/>
               <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Component id="statusPanel" alignment="0" max="32767" attributes="1"/>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
-          </Group>
+          <Component id="pnlEstHeader" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
+              <Component id="pnlEstHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAceptar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
@@ -92,8 +90,8 @@
                   <Component id="pnlTutInfoPersonal" min="-2" max="-2" attributes="1"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel2" max="32767" attributes="1"/>
-                      <Component id="pnlTutInfoContacto" alignment="0" min="-2" max="-2" attributes="1"/>
+                      <Component id="pnlTutInfoContacto" max="32767" attributes="1"/>
+                      <Component id="jPanel2" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -124,82 +122,87 @@
                           <Component id="lblSegundoApellido" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblApodo" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNacionalidad" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGenero" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblSegApellidoValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="cmbTipoDni" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtDni" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                                  <Component id="txtApodo" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="txtSegundoApellido" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="txtPrimerApellido" alignment="0" pref="211" max="32767" attributes="1"/>
-                                  <Component id="txtNacionalidad" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="txtSegundoNombre" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="txtPrimerNombre" alignment="0" max="32767" attributes="1"/>
-                              </Group>
-                              <EmptySpace pref="8" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblPrimerApellidoValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="lblPrimerNombreValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblDniValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="lblNacionalidadValMarker" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblLugarEntreHermanos" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLugarNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblFechaNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblHermanos" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblGenero" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblPeso" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblTalla" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCursoActual" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblSegApellidoValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="cmbCurso1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cmbNivelEscolar1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="ftfFechaNacimiento" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblFechaNacimientoValMarker" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="cmbGenero" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtLugarNacimiento" min="-2" pref="225" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblLugarNacimientoValMarker" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtTalla" min="-2" pref="68" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblTallaValMarker" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtPeso" min="-2" pref="68" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblPesoValMarker" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="spnLugarEntreHermanos" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="spnHermanos" alignment="0" pref="37" max="32767" attributes="1"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="cmbTipoDni" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtDni" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                                          <Component id="txtApodo" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="txtSegundoApellido" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="txtPrimerApellido" alignment="0" pref="211" max="32767" attributes="1"/>
+                                          <Component id="txtNacionalidad" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="txtSegundoNombre" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="txtPrimerNombre" alignment="0" max="32767" attributes="1"/>
+                                      </Group>
+                                      <EmptySpace pref="34" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lblPrimerApellidoValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Component id="lblPrimerNombreValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblDniValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblNacionalidadValMarker" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblLugarEntreHermanos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblLugarNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblFechaNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblHermanos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPeso" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblTalla" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblCursoActual" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblEscuelaProcedencia" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="cmbCurso" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="cmbNivelEscolar" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="ftfFechaNacimiento" min="-2" pref="120" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblFechaNacimientoValMarker" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="txtTalla" min="-2" pref="68" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblTallaValMarker" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="txtPeso" min="-2" pref="68" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblPesoValMarker" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="spnLugarEntreHermanos" alignment="0" max="32767" attributes="1"/>
+                                              <Component id="spnHermanos" alignment="0" min="-2" pref="37" max="-2" attributes="1"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jTextField1" alignment="0" max="32767" attributes="1"/>
+                                                  <Component id="txtLugarNacimiento" alignment="0" pref="225" max="32767" attributes="1"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblLugarNacimientoValMarker" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
+                          <Component id="cmbGenero" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -209,49 +212,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblGenero" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbGenero" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="ftfFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblFechaNacimientoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtLugarNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLugarNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLugarNacimientoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="spnHermanos" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblHermanos" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="spnLugarEntreHermanos" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLugarEntreHermanos" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtTalla" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblTallaValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="txtPeso" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblPesoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="lblPeso" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblDni" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -284,7 +246,6 @@
                                   <Component id="lblSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblSegApellidoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblTalla" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -292,15 +253,76 @@
                                   <Component id="txtApodo" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="ftfFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblFechaNacimientoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="txtLugarNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblLugarNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblLugarNacimientoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="spnHermanos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblHermanos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="spnLugarEntreHermanos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblLugarEntreHermanos" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="txtTalla" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblTallaValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                              <Component id="txtPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblPesoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="lblPeso" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="104" pref="104" max="104" attributes="0"/>
+                                      <Component id="lblTalla" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="26" pref="26" max="26" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblCursoActual" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbCurso" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbNivelEscolar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNacionalidadValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCursoActual" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbCurso1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbNivelEscolar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNacionalidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNacionalidadValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblGenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbGenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEscuelaProcedencia" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -590,7 +612,7 @@
                 <Property name="text" type="java.lang.String" value="Curso Actual"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cmbCurso1">
+            <Component class="javax.swing.JComboBox" name="cmbCurso">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="8">
@@ -606,7 +628,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cmbNivelEscolar1">
+            <Component class="javax.swing.JComboBox" name="cmbNivelEscolar">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
@@ -615,6 +637,13 @@
                     <StringItem index="2" value="Pre-Primaria"/>
                   </StringArray>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField1">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblEscuelaProcedencia">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Escuela Procedencia"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -631,35 +660,40 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="lblTelefono" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="1">
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                              <Component id="txtDir2" max="32767" attributes="1"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblDireccion" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="ftfTelefono" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txtDir2" alignment="0" pref="299" max="32767" attributes="1"/>
-                                  <Component id="txtDir1" alignment="1" pref="299" max="32767" attributes="1"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblTelefono" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lblDireccion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblTelMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblEmailValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDir1ValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDir2ValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="ftfTelefono" min="-2" pref="112" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblTelValMarker" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtDir1" min="-2" pref="284" max="-2" attributes="1"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblDir2ValMarker" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDir1ValMarker" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -669,26 +703,21 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTelMarker" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ftfTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTelValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="lblEmailValMarker" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblDir1ValMarker" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblDir2ValMarker" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtDir1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDir1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDir1ValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtDir2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtDir2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDir2ValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -712,23 +741,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDir2">
-              <Properties>
-                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="default"/>
-                </Property>
-              </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblTelMarker">
+            <Component class="javax.swing.JLabel" name="lblTelValMarker">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="ff" type="rgb"/>
                 </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblEmailValMarker">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="ff" type="rgb"/>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="ftfTelefono"/>
                 </Property>
               </Properties>
             </Component>
@@ -737,12 +757,18 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="ff" type="rgb"/>
                 </Property>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtDir1"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblDir2ValMarker">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="ff" type="rgb"/>
+                </Property>
+                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txtDir2"/>
                 </Property>
               </Properties>
             </Component>
@@ -767,12 +793,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="309" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="350" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="100" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="106" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -807,11 +833,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="statusPanelSeparator" alignment="0" pref="769" max="32767" attributes="0"/>
+              <Component id="statusPanelSeparator" alignment="0" pref="771" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="554" max="32767" attributes="0"/>
+                  <EmptySpace pref="556" max="32767" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -866,5 +892,58 @@
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JPanel" name="pnlEstHeader">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+            <EtchetBorder/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="532" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resources/images/estudiantes 65x65.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Registro de Estudiantes"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
