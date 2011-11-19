@@ -472,7 +472,8 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Nuevo", null, "U D DA"}
+                {"Celeste Garcia", "Madre", null},
+                {"Nuevo", null, ""}
             },
             new String [] {
                 "Nombre Tutor", "Relacion Familiar", "Opciones"
