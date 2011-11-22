@@ -26,26 +26,24 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblPsychSysLogo" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEscMensaje" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblPsychSysLogo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="spnEntidadEliminar" pref="269" max="32767" attributes="1"/>
-                          <Component id="lblMensajeEliminacion" alignment="0" min="-2" max="-2" attributes="1"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                       <Component id="chkCambiarStatus" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="lblProgressBar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnSi" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnNo" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="spnEntidadEliminar" pref="294" max="32767" attributes="1"/>
+                  <Component id="lblMensajeEliminacion" alignment="0" min="-2" max="-2" attributes="1"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -65,22 +63,21 @@
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="chkCambiarStatus" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="btnNo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnSi" alignment="3" pref="30" max="32767" attributes="1"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblProgressBar" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                              <Component id="btnNo" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="btnSi" alignment="3" pref="30" max="32767" attributes="1"/>
-                          </Group>
-                          <Component id="lblProgressBar" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEscMensaje" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkCambiarStatus" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -144,6 +141,14 @@
     <Component class="javax.swing.JButton" name="btnNo">
       <Properties>
         <Property name="text" type="java.lang.String" value="No"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEscMensaje">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/resources/images/information 20x20.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;ESC para&lt;br&gt; cancelar&lt;/html&gt;"/>
       </Properties>
     </Component>
   </SubComponents>
