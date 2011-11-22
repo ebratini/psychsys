@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="PsychSysPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>org.salvador_dali.psychsys.model.entities.AntPsicomotrizLenguaje</class>
+    <class>org.salvador_dali.psychsys.model.entities.AntPersMadre</class>
+    <class>org.salvador_dali.psychsys.model.entities.AntRecienNacido</class>
+    <class>org.salvador_dali.psychsys.model.entities.Caso</class>
+    <class>org.salvador_dali.psychsys.model.entities.Rol</class>
+    <class>org.salvador_dali.psychsys.model.entities.PruebasPsicologica</class>
+    <class>org.salvador_dali.psychsys.model.entities.Tutor</class>
+    <class>org.salvador_dali.psychsys.model.entities.Permiso</class>
+    <class>org.salvador_dali.psychsys.model.entities.AntPsicosocialSexual</class>
+    <class>org.salvador_dali.psychsys.model.entities.Referimiento</class>
+    <class>org.salvador_dali.psychsys.model.entities.AntNeonatal</class>
+    <class>org.salvador_dali.psychsys.model.entities.Escolaridad</class>
+    <class>org.salvador_dali.psychsys.model.entities.Usuario</class>
+    <class>org.salvador_dali.psychsys.model.entities.HistoriaClinica</class>
+    <class>org.salvador_dali.psychsys.model.entities.TutorEstudiante</class>
+    <class>org.salvador_dali.psychsys.model.entities.UbicacionPrueba</class>
+    <class>org.salvador_dali.psychsys.model.entities.Estudiante</class>
+    <class>org.salvador_dali.psychsys.model.entities.Bitacora</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=PsychSysDB"/>
+      <property name="javax.persistence.jdbc.password" value="Mssql88**"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
+    </properties>
+  </persistence-unit>
+</persistence>

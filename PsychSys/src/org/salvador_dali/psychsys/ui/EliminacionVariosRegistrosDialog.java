@@ -62,13 +62,14 @@ public class EliminacionVariosRegistrosDialog extends javax.swing.JDialog {
         btnSi = new javax.swing.JButton();
         lblProgressBar = new javax.swing.JLabel();
         btnNo = new javax.swing.JButton();
+        lblEscMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Eliminar Varios Registros [Estudiantes]");
         setModal(true);
         setResizable(false);
 
-        lblMensajeEliminacion.setText("¿Seguro que desea eliminar estos 2 registros?");
+        lblMensajeEliminacion.setText("<html>¿Seguro que desea eliminar<br />estos 2 registros?</html>");
 
         chkCambiarStatus.setSelected(true);
         chkCambiarStatus.setText("Solo cambiar status");
@@ -86,6 +87,9 @@ public class EliminacionVariosRegistrosDialog extends javax.swing.JDialog {
 
         btnNo.setText("No");
 
+        lblEscMensaje.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/information 20x20.png"))); // NOI18N
+        lblEscMensaje.setText("<html>ESC para<br> cancelar</html>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,8 +98,7 @@ public class EliminacionVariosRegistrosDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lblPsychSysLogo)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMensajeEliminacion)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(chkCambiarStatus)
                         .addGap(18, 18, 18)
@@ -103,7 +106,11 @@ public class EliminacionVariosRegistrosDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnNo)))
+                        .addComponent(btnNo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMensajeEliminacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblEscMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,7 +120,9 @@ public class EliminacionVariosRegistrosDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPsychSysLogo)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMensajeEliminacion)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMensajeEliminacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEscMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -228,6 +237,7 @@ private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     private javax.swing.JButton btnNo;
     private javax.swing.JButton btnSi;
     private javax.swing.JCheckBox chkCambiarStatus;
+    private javax.swing.JLabel lblEscMensaje;
     private javax.swing.JLabel lblMensajeEliminacion;
     private javax.swing.JLabel lblProgressBar;
     private javax.swing.JLabel lblPsychSysLogo;
