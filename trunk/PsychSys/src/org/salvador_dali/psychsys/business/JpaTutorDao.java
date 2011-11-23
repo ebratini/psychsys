@@ -24,7 +24,7 @@
 package org.salvador_dali.psychsys.business;
 
 import java.util.List;
-import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.TutorDao;
 import org.salvador_dali.psychsys.model.entities.Tutor;
@@ -36,12 +36,30 @@ import org.salvador_dali.psychsys.model.entities.Tutor;
 public class JpaTutorDao extends JpaDao implements TutorDao {
 
     @Override
-    public List getTutoresByApellido(String apellido) throws NoResultException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Tutor getTutorByDNI(String dni) {
+        Query q = entityManager.createNamedQuery("Tutor.findByTutDni");
+        q.setParameter("tutDni", dni);
+        return (Tutor) q.getSingleResult();
     }
 
     @Override
-    public Tutor getTutorByDNI(String dni) throws NoResultException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List getTutoresByPrimerApellido(String primerApellido) {
+        Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerApellido");
+        q.setParameter("tutPrimerApellido", primerApellido);
+        return q.getResultList();
+    }
+
+    @Override
+    public List getTutoresByPrimerNombre(String primerNombre) {
+        Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerNombre");
+        q.setParameter("tutPrimerNombre", primerNombre);
+        return q.getResultList();
+    }
+
+    @Override
+    public List getTutoresByStatus(String status) {
+        Query q = entityManager.createNamedQuery("Tutor.findByTutStatus");
+        q.setParameter("tutStatus", status);
+        return q.getResultList();
     }
 }

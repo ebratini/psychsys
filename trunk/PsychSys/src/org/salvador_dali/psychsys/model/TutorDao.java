@@ -24,8 +24,6 @@
 package org.salvador_dali.psychsys.model;
 
 import java.util.List;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import org.salvador_dali.psychsys.model.entities.Tutor;
 
 /**
@@ -34,7 +32,11 @@ import org.salvador_dali.psychsys.model.entities.Tutor;
  */
 public interface TutorDao extends Dao {
 
-    List getTutoresByApellido(String apellido) throws NoResultException, NonUniqueResultException;
+    public Tutor getTutorByDNI(String dni);
 
-    Tutor getTutorByDNI(String dni) throws NoResultException;
+    public List getTutoresByPrimerApellido(String apellido);
+    
+    public List getTutoresByPrimerNombre(String primerNombre);
+    
+    public List getTutoresByStatus(String status);
 }

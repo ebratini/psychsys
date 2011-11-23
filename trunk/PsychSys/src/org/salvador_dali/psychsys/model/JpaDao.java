@@ -29,15 +29,16 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public abstract class JpaDao implements Dao {
-    
+    public static final String PERSISTENCE_UNIT_NAME = "PsychSysPU";
     protected Class entityClass;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("SyscafilPU");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
     protected EntityManager entityManager = emf.createEntityManager();
 
     // TODO: resolver problemas con el ParameterizedType
@@ -48,7 +49,7 @@ public abstract class JpaDao implements Dao {
     
     public JpaDao(Class entityClass, Map properties) {
         this(entityClass);
-        emf = Persistence.createEntityManagerFactory("SyscafilPU", properties);
+        emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME, properties);
         entityManager = emf.createEntityManager(properties);
     }
     
@@ -63,12 +64,13 @@ public abstract class JpaDao implements Dao {
     
     @Override
     public List retrieve() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query q = entityManager.createQuery(String.format("SELECT e FROM %s e", entityClass.getSimpleName()));
+        return q.getResultList();
     }
     
     @Override
     public <E> E update(E entity) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return entityManager.merge(entity);
     }
     
     @Override
@@ -79,5 +81,10 @@ public abstract class JpaDao implements Dao {
     @Override
     public <E, K> E findById(K id) {
         return (E) entityManager.find(entityClass, id);
+    }
+    
+    public void close() {
+        emf.close();
+        entityManager.close();
     }
 }
