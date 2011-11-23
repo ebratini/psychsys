@@ -125,6 +125,19 @@ public class Tutor implements Serializable {
         this.tutEstadoCivil = tutEstadoCivil;
         this.tutStatus = tutStatus;
     }
+    
+    public Tutor(String tutDni, String tutTipoDni, String tutPrimerApellido, String tutSegundoApellido, String tutPrimerNombre, String tutDireccion, String tutNacionalidad, char tutGenero, String tutEstadoCivil, char tutStatus) {
+        this.tutDni = tutDni;
+        this.tutTipoDni = tutTipoDni;
+        this.tutPrimerApellido = tutPrimerApellido;
+        this.tutSegundoApellido = tutSegundoApellido;
+        this.tutPrimerNombre = tutPrimerNombre;
+        this.tutDireccion = tutDireccion;
+        this.tutNacionalidad = tutNacionalidad;
+        this.tutGenero = tutGenero;
+        this.tutEstadoCivil = tutEstadoCivil;
+        this.tutStatus = tutStatus;
+    }
 
     public Integer getTutId() {
         return tutId;
