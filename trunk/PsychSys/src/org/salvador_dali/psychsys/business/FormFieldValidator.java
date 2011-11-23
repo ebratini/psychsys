@@ -70,6 +70,8 @@ public abstract class FormFieldValidator {
 
         if (!fieldValidator.validate(strToValidate)) {
             valid = false;
+            validationMarker.setToolTipText(validationMarker.getToolTipText() == null ? fieldValidator.getValidationMessage()
+                    : validationMarker.getToolTipText() + ";" + fieldValidator.getValidationMessage());
             turnValidationMarker(validationMarker, true);
         } else {
             turnValidationMarker(validationMarker, false);

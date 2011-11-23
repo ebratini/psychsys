@@ -25,15 +25,20 @@ package org.salvador_dali.psychsys.business;
 
 /**
  *
- * @author Edwin Bratini
+ * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public abstract class FieldValidator {
+public class PhoneFieldValidator extends DatePhoneFieldValidator {
 
-    private String validationMessage;
+    public PhoneFieldValidator() {
+        this("\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d");
+    }
 
-    public abstract boolean validate(String textToValidate);
+    public PhoneFieldValidator(String patternToMatch) {
+        super(patternToMatch);
+    }
 
+    @Override
     public String getValidationMessage() {
-        return "Campo no valido";
+        return "Telefono no valido.";
     }
 }

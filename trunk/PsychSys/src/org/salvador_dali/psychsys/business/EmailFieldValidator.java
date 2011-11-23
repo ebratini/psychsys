@@ -25,15 +25,17 @@ package org.salvador_dali.psychsys.business;
 
 /**
  *
- * @author Edwin Bratini
+ * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public abstract class FieldValidator {
+public class EmailFieldValidator extends FieldValidator {
 
-    private String validationMessage;
+    @Override
+    public boolean validate(String textToValidate) {
+        return true;
+    }
 
-    public abstract boolean validate(String textToValidate);
-
+    @Override
     public String getValidationMessage() {
-        return "Campo no valido";
+        return "Email no valido";
     }
 }

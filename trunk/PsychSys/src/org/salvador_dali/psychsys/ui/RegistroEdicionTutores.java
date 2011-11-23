@@ -29,7 +29,16 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.HashMap;
+import javax.swing.JLabel;
+import javax.swing.text.JTextComponent;
+import org.salvador_dali.psychsys.business.EmailFieldValidator;
+import org.salvador_dali.psychsys.business.EmptyFieldValidator;
+import org.salvador_dali.psychsys.business.FieldValidator;
+import org.salvador_dali.psychsys.business.FormFieldValidator;
+import org.salvador_dali.psychsys.business.PhoneFieldValidator;
 
 /**
  *
@@ -85,7 +94,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         lblDireccion = new javax.swing.JLabel();
         txtDir1 = new javax.swing.JTextField();
         txtDir2 = new javax.swing.JTextField();
-        lblTelMarker = new javax.swing.JLabel();
+        lblTelValMarker = new javax.swing.JLabel();
         lblEmailValMarker = new javax.swing.JLabel();
         lblDir1ValMarker = new javax.swing.JLabel();
         lblDir2ValMarker = new javax.swing.JLabel();
@@ -185,7 +194,6 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         pnlTutInfoPersonalLayout.setHorizontalGroup(
             pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
                 .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDni)
                     .addComponent(lblTipoDni)
@@ -196,16 +204,17 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                 .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPrimerApellido)
                     .addComponent(cmbTipoDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
+                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDniValMarker))
                     .addComponent(txtPrimerNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(txtSegundoNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPrimerNombreValMarker)
-                            .addComponent(lblDniValMarker))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(2, 2, 2)
+                        .addComponent(lblPrimerNombreValMarker)
+                        .addGap(10, 10, 10)
                         .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblGenero)
                             .addComponent(lblEstadoCivil)
@@ -223,14 +232,15 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                                     .addComponent(lblNacionalidadValMarker)))
                             .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblPrimerApellidoValMarker))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPrimerApellidoValMarker))))
         );
         pnlTutInfoPersonalLayout.setVerticalGroup(
             pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
                         .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSegundoApellido)
@@ -266,12 +276,12 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSegundoNombre)
-                            .addComponent(txtSegundoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPrimerApellido)
-                            .addComponent(txtPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPrimerApellidoValMarker))))
+                            .addComponent(txtSegundoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrimerApellido)
+                    .addComponent(txtPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPrimerApellidoValMarker))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -289,8 +299,8 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
         txtDir2.setNextFocusableComponent(btnAceptar);
 
-        lblTelMarker.setForeground(new java.awt.Color(255, 51, 51));
-        lblTelMarker.setLabelFor(ftfTelefono);
+        lblTelValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblTelValMarker.setLabelFor(ftfTelefono);
 
         lblEmailValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblEmailValMarker.setLabelFor(txtEmail);
@@ -320,14 +330,16 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                             .addComponent(txtDir2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDir1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTelMarker)
                             .addComponent(lblEmailValMarker)
                             .addComponent(lblDir1ValMarker)
                             .addComponent(lblDir2ValMarker)))
-                    .addComponent(ftfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(212, Short.MAX_VALUE))
+                    .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
+                        .addComponent(ftfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTelValMarker)))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         pnlTutInfoContactoLayout.setVerticalGroup(
             pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,8 +347,8 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefono)
-                    .addComponent(lblTelMarker)
-                    .addComponent(ftfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ftfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTelValMarker))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmail)
@@ -362,7 +374,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnlTutInfoContacto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlTutInfoPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlTutInfoPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -385,11 +397,11 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 484, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 494, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -409,7 +421,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(500, Short.MAX_VALUE)
+                .addContainerGap(510, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -447,8 +459,31 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        pc.start();
         LimpiadorComponentes.limpiarValidationMarkers(this);
+        if (!checkFormFields()) {
+            statusMessageLabel.setText("Por favor corriga los campos marcados.");
+            statusMessageLabel.setForeground(Color.red);
+            new Thread(new LabelToolTipShower(statusMessageLabel, 3000)).start();
+            return;
+        }
+
+        // si todo esta bien
+        statusMessageLabel.setVisible(false);
+        
+        // crear el objeto tutor
+        
+        // crear el objeto tutorDao e invocar el metodo persist del mismo     
+        
+        
+        statusMessageLabel.setText("Tutor registrado exitosamente.");
+        statusMessageLabel.setForeground(Color.GREEN);
+        statusMessageLabel.setVisible(true);
+        new Thread(new LabelToolTipShower(statusMessageLabel)).start();
         LimpiadorComponentes.limpiarComponentes(this);
+        txtDni.requestFocusInWindow();
+        pc.stop();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
@@ -486,6 +521,36 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
         });
     }
+
+    private boolean checkFormFields() {
+        boolean validFields = true;
+
+        FieldValidator emptynessVal, phoneVal, emailVal;
+        emptynessVal = new EmptyFieldValidator();
+        phoneVal = new PhoneFieldValidator();
+        emailVal = new EmailFieldValidator();
+
+        FieldValidator[] emptynessArr = new FieldValidator[]{emptynessVal};
+
+        HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
+        campos.put(lblDniValMarker, emptynessArr);
+        campos.put(lblPrimerNombreValMarker, emptynessArr);
+        campos.put(lblPrimerApellidoValMarker, emptynessArr);
+        campos.put(lblSegApellidoValMarker, emptynessArr);
+        campos.put(lblNacionalidadValMarker, emptynessArr);
+        campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
+
+        if (!((JTextComponent) lblEmailValMarker.getLabelFor()).getText().isEmpty()) {
+            campos.put(lblEmailValMarker, new FieldValidator[]{emailVal});
+        }
+
+        campos.put(lblDir1ValMarker, emptynessArr);
+        campos.put(lblDir2ValMarker, emptynessArr);
+
+        validFields = FormFieldValidator.verifyFormFields(campos);
+
+        return validFields;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
@@ -512,7 +577,7 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JLabel lblSegApellidoValMarker;
     private javax.swing.JLabel lblSegundoApellido;
     private javax.swing.JLabel lblSegundoNombre;
-    private javax.swing.JLabel lblTelMarker;
+    private javax.swing.JLabel lblTelValMarker;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTipoDni;
     private javax.swing.JPanel pnlTutInfoContacto;

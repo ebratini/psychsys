@@ -23,17 +23,37 @@
  */
 package org.salvador_dali.psychsys.business;
 
+import java.util.regex.Pattern;
+
 /**
  *
- * @author Edwin Bratini
+ * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public abstract class FieldValidator {
+public abstract class DatePhoneFieldValidator extends FieldValidator {
 
-    private String validationMessage;
+    private String patternToMatch;
 
-    public abstract boolean validate(String textToValidate);
+    public DatePhoneFieldValidator() {
+    }
 
-    public String getValidationMessage() {
-        return "Campo no valido";
+    public DatePhoneFieldValidator(String patternToMatch) {
+        this.patternToMatch = patternToMatch;
+    }
+
+    public String getPatternToMatch() {
+        return patternToMatch;
+    }
+
+    public void setPatternToMatch(String patternToMatch) {
+        this.patternToMatch = patternToMatch;
+    }
+
+    @Override
+    public boolean validate(String textToValidate) {
+        if (Pattern.matches(patternToMatch, textToValidate)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
