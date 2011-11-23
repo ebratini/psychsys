@@ -21,19 +21,22 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
+
 package org.salvador_dali.psychsys.business;
 
 /**
  *
- * @author Edwin Bratini
+ * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public abstract class FieldValidator {
+public class WebFieldValidator extends FieldValidator {
 
-    private String validationMessage;
-
-    public abstract boolean validate(String textToValidate);
-
+    @Override
+    public boolean validate(String textToValidate) {
+        return true;
+    }
+    
+    @Override
     public String getValidationMessage() {
-        return "Campo no valido";
+        return "Web no valido.";
     }
 }

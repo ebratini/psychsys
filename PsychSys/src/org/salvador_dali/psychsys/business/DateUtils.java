@@ -1,7 +1,7 @@
 /*
  *  The MIT License
  * 
- *  Copyright 2011 Edwin Bratini.
+ *  Copyright 2011 Edwin Bratini <edwin.bratini@gmail.com>.
  * 
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,24 @@
  */
 package org.salvador_dali.psychsys.business;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
- * @author Edwin Bratini
+ * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public abstract class FieldValidator {
+public class DateUtils {
 
-    private String validationMessage;
-
-    public abstract boolean validate(String textToValidate);
-
-    public String getValidationMessage() {
-        return "Campo no valido";
+    public static Date parseDate(String strDate) {
+        String[] dateFields = null;
+        Date date = null;
+        if (new DateFieldValidator().validate(strDate)) {
+            dateFields = strDate.split("-");
+            Calendar cal = Calendar.getInstance();
+            cal.set(Integer.parseInt(dateFields[2]), Integer.parseInt(dateFields[1]) - 1, Integer.parseInt(dateFields[0]));
+            date = cal.getTime();
+        }
+        return date;
     }
 }

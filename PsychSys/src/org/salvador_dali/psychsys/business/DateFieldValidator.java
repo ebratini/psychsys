@@ -23,17 +23,44 @@
  */
 package org.salvador_dali.psychsys.business;
 
+import java.util.regex.Pattern;
+
 /**
  *
- * @author Edwin Bratini
+ * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public abstract class FieldValidator {
+public class DateFieldValidator extends DatePhoneFieldValidator {
 
-    private String validationMessage;
+    public DateFieldValidator() {
+        this("\\d\\d-\\d\\d-\\d\\d\\d\\d");
+    }
 
-    public abstract boolean validate(String textToValidate);
+    public DateFieldValidator(String patternToMatch) {
+        super(patternToMatch);
+    }
 
+    @Override
+    public boolean validate(String textToValidate) {
+        boolean valid = false;
+        String[] dateSplitted = textToValidate.split("-");
+
+        if (!textToValidate.isEmpty()) {
+            int dia = Integer.parseInt(dateSplitted[0]);
+            int mes = Integer.parseInt(dateSplitted[1]);
+            int anio = Integer.parseInt(dateSplitted[2]);
+            if ((anio >= 1) && (mes >= 1 && mes <= 12) && (dia >= 1 && dia <= 31)) {
+                if (Pattern.matches(getPatternToMatch(), textToValidate)) {
+                    valid = true;
+                } else {
+                    valid = false;
+                }
+            }
+        }
+        return valid;
+    }
+
+    @Override
     public String getValidationMessage() {
-        return "Campo no valido";
+        return "Fecha no valida.";
     }
 }
