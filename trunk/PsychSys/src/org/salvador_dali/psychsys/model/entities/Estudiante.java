@@ -137,7 +137,7 @@ public class Estudiante implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiante")
     private Collection<TutorEstudiante> tutorEstudianteCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estId")
-    private Collection<PruebasPsicologica> pruebasPsicologicaCollection;
+    private Collection<PruebaPsicologica> pruebaPsicologicaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estId")
     private Collection<Referimiento> referimientoCollection;
 
@@ -352,12 +352,12 @@ public class Estudiante implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PruebasPsicologica> getPruebasPsicologicaCollection() {
-        return pruebasPsicologicaCollection;
+    public Collection<PruebaPsicologica> getPruebaPsicologicaCollection() {
+        return pruebaPsicologicaCollection;
     }
 
-    public void setPruebasPsicologicaCollection(Collection<PruebasPsicologica> pruebasPsicologicaCollection) {
-        this.pruebasPsicologicaCollection = pruebasPsicologicaCollection;
+    public void setPruebaPsicologicaCollection(Collection<PruebaPsicologica> pruebaPsicologicaCollection) {
+        this.pruebaPsicologicaCollection = pruebaPsicologicaCollection;
     }
 
     @XmlTransient

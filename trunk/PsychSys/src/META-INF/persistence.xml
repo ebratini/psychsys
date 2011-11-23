@@ -7,7 +7,7 @@
     <class>org.salvador_dali.psychsys.model.entities.AntRecienNacido</class>
     <class>org.salvador_dali.psychsys.model.entities.Caso</class>
     <class>org.salvador_dali.psychsys.model.entities.Rol</class>
-    <class>org.salvador_dali.psychsys.model.entities.PruebasPsicologica</class>
+    <class>org.salvador_dali.psychsys.model.entities.PruebaPsicologica</class>
     <class>org.salvador_dali.psychsys.model.entities.Tutor</class>
     <class>org.salvador_dali.psychsys.model.entities.Permiso</class>
     <class>org.salvador_dali.psychsys.model.entities.AntPsicosocialSexual</class>
@@ -20,6 +20,7 @@
     <class>org.salvador_dali.psychsys.model.entities.UbicacionPrueba</class>
     <class>org.salvador_dali.psychsys.model.entities.Estudiante</class>
     <class>org.salvador_dali.psychsys.model.entities.Bitacora</class>
+    <class>org.salvador_dali.psychsys.model.entities.PruebaPsicologica</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=PsychSysDB"/>
       <property name="javax.persistence.jdbc.password" value="Mssql88**"/>
