@@ -94,7 +94,7 @@ public class Caso implements Serializable {
     @ManyToOne(optional = false)
     private Referimiento refId;
     @OneToMany(mappedBy = "csoId")
-    private Collection<PruebasPsicologica> pruebasPsicologicaCollection;
+    private Collection<PruebaPsicologica> pruebaPsicologicaCollection;
 
     public Caso() {
     }
@@ -200,12 +200,12 @@ public class Caso implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PruebasPsicologica> getPruebasPsicologicaCollection() {
-        return pruebasPsicologicaCollection;
+    public Collection<PruebaPsicologica> getPruebaPsicologicaCollection() {
+        return pruebaPsicologicaCollection;
     }
 
-    public void setPruebasPsicologicaCollection(Collection<PruebasPsicologica> pruebasPsicologicaCollection) {
-        this.pruebasPsicologicaCollection = pruebasPsicologicaCollection;
+    public void setPruebaPsicologicaCollection(Collection<PruebaPsicologica> pruebaPsicologicaCollection) {
+        this.pruebaPsicologicaCollection = pruebaPsicologicaCollection;
     }
 
     @Override

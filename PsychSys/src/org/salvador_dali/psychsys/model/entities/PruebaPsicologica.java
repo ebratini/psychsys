@@ -51,12 +51,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Pruebas_Psicologicas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PruebasPsicologica.findAll", query = "SELECT p FROM PruebasPsicologica p"),
-    @NamedQuery(name = "PruebasPsicologica.findByPpsId", query = "SELECT p FROM PruebasPsicologica p WHERE p.ppsId = :ppsId"),
-    @NamedQuery(name = "PruebasPsicologica.findByPpsFechaAplicacion", query = "SELECT p FROM PruebasPsicologica p WHERE p.ppsFechaAplicacion = :ppsFechaAplicacion"),
-    @NamedQuery(name = "PruebasPsicologica.findByPpsNombrePrueba", query = "SELECT p FROM PruebasPsicologica p WHERE p.ppsNombrePrueba = :ppsNombrePrueba"),
-    @NamedQuery(name = "PruebasPsicologica.findByPpsCorrecionAutomatica", query = "SELECT p FROM PruebasPsicologica p WHERE p.ppsCorrecionAutomatica = :ppsCorrecionAutomatica")})
-public class PruebasPsicologica implements Serializable {
+    @NamedQuery(name = "PruebaPsicologica.findAll", query = "SELECT p FROM PruebaPsicologica p"),
+    @NamedQuery(name = "PruebaPsicologica.findByPpsId", query = "SELECT p FROM PruebaPsicologica p WHERE p.ppsId = :ppsId"),
+    @NamedQuery(name = "PruebaPsicologica.findByPpsFechaAplicacion", query = "SELECT p FROM PruebaPsicologica p WHERE p.ppsFechaAplicacion = :ppsFechaAplicacion"),
+    @NamedQuery(name = "PruebaPsicologica.findByPpsNombrePrueba", query = "SELECT p FROM PruebaPsicologica p WHERE p.ppsNombrePrueba = :ppsNombrePrueba"),
+    @NamedQuery(name = "PruebaPsicologica.findByPpsCorrecionAutomatica", query = "SELECT p FROM PruebaPsicologica p WHERE p.ppsCorrecionAutomatica = :ppsCorrecionAutomatica")})
+public class PruebaPsicologica implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -87,14 +87,14 @@ public class PruebasPsicologica implements Serializable {
     @ManyToOne
     private Caso csoId;
 
-    public PruebasPsicologica() {
+    public PruebaPsicologica() {
     }
 
-    public PruebasPsicologica(Integer ppsId) {
+    public PruebaPsicologica(Integer ppsId) {
         this.ppsId = ppsId;
     }
 
-    public PruebasPsicologica(Integer ppsId, Date ppsFechaAplicacion, String ppsNombrePrueba, char ppsCorrecionAutomatica) {
+    public PruebaPsicologica(Integer ppsId, Date ppsFechaAplicacion, String ppsNombrePrueba, char ppsCorrecionAutomatica) {
         this.ppsId = ppsId;
         this.ppsFechaAplicacion = ppsFechaAplicacion;
         this.ppsNombrePrueba = ppsNombrePrueba;
@@ -184,10 +184,10 @@ public class PruebasPsicologica implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PruebasPsicologica)) {
+        if (!(object instanceof PruebaPsicologica)) {
             return false;
         }
-        PruebasPsicologica other = (PruebasPsicologica) object;
+        PruebaPsicologica other = (PruebaPsicologica) object;
         if ((this.ppsId == null && other.ppsId != null) || (this.ppsId != null && !this.ppsId.equals(other.ppsId))) {
             return false;
         }
@@ -196,7 +196,7 @@ public class PruebasPsicologica implements Serializable {
 
     @Override
     public String toString() {
-        return "org.salvador_dali.psychsys.model.entities.PruebasPsicologica[ ppsId=" + ppsId + " ]";
+        return "org.salvador_dali.psychsys.model.entities.PruebaPsicologica[ ppsId=" + ppsId + " ]";
     }
     
 }
