@@ -24,6 +24,8 @@
 package org.salvador_dali.psychsys.business;
 
 import java.util.List;
+import java.util.Map;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.TutorDao;
@@ -35,11 +37,23 @@ import org.salvador_dali.psychsys.model.entities.Tutor;
  */
 public class JpaTutorDao extends JpaDao implements TutorDao {
 
+    public JpaTutorDao() {
+        super(Tutor.class);
+    }
+
+    public JpaTutorDao(Map props) {
+        super(Tutor.class, props);
+    }
+
     @Override
     public Tutor getTutorByDNI(String dni) {
-        Query q = entityManager.createNamedQuery("Tutor.findByTutDni");
-        q.setParameter("tutDni", dni);
-        return (Tutor) q.getSingleResult();
+        try {
+            Query q = entityManager.createNamedQuery("Tutor.findByTutDni");
+            q.setParameter("tutDni", dni);
+            return (Tutor) q.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override

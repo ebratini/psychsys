@@ -38,7 +38,10 @@ import org.salvador_dali.psychsys.business.EmailFieldValidator;
 import org.salvador_dali.psychsys.business.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
+import org.salvador_dali.psychsys.business.JpaTutorDao;
 import org.salvador_dali.psychsys.business.PhoneFieldValidator;
+import org.salvador_dali.psychsys.model.TutorDao;
+import org.salvador_dali.psychsys.model.entities.Tutor;
 
 /**
  *
@@ -46,9 +49,21 @@ import org.salvador_dali.psychsys.business.PhoneFieldValidator;
  */
 public class RegistroEdicionTutores extends javax.swing.JFrame {
 
+    public enum RegistroEdicionModo {
+
+        REGISTRO, EDICION
+    };
+    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private Tutor tutorAEditar = null;
+
     /** Creates new form RegistroEdicionTutores */
     public RegistroEdicionTutores() {
         initComponents();
+    }
+
+    public RegistroEdicionTutores(RegistroEdicionModo modo) {
+        this();
+        this.modo = modo;
     }
 
     /** This method is called from within the constructor to
@@ -92,13 +107,12 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lblDireccion = new javax.swing.JLabel();
-        txtDir1 = new javax.swing.JTextField();
-        txtDir2 = new javax.swing.JTextField();
         lblTelValMarker = new javax.swing.JLabel();
         lblEmailValMarker = new javax.swing.JLabel();
-        lblDir1ValMarker = new javax.swing.JLabel();
-        lblDir2ValMarker = new javax.swing.JLabel();
+        lblDirValMarker = new javax.swing.JLabel();
         ftfTelefono = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txaDireccion = new javax.swing.JTextArea();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -108,6 +122,11 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         setTitle("Registrar Tutor");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnAceptar.setText("Aceptar");
         btnAceptar.setNextFocusableComponent(btnCancelar);
@@ -141,11 +160,6 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         lblPrimerNombre.setText("Primer Nombre");
 
         txtPrimerNombre.setNextFocusableComponent(txtSegundoNombre);
-        txtPrimerNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrimerNombreActionPerformed(evt);
-            }
-        });
 
         lblSegundoNombre.setText("Segundo Nombre");
 
@@ -175,19 +189,24 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
         lblDniValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblDniValMarker.setLabelFor(txtDni);
+        lblDniValMarker.setText("*");
 
         lblPrimerNombreValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblPrimerNombreValMarker.setLabelFor(txtPrimerNombre);
+        lblPrimerNombreValMarker.setText("*");
 
         lblPrimerApellidoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblPrimerApellidoValMarker.setLabelFor(txtPrimerApellido);
+        lblPrimerApellidoValMarker.setText("*");
 
         lblSegApellidoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblSegApellidoValMarker.setLabelFor(txtSegundoApellido);
+        lblSegApellidoValMarker.setText("*");
 
         lblNacionalidadValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblNacionalidadValMarker.setLabelFor(txtNacionalidad);
-        lblNacionalidadValMarker.setToolTipText("");
+        lblNacionalidadValMarker.setText("*");
+        lblNacionalidadValMarker.setToolTipText(null);
 
         javax.swing.GroupLayout pnlTutInfoPersonalLayout = new javax.swing.GroupLayout(pnlTutInfoPersonal);
         pnlTutInfoPersonal.setLayout(pnlTutInfoPersonalLayout);
@@ -234,7 +253,8 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                             .addComponent(cmbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPrimerApellidoValMarker))))
+                        .addComponent(lblPrimerApellidoValMarker)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTutInfoPersonalLayout.setVerticalGroup(
             pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,27 +311,27 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
         lblEmail.setText("Email");
 
-        txtEmail.setNextFocusableComponent(txtDir1);
-
         lblDireccion.setText("Direccion");
-
-        txtDir1.setNextFocusableComponent(txtDir2);
-
-        txtDir2.setNextFocusableComponent(btnAceptar);
 
         lblTelValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblTelValMarker.setLabelFor(ftfTelefono);
+        lblTelValMarker.setText("*");
 
         lblEmailValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblEmailValMarker.setLabelFor(txtEmail);
+        lblEmailValMarker.setText("*");
 
-        lblDir1ValMarker.setForeground(new java.awt.Color(255, 51, 51));
-        lblDir1ValMarker.setLabelFor(txtDir1);
-
-        lblDir2ValMarker.setForeground(new java.awt.Color(255, 51, 51));
-        lblDir2ValMarker.setLabelFor(txtDir2);
+        lblDirValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblDirValMarker.setLabelFor(txaDireccion);
+        lblDirValMarker.setText("*");
 
         ftfTelefono.setNextFocusableComponent(txtEmail);
+
+        txaDireccion.setColumns(20);
+        txaDireccion.setLineWrap(true);
+        txaDireccion.setRows(3);
+        txaDireccion.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(txaDireccion);
 
         javax.swing.GroupLayout pnlTutInfoContactoLayout = new javax.swing.GroupLayout(pnlTutInfoContacto);
         pnlTutInfoContacto.setLayout(pnlTutInfoContactoLayout);
@@ -326,20 +346,19 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
-                        .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtDir2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDir1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(ftfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTelValMarker)
+                        .addContainerGap(423, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTutInfoContactoLayout.createSequentialGroup()
+                        .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmail)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEmailValMarker)
-                            .addComponent(lblDir1ValMarker)
-                            .addComponent(lblDir2ValMarker)))
-                    .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
-                        .addComponent(ftfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTelValMarker)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                            .addComponent(lblDirValMarker))
+                        .addGap(206, 206, 206))))
         );
         pnlTutInfoContactoLayout.setVerticalGroup(
             pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,14 +374,10 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmailValMarker))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDireccion)
-                    .addComponent(txtDir1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDir1ValMarker))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDir2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDir2ValMarker))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDirValMarker))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -373,8 +388,8 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pnlTutInfoContacto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlTutInfoPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE))
+                    .addComponent(pnlTutInfoContacto, javax.swing.GroupLayout.Alignment.LEADING, 0, 614, Short.MAX_VALUE)
+                    .addComponent(pnlTutInfoPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -392,16 +407,17 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
         statusAnimationLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         statusAnimationLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
+        statusAnimationLabel.setToolTipText("trabajando");
 
         javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 494, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 468, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -421,16 +437,16 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(510, Short.MAX_VALUE)
+                .addContainerGap(484, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
                 .addContainerGap())
+            .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -448,10 +464,6 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrimerNombreActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_txtPrimerNombreActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -460,6 +472,7 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        String trabajoCompletoMensaje = "Tutor registrado exitosamente.";
         pc.start();
         LimpiadorComponentes.limpiarValidationMarkers(this);
         if (!checkFormFields()) {
@@ -471,20 +484,59 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
-        
-        // crear el objeto tutor
-        
+
+        // crear o editar el objeto tutor
+        TutorDao tutDao = new JpaTutorDao();
+
+
+        if (tutDao.getTutorByDNI(txtDni.getText()) != null) {
+            lblDniValMarker.setVisible(true);
+            statusMessageLabel.setText("Ya existe un tutor con DNI digitado.");
+            statusMessageLabel.setForeground(Color.red);
+            statusMessageLabel.setVisible(true);
+            return;
+        }
+
+
+        Tutor tutor = new Tutor(txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+                txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
+                cmbEstadoCivil.getSelectedItem().toString(), 'A');
+
+        tutor.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
+        tutor.setTutTelefono((!ftfTelefono.getText().isEmpty() ? ftfTelefono.getText().replaceAll("-", "") : null));
+        tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
+
         // crear el objeto tutorDao e invocar el metodo persist del mismo     
-        
-        
-        statusMessageLabel.setText("Tutor registrado exitosamente.");
+        if (this.modo.equals(RegistroEdicionModo.REGISTRO)) {
+            tutDao.persist(tutor);
+        } else {
+            if (tutorAEditar != null) {
+                tutor.setTutId(tutorAEditar.getTutId());
+                tutDao.update(tutor);
+                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+
+            } else {
+                statusMessageLabel.setText("Error al editar tutor, favor cierre y vuelva a intentarlo.");
+                statusMessageLabel.setForeground(Color.red);
+                return;
+            }
+        }
+
+        statusMessageLabel.setText(trabajoCompletoMensaje);
         statusMessageLabel.setForeground(Color.GREEN);
         statusMessageLabel.setVisible(true);
-        new Thread(new LabelToolTipShower(statusMessageLabel)).start();
+        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         LimpiadorComponentes.limpiarComponentes(this);
         txtDni.requestFocusInWindow();
         pc.stop();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        statusMessageLabel.setVisible(false);
+        statusAnimationLabel.setVisible(false);
+        LimpiadorComponentes.limpiarValidationMarkers(this);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -516,6 +568,7 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 new RegistroEdicionTutores().setVisible(true);
             }
@@ -539,17 +592,23 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
         campos.put(lblSegApellidoValMarker, emptynessArr);
         campos.put(lblNacionalidadValMarker, emptynessArr);
         campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
-
+        
         if (!((JTextComponent) lblEmailValMarker.getLabelFor()).getText().isEmpty()) {
             campos.put(lblEmailValMarker, new FieldValidator[]{emailVal});
         }
-
-        campos.put(lblDir1ValMarker, emptynessArr);
-        campos.put(lblDir2ValMarker, emptynessArr);
-
+        campos.put(lblDirValMarker, emptynessArr);
+        
         validFields = FormFieldValidator.verifyFormFields(campos);
 
         return validFields;
+    }
+
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
+        this.modo = modo;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
@@ -559,8 +618,8 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JComboBox cmbTipoDni;
     private javax.swing.JFormattedTextField ftfTelefono;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblDir1ValMarker;
-    private javax.swing.JLabel lblDir2ValMarker;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDirValMarker;
     private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblDni;
     private javax.swing.JLabel lblDniValMarker;
@@ -585,8 +644,7 @@ private void txtPrimerNombreActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
-    private javax.swing.JTextField txtDir1;
-    private javax.swing.JTextField txtDir2;
+    private javax.swing.JTextArea txaDireccion;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNacionalidad;

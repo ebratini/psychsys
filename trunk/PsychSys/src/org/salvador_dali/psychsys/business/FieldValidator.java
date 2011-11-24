@@ -29,11 +29,11 @@ package org.salvador_dali.psychsys.business;
  */
 public abstract class FieldValidator {
 
-    private String validationMessage;
+    private String validationMessage = "Campo no valido.";
 
     public abstract boolean validate(String textToValidate);
 
     public String getValidationMessage() {
-        return "Campo no valido";
+        return this.validationMessage;
     }
 }
