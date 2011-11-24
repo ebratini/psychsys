@@ -58,6 +58,7 @@ public abstract class LimpiadorComponentes {
             if (comp instanceof JLabel && ((JLabel) comp).getText().equalsIgnoreCase("*")) {
                 //((JLabel) comp).setText("");
                 ((JLabel) comp).setVisible(false);
+                ((JLabel) comp).setToolTipText(null);
             } else if (comp instanceof Container) {
                 limpiarValidationMarkers((Container) comp);
             }

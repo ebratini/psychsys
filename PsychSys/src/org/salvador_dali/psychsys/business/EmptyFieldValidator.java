@@ -41,6 +41,6 @@ public class EmptyFieldValidator extends FieldValidator {
 
     @Override
     public String getValidationMessage() {
-        return "El campo no puede estar vacio";
+        return "El campo no puede estar vacio.";
     }
 }

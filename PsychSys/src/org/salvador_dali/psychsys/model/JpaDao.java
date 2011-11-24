@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -43,8 +44,8 @@ public abstract class JpaDao implements Dao {
 
     // TODO: resolver problemas con el ParameterizedType
     public JpaDao() {
-        ParameterizedType genericSuperclass = ((ParameterizedType) getClass().getGenericSuperclass());
-        this.entityClass = (Class) genericSuperclass.getActualTypeArguments()[1];
+        //ParameterizedType genericSuperclass = (ParameterizedType) (getClass().getGenericSuperclass());
+        //this.entityClass = (Class) genericSuperclass.getActualTypeArguments()[0];
     }
     
     public JpaDao(Class entityClass, Map properties) {
@@ -59,7 +60,10 @@ public abstract class JpaDao implements Dao {
     
     @Override
     public <E> void persist(E entity) {
+        EntityTransaction et = entityManager.getTransaction();
+        et.begin();
         entityManager.persist(entity);
+        et.commit();
     }
     
     @Override
@@ -70,12 +74,20 @@ public abstract class JpaDao implements Dao {
     
     @Override
     public <E> E update(E entity) {
-        return entityManager.merge(entity);
+        E updated = null;
+        EntityTransaction et = entityManager.getTransaction();
+        et.begin();
+        updated = entityManager.merge(entity);
+        et.commit();
+        return updated;
     }
     
     @Override
     public <E> void remove(E entity) {
+        EntityTransaction et = entityManager.getTransaction();
+        et.begin();
         entityManager.remove(entity);
+        et.commit();
     }
     
     @Override

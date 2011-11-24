@@ -24,18 +24,16 @@
 package org.salvador_dali.psychsys.model.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -52,7 +50,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tutor.findByTutPrimerApellido", query = "SELECT t FROM Tutor t WHERE t.tutPrimerApellido = :tutPrimerApellido"),
     @NamedQuery(name = "Tutor.findByTutSegundoApellido", query = "SELECT t FROM Tutor t WHERE t.tutSegundoApellido = :tutSegundoApellido"),
     @NamedQuery(name = "Tutor.findByTutPrimerNombre", query = "SELECT t FROM Tutor t WHERE t.tutPrimerNombre = :tutPrimerNombre"),
-    @NamedQuery(name = "Tutor.findByTutSegundoNumbre", query = "SELECT t FROM Tutor t WHERE t.tutSegundoNumbre = :tutSegundoNumbre"),
+    @NamedQuery(name = "Tutor.findByTutSegundoNombre", query = "SELECT t FROM Tutor t WHERE t.tutSegundoNombre = :tutSegundoNombre"),
     @NamedQuery(name = "Tutor.findByTutTelefono", query = "SELECT t FROM Tutor t WHERE t.tutTelefono = :tutTelefono"),
     @NamedQuery(name = "Tutor.findByTutDireccion", query = "SELECT t FROM Tutor t WHERE t.tutDireccion = :tutDireccion"),
     @NamedQuery(name = "Tutor.findByTutEmail", query = "SELECT t FROM Tutor t WHERE t.tutEmail = :tutEmail"),
@@ -63,6 +61,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Tutor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "tut_id")
     private Integer tutId;
@@ -81,8 +80,8 @@ public class Tutor implements Serializable {
     @Basic(optional = false)
     @Column(name = "tut_primer_nombre")
     private String tutPrimerNombre;
-    @Column(name = "tut_segundo_numbre")
-    private String tutSegundoNumbre;
+    @Column(name = "tut_segundo_nombre")
+    private String tutSegundoNombre;
     @Column(name = "tut_telefono")
     private String tutTelefono;
     @Basic(optional = false)
@@ -102,8 +101,6 @@ public class Tutor implements Serializable {
     @Basic(optional = false)
     @Column(name = "tut_status")
     private char tutStatus;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
-    private Collection<TutorEstudiante> tutorEstudianteCollection;
 
     public Tutor() {
     }
@@ -187,12 +184,12 @@ public class Tutor implements Serializable {
         this.tutPrimerNombre = tutPrimerNombre;
     }
 
-    public String getTutSegundoNumbre() {
-        return tutSegundoNumbre;
+    public String getTutSegundoNombre() {
+        return tutSegundoNombre;
     }
 
-    public void setTutSegundoNumbre(String tutSegundoNumbre) {
-        this.tutSegundoNumbre = tutSegundoNumbre;
+    public void setTutSegundoNombre(String tutSegundoNombre) {
+        this.tutSegundoNombre = tutSegundoNombre;
     }
 
     public String getTutTelefono() {
@@ -249,15 +246,6 @@ public class Tutor implements Serializable {
 
     public void setTutStatus(char tutStatus) {
         this.tutStatus = tutStatus;
-    }
-
-    @XmlTransient
-    public Collection<TutorEstudiante> getTutorEstudianteCollection() {
-        return tutorEstudianteCollection;
-    }
-
-    public void setTutorEstudianteCollection(Collection<TutorEstudiante> tutorEstudianteCollection) {
-        this.tutorEstudianteCollection = tutorEstudianteCollection;
     }
 
     @Override
