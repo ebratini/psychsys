@@ -57,7 +57,7 @@ public class UbicacionPrueba implements Serializable {
     private String ubpUrl;
     @JoinColumn(name = "pps_id", referencedColumnName = "pps_id")
     @ManyToOne(optional = false)
-    private PruebaPsicologica ppsId;
+    private PruebaPsicologica pruebaPsicologica;
 
     public UbicacionPrueba() {
     }
@@ -87,12 +87,12 @@ public class UbicacionPrueba implements Serializable {
         this.ubpUrl = ubpUrl;
     }
 
-    public PruebaPsicologica getPpsId() {
-        return ppsId;
+    public PruebaPsicologica getPruebaPsicologica() {
+        return pruebaPsicologica;
     }
 
-    public void setPpsId(PruebaPsicologica ppsId) {
-        this.ppsId = ppsId;
+    public void setPruebaPsicologica(PruebaPsicologica pruebaPsicologica) {
+        this.pruebaPsicologica = pruebaPsicologica;
     }
 
     @Override

@@ -29,7 +29,7 @@
  */
 package org.salvador_dali.psychsys.ui;
 
-import org.salvador_dali.psychsys.model.Usuario;
+import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
  *
@@ -156,6 +156,7 @@ public class Login extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 Login dialog = new Login(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {

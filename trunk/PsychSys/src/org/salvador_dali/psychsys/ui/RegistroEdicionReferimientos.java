@@ -29,7 +29,9 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
 import java.awt.Toolkit;
+import org.salvador_dali.psychsys.model.entities.Referimiento;
 
 /**
  *
@@ -37,9 +39,17 @@ import java.awt.Toolkit;
  */
 public class RegistroEdicionReferimientos extends javax.swing.JFrame {
 
+    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private Referimiento refAEditar;
+
     /** Creates new form RegistroEdicionReferimientos */
     public RegistroEdicionReferimientos() {
         initComponents();
+    }
+
+    public RegistroEdicionReferimientos(RegistroEdicionModo modo) {
+        this();
+        this.modo = modo;
     }
 
     /** This method is called from within the constructor to
@@ -72,7 +82,6 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
         ftfFecha = new javax.swing.JFormattedTextField();
         lblFecha = new javax.swing.JLabel();
         lblFechaValMarker = new javax.swing.JLabel();
-        lblFechaValMarker1 = new javax.swing.JLabel();
         lblAnioEscolarValMarker1 = new javax.swing.JLabel();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
@@ -85,6 +94,11 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
         setTitle("Crear Referimiento");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -95,6 +109,7 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
         lblReferidor.setText("Referidor");
 
         btnBuscarEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
+        btnBuscarEstudiante.setBorderPainted(false);
 
         lblMotivoReferimiento.setText("Motivo Referimiento");
 
@@ -111,28 +126,43 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
 
         lblEstudianteValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblEstudianteValMarker.setLabelFor(lblEstudiante);
+        lblEstudianteValMarker.setText("*");
         lblEstudianteValMarker.setToolTipText("");
 
         lblMotivoRefValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblMotivoRefValMarker.setLabelFor(txaMotivoReferimiento);
+        lblMotivoRefValMarker.setText("*");
         lblMotivoRefValMarker.setToolTipText("");
 
         lblReferidorValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblReferidorValMarker.setLabelFor(txtReferidor);
+        lblReferidorValMarker.setText("*");
         lblReferidorValMarker.setToolTipText("");
+
+        try {
+            ftfAnioEscolar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         lblAnioEscolarValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblAnioEscolarValMarker.setLabelFor(ftfAnioEscolar);
         lblAnioEscolarValMarker.setToolTipText("");
 
+        try {
+            ftfFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         lblFecha.setText("Fecha");
 
         lblFechaValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblFechaValMarker.setLabelFor(ftfFecha);
-
-        lblFechaValMarker1.setForeground(new java.awt.Color(255, 51, 51));
+        lblFechaValMarker.setText("*");
 
         lblAnioEscolarValMarker1.setForeground(new java.awt.Color(255, 51, 51));
+        lblAnioEscolarValMarker1.setText("*");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,8 +179,14 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
                     .addComponent(lblFecha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ftfAnioEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ftfAnioEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblAnioEscolarValMarker1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblFechaValMarker))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addComponent(txtReferidor)
@@ -158,15 +194,12 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
                         .addComponent(txtEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblMotivoRefValMarker)
                     .addComponent(lblReferidorValMarker)
                     .addComponent(lblEstudianteValMarker)
-                    .addComponent(lblAnioEscolarValMarker)
-                    .addComponent(lblFechaValMarker)
-                    .addComponent(lblFechaValMarker1)
-                    .addComponent(lblAnioEscolarValMarker1))
+                    .addComponent(lblAnioEscolarValMarker))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -182,8 +215,7 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblFecha)
                             .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFechaValMarker)
-                            .addComponent(lblFechaValMarker1))
+                            .addComponent(lblFechaValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAnioEscolar)
@@ -224,11 +256,11 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -244,8 +276,18 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -257,7 +299,7 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
                 .addContainerGap())
             .addComponent(statusPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(270, Short.MAX_VALUE)
+                .addContainerGap(272, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -278,6 +320,80 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        statusMessageLabel.setVisible(false);
+        statusAnimationLabel.setVisible(false);
+        LimpiadorComponentes.limpiarValidationMarkers(this);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        // TODO: implementar correctamente el spinning progress bar
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        String trabajoCompletoMensaje = "Referimiento registrado exitosamente.";
+        pc.start();
+        LimpiadorComponentes.limpiarValidationMarkers(this);
+        if (!checkFormFields()) {
+            statusMessageLabel.setText("Por favor corriga los campos marcados.");
+            statusMessageLabel.setForeground(Color.red);
+            new Thread(new LabelToolTipShower(statusMessageLabel, 3000)).start();
+            return;
+        }
+
+        // si todo esta bien
+        statusMessageLabel.setVisible(false);
+
+        // crear o editar el objeto tutor
+        /*TutorDao tutDao = new JpaTutorDao();
+
+        if (tutDao.getTutorByDNI(txtDni.getText()) != null) {
+            lblDniValMarker.setVisible(true);
+            statusMessageLabel.setText("Ya existe un tutor con DNI digitado.");
+            statusMessageLabel.setForeground(Color.red);
+            statusMessageLabel.setVisible(true);
+            return;
+        }
+
+
+        Tutor tutor = new Tutor(txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+                txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
+                cmbEstadoCivil.getSelectedItem().toString(), 'A');
+
+        tutor.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
+        tutor.setTutTelefono((!ftfTelefono.getText().isEmpty() ? ftfTelefono.getText().replaceAll("-", "") : null));
+        tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
+
+        // crear el objeto tutorDao e invocar el metodo persist del mismo     
+        if (this.modo.equals(RegistroEdicionModo.REGISTRO)) {
+            tutDao.persist(tutor);
+        } else {
+            if (tutorAEditar != null) {
+                tutor.setTutId(tutorAEditar.getTutId());
+                tutDao.update(tutor);
+                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+
+            } else {
+                statusMessageLabel.setText("Error al editar tutor, favor cierre y vuelva a intentarlo.");
+                statusMessageLabel.setForeground(Color.red);
+                return;
+            }
+        }*/
+
+        statusMessageLabel.setText(trabajoCompletoMensaje);
+        statusMessageLabel.setForeground(Color.GREEN);
+        statusMessageLabel.setVisible(true);
+        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
+        LimpiadorComponentes.limpiarComponentes(this);
+        ftfFecha.requestFocusInWindow();
+        pc.stop();
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +430,50 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
             }
         });
     }
+
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
+        this.modo = modo;
+    }
+
+    public Referimiento getRefAEditar() {
+        return refAEditar;
+    }
+
+    public void setRefAEditar(Referimiento refAEditar) {
+        this.refAEditar = refAEditar;
+    }
+
+    private boolean checkFormFields() {
+        boolean validFields = true;
+
+        /*FieldValidator emptynessVal, phoneVal, emailVal;
+        emptynessVal = new EmptyFieldValidator();
+        phoneVal = new PhoneFieldValidator();
+        emailVal = new EmailFieldValidator();
+        
+        FieldValidator[] emptynessArr = new FieldValidator[]{emptynessVal};
+        
+        HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
+        campos.put(lblDniValMarker, emptynessArr);
+        campos.put(lblPrimerNombreValMarker, emptynessArr);
+        campos.put(lblPrimerApellidoValMarker, emptynessArr);
+        campos.put(lblSegApellidoValMarker, emptynessArr);
+        campos.put(lblNacionalidadValMarker, emptynessArr);
+        campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
+        
+        if (!((JTextComponent) lblEmailValMarker.getLabelFor()).getText().isEmpty()) {
+        campos.put(lblEmailValMarker, new FieldValidator[]{emailVal});
+        }
+        campos.put(lblDirValMarker, emptynessArr);
+        
+        validFields = FormFieldValidator.verifyFormFields(campos);*/
+
+        return validFields;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnBuscarEstudiante;
@@ -331,7 +491,6 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
     private javax.swing.JLabel lblEstudianteValMarker;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFechaValMarker;
-    private javax.swing.JLabel lblFechaValMarker1;
     private javax.swing.JLabel lblMotivoRefValMarker;
     private javax.swing.JLabel lblMotivoReferimiento;
     private javax.swing.JLabel lblReferidor;

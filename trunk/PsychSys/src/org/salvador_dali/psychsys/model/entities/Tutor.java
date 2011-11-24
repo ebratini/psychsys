@@ -24,7 +24,9 @@
 package org.salvador_dali.psychsys.model.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,8 +34,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -59,9 +63,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tutor.findByTutEstadoCivil", query = "SELECT t FROM Tutor t WHERE t.tutEstadoCivil = :tutEstadoCivil"),
     @NamedQuery(name = "Tutor.findByTutStatus", query = "SELECT t FROM Tutor t WHERE t.tutStatus = :tutStatus")})
 public class Tutor implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "tut_id")
     private Integer tutId;
@@ -101,6 +106,8 @@ public class Tutor implements Serializable {
     @Basic(optional = false)
     @Column(name = "tut_status")
     private char tutStatus;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tutor")
+    private Collection<TutorEstudiante> tutorEstudianteCollection;
 
     public Tutor() {
     }
@@ -111,19 +118,6 @@ public class Tutor implements Serializable {
 
     public Tutor(Integer tutId, String tutDni, String tutTipoDni, String tutPrimerApellido, String tutSegundoApellido, String tutPrimerNombre, String tutDireccion, String tutNacionalidad, char tutGenero, String tutEstadoCivil, char tutStatus) {
         this.tutId = tutId;
-        this.tutDni = tutDni;
-        this.tutTipoDni = tutTipoDni;
-        this.tutPrimerApellido = tutPrimerApellido;
-        this.tutSegundoApellido = tutSegundoApellido;
-        this.tutPrimerNombre = tutPrimerNombre;
-        this.tutDireccion = tutDireccion;
-        this.tutNacionalidad = tutNacionalidad;
-        this.tutGenero = tutGenero;
-        this.tutEstadoCivil = tutEstadoCivil;
-        this.tutStatus = tutStatus;
-    }
-    
-    public Tutor(String tutDni, String tutTipoDni, String tutPrimerApellido, String tutSegundoApellido, String tutPrimerNombre, String tutDireccion, String tutNacionalidad, char tutGenero, String tutEstadoCivil, char tutStatus) {
         this.tutDni = tutDni;
         this.tutTipoDni = tutTipoDni;
         this.tutPrimerApellido = tutPrimerApellido;
@@ -248,6 +242,15 @@ public class Tutor implements Serializable {
         this.tutStatus = tutStatus;
     }
 
+    @XmlTransient
+    public Collection<TutorEstudiante> getTutorEstudianteCollection() {
+        return tutorEstudianteCollection;
+    }
+
+    public void setTutorEstudianteCollection(Collection<TutorEstudiante> tutorEstudianteCollection) {
+        this.tutorEstudianteCollection = tutorEstudianteCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -272,5 +275,4 @@ public class Tutor implements Serializable {
     public String toString() {
         return "org.salvador_dali.psychsys.model.entities.Tutor[ tutId=" + tutId + " ]";
     }
-    
 }

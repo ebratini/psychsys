@@ -73,7 +73,7 @@ public class Bitacora implements Serializable {
     private String bitDescripcion;
     @JoinColumn(name = "usr_id", referencedColumnName = "usr_id")
     @ManyToOne(optional = false)
-    private Usuario usrId;
+    private Usuario usuario;
 
     public Bitacora() {
     }
@@ -130,12 +130,12 @@ public class Bitacora implements Serializable {
         this.bitDescripcion = bitDescripcion;
     }
 
-    public Usuario getUsrId() {
-        return usrId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsrId(Usuario usrId) {
-        this.usrId = usrId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

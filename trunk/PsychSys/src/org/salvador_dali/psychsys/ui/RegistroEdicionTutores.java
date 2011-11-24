@@ -49,12 +49,8 @@ import org.salvador_dali.psychsys.model.entities.Tutor;
  */
 public class RegistroEdicionTutores extends javax.swing.JFrame {
 
-    public enum RegistroEdicionModo {
-
-        REGISTRO, EDICION
-    };
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
-    private Tutor tutorAEditar = null;
+    private Tutor tutorAEditar;
 
     /** Creates new form RegistroEdicionTutores */
     public RegistroEdicionTutores() {
@@ -325,6 +321,11 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         lblDirValMarker.setLabelFor(txaDireccion);
         lblDirValMarker.setText("*");
 
+        try {
+            ftfTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(###) ###-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         ftfTelefono.setNextFocusableComponent(txtEmail);
 
         txaDireccion.setColumns(20);
@@ -388,7 +389,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pnlTutInfoContacto, javax.swing.GroupLayout.Alignment.LEADING, 0, 614, Short.MAX_VALUE)
+                    .addComponent(pnlTutInfoContacto, javax.swing.GroupLayout.Alignment.LEADING, 0, 618, Short.MAX_VALUE)
                     .addComponent(pnlTutInfoPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -413,11 +414,11 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 468, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -437,7 +438,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(484, Short.MAX_VALUE)
+                .addContainerGap(488, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -471,6 +472,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
+        // TODO: implementar correctamente el spinning progress bar
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
         String trabajoCompletoMensaje = "Tutor registrado exitosamente.";
         pc.start();
@@ -488,7 +490,6 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         // crear o editar el objeto tutor
         TutorDao tutDao = new JpaTutorDao();
 
-
         if (tutDao.getTutorByDNI(txtDni.getText()) != null) {
             lblDniValMarker.setVisible(true);
             statusMessageLabel.setText("Ya existe un tutor con DNI digitado.");
@@ -498,7 +499,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         }
 
 
-        Tutor tutor = new Tutor(txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+        Tutor tutor = new Tutor(null, txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
                 txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
                 cmbEstadoCivil.getSelectedItem().toString(), 'A');
 
@@ -580,24 +581,28 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
         FieldValidator emptynessVal, phoneVal, emailVal;
         emptynessVal = new EmptyFieldValidator();
-        phoneVal = new PhoneFieldValidator();
+        phoneVal = new PhoneFieldValidator("\\(\\d\\d\\d\\) \\d\\d\\d-\\d\\d\\d\\d");
         emailVal = new EmailFieldValidator();
 
         FieldValidator[] emptynessArr = new FieldValidator[]{emptynessVal};
 
         HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
+        
+        // validando info personal
         campos.put(lblDniValMarker, emptynessArr);
         campos.put(lblPrimerNombreValMarker, emptynessArr);
         campos.put(lblPrimerApellidoValMarker, emptynessArr);
         campos.put(lblSegApellidoValMarker, emptynessArr);
         campos.put(lblNacionalidadValMarker, emptynessArr);
-        campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
         
+        // validando info contacto
+        campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
+
         if (!((JTextComponent) lblEmailValMarker.getLabelFor()).getText().isEmpty()) {
             campos.put(lblEmailValMarker, new FieldValidator[]{emailVal});
         }
         campos.put(lblDirValMarker, emptynessArr);
-        
+
         validFields = FormFieldValidator.verifyFormFields(campos);
 
         return validFields;
@@ -609,6 +614,14 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
     public void setModo(RegistroEdicionModo modo) {
         this.modo = modo;
+    }
+
+    public Tutor getTutorAEditar() {
+        return tutorAEditar;
+    }
+
+    public void setTutorAEditar(Tutor tutorAEditar) {
+        this.tutorAEditar = tutorAEditar;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;

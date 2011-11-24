@@ -21,22 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.model;
-
-import java.util.List;
-import org.salvador_dali.psychsys.model.entities.Tutor;
+package org.salvador_dali.psychsys.ui;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public interface TutorDao extends Dao {
-
-    public Tutor getTutorByDNI(String dni);
-
-    public List getTutoresByPrimerApellido(String primerApellido);
-    
-    public List getTutoresByPrimerNombre(String primerNombre);
-    
-    public List getTutoresByStatus(char status);
+public enum RegistroEdicionModo {
+    REGISTRO, EDICION
 }

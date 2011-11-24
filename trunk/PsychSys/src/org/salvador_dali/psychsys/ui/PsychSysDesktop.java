@@ -23,9 +23,8 @@
  */
 package org.salvador_dali.psychsys.ui;
 
-import org.salvador_dali.psychsys.model.Usuario;
+import org.salvador_dali.psychsys.model.entities.Usuario;
 import org.salvador_dali.psychsys.business.BehaviorNotImplementedException;
-import java.awt.event.WindowEvent;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;

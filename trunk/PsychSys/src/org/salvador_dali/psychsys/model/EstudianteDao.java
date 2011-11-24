@@ -24,19 +24,19 @@
 package org.salvador_dali.psychsys.model;
 
 import java.util.List;
-import org.salvador_dali.psychsys.model.entities.Tutor;
+import org.salvador_dali.psychsys.model.entities.Estudiante;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public interface TutorDao extends Dao {
+public interface EstudianteDao extends Dao {
 
-    public Tutor getTutorByDNI(String dni);
+    public Estudiante getEstudianteByDNI(String dni);
 
-    public List getTutoresByPrimerApellido(String primerApellido);
-    
-    public List getTutoresByPrimerNombre(String primerNombre);
-    
-    public List getTutoresByStatus(char status);
+    public List getEstudiantesByPrimerApellido(String primerApellido);
+
+    public List getEstudiantesByPrimerNombre(String primerNombre);
+
+    public List getEstudiantesByStatus(char status);
 }
