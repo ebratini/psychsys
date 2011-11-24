@@ -498,13 +498,12 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
             return;
         }
 
-
         Tutor tutor = new Tutor(null, txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
                 txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
                 cmbEstadoCivil.getSelectedItem().toString(), 'A');
 
         tutor.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
-        tutor.setTutTelefono((!ftfTelefono.getText().isEmpty() ? ftfTelefono.getText().replaceAll("-", "") : null));
+        tutor.setTutTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
         tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
 
         // crear el objeto tutorDao e invocar el metodo persist del mismo     
@@ -587,16 +586,22 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         FieldValidator[] emptynessArr = new FieldValidator[]{emptynessVal};
 
         HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
-        
+
         // validando info personal
         campos.put(lblDniValMarker, emptynessArr);
         campos.put(lblPrimerNombreValMarker, emptynessArr);
         campos.put(lblPrimerApellidoValMarker, emptynessArr);
         campos.put(lblSegApellidoValMarker, emptynessArr);
         campos.put(lblNacionalidadValMarker, emptynessArr);
-        
+
         // validando info contacto
-        campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
+        if (!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -")) {
+            campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
+        } else {
+            lblTelValMarker.setToolTipText("El campo no puede estar vacio");
+            lblTelValMarker.setVisible(true);
+            validFields &= false;
+        }
 
         if (!((JTextComponent) lblEmailValMarker.getLabelFor()).getText().isEmpty()) {
             campos.put(lblEmailValMarker, new FieldValidator[]{emailVal});
@@ -606,6 +611,10 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
         validFields = FormFieldValidator.verifyFormFields(campos);
 
         return validFields;
+    }
+
+    private String extractTel(String tel) {
+        return tel.replaceAll("-", "").replace("(", "").replace(")", "").replace(" ", "");
     }
 
     public RegistroEdicionModo getModo() {

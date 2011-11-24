@@ -63,10 +63,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tutor.findByTutEstadoCivil", query = "SELECT t FROM Tutor t WHERE t.tutEstadoCivil = :tutEstadoCivil"),
     @NamedQuery(name = "Tutor.findByTutStatus", query = "SELECT t FROM Tutor t WHERE t.tutStatus = :tutStatus")})
 public class Tutor implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "tut_id")
     private Integer tutId;
@@ -275,4 +274,5 @@ public class Tutor implements Serializable {
     public String toString() {
         return "org.salvador_dali.psychsys.model.entities.Tutor[ tutId=" + tutId + " ]";
     }
+    
 }
