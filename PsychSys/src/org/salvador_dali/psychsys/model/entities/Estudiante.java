@@ -70,13 +70,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Estudiante.findByEstPeso", query = "SELECT e FROM Estudiante e WHERE e.estPeso = :estPeso"),
     @NamedQuery(name = "Estudiante.findByEstNivelEscolar", query = "SELECT e FROM Estudiante e WHERE e.estNivelEscolar = :estNivelEscolar"),
     @NamedQuery(name = "Estudiante.findByEstGradoEscolar", query = "SELECT e FROM Estudiante e WHERE e.estGradoEscolar = :estGradoEscolar"),
+    @NamedQuery(name = "Estudiante.findByEstEscuelaProcedencia", query = "SELECT e FROM Estudiante e WHERE e.estEscuelaProcedencia = :estEscuelaProcedencia"),
     @NamedQuery(name = "Estudiante.findByEstCantHermanos", query = "SELECT e FROM Estudiante e WHERE e.estCantHermanos = :estCantHermanos"),
     @NamedQuery(name = "Estudiante.findByEstOrdenHermanos", query = "SELECT e FROM Estudiante e WHERE e.estOrdenHermanos = :estOrdenHermanos"),
     @NamedQuery(name = "Estudiante.findByEstStatus", query = "SELECT e FROM Estudiante e WHERE e.estStatus = :estStatus")})
 public class Estudiante implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "est_id")
     private Integer estId;
@@ -126,6 +127,8 @@ public class Estudiante implements Serializable {
     @Basic(optional = false)
     @Column(name = "est_grado_escolar")
     private int estGradoEscolar;
+    @Column(name = "est_escuela_procedencia")
+    private String estEscuelaProcedencia;
     @Basic(optional = false)
     @Column(name = "est_cant_hermanos")
     private int estCantHermanos;
@@ -310,6 +313,14 @@ public class Estudiante implements Serializable {
 
     public void setEstGradoEscolar(int estGradoEscolar) {
         this.estGradoEscolar = estGradoEscolar;
+    }
+
+    public String getEstEscuelaProcedencia() {
+        return estEscuelaProcedencia;
+    }
+
+    public void setEstEscuelaProcedencia(String estEscuelaProcedencia) {
+        this.estEscuelaProcedencia = estEscuelaProcedencia;
     }
 
     public int getEstCantHermanos() {

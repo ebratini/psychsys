@@ -31,17 +31,21 @@ package org.salvador_dali.psychsys.ui;
 
 import java.awt.Color;
 import java.awt.Toolkit;
-import java.text.ParseException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JLabel;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
 import org.salvador_dali.psychsys.business.DateFieldValidator;
+import org.salvador_dali.psychsys.business.DateUtils;
 import org.salvador_dali.psychsys.business.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
+import org.salvador_dali.psychsys.business.JpaEstudianteDao;
 import org.salvador_dali.psychsys.business.PhoneFieldValidator;
+import org.salvador_dali.psychsys.model.EstudianteDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.Tutor;
 
 /**
  *
@@ -51,6 +55,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private Estudiante estAEditar;
+    private List<Tutor> tutores = new ArrayList<Tutor>();
 
     /** Creates new form RegistroEdicionEstudiantes */
     public RegistroEdicionEstudiantes() {
@@ -115,7 +120,6 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         cmbNivelEscolar = new javax.swing.JComboBox();
         txtEscuelaProcedencia = new javax.swing.JTextField();
         lblEscuelaProcedencia = new javax.swing.JLabel();
-        lblEscuelaProcedenciaValMarker = new javax.swing.JLabel();
         ftfTalla = new javax.swing.JFormattedTextField();
         ftfPeso = new javax.swing.JFormattedTextField();
         pnlTutInfoContacto = new javax.swing.JPanel();
@@ -185,15 +189,19 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         cmbGenero.setNextFocusableComponent(ftfFechaNacimiento);
 
         lblDniValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblDniValMarker.setLabelFor(txtDni);
         lblDniValMarker.setText("*");
 
         lblPrimerNombreValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblPrimerNombreValMarker.setLabelFor(txtPrimerNombre);
         lblPrimerNombreValMarker.setText("*");
 
         lblPrimerApellidoValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblPrimerApellidoValMarker.setLabelFor(txtPrimerApellido);
         lblPrimerApellidoValMarker.setText("*");
 
         lblSegApellidoValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblSegApellidoValMarker.setLabelFor(txtSegundoApellido);
         lblSegApellidoValMarker.setText("*");
 
         lblNacionalidadValMarker.setForeground(new java.awt.Color(255, 51, 51));
@@ -207,6 +215,11 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         lblFechaNacimiento.setText("Fecha de Nacimiento");
 
+        try {
+            ftfFechaNacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         ftfFechaNacimiento.setNextFocusableComponent(txtLugarNacimiento);
 
         lblLugarNacimiento.setText("Lugar de Nacimiento");
@@ -256,10 +269,6 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         txtEscuelaProcedencia.setNextFocusableComponent(ftfTelefono);
 
         lblEscuelaProcedencia.setText("Escuela Procedencia");
-
-        lblEscuelaProcedenciaValMarker.setForeground(new java.awt.Color(255, 51, 51));
-        lblEscuelaProcedenciaValMarker.setText("*");
-        lblEscuelaProcedenciaValMarker.setToolTipText("");
 
         ftfTalla.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         ftfTalla.setNextFocusableComponent(ftfPeso);
@@ -332,9 +341,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                                     .addComponent(txtEscuelaProcedencia, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtLugarNacimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblEscuelaProcedenciaValMarker)
-                                    .addComponent(lblLugarNacimientoValMarker)))
+                                .addComponent(lblLugarNacimientoValMarker))
                             .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
                                 .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ftfPeso, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
@@ -431,8 +438,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                             .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtEscuelaProcedencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblEscuelaProcedencia)
-                        .addComponent(lblEscuelaProcedenciaValMarker)))
+                        .addComponent(lblEscuelaProcedencia)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -506,8 +512,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         tblTutores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Celeste Garcia", "Madre", null},
-                {"Nuevo", null, ""}
+                {"Celeste Garcia", "Madre", null}
             },
             new String [] {
                 "Nombre Tutor", "Relacion Familiar", "Opciones"
@@ -646,6 +651,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         String trabajoCompletoMensaje = "Estudiante registrado exitosamente.";
         pc.start();
         LimpiadorComponentes.limpiarValidationMarkers(this);
+
         if (!checkFormFields()) {
             statusMessageLabel.setText("Por favor corriga los campos marcados.");
             statusMessageLabel.setForeground(Color.red);
@@ -653,44 +659,65 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
             return;
         }
 
+        if (tblTutores.getRowCount() < 1) {
+            statusMessageLabel.setText("Por favor seleccione al menos un tutor para el estudiante.");
+            statusMessageLabel.setForeground(Color.red);
+            new Thread(new LabelToolTipShower(statusMessageLabel, 3000)).start();
+            return;
+        }
         // si todo esta bien
         statusMessageLabel.setVisible(false);
 
         // crear o editar el objeto tutor
-        /*TutorDao tutDao = new JpaTutorDao();
+        EstudianteDao estDao = new JpaEstudianteDao();
 
-        if (tutDao.getTutorByDNI(txtDni.getText()) != null) {
+        if (estDao.getEstudianteByDNI(txtDni.getText()) != null) {
             lblDniValMarker.setVisible(true);
-            statusMessageLabel.setText("Ya existe un tutor con DNI digitado.");
+            statusMessageLabel.setText("Ya existe un estudiante con DNI digitado.");
             statusMessageLabel.setForeground(Color.red);
             statusMessageLabel.setVisible(true);
             return;
         }
 
+        Estudiante estudiante = new Estudiante(null, txtPrimerApellido.getText(), txtSegundoApellido.getText(), txtPrimerNombre.getText(), txaDireccion.getText().trim(),
+                txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0), DateUtils.parseDate(ftfFechaNacimiento.getText()), txtLugarNacimiento.getText(),
+                cmbNivelEscolar.getSelectedItem().toString(), Integer.parseInt(cmbGradoEscolar.getSelectedItem().toString()), Integer.valueOf(spnHermanos.getValue().toString()),
+                Integer.valueOf(spnLugarEntreHermanos.getValue().toString()), 'A');
 
-        Tutor tutor = new Tutor(null, txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
-                txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
-                cmbEstadoCivil.getSelectedItem().toString(), 'A');
+        estudiante.setEstDni((!txtDni.getText().isEmpty() ? txtDni.getText() : null));
+        estudiante.setEstTipoDni((!txtDni.getText().isEmpty() ? cmbTipoDni.getSelectedItem().toString() : null));
+        estudiante.setEstSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
+        estudiante.setEstApodo((!txtApodo.getText().isEmpty() ? txtApodo.getText() : null));
+        estudiante.setEstTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
+        estudiante.setEstTalla((!ftfTalla.getText().isEmpty() ? BigDecimal.valueOf(Double.parseDouble(ftfTalla.getText())) : null));
+        estudiante.setEstPeso((!ftfPeso.getText().isEmpty() ? BigDecimal.valueOf(Double.parseDouble(ftfPeso.getText())) : null));
+        estudiante.setEstEscuelaProcedencia((!txtEscuelaProcedencia.getText().isEmpty() ? txtEscuelaProcedencia.getText() : null));
 
-        tutor.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
-        tutor.setTutTelefono((!ftfTelefono.getText().isEmpty() ? ftfTelefono.getText().replaceAll("-", "") : null));
-        tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
-
-        // crear el objeto tutorDao e invocar el metodo persist del mismo     
+        //crear el objeto estudianteDao e invocar el metodo persist del mismo     
         if (this.modo.equals(RegistroEdicionModo.REGISTRO)) {
-            tutDao.persist(tutor);
+            /*Tutor tutor = new JpaTutorDao().getTutorByDNI("22500301811");
+            tutores.add(tutor);
+
+            for (Tutor tut : tutores) {
+                TutorEstudiante tutEst = new TutorEstudiante(new TutorEstudiantePK(tut.getTutId(), estudiante.getEstId()));
+                estudiante.getTutorEstudianteCollection().add(tutEst);
+                // TODO: Revisar comportamiento de este segmento en base de datos
+                //tut.getTutorEstudianteCollection().add(tutEst);
+            }*/
+            estDao.persist(estudiante);
         } else {
-            if (tutorAEditar != null) {
-                tutor.setTutId(tutorAEditar.getTutId());
-                tutDao.update(tutor);
+            // TODO: ver como implementar lo de tutores (adicion, remocion)
+            if (estAEditar != null) {
+                estudiante.setEstId(estAEditar.getEstId());
+                estDao.update(estudiante);
                 trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
 
             } else {
-                statusMessageLabel.setText("Error al editar tutor, favor cierre y vuelva a intentarlo.");
+                statusMessageLabel.setText("Error al editar estudiante, favor cierre y vuelva a intentarlo.");
                 statusMessageLabel.setForeground(Color.red);
                 return;
             }
-        }*/
+        }
 
         statusMessageLabel.setText(trabajoCompletoMensaje);
         statusMessageLabel.setForeground(Color.GREEN);
@@ -752,7 +779,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
     public void setModo(RegistroEdicionModo modo) {
         this.modo = modo;
     }
-    
+
     private boolean checkFormFields() {
         boolean validFields = true;
 
@@ -764,17 +791,32 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         FieldValidator[] emptynessArr = new FieldValidator[]{emptynessVal};
 
         HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
-        
+
         // validando info personal
-        campos.put(lblDniValMarker, emptynessArr);
         campos.put(lblPrimerNombreValMarker, emptynessArr);
         campos.put(lblPrimerApellidoValMarker, emptynessArr);
         campos.put(lblSegApellidoValMarker, emptynessArr);
         campos.put(lblNacionalidadValMarker, emptynessArr);
-        campos.put(lblFechaNacimientoValMarker, new FieldValidator[]{emptynessVal, dateVal});
-        
+
+        if (!ftfFechaNacimiento.getText().trim().equalsIgnoreCase("-  -")) {
+            campos.put(lblFechaNacimientoValMarker, new FieldValidator[]{emptynessVal, dateVal});
+        } else {
+            lblFechaNacimientoValMarker.setToolTipText("El campo no puede estar vacio");
+            lblFechaNacimientoValMarker.setVisible(true);
+            validFields &= false;
+        }
+
+        campos.put(lblLugarNacimientoValMarker, emptynessArr);
+
         // validando info contacto
-        campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});        
+        if (!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -")) {
+            campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
+        } else {
+            lblTelValMarker.setToolTipText("El campo no puede estar vacio");
+            lblTelValMarker.setVisible(true);
+            validFields &= false;
+        }
+
         campos.put(lblDirValMarker, emptynessArr);
 
         validFields = FormFieldValidator.verifyFormFields(campos);
@@ -782,7 +824,9 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         return validFields;
     }
 
-    
+    private String extractTel(String tel) {
+        return tel.replaceAll("-", "").replace("(", "").replace(")", "").replace(" ", "");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
@@ -805,7 +849,6 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
     private javax.swing.JLabel lblDni;
     private javax.swing.JLabel lblDniValMarker;
     private javax.swing.JLabel lblEscuelaProcedencia;
-    private javax.swing.JLabel lblEscuelaProcedenciaValMarker;
     private javax.swing.JLabel lblFechaNacimiento;
     private javax.swing.JLabel lblFechaNacimientoValMarker;
     private javax.swing.JLabel lblGenero;
