@@ -92,8 +92,8 @@ public class Caso implements Serializable {
     private char csoEstadoCaso;
     @JoinColumn(name = "ref_id", referencedColumnName = "ref_id")
     @ManyToOne(optional = false)
-    private Referimiento refId;
-    @OneToMany(mappedBy = "csoId")
+    private Referimiento referimiento;
+    @OneToMany(mappedBy = "caso")
     private Collection<PruebaPsicologica> pruebaPsicologicaCollection;
 
     public Caso() {
@@ -191,12 +191,12 @@ public class Caso implements Serializable {
         this.csoEstadoCaso = csoEstadoCaso;
     }
 
-    public Referimiento getRefId() {
-        return refId;
+    public Referimiento getReferimiento() {
+        return referimiento;
     }
 
-    public void setRefId(Referimiento refId) {
-        this.refId = refId;
+    public void setReferimiento(Referimiento referimiento) {
+        this.referimiento = referimiento;
     }
 
     @XmlTransient

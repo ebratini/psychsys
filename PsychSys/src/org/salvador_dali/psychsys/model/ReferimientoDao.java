@@ -23,14 +23,26 @@
  */
 package org.salvador_dali.psychsys.model;
 
+import java.util.Date;
+import java.util.List;
+import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.Usuario;
+
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class Usuario {
+public interface ReferimientoDao extends Dao {
 
-    public String getUsrLogin() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+    public List getReferimientosByFecha(Date fecha);
+
+    public List getReferimientosByAnioEscolar(String anioEscolar);
+
+    public List getReferimientosByEstudiante(Estudiante estudiante);
+
+    public List getReferimientosByReferidor(String referidor);
     
+    public List getReferimientosByUsuario(Usuario usuario);
+    
+    public List getReferimientosByEstadoReferimiento(char status);
 }

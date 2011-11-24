@@ -90,10 +90,10 @@ public class Usuario implements Serializable {
     private char usrStatus;
     @JoinColumn(name = "rol_id", referencedColumnName = "rol_id")
     @ManyToOne(optional = false)
-    private Rol rolId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
+    private Rol rol;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<Referimiento> referimientoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Collection<Bitacora> bitacoraCollection;
 
     public Usuario() {
@@ -178,12 +178,12 @@ public class Usuario implements Serializable {
         this.usrStatus = usrStatus;
     }
 
-    public Rol getRolId() {
-        return rolId;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRolId(Rol rolId) {
-        this.rolId = rolId;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     @XmlTransient

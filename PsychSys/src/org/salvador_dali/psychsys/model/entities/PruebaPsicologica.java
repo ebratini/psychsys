@@ -78,14 +78,14 @@ public class PruebaPsicologica implements Serializable {
     @Basic(optional = false)
     @Column(name = "pps_correcion_automatica")
     private char ppsCorrecionAutomatica;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ppsId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pruebaPsicologica")
     private Collection<UbicacionPrueba> ubicacionPruebaCollection;
     @JoinColumn(name = "est_id", referencedColumnName = "est_id")
     @ManyToOne(optional = false)
-    private Estudiante estId;
+    private Estudiante estudiante;
     @JoinColumn(name = "cso_id", referencedColumnName = "cso_id")
     @ManyToOne
-    private Caso csoId;
+    private Caso caso;
 
     public PruebaPsicologica() {
     }
@@ -158,20 +158,20 @@ public class PruebaPsicologica implements Serializable {
         this.ubicacionPruebaCollection = ubicacionPruebaCollection;
     }
 
-    public Estudiante getEstId() {
-        return estId;
+    public Estudiante getEstudiante() {
+        return estudiante;
     }
 
-    public void setEstId(Estudiante estId) {
-        this.estId = estId;
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
-    public Caso getCsoId() {
-        return csoId;
+    public Caso getCaso() {
+        return caso;
     }
 
-    public void setCsoId(Caso csoId) {
-        this.csoId = csoId;
+    public void setCaso(Caso caso) {
+        this.caso = caso;
     }
 
     @Override

@@ -29,6 +29,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -57,6 +59,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class HistoriaClinica implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "hic_id")
     private Integer hicId;
@@ -76,7 +79,7 @@ public class HistoriaClinica implements Serializable {
     private char hicStatus;
     @JoinColumn(name = "est_id", referencedColumnName = "est_id")
     @ManyToOne(optional = false)
-    private Estudiante estId;
+    private Estudiante estudiante;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "historiaClinica")
     private AntPsicosocialSexual antPsicosocialSexual;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "historiaClinica")
@@ -145,12 +148,12 @@ public class HistoriaClinica implements Serializable {
         this.hicStatus = hicStatus;
     }
 
-    public Estudiante getEstId() {
-        return estId;
+    public Estudiante getEstudiante() {
+        return estudiante;
     }
 
-    public void setEstId(Estudiante estId) {
-        this.estId = estId;
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
     public AntPsicosocialSexual getAntPsicosocialSexual() {

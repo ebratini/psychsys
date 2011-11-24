@@ -80,7 +80,7 @@ public class Rol implements Serializable {
     private char rolStatus;
     @ManyToMany(mappedBy = "rolCollection")
     private Collection<Permiso> permisoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
     private Collection<Usuario> usuarioCollection;
 
     public Rol() {

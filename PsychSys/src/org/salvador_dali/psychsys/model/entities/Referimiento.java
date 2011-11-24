@@ -30,6 +30,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -60,6 +62,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Referimiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ref_id")
     private Integer refId;
@@ -86,14 +89,14 @@ public class Referimiento implements Serializable {
     @Basic(optional = false)
     @Column(name = "ref_estado_referimiento")
     private char refEstadoReferimiento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "refId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "referimiento")
     private Collection<Caso> casoCollection;
     @JoinColumn(name = "usr_id", referencedColumnName = "usr_id")
     @ManyToOne(optional = false)
-    private Usuario usrId;
+    private Usuario usuario;
     @JoinColumn(name = "est_id", referencedColumnName = "est_id")
     @ManyToOne(optional = false)
-    private Estudiante estId;
+    private Estudiante estudiante;
 
     public Referimiento() {
     }
@@ -184,20 +187,20 @@ public class Referimiento implements Serializable {
         this.casoCollection = casoCollection;
     }
 
-    public Usuario getUsrId() {
-        return usrId;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsrId(Usuario usrId) {
-        this.usrId = usrId;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Estudiante getEstId() {
-        return estId;
+    public Estudiante getEstudiante() {
+        return estudiante;
     }
 
-    public void setEstId(Estudiante estId) {
-        this.estId = estId;
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
     @Override

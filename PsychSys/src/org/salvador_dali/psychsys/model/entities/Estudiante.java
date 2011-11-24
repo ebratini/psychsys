@@ -31,6 +31,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -74,6 +76,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Estudiante implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "est_id")
     private Integer estId;
@@ -132,13 +135,13 @@ public class Estudiante implements Serializable {
     @Basic(optional = false)
     @Column(name = "est_status")
     private char estStatus;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiante")
     private Collection<HistoriaClinica> historiaClinicaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiante")
     private Collection<TutorEstudiante> tutorEstudianteCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiante")
     private Collection<PruebaPsicologica> pruebaPsicologicaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiante")
     private Collection<Referimiento> referimientoCollection;
 
     public Estudiante() {
