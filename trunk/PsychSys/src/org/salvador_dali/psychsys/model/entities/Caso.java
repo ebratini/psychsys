@@ -29,6 +29,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -52,15 +54,21 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Caso.findAll", query = "SELECT c FROM Caso c"),
     @NamedQuery(name = "Caso.findByCsoId", query = "SELECT c FROM Caso c WHERE c.csoId = :csoId"),
+    @NamedQuery(name = "Caso.findByCsoFecha", query = "SELECT c FROM Caso c WHERE c.csoFecha = :csoFecha"),
     @NamedQuery(name = "Caso.findByCsoAnioEscolar", query = "SELECT c FROM Caso c WHERE c.csoAnioEscolar = :csoAnioEscolar"),
     @NamedQuery(name = "Caso.findByCsoDiagnosticoDefinitivo", query = "SELECT c FROM Caso c WHERE c.csoDiagnosticoDefinitivo = :csoDiagnosticoDefinitivo"),
     @NamedQuery(name = "Caso.findByCsoEstadoCaso", query = "SELECT c FROM Caso c WHERE c.csoEstadoCaso = :csoEstadoCaso")})
 public class Caso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "cso_id")
     private Integer csoId;
+    @Basic(optional = false)
+    @Column(name = "cso_fecha")
+    @Temporal(TemporalType.DATE)
+    private Date csoFecha;
     @Basic(optional = false)
     @Column(name = "cso_anio_escolar")
     @Temporal(TemporalType.DATE)
@@ -103,8 +111,9 @@ public class Caso implements Serializable {
         this.csoId = csoId;
     }
 
-    public Caso(Integer csoId, Date csoAnioEscolar, String csoJuicioClinico, char csoDiagnosticoDefinitivo, char csoEstadoCaso) {
+    public Caso(Integer csoId, Date csoFecha, Date csoAnioEscolar, String csoJuicioClinico, char csoDiagnosticoDefinitivo, char csoEstadoCaso) {
         this.csoId = csoId;
+        this.csoFecha = csoFecha;
         this.csoAnioEscolar = csoAnioEscolar;
         this.csoJuicioClinico = csoJuicioClinico;
         this.csoDiagnosticoDefinitivo = csoDiagnosticoDefinitivo;
@@ -117,6 +126,14 @@ public class Caso implements Serializable {
 
     public void setCsoId(Integer csoId) {
         this.csoId = csoId;
+    }
+
+    public Date getCsoFecha() {
+        return csoFecha;
+    }
+
+    public void setCsoFecha(Date csoFecha) {
+        this.csoFecha = csoFecha;
     }
 
     public Date getCsoAnioEscolar() {
