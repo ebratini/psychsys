@@ -25,58 +25,50 @@ package org.salvador_dali.psychsys.business;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.salvador_dali.psychsys.model.CasoDao;
 import org.salvador_dali.psychsys.model.JpaDao;
+import org.salvador_dali.psychsys.model.PruebaPsicologicaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
-import org.salvador_dali.psychsys.model.entities.Referimiento;
+import org.salvador_dali.psychsys.model.entities.Estudiante;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaCasoDao extends JpaDao implements CasoDao {
-
-    public JpaCasoDao() {
-        super(Caso.class);
-    }
-
-    public JpaCasoDao(Map props) {
-        super(Caso.class, props);
-    }
+public class JpaPruebaPsicologicaDao extends JpaDao implements PruebaPsicologicaDao {
 
     @Override
-    public List getCasosByFecha(Date fecha) {
-        Query q = entityManager.createNamedQuery("Caso.findByCsoFecha");
-        q.setParameter("csoFecha", fecha);
+    public List getPruebasPsicologicasByEstudiante(Estudiante estudiante) {
+        Query q = entityManager.createQuery("SELECT pps FROM PruebaPsicologica pps WHERE pps.estudiante = :ppsEstudiante");
+        q.setParameter("ppsEstudiante", estudiante);
         return q.getResultList();
     }
 
     @Override
-    public List getCasosByAnioEscolar(String anioEscolar) {
-        Query q = entityManager.createNamedQuery("Caso.findByCsoAnioEscolar");
-        q.setParameter("csoAnioEscolar", anioEscolar);
+    public List getPruebasPsicologicasByCaso(Caso caso) {
+        Query q = entityManager.createQuery("SELECT pps FROM PruebaPsicologica pps WHERE pps.caso = :ppsCaso");
+        q.setParameter("ppsCaso", caso);
         return q.getResultList();
     }
 
     @Override
-    public Caso getCasoByReferimiento(Referimiento referimiento) {
-        try {
-            Query q = entityManager.createQuery("SELECT c FROM Caso c WHERE c.referimiento = :csoReferimiento");
-            q.setParameter("csoReferimiento", referimiento);
-            return (Caso) q.getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
+    public List getPruebasPsicologicasByFechaAplicacion(Date fechaAplicacion) {
+        Query q = entityManager.createNamedQuery("PruebaPsicologica.findByPpsFechaAplicacion");
+        q.setParameter("ppsFechaAplicacion", fechaAplicacion);
+        return q.getResultList();
     }
 
     @Override
-    public List getCasosByEstado(char estadoCaso) {
-        Query q = entityManager.createNamedQuery("Caso.findByCsoEstadoCaso");
-        q.setParameter("csoEstadoCaso", estadoCaso);
+    public List getPruebasPsicologicasByNombrePrueba(String nombrePrueba) {
+        Query q = entityManager.createNamedQuery("PruebaPsicologica.findByPpsNombrePrueba");
+        q.setParameter("ppsNombrePrueba", nombrePrueba);
         return q.getResultList();
     }
-    
+
+    @Override
+    public List getPruebasPsicologicasByCorreccionAutomatica(char correcionAutomatica) {
+        Query q = entityManager.createNamedQuery("PruebaPsicologica.findByPpsCorrecionAutomatica");
+        q.setParameter("ppsCorrecionAutomatica", correcionAutomatica);
+        return q.getResultList();
+    }
 }
