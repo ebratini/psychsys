@@ -21,21 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.model;
+package org.salvador_dali.psychsys.business;
 
 import java.util.Date;
 import java.util.List;
-import org.salvador_dali.psychsys.model.entities.Estudiante;
+import javax.persistence.Query;
+import org.salvador_dali.psychsys.model.BitacoraDao;
+import org.salvador_dali.psychsys.model.JpaDao;
+import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public interface HistoriaClinicaDao extends Dao {
+public class JpaBitacoraDao extends JpaDao implements BitacoraDao {
 
-    public Estudiante getHistoriaClinicaByEstudiante(Estudiante estudiante);
+    @Override
+    public List getBitacorasByUsuario(Usuario usuario) {
+        Query q = entityManager.createQuery("SELECT bit FROM Bitacora ubp WHERE bit.usuario = :bitUsuario");
+        q.setParameter("bitUsuario", usuario);
+        return q.getResultList();
+    }
 
-    public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
+    @Override
+    public List getBitacorasByFecha(Date fecha) {
+        Query q = entityManager.createNamedQuery("Bitacora.findByBitFecha");
+        q.setParameter("bitFecha", fecha);
+        return q.getResultList();
+    }
 
-    public List getHistoriasClinicasByStatus(char status);
+    @Override
+    public List getBitacorasByFuente(String fuente) {
+        Query q = entityManager.createNamedQuery("Bitacora.findByBitFuente");
+        q.setParameter("bitFuente", fuente);
+        return q.getResultList();
+    }
+
+    @Override
+    public List getBitacorasByCategoria(String categoria) {
+        Query q = entityManager.createNamedQuery("Bitacora.findByBitCategoria");
+        q.setParameter("bitCategoria", categoria);
+        return q.getResultList();
+    }
 }

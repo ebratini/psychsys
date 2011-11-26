@@ -71,8 +71,7 @@ public class Caso implements Serializable {
     private Date csoFecha;
     @Basic(optional = false)
     @Column(name = "cso_anio_escolar")
-    @Temporal(TemporalType.DATE)
-    private Date csoAnioEscolar;
+    private String csoAnioEscolar;
     @Lob
     @Column(name = "cso_analisis_resultados_pruebas")
     private String csoAnalisisResultadosPruebas;
@@ -111,7 +110,7 @@ public class Caso implements Serializable {
         this.csoId = csoId;
     }
 
-    public Caso(Integer csoId, Date csoFecha, Date csoAnioEscolar, String csoJuicioClinico, char csoDiagnosticoDefinitivo, char csoEstadoCaso) {
+    public Caso(Integer csoId, Date csoFecha, String csoAnioEscolar, String csoJuicioClinico, char csoDiagnosticoDefinitivo, char csoEstadoCaso) {
         this.csoId = csoId;
         this.csoFecha = csoFecha;
         this.csoAnioEscolar = csoAnioEscolar;
@@ -136,11 +135,11 @@ public class Caso implements Serializable {
         this.csoFecha = csoFecha;
     }
 
-    public Date getCsoAnioEscolar() {
+    public String getCsoAnioEscolar() {
         return csoAnioEscolar;
     }
 
-    public void setCsoAnioEscolar(Date csoAnioEscolar) {
+    public void setCsoAnioEscolar(String csoAnioEscolar) {
         this.csoAnioEscolar = csoAnioEscolar;
     }
 

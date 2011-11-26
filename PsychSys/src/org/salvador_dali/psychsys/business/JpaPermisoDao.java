@@ -21,21 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.model;
+package org.salvador_dali.psychsys.business;
 
-import java.util.Date;
 import java.util.List;
-import org.salvador_dali.psychsys.model.entities.Estudiante;
+import javax.persistence.Query;
+import org.salvador_dali.psychsys.model.JpaDao;
+import org.salvador_dali.psychsys.model.PermisoDao;
+import org.salvador_dali.psychsys.model.entities.Permiso;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public interface HistoriaClinicaDao extends Dao {
+public class JpaPermisoDao extends JpaDao implements PermisoDao {
 
-    public Estudiante getHistoriaClinicaByEstudiante(Estudiante estudiante);
+    @Override
+    public Permiso getPermisoByNombre(String nombre) {
+        Query q = entityManager.createNamedQuery("Permiso.findByPerNombre");
+        q.setParameter("perNombre", nombre);
+        return (Permiso) q.getSingleResult();
+    }
 
-    public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
-
-    public List getHistoriasClinicasByStatus(char status);
+    @Override
+    public List getPermisosByStatus(char status) {
+        Query q = entityManager.createNamedQuery("Permiso.findByPerStatus");
+        q.setParameter("perStatus", status);
+        return q.getResultList();
+    }
 }

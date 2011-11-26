@@ -21,21 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.model;
-
-import java.util.Date;
-import java.util.List;
-import org.salvador_dali.psychsys.model.entities.Estudiante;
+package org.salvador_dali.psychsys.business;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public interface HistoriaClinicaDao extends Dao {
-
-    public Estudiante getHistoriaClinicaByEstudiante(Estudiante estudiante);
-
-    public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
-
-    public List getHistoriasClinicasByStatus(char status);
+public class AppLogger {
+    
 }

@@ -21,21 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.model;
+package org.salvador_dali.psychsys.business;
 
-import java.util.Date;
 import java.util.List;
-import org.salvador_dali.psychsys.model.entities.Estudiante;
+import javax.persistence.Query;
+import org.salvador_dali.psychsys.model.JpaDao;
+import org.salvador_dali.psychsys.model.RolDao;
+import org.salvador_dali.psychsys.model.entities.Rol;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public interface HistoriaClinicaDao extends Dao {
+public class JpaRolDao extends JpaDao implements RolDao {
 
-    public Estudiante getHistoriaClinicaByEstudiante(Estudiante estudiante);
+    @Override
+    public Rol getRolByNombre(String nombre) {
+        Query q = entityManager.createNamedQuery("Rol.findByRolNombre");
+        q.setParameter("rolNombre", nombre);
+        return (Rol) q.getSingleResult();
+    }
 
-    public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
-
-    public List getHistoriasClinicasByStatus(char status);
+    @Override
+    public List getRolesByStatus(char status) {
+        Query q = entityManager.createNamedQuery("Rol.findByRolStatus");
+        q.setParameter("rolStatus", status);
+        return q.getResultList();
+    }
 }
