@@ -48,7 +48,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "AntPsicomotrizLenguaje.findByHicId", query = "SELECT a FROM AntPsicomotrizLenguaje a WHERE a.hicId = :hicId"),
     @NamedQuery(name = "AntPsicomotrizLenguaje.findByAplEdadInicioMarcha", query = "SELECT a FROM AntPsicomotrizLenguaje a WHERE a.aplEdadInicioMarcha = :aplEdadInicioMarcha")})
 public class AntPsicomotrizLenguaje implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -154,4 +153,5 @@ public class AntPsicomotrizLenguaje implements Serializable {
     public String toString() {
         return "org.salvador_dali.psychsys.model.entities.AntPsicomotrizLenguaje[ hicId=" + hicId + " ]";
     }
+    
 }

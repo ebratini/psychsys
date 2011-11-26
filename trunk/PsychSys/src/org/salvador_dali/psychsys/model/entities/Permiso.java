@@ -29,6 +29,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -59,6 +61,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Permiso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "per_id")
     private Integer perId;
@@ -73,7 +76,7 @@ public class Permiso implements Serializable {
     private String perUpdateBy;
     @Basic(optional = false)
     @Column(name = "per_update_date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date perUpdateDate;
     @Basic(optional = false)
     @Column(name = "per_status")

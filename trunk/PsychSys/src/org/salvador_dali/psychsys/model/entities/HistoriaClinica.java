@@ -1,4 +1,4 @@
- /*
+/*
  * The MIT License
  *
  * Copyright 2011 Edwin Bratini <edwin.bratini@gmail.com>.
@@ -29,6 +29,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -57,6 +59,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class HistoriaClinica implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "hic_id")
     private Integer hicId;
@@ -69,7 +72,7 @@ public class HistoriaClinica implements Serializable {
     private String hicUpdateBy;
     @Basic(optional = false)
     @Column(name = "hic_update_date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date hicUpdateDate;
     @Basic(optional = false)
     @Column(name = "hic_status")

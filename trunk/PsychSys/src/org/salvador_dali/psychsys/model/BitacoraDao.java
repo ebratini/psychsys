@@ -25,17 +25,19 @@ package org.salvador_dali.psychsys.model;
 
 import java.util.Date;
 import java.util.List;
-import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
  *
- * @author Edwin Bratini <edwin.bratini@gmail.com>
+ * @author Edwin Bratini
  */
-public interface HistoriaClinicaDao extends Dao {
+public interface BitacoraDao extends Dao {
 
-    public Estudiante getHistoriaClinicaByEstudiante(Estudiante estudiante);
+    public List getBitacorasByUsuario(Usuario usuario);
 
-    public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
+    public List getBitacorasByFecha(Date fecha);
 
-    public List getHistoriasClinicasByStatus(char status);
+    public List getBitacorasByFuente(String fuente);
+
+    public List getBitacorasByCategoria(String categoria);
 }

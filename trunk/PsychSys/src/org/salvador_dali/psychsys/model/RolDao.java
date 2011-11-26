@@ -23,19 +23,16 @@
  */
 package org.salvador_dali.psychsys.model;
 
-import java.util.Date;
 import java.util.List;
-import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.Rol;
 
 /**
  *
- * @author Edwin Bratini <edwin.bratini@gmail.com>
+ * @author Edwin Bratini
  */
-public interface HistoriaClinicaDao extends Dao {
+public interface RolDao extends Dao {
 
-    public Estudiante getHistoriaClinicaByEstudiante(Estudiante estudiante);
+    public Rol getRolByNombre(String nombre);
 
-    public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
-
-    public List getHistoriasClinicasByStatus(char status);
+    public List getRolesByStatus(char status);
 }
