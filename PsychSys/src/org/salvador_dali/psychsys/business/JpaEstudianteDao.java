@@ -76,4 +76,15 @@ public class JpaEstudianteDao extends JpaDao implements EstudianteDao {
         q.setParameter("estStatus", status);
         return q.getResultList();
     }
+
+    @Override
+    public List getEstudiantesByNombreCompleto(String primerNombre, String primerApellido) {
+        String strQuery = "SELECT e FROM Estudiante e WHERE e.estPrimerNombre := primerNombre";
+        strQuery += " AND e.estPrimerApellido := primerApellido";
+        
+        Query q = entityManager.createQuery(strQuery);
+        q.setParameter("primerNombre", primerNombre);
+        q.setParameter("primerApellido", primerApellido);
+        return q.getResultList();
+    }
 }
