@@ -59,14 +59,14 @@ public class JpaTutorDao extends JpaDao implements TutorDao {
     @Override
     public List getTutoresByPrimerApellido(String primerApellido) {
         Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerApellido");
-        q.setParameter("tutPrimerApellido", primerApellido);
+        q.setParameter("tutPrimerApellido", primerApellido.toLowerCase());
         return q.getResultList();
     }
 
     @Override
     public List getTutoresByPrimerNombre(String primerNombre) {
         Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerNombre");
-        q.setParameter("tutPrimerNombre", primerNombre);
+        q.setParameter("tutPrimerNombre", primerNombre.toLowerCase());
         return q.getResultList();
     }
 
