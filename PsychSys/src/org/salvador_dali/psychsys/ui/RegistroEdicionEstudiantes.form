@@ -13,6 +13,9 @@
             <Property name="text" type="java.lang.String" value="Nuevo Tutor"/>
             <Property name="toolTipText" type="java.lang.String" value="Click para agregar tutor"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniNuevoTutorActionPerformed"/>
+          </Events>
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="mniEditarRelFamiliar">
           <Properties>
@@ -27,15 +30,6 @@
             <Property name="text" type="java.lang.String" value="Remover Tutor"/>
             <Property name="toolTipText" type="java.lang.String" value="Click para remover tutor"/>
           </Properties>
-        </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="mniRemoverTutores">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Remover Tutores"/>
-            <Property name="toolTipText" type="java.lang.String" value="Click para remover todos los tutores asociados a este estudiante"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniRemoverTutoresActionPerformed"/>
-          </Events>
         </MenuItem>
       </SubComponents>
     </Container>
@@ -72,7 +66,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="611" max="32767" attributes="0"/>
+              <EmptySpace pref="619" max="32767" attributes="0"/>
               <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
@@ -244,7 +238,7 @@
                           </Group>
                           <Component id="cmbGenero" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <EmptySpace pref="30" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -576,6 +570,9 @@
             </Component>
             <Component class="javax.swing.JSpinner" name="spnHermanos">
               <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="spnLugarEntreHermanos"/>
                 </Property>
@@ -588,6 +585,9 @@
             </Component>
             <Component class="javax.swing.JSpinner" name="spnLugarEntreHermanos">
               <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="ftfTalla"/>
                 </Property>
@@ -871,14 +871,13 @@
                 <Component class="javax.swing.JTable" name="tblTutores">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="1">
+                      <Table columnCount="2" rowCount="1">
                         <Column editable="true" title="Nombre Tutor" type="java.lang.Object">
                           <Data value="Edwin Bratini"/>
                         </Column>
                         <Column editable="true" title="Relacion Familiar" type="java.lang.Object">
                           <Data value="Padre"/>
                         </Column>
-                        <Column editable="true" title="Opciones" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -898,11 +897,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="statusPanelSeparator" alignment="0" pref="785" max="32767" attributes="0"/>
+              <Component id="statusPanelSeparator" alignment="0" pref="793" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="570" max="32767" attributes="0"/>
+                  <EmptySpace pref="578" max="32767" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

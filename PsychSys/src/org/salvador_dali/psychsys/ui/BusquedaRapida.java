@@ -29,20 +29,57 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import org.salvador_dali.psychsys.business.EntitySearcher;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class BusquedaRapida extends javax.swing.JDialog {
+
     private Object entitySelectedId;
+    private EntitySearcher entitySearcher = new EntitySearcher().new TutorEntitySearcher();
 
     /** Creates new form BusquedaRapida */
     public BusquedaRapida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        // customizando el jtable y evitando que puedan mover las columnas
+        if (entitySearcher != null) {
+            cmbCampoBuscar.setModel(entitySearcher.getDefComboBoxModel());
+            tblEntidades.setColumnModel(entitySearcher.getDefTableColumnModel());
+            tblEntidades.setModel(entitySearcher.getDefTableModel());
+        } else {
+            tblEntidades.setColumnModel(new DefaultTableColumnModel() {
+
+                @Override
+                public void moveColumn(int columnIndex, int newIndex) {
+                    if (columnIndex == 0 || newIndex == 0) {
+                        return;
+                    }
+                    super.moveColumn(columnIndex, newIndex);
+                }
+            });
+
+            DefaultTableModel dtm = new DefaultTableModel(new Object[][]{{}},
+                    new Object[]{"Id", "Col 2", "Col 3"}) {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int mColIndex) {
+                    return false;
+                }
+            };
+
+            tblEntidades.setModel(dtm);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -57,18 +94,16 @@ public class BusquedaRapida extends javax.swing.JDialog {
         lblProgressBar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pnlOpBusqueda = new javax.swing.JPanel();
-        chkFiltro = new javax.swing.JCheckBox();
         cmbCampoBuscar = new javax.swing.JComboBox();
         lblEntidades = new javax.swing.JLabel();
         scrEntidades = new javax.swing.JScrollPane();
-        jtbEntidades = new javax.swing.JTable();
+        tblEntidades = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         txtBusqueda = new javax.swing.JTextField();
         btnSeleccionar = new javax.swing.JButton();
-        lblResultadosBusqueda = new javax.swing.JLabel();
         statusPanel2 = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator2 = new javax.swing.JSeparator();
-        statusMessageLabel2 = new javax.swing.JLabel();
+        statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel2 = new javax.swing.JLabel();
 
         lblProgressBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
@@ -81,14 +116,6 @@ public class BusquedaRapida extends javax.swing.JDialog {
         pnlOpBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones de Busqueda"));
         pnlOpBusqueda.setName("pnlOpBusqueda"); // NOI18N
 
-        chkFiltro.setText("Filtro");
-        chkFiltro.setName("chkFiltro"); // NOI18N
-        chkFiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkFiltroActionPerformed(evt);
-            }
-        });
-
         cmbCampoBuscar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Nombre", "Apellido" }));
 
         javax.swing.GroupLayout pnlOpBusquedaLayout = new javax.swing.GroupLayout(pnlOpBusqueda);
@@ -96,15 +123,13 @@ public class BusquedaRapida extends javax.swing.JDialog {
         pnlOpBusquedaLayout.setHorizontalGroup(
             pnlOpBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOpBusquedaLayout.createSequentialGroup()
-                .addComponent(chkFiltro)
-                .addContainerGap(134, Short.MAX_VALUE))
-            .addComponent(cmbCampoBuscar, 0, 183, Short.MAX_VALUE)
+                .addComponent(cmbCampoBuscar, 0, 163, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlOpBusquedaLayout.setVerticalGroup(
             pnlOpBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOpBusquedaLayout.createSequentialGroup()
-                .addComponent(chkFiltro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOpBusquedaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmbCampoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -112,7 +137,7 @@ public class BusquedaRapida extends javax.swing.JDialog {
 
         scrEntidades.setName("scrEntidades"); // NOI18N
 
-        jtbEntidades.setModel(new javax.swing.table.DefaultTableModel(
+        tblEntidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"2010-10", "Bratini G., Edwin A.", "4to de Media"},
                 {null, null, null},
@@ -131,7 +156,12 @@ public class BusquedaRapida extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        scrEntidades.setViewportView(jtbEntidades);
+        tblEntidades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEntidadesMouseClicked(evt);
+            }
+        });
+        scrEntidades.setViewportView(tblEntidades);
 
         btnBuscar.setText("Buscar");
         btnBuscar.setName("btnBuscar"); // NOI18N
@@ -155,28 +185,25 @@ public class BusquedaRapida extends javax.swing.JDialog {
             }
         });
 
-        lblResultadosBusqueda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scrEntidades, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblEntidades)
-                        .addGap(84, 84, 84)
-                        .addComponent(lblResultadosBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                        .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(pnlOpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnBuscar)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(pnlOpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnBuscar))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblEntidades)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(scrEntidades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -184,24 +211,20 @@ public class BusquedaRapida extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscar))
                     .addComponent(pnlOpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblEntidades)
-                        .addComponent(lblResultadosBusqueda))
-                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEntidades))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrEntidades, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        statusMessageLabel2.setForeground(new java.awt.Color(0, 153, 51));
+        statusMessageLabel.setForeground(new java.awt.Color(0, 153, 51));
 
         statusAnimationLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         statusAnimationLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
@@ -210,11 +233,11 @@ public class BusquedaRapida extends javax.swing.JDialog {
         statusPanel2.setLayout(statusPanel2Layout);
         statusPanel2Layout.setHorizontalGroup(
             statusPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
             .addGroup(statusPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(statusMessageLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 597, Short.MAX_VALUE)
+                .addComponent(statusMessageLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 622, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel2)
                 .addContainerGap())
         );
@@ -224,7 +247,7 @@ public class BusquedaRapida extends javax.swing.JDialog {
                 .addComponent(statusPanelSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(statusPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(statusMessageLabel2)
+                    .addComponent(statusMessageLabel)
                     .addComponent(statusAnimationLabel2))
                 .addContainerGap())
         );
@@ -233,45 +256,76 @@ public class BusquedaRapida extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(statusPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(statusPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void chkFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkFiltroActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_chkFiltroActionPerformed
+    public EntitySearcher getEntitySearcher() {
+        return entitySearcher;
+    }
+
+    public void setEntitySearcher(EntitySearcher entitySearcher) {
+        this.entitySearcher = entitySearcher;
+    }
+
+    public Object getEntitySelectedId() {
+        return entitySelectedId;
+    }
+
+    public void setEntitySelectedId(Object entitySelectedId) {
+        this.entitySelectedId = entitySelectedId;
+    }
+
+    public JLabel getLblEntidades() {
+        return lblEntidades;
+    }
+
+    public void setLblEntidades(JLabel lblEntidades) {
+        this.lblEntidades = lblEntidades;
+    }
 
 private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        doSearch();
+    // TODO add your handling code here:
+    if (txtBusqueda.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Introduzca texto a buscar", "Busqueda", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    doSearch();
 }//GEN-LAST:event_btnBuscarActionPerformed
 
 private void txtBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnBuscar.doClick();
-        }
+    // TODO add your handling code here:
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        btnBuscar.doClick();
+    }
 }//GEN-LAST:event_txtBusquedaKeyPressed
 
 private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        // TODO add your handling code here:
-        if (jtbEntidades.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Primero seleccione registro", "Seleccion", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        entitySelectedId = jtbEntidades.getValueAt(jtbEntidades.getSelectedRow(), 0);
-        this.dispose();
+    // TODO add your handling code here:
+    if (tblEntidades.getSelectedRow() == -1) {
+        JOptionPane.showMessageDialog(this, "Primero seleccione registro", "Seleccion", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    entitySelectedId = tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0);
+    this.dispose();
 }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void tblEntidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEntidadesMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            btnSeleccionar.doClick();
+        }
+    }//GEN-LAST:event_tblEntidadesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -303,6 +357,7 @@ private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GE
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 BusquedaRapida dialog = new BusquedaRapida(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -316,31 +371,32 @@ private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GE
             }
         });
     }
+
+    private void doSearch() {
+        TableModel tm = getEntitySearcher().doSearch(cmbCampoBuscar.getSelectedItem().toString(), txtBusqueda.getText());
+        if (tm != null) {
+            tblEntidades.setModel(tm);
+        } else {
+            statusMessageLabel.setText("No hubo resultados");
+            statusMessageLabel.setForeground(Color.red);
+            new Thread(new LabelToolTipShower(statusMessageLabel, 3000)).start();
+            tblEntidades.setModel(getEntitySearcher().getDefTableModel());
+            return;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSeleccionar;
-    private javax.swing.JCheckBox chkFiltro;
     private javax.swing.JComboBox cmbCampoBuscar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTable jtbEntidades;
     private javax.swing.JLabel lblEntidades;
     private javax.swing.JLabel lblProgressBar;
-    private javax.swing.JLabel lblResultadosBusqueda;
     private javax.swing.JPanel pnlOpBusqueda;
     private javax.swing.JScrollPane scrEntidades;
-    private javax.swing.JLabel statusAnimationLabel;
-    private javax.swing.JLabel statusAnimationLabel1;
     private javax.swing.JLabel statusAnimationLabel2;
     private javax.swing.JLabel statusMessageLabel;
-    private javax.swing.JLabel statusMessageLabel1;
-    private javax.swing.JLabel statusMessageLabel2;
-    private javax.swing.JPanel statusPanel;
-    private javax.swing.JPanel statusPanel1;
     private javax.swing.JPanel statusPanel2;
+    private javax.swing.JTable tblEntidades;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
-
-    private void doSearch() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
 }
