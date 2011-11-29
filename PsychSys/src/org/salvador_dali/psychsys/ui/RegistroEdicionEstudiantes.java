@@ -32,6 +32,8 @@ package org.salvador_dali.psychsys.ui;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,12 +67,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private Estudiante estAEditar;
-    private Map<Integer, Tutor> tutores = new HashMap<Integer, Tutor>() {
-
-        {
-            put(0, (Tutor) new JpaTutorDao().getTutorByDNI("22500301811"));
-        }
-    };
+    private Map<Integer, Tutor> tutores = new HashMap<Integer, Tutor>();
     private Map<Integer, String> tutOpAccion = new HashMap<Integer, String>();
 
     /** Creates new form RegistroEdicionEstudiantes */
@@ -88,18 +85,8 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                 super.moveColumn(columnIndex, newIndex);
             }
         });
-
         
-        DefaultTableModel dtm = new DefaultTableModel(new Object[][]{{"Edwin Bratini", "Padre"}},
-                new Object[]{"Nombre Tutor", "Relacion Familiar"}) {
-
-            @Override
-            public boolean isCellEditable(int rowIndex, int mColIndex) {
-                return false;
-            }
-        };
-        
-        tblTutores.setModel(dtm);
+        tblTutores.setModel(getDefTblModel());
     }
 
     public RegistroEdicionEstudiantes(RegistroEdicionModo modo) {
@@ -196,11 +183,21 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         mniEditarRelFamiliar.setText("Editar Relacion Familiar");
         mniEditarRelFamiliar.setToolTipText("Click para editar relacion familiar entre tutor y estudiante");
+        mniEditarRelFamiliar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniEditarRelFamiliarActionPerformed(evt);
+            }
+        });
         ppmTutores.add(mniEditarRelFamiliar);
         ppmTutores.add(jSeparator1);
 
         mniRemoverTutor.setText("Remover Tutor");
         mniRemoverTutor.setToolTipText("Click para remover tutor");
+        mniRemoverTutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniRemoverTutorActionPerformed(evt);
+            }
+        });
         ppmTutores.add(mniRemoverTutor);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -231,7 +228,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         lblTipoDni.setText("Tipo DNI");
 
-        cmbTipoDni.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccion", "Cedula", "Pasaporte", "NSS" }));
+        cmbTipoDni.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cedula", "Pasaporte", "NSS" }));
         cmbTipoDni.setNextFocusableComponent(txtPrimerNombre);
 
         lblPrimerNombre.setText("Primer Nombre");
@@ -424,7 +421,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                                     .addComponent(lblTallaValMarker)
                                     .addComponent(lblPesoValMarker)))))
                     .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         pnlTutInfoPersonalLayout.setVerticalGroup(
             pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -585,7 +582,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         tblTutores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Edwin Bratini", "Padre"}
+
             },
             new String [] {
                 "Nombre Tutor", "Relacion Familiar"
@@ -605,7 +602,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -713,6 +710,18 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private DefaultTableModel getDefTblModel() {
+        DefaultTableModel dtm = new DefaultTableModel(null, new Object[]{"Nombre Tutor", "Relacion Familiar"}) {
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int mColIndex) {
+                return false;
+            }
+        };
+        
+        return dtm;
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -767,7 +776,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         estudiante.setEstTipoDni((!txtDni.getText().isEmpty() ? cmbTipoDni.getSelectedItem().toString() : null));
         estudiante.setEstSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
         estudiante.setEstApodo((!txtApodo.getText().isEmpty() ? txtApodo.getText() : null));
-        estudiante.setEstTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
+        estudiante.setEstTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTelFromFormField(ftfTelefono.getText()) : null));
         estudiante.setEstTalla((!ftfTalla.getText().isEmpty() ? BigDecimal.valueOf(Double.parseDouble(ftfTalla.getText())) : null));
         estudiante.setEstPeso((!ftfPeso.getText().isEmpty() ? BigDecimal.valueOf(Double.parseDouble(ftfPeso.getText())) : null));
         estudiante.setEstEscuelaProcedencia((!txtEscuelaProcedencia.getText().isEmpty() ? txtEscuelaProcedencia.getText() : null));
@@ -793,6 +802,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                 TutorEstudiante tutEst = new TutorEstudiante(new TutorEstudiantePK(tutEntry.getValue().getTutId(), estudianteConfirmado.getEstId()));
                 tutEst.setTesRelacionFamiliar(tblTutores.getValueAt(tutEntry.getKey(), 1).toString());
                 estudiante.getTutorEstudianteCollection().add(tutEst);
+                new JpaTutorEstudianteDao().persist(tutEst);
             }
         } else {
             // TODO: ver como implementar lo de tutores (adicion, remocion)
@@ -813,6 +823,8 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         statusMessageLabel.setVisible(true);
         new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         LimpiadorComponentes.limpiarComponentes(this);
+        tblTutores.setModel(getDefTblModel());
+        tutores.clear();
         txtDni.requestFocusInWindow();
         pc.stop();
     }//GEN-LAST:event_btnAceptarActionPerformed
@@ -877,16 +889,44 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         brt.getLblEntidades().setText("Tutores");
         brt.setVisible(true);
         
-        Object tutId = brt.getEntitySelectedId();
+        Object tutId = brt.getEntitySelectedId();        
         if (tutId != null) {
+            if (tutores.containsValue(new Tutor(Integer.parseInt(tutId.toString())))) {
+                JOptionPane.showMessageDialog(this, "Este tutor ya ha sido agregado", "Agregar Tutor", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             String relFamiliar = JOptionPane.showInputDialog(this, "Relacion Familiar", "Relacion Familiar Tutor-Estudiante", JOptionPane.QUESTION_MESSAGE);
             Tutor tut = new JpaTutorDao().findById(tutId);
             DefaultTableModel dtm = (DefaultTableModel) tblTutores.getModel();
             dtm.addRow(new Object[]{String.format("%s %s", tut.getTutPrimerNombre(), tut.getTutPrimerApellido()), relFamiliar});
-            
             tutores.put(dtm.getRowCount() - 1, tut);
         }
     }//GEN-LAST:event_mniNuevoTutorActionPerformed
+
+    private void mniEditarRelFamiliarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEditarRelFamiliarActionPerformed
+        // TODO add your handling code here:
+        if (modo.equals(RegistroEdicionModo.REGISTRO)) {
+            int rowEditing = tblTutores.getSelectedRow();
+            String nuevoRelFamiliar = JOptionPane.showInputDialog(this, "Relacion Familiar", tblTutores.getValueAt(rowEditing, 1));
+            tblTutores.setValueAt(nuevoRelFamiliar, rowEditing, 1);
+        } else {
+        
+        }
+    }//GEN-LAST:event_mniEditarRelFamiliarActionPerformed
+
+    private void mniRemoverTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRemoverTutorActionPerformed
+        // TODO add your handling code here:
+        if (modo.equals(RegistroEdicionModo.REGISTRO)) {
+            int[] rowsDeleting = tblTutores.getSelectedRows();
+            DefaultTableModel dtm = (DefaultTableModel) tblTutores.getModel();
+            for (int i = (rowsDeleting.length - 1); i >= 0; i--) {
+                dtm.removeRow(rowsDeleting[i]);
+                tutores.remove(rowsDeleting[i]);
+            }
+        } else {
+        
+        }
+    }//GEN-LAST:event_mniRemoverTutorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -984,7 +1024,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         return validFields;
     }
 
-    private String extractTel(String tel) {
+    private String extractTelFromFormField(String tel) {
         return tel.replaceAll("-", "").replace("(", "").replace(")", "").replace(" ", "");
     }
 

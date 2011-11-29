@@ -59,14 +59,14 @@ public class JpaEstudianteDao extends JpaDao implements EstudianteDao {
     @Override
     public List getEstudiantesByPrimerApellido(String primerApellido) {
         Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerApellido");
-        q.setParameter("estPrimerApellido", primerApellido);
+        q.setParameter("estPrimerApellido", primerApellido.toLowerCase());
         return q.getResultList();
     }
 
     @Override
     public List getEstudiantesByPrimerNombre(String primerNombre) {
         Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerNombre");
-        q.setParameter("estPrimerNombre", primerNombre);
+        q.setParameter("estPrimerNombre", primerNombre.toLowerCase());
         return q.getResultList();
     }
 
@@ -79,12 +79,12 @@ public class JpaEstudianteDao extends JpaDao implements EstudianteDao {
 
     @Override
     public List getEstudiantesByNombreCompleto(String primerNombre, String primerApellido) {
-        String strQuery = "SELECT e FROM Estudiante e WHERE e.estPrimerNombre := primerNombre";
-        strQuery += " AND e.estPrimerApellido := primerApellido";
+        String strQuery = "SELECT e FROM Estudiante e WHERE lower(e.estPrimerNombre) = :primerNombre";
+        strQuery += " AND lower(e.estPrimerApellido) = :primerApellido";
         
         Query q = entityManager.createQuery(strQuery);
-        q.setParameter("primerNombre", primerNombre);
-        q.setParameter("primerApellido", primerApellido);
+        q.setParameter("primerNombre", primerNombre.toLowerCase());
+        q.setParameter("primerApellido", primerApellido.toLowerCase());
         return q.getResultList();
     }
 }

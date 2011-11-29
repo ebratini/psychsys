@@ -22,6 +22,9 @@
             <Property name="text" type="java.lang.String" value="Editar Relacion Familiar"/>
             <Property name="toolTipText" type="java.lang.String" value="Click para editar relacion familiar entre tutor y estudiante"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniEditarRelFamiliarActionPerformed"/>
+          </Events>
         </MenuItem>
         <Component class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
         </Component>
@@ -30,6 +33,9 @@
             <Property name="text" type="java.lang.String" value="Remover Tutor"/>
             <Property name="toolTipText" type="java.lang.String" value="Click para remover tutor"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniRemoverTutorActionPerformed"/>
+          </Events>
         </MenuItem>
       </SubComponents>
     </Container>
@@ -238,7 +244,7 @@
                           </Group>
                           <Component id="cmbGenero" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                      <EmptySpace pref="34" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -378,11 +384,10 @@
             <Component class="javax.swing.JComboBox" name="cmbTipoDni">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Seleccion"/>
-                    <StringItem index="1" value="Cedula"/>
-                    <StringItem index="2" value="Pasaporte"/>
-                    <StringItem index="3" value="NSS"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value="Cedula"/>
+                    <StringItem index="1" value="Pasaporte"/>
+                    <StringItem index="2" value="NSS"/>
                   </StringArray>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -854,7 +859,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="346" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="354" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -871,13 +876,9 @@
                 <Component class="javax.swing.JTable" name="tblTutores">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="1">
-                        <Column editable="true" title="Nombre Tutor" type="java.lang.Object">
-                          <Data value="Edwin Bratini"/>
-                        </Column>
-                        <Column editable="true" title="Relacion Familiar" type="java.lang.Object">
-                          <Data value="Padre"/>
-                        </Column>
+                      <Table columnCount="2" rowCount="0">
+                        <Column editable="true" title="Nombre Tutor" type="java.lang.Object"/>
+                        <Column editable="true" title="Relacion Familiar" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
