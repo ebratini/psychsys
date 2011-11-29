@@ -51,17 +51,17 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tutor.findByTutId", query = "SELECT t FROM Tutor t WHERE t.tutId = :tutId"),
     @NamedQuery(name = "Tutor.findByTutDni", query = "SELECT t FROM Tutor t WHERE t.tutDni = :tutDni"),
     @NamedQuery(name = "Tutor.findByTutTipoDni", query = "SELECT t FROM Tutor t WHERE t.tutTipoDni = :tutTipoDni"),
-    @NamedQuery(name = "Tutor.findByTutPrimerApellido", query = "SELECT t FROM Tutor t WHERE lower(t.tutPrimerApellido) = :tutPrimerApellido"),
-    @NamedQuery(name = "Tutor.findByTutSegundoApellido", query = "SELECT t FROM Tutor t WHERE t.tutSegundoApellido = :tutSegundoApellido"),
-    @NamedQuery(name = "Tutor.findByTutPrimerNombre", query = "SELECT t FROM Tutor t WHERE lower(t.tutPrimerNombre) = :tutPrimerNombre"),
-    @NamedQuery(name = "Tutor.findByTutSegundoNombre", query = "SELECT t FROM Tutor t WHERE t.tutSegundoNombre = :tutSegundoNombre"),
+    @NamedQuery(name = "Tutor.findByTutPrimerApellido", query = "SELECT t FROM Tutor t WHERE lower(t.tutPrimerApellido) = lower(:tutPrimerApellido)"),
+    @NamedQuery(name = "Tutor.findByTutSegundoApellido", query = "SELECT t FROM Tutor t WHERE lower(t.tutSegundoApellido) = lower(:tutSegundoApellido)"),
+    @NamedQuery(name = "Tutor.findByTutPrimerNombre", query = "SELECT t FROM Tutor t WHERE lower(t.tutPrimerNombre) = lower(:tutPrimerNombre)"),
+    @NamedQuery(name = "Tutor.findByTutSegundoNombre", query = "SELECT t FROM Tutor t WHERE lower(t.tutSegundoNombre) = lower(:tutSegundoNombre)"),
     @NamedQuery(name = "Tutor.findByTutTelefono", query = "SELECT t FROM Tutor t WHERE t.tutTelefono = :tutTelefono"),
     @NamedQuery(name = "Tutor.findByTutDireccion", query = "SELECT t FROM Tutor t WHERE t.tutDireccion = :tutDireccion"),
     @NamedQuery(name = "Tutor.findByTutEmail", query = "SELECT t FROM Tutor t WHERE t.tutEmail = :tutEmail"),
-    @NamedQuery(name = "Tutor.findByTutNacionalidad", query = "SELECT t FROM Tutor t WHERE t.tutNacionalidad = :tutNacionalidad"),
-    @NamedQuery(name = "Tutor.findByTutGenero", query = "SELECT t FROM Tutor t WHERE t.tutGenero = :tutGenero"),
-    @NamedQuery(name = "Tutor.findByTutEstadoCivil", query = "SELECT t FROM Tutor t WHERE t.tutEstadoCivil = :tutEstadoCivil"),
-    @NamedQuery(name = "Tutor.findByTutStatus", query = "SELECT t FROM Tutor t WHERE t.tutStatus = :tutStatus")})
+    @NamedQuery(name = "Tutor.findByTutNacionalidad", query = "SELECT t FROM Tutor t WHERE lower(t.tutNacionalidad) = lower(:tutNacionalidad)"),
+    @NamedQuery(name = "Tutor.findByTutGenero", query = "SELECT t FROM Tutor t WHERE lower(t.tutGenero) = lower(:tutGenero)"),
+    @NamedQuery(name = "Tutor.findByTutEstadoCivil", query = "SELECT t FROM Tutor t WHERE lower(t.tutEstadoCivil) = lower(:tutEstadoCivil)"),
+    @NamedQuery(name = "Tutor.findByTutStatus", query = "SELECT t FROM Tutor t WHERE lower(t.tutStatus) = lower(:tutStatus)")})
 public class Tutor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

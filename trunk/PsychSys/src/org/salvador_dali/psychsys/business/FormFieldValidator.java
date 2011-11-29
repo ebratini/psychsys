@@ -44,7 +44,8 @@ public abstract class FormFieldValidator {
                 outLabel.setForeground(Color.red);
                 outLabel.setVisible(true);
             } else {
-                outLabel.setText("");
+                //outLabel.setText("");
+                outLabel.setVisible(false);
             }
         }
     }
