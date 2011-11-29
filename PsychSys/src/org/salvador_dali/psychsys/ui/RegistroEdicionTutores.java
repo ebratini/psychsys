@@ -599,6 +599,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
             campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
         } else {
             lblTelValMarker.setToolTipText("El campo no puede estar vacio");
+            lblTelValMarker.setText("*");
             lblTelValMarker.setVisible(true);
             validFields &= false;
         }

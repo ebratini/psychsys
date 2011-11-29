@@ -32,8 +32,6 @@ package org.salvador_dali.psychsys.ui;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,28 +63,17 @@ import org.salvador_dali.psychsys.model.entities.TutorEstudiantePK;
  */
 public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
-    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
-    private Estudiante estAEditar;
+    private RegistroEdicionModo modo = RegistroEdicionModo.EDICION;
+    private Estudiante estAEditar = new Estudiante(1);
     private Map<Integer, Tutor> tutores = new HashMap<Integer, Tutor>();
-    private Map<Integer, String> tutOpAccion = new HashMap<Integer, String>();
+    private Map<Integer, TutorEstudiante> tutoresEstudiantes = new HashMap<Integer, TutorEstudiante>();
+    private Map<Integer, String> tutEstOpAccion = new HashMap<Integer, String>();
 
     /** Creates new form RegistroEdicionEstudiantes */
     public RegistroEdicionEstudiantes() {
         initComponents();
 
-        // customizando el jtable y evitando que puedan mover las columnas
-        tblTutores.setColumnModel(new DefaultTableColumnModel() {
-
-            @Override
-            public void moveColumn(int columnIndex, int newIndex) {
-                if (columnIndex == 1 || newIndex == 1) {
-                    return;
-                }
-                super.moveColumn(columnIndex, newIndex);
-            }
-        });
         
-        tblTutores.setModel(getDefTblModel());
     }
 
     public RegistroEdicionEstudiantes(RegistroEdicionModo modo) {
@@ -109,7 +96,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mniRemoverTutor = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        pnlTutInfoPersonal = new javax.swing.JPanel();
+        pnlInfoPersonal = new javax.swing.JPanel();
         lblDni = new javax.swing.JLabel();
         txtDni = new javax.swing.JTextField();
         lblTipoDni = new javax.swing.JLabel();
@@ -154,7 +141,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         lblEscuelaProcedencia = new javax.swing.JLabel();
         ftfTalla = new javax.swing.JFormattedTextField();
         ftfPeso = new javax.swing.JFormattedTextField();
-        pnlTutInfoContacto = new javax.swing.JPanel();
+        pnlInfoContacto = new javax.swing.JPanel();
         lblTelefono = new javax.swing.JLabel();
         lblDireccion = new javax.swing.JLabel();
         lblTelValMarker = new javax.swing.JLabel();
@@ -162,7 +149,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txaDireccion = new javax.swing.JTextArea();
         lblDirValMarker = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        pnlTutores = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTutores = new javax.swing.JTable();
         statusPanel = new javax.swing.JPanel();
@@ -220,7 +207,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTutInfoPersonal.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Personal"));
+        pnlInfoPersonal.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion Personal"));
 
         lblDni.setText("DNI");
 
@@ -258,24 +245,19 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         lblDniValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblDniValMarker.setLabelFor(txtDni);
-        lblDniValMarker.setText("*");
 
         lblPrimerNombreValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblPrimerNombreValMarker.setLabelFor(txtPrimerNombre);
-        lblPrimerNombreValMarker.setText("*");
 
         lblPrimerApellidoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblPrimerApellidoValMarker.setLabelFor(txtPrimerApellido);
-        lblPrimerApellidoValMarker.setText("*");
 
         lblSegApellidoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblSegApellidoValMarker.setLabelFor(txtSegundoApellido);
-        lblSegApellidoValMarker.setText("*");
 
         lblNacionalidadValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblNacionalidadValMarker.setLabelFor(txtNacionalidad);
-        lblNacionalidadValMarker.setText("*");
-        lblNacionalidadValMarker.setToolTipText("");
+        lblNacionalidadValMarker.setToolTipText(null);
 
         lblApodo.setText("Apodo");
 
@@ -310,22 +292,18 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         lblFechaNacimientoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblFechaNacimientoValMarker.setLabelFor(ftfFechaNacimiento);
-        lblFechaNacimientoValMarker.setText("*");
         lblFechaNacimientoValMarker.setToolTipText("");
 
         lblLugarNacimientoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblLugarNacimientoValMarker.setLabelFor(txtLugarNacimiento);
-        lblLugarNacimientoValMarker.setText("*");
         lblLugarNacimientoValMarker.setToolTipText("");
 
         lblTallaValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblTallaValMarker.setLabelFor(ftfTalla);
-        lblTallaValMarker.setText("*");
         lblTallaValMarker.setToolTipText("");
 
         lblPesoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblPesoValMarker.setLabelFor(ftfPeso);
-        lblPesoValMarker.setText("*");
         lblPesoValMarker.setToolTipText("");
 
         lblCursoActual.setText("Curso Actual");
@@ -346,13 +324,13 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         ftfPeso.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         ftfPeso.setNextFocusableComponent(cmbGradoEscolar);
 
-        javax.swing.GroupLayout pnlTutInfoPersonalLayout = new javax.swing.GroupLayout(pnlTutInfoPersonal);
-        pnlTutInfoPersonal.setLayout(pnlTutInfoPersonalLayout);
-        pnlTutInfoPersonalLayout.setHorizontalGroup(
-            pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlInfoPersonalLayout = new javax.swing.GroupLayout(pnlInfoPersonal);
+        pnlInfoPersonal.setLayout(pnlInfoPersonalLayout);
+        pnlInfoPersonalLayout.setHorizontalGroup(
+            pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDni)
                     .addComponent(lblTipoDni)
                     .addComponent(lblPrimerNombre)
@@ -363,11 +341,11 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                     .addComponent(lblNacionalidad)
                     .addComponent(lblGenero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(cmbTipoDni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlTutInfoPersonalLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlInfoPersonalLayout.createSequentialGroup()
                                 .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblDniValMarker))
@@ -378,13 +356,13 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                             .addComponent(txtSegundoNombre, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPrimerNombre, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSegApellidoValMarker)
                             .addComponent(lblNacionalidadValMarker)
                             .addComponent(lblPrimerApellidoValMarker)
                             .addComponent(lblPrimerNombreValMarker))
                         .addGap(40, 40, 40)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblLugarEntreHermanos)
                             .addComponent(lblLugarNacimiento)
                             .addComponent(lblFechaNacimiento)
@@ -394,125 +372,125 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                             .addComponent(lblPeso)
                             .addComponent(lblTalla))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
                                 .addComponent(cmbGradoEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbNivelEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
+                            .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
                                 .addComponent(ftfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblFechaNacimientoValMarker))
-                            .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
+                                .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtEscuelaProcedencia, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtLugarNacimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblLugarNacimientoValMarker))
-                            .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
+                                .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ftfPeso, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                                     .addComponent(ftfTalla))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTallaValMarker)
                                     .addComponent(lblPesoValMarker)))))
                     .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
-        pnlTutInfoPersonalLayout.setVerticalGroup(
-            pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
+        pnlInfoPersonalLayout.setVerticalGroup(
+            pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDni)
                             .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDniValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTipoDni)
                             .addComponent(cmbTipoDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPrimerNombre)
                             .addComponent(txtPrimerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPrimerNombreValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSegundoNombre)
                             .addComponent(txtSegundoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPrimerApellido)
                             .addComponent(txtPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPrimerApellidoValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSegundoApellido)
                             .addComponent(txtSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblSegApellidoValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblApodo)
                             .addComponent(txtApodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ftfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblFechaNacimiento)
                             .addComponent(lblFechaNacimientoValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtLugarNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblLugarNacimiento)
                             .addComponent(lblLugarNacimientoValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(spnHermanos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblHermanos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblLugarEntreHermanos))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
+                                .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(ftfTalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblTalla)
                                     .addComponent(lblTallaValMarker))
                                 .addGap(26, 26, 26))
-                            .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(ftfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblPesoValMarker)
                                 .addComponent(lblPeso)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCursoActual)
                             .addComponent(cmbGradoEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbNivelEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNacionalidad)
                             .addComponent(txtNacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNacionalidadValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblGenero)
                             .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtEscuelaProcedencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblEscuelaProcedencia)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        pnlTutInfoContacto.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion de Contacto"));
+        pnlInfoContacto.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion de Contacto"));
 
         lblTelefono.setText("Telefono");
 
@@ -520,7 +498,6 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         lblTelValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblTelValMarker.setLabelFor(ftfTelefono);
-        lblTelValMarker.setText("*");
 
         try {
             ftfTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(###) ###-####")));
@@ -536,49 +513,48 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
         lblDirValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblDirValMarker.setLabelFor(txaDireccion);
-        lblDirValMarker.setText("*");
 
-        javax.swing.GroupLayout pnlTutInfoContactoLayout = new javax.swing.GroupLayout(pnlTutInfoContacto);
-        pnlTutInfoContacto.setLayout(pnlTutInfoContactoLayout);
-        pnlTutInfoContactoLayout.setHorizontalGroup(
-            pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlInfoContactoLayout = new javax.swing.GroupLayout(pnlInfoContacto);
+        pnlInfoContacto.setLayout(pnlInfoContactoLayout);
+        pnlInfoContactoLayout.setHorizontalGroup(
+            pnlInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInfoContactoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
+                .addGroup(pnlInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlInfoContactoLayout.createSequentialGroup()
                         .addComponent(lblTelefono)
                         .addGap(5, 5, 5))
-                    .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
+                    .addGroup(pnlInfoContactoLayout.createSequentialGroup()
                         .addComponent(lblDireccion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
+                .addGroup(pnlInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInfoContactoLayout.createSequentialGroup()
                         .addComponent(ftfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTelValMarker))
-                    .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
+                    .addGroup(pnlInfoContactoLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblDirValMarker)))
                 .addContainerGap())
         );
-        pnlTutInfoContactoLayout.setVerticalGroup(
-            pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTutInfoContactoLayout.createSequentialGroup()
+        pnlInfoContactoLayout.setVerticalGroup(
+            pnlInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInfoContactoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefono)
                     .addComponent(ftfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTelValMarker))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDireccion)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDirValMarker))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tutores"));
+        pnlTutores.setBorder(javax.swing.BorderFactory.createTitledBorder("Tutores"));
 
         tblTutores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -598,14 +574,14 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblTutores);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnlTutoresLayout = new javax.swing.GroupLayout(pnlTutores);
+        pnlTutores.setLayout(pnlTutoresLayout);
+        pnlTutoresLayout.setHorizontalGroup(
+            pnlTutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlTutoresLayout.setVerticalGroup(
+            pnlTutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
         );
 
@@ -616,22 +592,22 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlTutInfoPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(pnlTutInfoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlInfoContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(pnlTutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlTutInfoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlInfoPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlTutInfoContacto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlInfoContacto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlTutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -645,11 +621,11 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 578, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 586, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -683,7 +659,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(619, Short.MAX_VALUE)
+                .addContainerGap(627, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -731,7 +707,41 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         // TODO add your handling code here:
         statusMessageLabel.setVisible(false);
         statusAnimationLabel.setVisible(false);
-        LimpiadorComponentes.limpiarValidationMarkers(this);
+        
+        // customizando el jtable y evitando que puedan mover las columnas
+        tblTutores.setColumnModel(new DefaultTableColumnModel() {
+
+            @Override
+            public void moveColumn(int columnIndex, int newIndex) {
+                if (columnIndex == 1 || newIndex == 1) {
+                    return;
+                }
+                super.moveColumn(columnIndex, newIndex);
+            }
+        });
+        
+        if (modo.equals(RegistroEdicionModo.REGISTRO)) {
+            tblTutores.setModel(getDefTblModel());
+        } else {
+            if (estAEditar == null) {
+                JOptionPane.showMessageDialog(this, "El estudiante a editar no esta establecido", "Editar Estudiante", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            List<TutorEstudiante> tutEsts = (List<TutorEstudiante>) new JpaTutorEstudianteDao().getTutorEstudianteByEstId(estAEditar.getEstId());
+                        
+            // llenando el map y mostrando en jtable
+            Object[][] data = new Object[tutEsts.size()][];;
+            int i = 0;
+            for (TutorEstudiante tutEst : tutEsts) {
+                tutoresEstudiantes.put(i, tutEst);
+                data[i] = new Object[]{String.format("%s %s", tutEst.getTutor().getTutPrimerNombre(), tutEst.getTutor().getTutPrimerApellido()),
+                    tutEst.getTesRelacionFamiliar()};
+                i++;
+            }
+            
+            DefaultTableModel dtm = new DefaultTableModel(data, new Object[] {"Nombre Tutor", "Relacion Familiar"});
+            tblTutores.setModel(dtm);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -887,19 +897,26 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         brt.setTitle("Buscar Tutor");
         brt.setEntitySearcher(new EntitySearcher().new TutorEntitySearcher());
         brt.getLblEntidades().setText("Tutores");
+        brt.setLocationRelativeTo(this);
         brt.setVisible(true);
         
         Object tutId = brt.getEntitySelectedId();        
         if (tutId != null) {
-            if (tutores.containsValue(new Tutor(Integer.parseInt(tutId.toString())))) {
-                JOptionPane.showMessageDialog(this, "Este tutor ya ha sido agregado", "Agregar Tutor", JOptionPane.ERROR_MESSAGE);
+            Tutor tut = new JpaTutorDao().findById(tutId);
+            if ((modo.equals(RegistroEdicionModo.REGISTRO) && tutores.containsValue(tut))
+                    || (modo.equals(RegistroEdicionModo.EDICION) && tutoresEstudiantes.containsValue(new TutorEstudiante(tut.getTutId(), estAEditar.getEstId())))) {
+                JOptionPane.showMessageDialog(this, "Este tutor ya aparece listado", "Agregar Tutor", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             String relFamiliar = JOptionPane.showInputDialog(this, "Relacion Familiar", "Relacion Familiar Tutor-Estudiante", JOptionPane.QUESTION_MESSAGE);
-            Tutor tut = new JpaTutorDao().findById(tutId);
+            //Tutor tut = new JpaTutorDao().findById(tutId);
             DefaultTableModel dtm = (DefaultTableModel) tblTutores.getModel();
             dtm.addRow(new Object[]{String.format("%s %s", tut.getTutPrimerNombre(), tut.getTutPrimerApellido()), relFamiliar});
-            tutores.put(dtm.getRowCount() - 1, tut);
+            //if (modo.equals(RegistroEdicionModo.REGISTRO)) {
+            tutores.put((dtm.getRowCount() - 1), tut);
+            //} else {
+            //tutoresEstudiantes.put((dtm.getRowCount() - 1), new TutorEstudiante(tut.getTutId(), estAEditar.getEstId()));
+            //}
         }
     }//GEN-LAST:event_mniNuevoTutorActionPerformed
 
@@ -907,24 +924,33 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (modo.equals(RegistroEdicionModo.REGISTRO)) {
             int rowEditing = tblTutores.getSelectedRow();
+            String oldRelFam = tblTutores.getValueAt(rowEditing, 1).toString();
             String nuevoRelFamiliar = JOptionPane.showInputDialog(this, "Relacion Familiar", tblTutores.getValueAt(rowEditing, 1));
+            if (nuevoRelFamiliar == null || (nuevoRelFamiliar != null && nuevoRelFamiliar.isEmpty())) {
+                nuevoRelFamiliar = oldRelFam;
+            }
             tblTutores.setValueAt(nuevoRelFamiliar, rowEditing, 1);
         } else {
-        
+            
         }
     }//GEN-LAST:event_mniEditarRelFamiliarActionPerformed
 
     private void mniRemoverTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRemoverTutorActionPerformed
         // TODO add your handling code here:
-        if (modo.equals(RegistroEdicionModo.REGISTRO)) {
-            int[] rowsDeleting = tblTutores.getSelectedRows();
-            DefaultTableModel dtm = (DefaultTableModel) tblTutores.getModel();
-            for (int i = (rowsDeleting.length - 1); i >= 0; i--) {
-                dtm.removeRow(rowsDeleting[i]);
-                tutores.remove(rowsDeleting[i]);
+        // TODO: revisar cuando se seleccionar filas que no son continuas o que no empiezan desde el principio
+        int[] rowsDeleting = tblTutores.getSelectedRows();
+        int selectedRow = -1;
+        DefaultTableModel dtm = (DefaultTableModel) tblTutores.getModel();
+        for (int i = 0; i < rowsDeleting.length; i++) {
+            selectedRow = tblTutores.getSelectedRow();
+            dtm.removeRow(selectedRow);
+            if (modo.equals(RegistroEdicionModo.REGISTRO) || (modo.equals(RegistroEdicionModo.EDICION) && tutores.containsKey(i))) {
+                tutores.remove(selectedRow);
+            } else {
+                if (!tutores.containsKey(i)) {
+                    tutEstOpAccion.put(i, "remover");
+                }
             }
-        } else {
-        
         }
     }//GEN-LAST:event_mniRemoverTutorActionPerformed
 
@@ -1013,6 +1039,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
             campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
         } else {
             lblTelValMarker.setToolTipText("El campo no puede estar vacio");
+            lblTelValMarker.setText("*");
             lblTelValMarker.setVisible(true);
             validFields &= false;
         }
@@ -1056,7 +1083,6 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ftfTalla;
     private javax.swing.JFormattedTextField ftfTelefono;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -1093,8 +1119,9 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniEditarRelFamiliar;
     private javax.swing.JMenuItem mniNuevoTutor;
     private javax.swing.JMenuItem mniRemoverTutor;
-    private javax.swing.JPanel pnlTutInfoContacto;
-    private javax.swing.JPanel pnlTutInfoPersonal;
+    private javax.swing.JPanel pnlInfoContacto;
+    private javax.swing.JPanel pnlInfoPersonal;
+    private javax.swing.JPanel pnlTutores;
     private javax.swing.JPopupMenu ppmTutores;
     private javax.swing.JSpinner spnHermanos;
     private javax.swing.JSpinner spnLugarEntreHermanos;

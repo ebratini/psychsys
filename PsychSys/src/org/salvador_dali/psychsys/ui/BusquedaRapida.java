@@ -30,13 +30,16 @@
 package org.salvador_dali.psychsys.ui;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.salvador_dali.psychsys.business.EntitySearcher;
+import org.salvador_dali.psychsys.business.NumberFieldValidator;
 
 /**
  *
@@ -45,43 +48,20 @@ import org.salvador_dali.psychsys.business.EntitySearcher;
 public class BusquedaRapida extends javax.swing.JDialog {
 
     private Object entitySelectedId;
-    private EntitySearcher entitySearcher = new EntitySearcher().new TutorEntitySearcher();
+    private EntitySearcher entitySearcher;
 
     /** Creates new form BusquedaRapida */
     public BusquedaRapida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
-        // customizando el jtable y evitando que puedan mover las columnas
-        if (entitySearcher != null) {
-            cmbCampoBuscar.setModel(entitySearcher.getDefComboBoxModel());
-            tblEntidades.setColumnModel(entitySearcher.getDefTableColumnModel());
-            tblEntidades.setModel(entitySearcher.getDefTableModel());
-        } else {
-            tblEntidades.setColumnModel(new DefaultTableColumnModel() {
-
-                @Override
-                public void moveColumn(int columnIndex, int newIndex) {
-                    if (columnIndex == 0 || newIndex == 0) {
-                        return;
-                    }
-                    super.moveColumn(columnIndex, newIndex);
-                }
-            });
-
-            DefaultTableModel dtm = new DefaultTableModel(new Object[][]{{}},
-                    new Object[]{"Id", "Col 2", "Col 3"}) {
-
-                @Override
-                public boolean isCellEditable(int rowIndex, int mColIndex) {
-                    return false;
-                }
-            };
-
-            tblEntidades.setModel(dtm);
-        }
     }
 
+    public BusquedaRapida(EntitySearcher entitySearcher, Frame owner, boolean modal) {
+        super(owner, modal);
+        this.entitySearcher = entitySearcher;
+        initComponents();
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -112,6 +92,11 @@ public class BusquedaRapida extends javax.swing.JDialog {
         setTitle("Busqueda de Estudiantes");
         setModal(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         pnlOpBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones de Busqueda"));
         pnlOpBusqueda.setName("pnlOpBusqueda"); // NOI18N
@@ -327,6 +312,38 @@ private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GE
         }
     }//GEN-LAST:event_tblEntidadesMouseClicked
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        // customizando el jtable y evitando que puedan mover las columnas
+        if (entitySearcher != null) {
+            cmbCampoBuscar.setModel(entitySearcher.getDefComboBoxModel());
+            tblEntidades.setColumnModel(entitySearcher.getDefTableColumnModel());
+            tblEntidades.setModel(entitySearcher.getDefTableModel());
+        } else {
+            tblEntidades.setColumnModel(new DefaultTableColumnModel() {
+
+                @Override
+                public void moveColumn(int columnIndex, int newIndex) {
+                    if (columnIndex == 0 || newIndex == 0) {
+                        return;
+                    }
+                    super.moveColumn(columnIndex, newIndex);
+                }
+            });
+
+            DefaultTableModel dtm = new DefaultTableModel(new Object[][]{{}},
+                    new Object[]{"Id", "Col 2", "Col 3"}) {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int mColIndex) {
+                    return false;
+                }                
+            };
+
+            tblEntidades.setModel(dtm);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -372,10 +389,19 @@ private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GE
         });
     }
 
+    
+    
     private void doSearch() {
+        if (cmbCampoBuscar.getSelectedItem().toString().equalsIgnoreCase("id") && !txtBusqueda.getText().equals("*")) {
+            if (!new NumberFieldValidator().validate(txtBusqueda.getText())) {
+                JOptionPane.showMessageDialog(this, "Este campo solo acepta numeros", "Busqueda", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }        
         TableModel tm = getEntitySearcher().doSearch(cmbCampoBuscar.getSelectedItem().toString(), txtBusqueda.getText());
         if (tm != null) {
             tblEntidades.setModel(tm);
+            tblEntidades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         } else {
             statusMessageLabel.setText("No hubo resultados");
             statusMessageLabel.setForeground(Color.red);

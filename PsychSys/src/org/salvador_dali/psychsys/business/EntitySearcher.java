@@ -171,7 +171,7 @@ public class EntitySearcher {
                 }
             } else {
                 if (fieldToSearch.equalsIgnoreCase("id")) {
-                    if (isIdFieldValid(fieldToSearch)) {
+                    if (isIdFieldValid(value)) {
                         Tutor tutSearched = jpaTutDao.findById(Integer.parseInt(value));
                         if (tutSearched != null) {
                             data = new Object[][] {new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(),
