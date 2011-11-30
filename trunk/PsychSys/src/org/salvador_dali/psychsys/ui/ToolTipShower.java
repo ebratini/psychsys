@@ -23,20 +23,61 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Container;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.pushingpixels.flamingo.internal.ui.common.JRichTooltipPanel;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-class ToolTipShower implements Runnable {
+public class ToolTipShower implements Runnable {
+
+    private JRichTooltipPanel rtp;
+    private long time = 2000;
+
+    public ToolTipShower() {
+    }
 
     public ToolTipShower(JRichTooltipPanel rtp) {
+        this.rtp = rtp;
+    }
+
+    public ToolTipShower(JRichTooltipPanel rtp, long time) {
+        this.rtp = rtp;
+        this.time = time;
+    }
+
+    public JRichTooltipPanel getRtp() {
+        return rtp;
+    }
+
+    public void setRtp(JRichTooltipPanel rtp) {
+        this.rtp = rtp;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            rtp.setVisible(true);
+            Thread.sleep(time);
+            //this.rtp.setVisible(false);
+            Container parent = rtp.getParent();
+            parent.remove(rtp);
+            parent.validate();
+            parent.repaint();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ToolTipShower.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
 }
+

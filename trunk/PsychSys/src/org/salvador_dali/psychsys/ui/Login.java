@@ -29,7 +29,11 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.salvador_dali.psychsys.business.JpaUsuarioDao;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
@@ -38,6 +42,7 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  */
 public class Login extends javax.swing.JDialog {
 
+    private JpaUsuarioDao jpaUsrDao = new JpaUsuarioDao();
     private Usuario usuario;
 
     /** Creates new form Login */
@@ -60,7 +65,7 @@ public class Login extends javax.swing.JDialog {
         lblContrasenia = new javax.swing.JLabel();
         txtNombreUsuario = new javax.swing.JTextField();
         btnOk = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         psfContrasenia = new javax.swing.JPasswordField();
         lblProgressBar = new javax.swing.JLabel();
 
@@ -75,9 +80,30 @@ public class Login extends javax.swing.JDialog {
 
         lblContrasenia.setText("Contraseña:");
 
-        btnOk.setText("Ok");
+        txtNombreUsuario.setNextFocusableComponent(psfContrasenia);
 
-        jButton1.setText("Cancelar");
+        btnOk.setText("Ok");
+        btnOk.setNextFocusableComponent(btnCancelar);
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setNextFocusableComponent(txtNombreUsuario);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        psfContrasenia.setNextFocusableComponent(btnOk);
+        psfContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                psfContraseniaKeyPressed(evt);
+            }
+        });
 
         lblProgressBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
 
@@ -99,7 +125,7 @@ public class Login extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1))
+                    .addComponent(btnCancelar))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(399, Short.MAX_VALUE)
@@ -120,7 +146,7 @@ public class Login extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblContrasenia)
-                            .addComponent(jButton1)
+                            .addComponent(btnCancelar)
                             .addComponent(psfContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblProgressBar))
@@ -128,6 +154,39 @@ public class Login extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        // TODO add your handling code here:
+        char[] pass = psfContrasenia.getPassword();
+        int charCount = pass.length;
+        clearArray(pass);
+
+        if (txtNombreUsuario.getText().isEmpty() || charCount == 0) {
+            JOptionPane.showMessageDialog(this, "Los campos nombre usuario y contraseña son obligatorios",
+                    "Validacion de Usuario", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (esUsuarioValido(txtNombreUsuario.getText())) {
+            this.usuario = jpaUsrDao.getUsuarioByLogin(txtNombreUsuario.getText());
+            //JOptionPane.showMessageDialog(this, "Bienvenido, " + txtlNombreUsuario.getText(), "Validacion de Usuario", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario / Contraseña Invalido", "Validacion de Usuario", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnOkActionPerformed
+
+    private void psfContraseniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_psfContraseniaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnOk.doClick();
+        }
+    }//GEN-LAST:event_psfContraseniaKeyPressed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,9 +240,38 @@ public class Login extends javax.swing.JDialog {
     public JTextField getTxtNombreUsuario() {
         return txtNombreUsuario;
     }
+    
+    private void clearArray(char[] array) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = 0;
+        }
+    }
+    
+    private boolean esUsuarioValido(String nombreUsuario) {
+        Usuario user = jpaUsrDao.getUsuarioByLogin(nombreUsuario);
+        boolean usuarioValido = false;
+
+        if (user != null) {
+            char[] usrPass = user.getUsrPassword().toCharArray();
+            char[] passToComp = psfContrasenia.getPassword();
+
+            if (Arrays.equals(usrPass, passToComp)) {
+                usuarioValido = true;
+                clearArray(usrPass);
+            } else {
+                usuarioValido = false;
+            }
+
+            clearArray(usrPass);
+            clearArray(passToComp);
+        } else {
+            usuarioValido = false;
+        }
+        return usuarioValido;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOk;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblContrasenia;
     private javax.swing.JLabel lblProgressBar;
     private javax.swing.JLabel lblPsychSysLogo;

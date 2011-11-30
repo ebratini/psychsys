@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.business;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.UsuarioDao;
@@ -46,9 +47,15 @@ public class JpaUsuarioDao extends JpaDao implements UsuarioDao {
 
     @Override
     public Usuario getUsuarioByLogin(String login) {
+        Usuario usr = null;
         Query q = entityManager.createNamedQuery("Usuario.findByUsrLogin");
         q.setParameter("usrLogin", login);
-        return (Usuario) q.getSingleResult();
+        try {
+            usr = (Usuario) q.getSingleResult();
+        } catch (NoResultException nre) {
+        }
+
+        return usr;
     }
 
     @Override
