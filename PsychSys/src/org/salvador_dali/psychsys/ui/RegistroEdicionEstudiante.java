@@ -23,7 +23,7 @@
  */
 
 /*
- * RegistroEdicionEstudiantes.java
+ * RegistroEdicionEstudiante.java
  *
  * Created on Nov 10, 2011, 10:08:24 AM
  */
@@ -60,7 +60,7 @@ import org.salvador_dali.psychsys.model.entities.TutorEstudiantePK;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
+public class RegistroEdicionEstudiante extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.EDICION;
     private Estudiante estAEditar = new Estudiante(1);
@@ -68,14 +68,14 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
     private Map<Integer, TutorEstudiante> tutoresEstudiantes = new HashMap<Integer, TutorEstudiante>();
     private Map<Integer, String> tutEstOpAccion = new HashMap<Integer, String>();
 
-    /** Creates new form RegistroEdicionEstudiantes */
-    public RegistroEdicionEstudiantes() {
+    /** Creates new form RegistroEdicionEstudiante */
+    public RegistroEdicionEstudiante() {
         initComponents();
 
         
     }
 
-    public RegistroEdicionEstudiantes(RegistroEdicionModo modo) {
+    public RegistroEdicionEstudiante(RegistroEdicionModo modo) {
         this();
         this.modo = modo;
     }
@@ -970,13 +970,13 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionEstudiantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionEstudiantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionEstudiantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionEstudiantes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionEstudiante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -985,7 +985,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                new RegistroEdicionEstudiantes().setVisible(true);
+                new RegistroEdicionEstudiante().setVisible(true);
             }
         });
     }

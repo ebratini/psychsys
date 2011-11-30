@@ -23,7 +23,7 @@
  */
 
 /*
- * RegistroEdicionPruebasPsicologicas.java
+ * RegistroEdicionPruebaPsicologica.java
  *
  * Created on Nov 10, 2011, 10:18:53 AM
  */
@@ -35,16 +35,16 @@ import java.awt.Toolkit;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
+public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo;
 
-    /** Creates new form RegistroEdicionPruebasPsicologicas */
-    public RegistroEdicionPruebasPsicologicas() {
+    /** Creates new form RegistroEdicionPruebaPsicologica */
+    public RegistroEdicionPruebaPsicologica() {
         initComponents();
     }
 
-    public RegistroEdicionPruebasPsicologicas(RegistroEdicionModo modo) {
+    public RegistroEdicionPruebaPsicologica(RegistroEdicionModo modo) {
         this.modo = modo;
     }
 
@@ -304,11 +304,11 @@ public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 608, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 617, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -333,7 +333,7 @@ public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(632, Short.MAX_VALUE)
+                .addContainerGap(641, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -380,13 +380,13 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionPruebasPsicologicas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionPruebaPsicologica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionPruebasPsicologicas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionPruebaPsicologica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionPruebasPsicologicas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionPruebaPsicologica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionPruebasPsicologicas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionPruebaPsicologica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -394,7 +394,7 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new RegistroEdicionPruebasPsicologicas().setVisible(true);
+                new RegistroEdicionPruebaPsicologica().setVisible(true);
             }
         });
     }
