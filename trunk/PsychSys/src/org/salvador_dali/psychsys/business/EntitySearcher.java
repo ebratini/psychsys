@@ -38,7 +38,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class EntitySearcher {
+public abstract class EntitySearcher {
 
     private JpaDao jpDao;
     private Object[] fieldsToSearch;
@@ -119,7 +119,7 @@ public class EntitySearcher {
         this.jpDao = jpDao;
     }
     
-    private boolean isIdFieldValid(String field) {
+    protected boolean isIdFieldValid(String field) {
         if (!new NumberFieldValidator().validate(field)) {
             return false;
         } else {
@@ -127,12 +127,11 @@ public class EntitySearcher {
         }
     }
 
-    public TableModel doSearch(String fieldToSearch, String value) {
-        throw new NotImplementedException();
-    }
+    public abstract TableModel doSearch(String fieldToSearch, String value);
+    
 
     // Clases
-    public class TutorEntitySearcher extends EntitySearcher {
+    public static class TutorEntitySearcher extends EntitySearcher {
 
         {
             setJpDao(new JpaTutorDao());
@@ -220,7 +219,7 @@ public class EntitySearcher {
         }
     }
 
-    public class EstudianteEntitySearcher extends EntitySearcher {
+    public static class EstudianteEntitySearcher extends EntitySearcher {
 
         {
             Object[] fields = new Object[]{"Id", "Primer Nombre", "Primer Apellido"};
