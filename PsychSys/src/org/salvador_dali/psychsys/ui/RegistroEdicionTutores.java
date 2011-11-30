@@ -185,23 +185,18 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
         lblDniValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblDniValMarker.setLabelFor(txtDni);
-        lblDniValMarker.setText("*");
 
         lblPrimerNombreValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblPrimerNombreValMarker.setLabelFor(txtPrimerNombre);
-        lblPrimerNombreValMarker.setText("*");
 
         lblPrimerApellidoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblPrimerApellidoValMarker.setLabelFor(txtPrimerApellido);
-        lblPrimerApellidoValMarker.setText("*");
 
         lblSegApellidoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblSegApellidoValMarker.setLabelFor(txtSegundoApellido);
-        lblSegApellidoValMarker.setText("*");
 
         lblNacionalidadValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblNacionalidadValMarker.setLabelFor(txtNacionalidad);
-        lblNacionalidadValMarker.setText("*");
         lblNacionalidadValMarker.setToolTipText(null);
 
         javax.swing.GroupLayout pnlTutInfoPersonalLayout = new javax.swing.GroupLayout(pnlTutInfoPersonal);
@@ -250,7 +245,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                     .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPrimerApellidoValMarker)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         pnlTutInfoPersonalLayout.setVerticalGroup(
             pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,15 +306,12 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
         lblTelValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblTelValMarker.setLabelFor(ftfTelefono);
-        lblTelValMarker.setText("*");
 
         lblEmailValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblEmailValMarker.setLabelFor(txtEmail);
-        lblEmailValMarker.setText("*");
 
         lblDirValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblDirValMarker.setLabelFor(txaDireccion);
-        lblDirValMarker.setText("*");
 
         try {
             ftfTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(###) ###-####")));
@@ -350,7 +342,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                         .addComponent(ftfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTelValMarker)
-                        .addContainerGap(423, Short.MAX_VALUE))
+                        .addContainerGap(429, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTutInfoContactoLayout.createSequentialGroup()
                         .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtEmail)

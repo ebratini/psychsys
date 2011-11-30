@@ -23,7 +23,7 @@
  */
 
 /*
- * RegistroEdicionCasos.java
+ * RegistroEdicionCaso.java
  *
  * Created on Nov 10, 2011, 10:18:30 AM
  */
@@ -35,10 +35,10 @@ import java.awt.Toolkit;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class RegistroEdicionCasos extends javax.swing.JFrame {
+public class RegistroEdicionCaso extends javax.swing.JFrame {
 
-    /** Creates new form RegistroEdicionCasos */
-    public RegistroEdicionCasos() {
+    /** Creates new form RegistroEdicionCaso */
+    public RegistroEdicionCaso() {
         initComponents();
     }
 
@@ -195,7 +195,7 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
         );
 
-        pnlAnalisisResPruebas.setBounds(0, 0, 390, 250);
+        pnlAnalisisResPruebas.setBounds(0, 0, 0, 0);
         lpnDetallesCaso.add(pnlAnalisisResPruebas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         pnlJuicioClinico.setBorder(javax.swing.BorderFactory.createTitledBorder("Juicio Clinico"));
@@ -438,13 +438,13 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionCasos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionCaso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionCasos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionCaso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionCasos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionCaso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionCasos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionCaso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -452,7 +452,7 @@ public class RegistroEdicionCasos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new RegistroEdicionCasos().setVisible(true);
+                new RegistroEdicionCaso().setVisible(true);
             }
         });
     }

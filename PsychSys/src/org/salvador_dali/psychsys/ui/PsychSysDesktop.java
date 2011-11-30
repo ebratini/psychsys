@@ -63,7 +63,7 @@ import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
  */
 public class PsychSysDesktop extends JRibbonFrame {
 
-    private static int appInstances;
+    public static int appInstances;
     // user logged
     private Usuario usuario;
     // button action handler
