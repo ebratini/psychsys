@@ -43,7 +43,6 @@ import org.salvador_dali.psychsys.business.DateFieldValidator;
 import org.salvador_dali.psychsys.business.DateUtils;
 import org.salvador_dali.psychsys.business.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
-import org.salvador_dali.psychsys.business.EntitySearcher.TutorEntitySearcher;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
 import org.salvador_dali.psychsys.business.JpaEstudianteDao;
@@ -381,9 +380,6 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                                 .addComponent(ftfFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblFechaNacimientoValMarker))
-                            .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlInfoPersonalLayout.createSequentialGroup()
                                 .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtEscuelaProcedencia, javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,9 +393,12 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblTallaValMarker)
-                                    .addComponent(lblPesoValMarker)))))
+                                    .addComponent(lblPesoValMarker)))
+                            .addGroup(pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                                .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, Short.MAX_VALUE))))
                     .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         pnlInfoPersonalLayout.setVerticalGroup(
             pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -578,7 +577,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         pnlTutores.setLayout(pnlTutoresLayout);
         pnlTutoresLayout.setHorizontalGroup(
             pnlTutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
         );
         pnlTutoresLayout.setVerticalGroup(
             pnlTutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -895,7 +894,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         // TODO add your handling code here:
         BusquedaRapida brt = new BusquedaRapida(this, true);
         brt.setTitle("Buscar Tutor");
-        brt.setEntitySearcher(new EntitySearcher().new TutorEntitySearcher());
+        brt.setEntitySearcher(new EntitySearcher.TutorEntitySearcher());
         brt.getLblEntidades().setText("Tutores");
         brt.setLocationRelativeTo(this);
         brt.setVisible(true);
@@ -984,6 +983,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 new RegistroEdicionEstudiantes().setVisible(true);
             }
