@@ -37,9 +37,15 @@ import java.awt.Toolkit;
  */
 public class RegistroEdicionPruebasPsicologicas extends javax.swing.JFrame {
 
+    private RegistroEdicionModo modo;
+
     /** Creates new form RegistroEdicionPruebasPsicologicas */
     public RegistroEdicionPruebasPsicologicas() {
         initComponents();
+    }
+
+    public RegistroEdicionPruebasPsicologicas(RegistroEdicionModo modo) {
+        this.modo = modo;
     }
 
     /** This method is called from within the constructor to
@@ -391,6 +397,14 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
                 new RegistroEdicionPruebasPsicologicas().setVisible(true);
             }
         });
+    }
+
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
+        this.modo = modo;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
