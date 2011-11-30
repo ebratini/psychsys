@@ -4,8 +4,6 @@
  */
 package org.salvador_dali.psychsys.business;
 
-import org.salvador_dali.psychsys.model.XMLFileManager;
-
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>

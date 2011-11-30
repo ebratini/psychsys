@@ -23,7 +23,7 @@
  */
 
 /*
- * RegistroEdicionTutores.java
+ * RegistroEdicionTutor.java
  *
  * Created on Nov 10, 2011, 3:51:06 PM
  */
@@ -47,17 +47,17 @@ import org.salvador_dali.psychsys.model.entities.Tutor;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class RegistroEdicionTutores extends javax.swing.JFrame {
+public class RegistroEdicionTutor extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private Tutor tutorAEditar;
 
-    /** Creates new form RegistroEdicionTutores */
-    public RegistroEdicionTutores() {
+    /** Creates new form RegistroEdicionTutor */
+    public RegistroEdicionTutor() {
         initComponents();
     }
 
-    public RegistroEdicionTutores(RegistroEdicionModo modo) {
+    public RegistroEdicionTutor(RegistroEdicionModo modo) {
         this();
         this.modo = modo;
     }
@@ -547,13 +547,13 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionTutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionTutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionTutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionTutores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionTutor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -562,7 +562,7 @@ public class RegistroEdicionTutores extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                new RegistroEdicionTutores().setVisible(true);
+                new RegistroEdicionTutor().setVisible(true);
             }
         });
     }

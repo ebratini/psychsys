@@ -23,7 +23,7 @@
  */
 
 /*
- * RegistroEdicionReferimientos.java
+ * RegistroEdicionReferimiento.java
  *
  * Created on Nov 10, 2011, 10:18:15 AM
  */
@@ -37,17 +37,17 @@ import org.salvador_dali.psychsys.model.entities.Referimiento;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class RegistroEdicionReferimientos extends javax.swing.JFrame {
+public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private Referimiento refAEditar;
 
-    /** Creates new form RegistroEdicionReferimientos */
-    public RegistroEdicionReferimientos() {
+    /** Creates new form RegistroEdicionReferimiento */
+    public RegistroEdicionReferimiento() {
         initComponents();
     }
 
-    public RegistroEdicionReferimientos(RegistroEdicionModo modo) {
+    public RegistroEdicionReferimiento(RegistroEdicionModo modo) {
         this();
         this.modo = modo;
     }
@@ -412,13 +412,13 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionReferimientos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionReferimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionReferimientos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionReferimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionReferimientos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionReferimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroEdicionReferimientos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroEdicionReferimiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -426,7 +426,7 @@ public class RegistroEdicionReferimientos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new RegistroEdicionReferimientos().setVisible(true);
+                new RegistroEdicionReferimiento().setVisible(true);
             }
         });
     }

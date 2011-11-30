@@ -507,11 +507,11 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbVerTutores")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarTutor")) {
-                RegistroEdicionTutores ret = new RegistroEdicionTutores(RegistroEdicionModo.REGISTRO);
+                RegistroEdicionTutor ret = new RegistroEdicionTutor(RegistroEdicionModo.REGISTRO);
                 ret.setLocationRelativeTo(PsychSysDesktop.this);
                 ret.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbEditarTutor")) {
-                RegistroEdicionTutores ret = new RegistroEdicionTutores(RegistroEdicionModo.EDICION);
+                RegistroEdicionTutor ret = new RegistroEdicionTutor(RegistroEdicionModo.EDICION);
                 ret.setTitle("Editar Tutor");
                 ret.setLocationRelativeTo(PsychSysDesktop.this);
                 ret.setVisible(true);
@@ -520,11 +520,11 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbVerEstudiantes")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarEstudiante")) {
-                RegistroEdicionEstudiantes ree = new RegistroEdicionEstudiantes(RegistroEdicionModo.REGISTRO);
+                RegistroEdicionEstudiante ree = new RegistroEdicionEstudiante(RegistroEdicionModo.REGISTRO);
                 ree.setLocationRelativeTo(PsychSysDesktop.this);
                 ree.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbEditarEstudiante")) {
-                /*RegistroEdicionEstudiantes ree = new RegistroEdicionEstudiantes(RegistroEdicionModo.EDICION);
+                /*RegistroEdicionEstudiante ree = new RegistroEdicionEstudiante(RegistroEdicionModo.EDICION);
                 ree.setTitle("Editar Estudiante");
                 ree.setLocationRelativeTo(PsychSysDesktop.this);
                 ree.setVisible(true);*/
@@ -533,11 +533,11 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbVerReferimientos")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarReferimiento")) {
-                RegistroEdicionReferimientos rer = new RegistroEdicionReferimientos(RegistroEdicionModo.REGISTRO);
+                RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.REGISTRO);
                 rer.setLocationRelativeTo(PsychSysDesktop.this);
                 rer.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbEditarReferimiento")) {
-                RegistroEdicionReferimientos rer = new RegistroEdicionReferimientos(RegistroEdicionModo.EDICION);
+                RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.EDICION);
                 rer.setTitle("Editar Referimiento");
                 rer.setLocationRelativeTo(PsychSysDesktop.this);
                 rer.setVisible(true);
@@ -546,11 +546,11 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbVerPruebasPsicologicas")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarPruebaPsicologica")) {
-                RegistroEdicionPruebasPsicologicas repp = new RegistroEdicionPruebasPsicologicas(RegistroEdicionModo.REGISTRO);
+                RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.REGISTRO);
                 repp.setLocationRelativeTo(PsychSysDesktop.this);
                 repp.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbEditarPruebaPsicologica")) {
-                RegistroEdicionPruebasPsicologicas repp = new RegistroEdicionPruebasPsicologicas(RegistroEdicionModo.EDICION);
+                RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.EDICION);
                 repp.setTitle("Editar Prueba Psicologicas");
                 repp.setLocationRelativeTo(PsychSysDesktop.this);
                 repp.setVisible(true);

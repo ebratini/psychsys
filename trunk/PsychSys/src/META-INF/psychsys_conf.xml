@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : psychsys_conf.xml
+    Created on : November 30, 2011, 4:07 PM
+    Author     : Edwin Bratini
+    Description:
+        Purpose of the document follows.
+-->
+
+<PsychSys>
+    <InfoCentroEstudios>
+        <Nombre>Escuela Salvador Dali</Nombre>
+        <Slogan></Slogan>
+        <Telefono></Telefono>
+        <Direccion></Direccion>
+    </InfoCentroEstudios>
+</PsychSys>
