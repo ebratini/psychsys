@@ -398,7 +398,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
                                 .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                                 .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, Short.MAX_VALUE))))
                     .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         pnlInfoPersonalLayout.setVerticalGroup(
             pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -620,11 +620,11 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 586, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 594, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -658,7 +658,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(627, Short.MAX_VALUE)
+                .addContainerGap(635, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -729,7 +729,7 @@ public class RegistroEdicionEstudiantes extends javax.swing.JFrame {
             List<TutorEstudiante> tutEsts = (List<TutorEstudiante>) new JpaTutorEstudianteDao().getTutorEstudianteByEstId(estAEditar.getEstId());
                         
             // llenando el map y mostrando en jtable
-            Object[][] data = new Object[tutEsts.size()][];;
+            Object[][] data = new Object[tutEsts.size()][];
             int i = 0;
             for (TutorEstudiante tutEst : tutEsts) {
                 tutoresEstudiantes.put(i, tutEst);

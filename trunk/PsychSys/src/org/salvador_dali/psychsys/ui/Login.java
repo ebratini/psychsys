@@ -29,6 +29,7 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import javax.swing.JTextField;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
@@ -36,6 +37,8 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class Login extends javax.swing.JDialog {
+
+    private Usuario usuario;
 
     /** Creates new form Login */
     public Login(java.awt.Frame parent, boolean modal) {
@@ -55,7 +58,7 @@ public class Login extends javax.swing.JDialog {
         lblPsychSysLogo = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         lblContrasenia = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtNombreUsuario = new javax.swing.JTextField();
         btnOk = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         psfContrasenia = new javax.swing.JPasswordField();
@@ -92,7 +95,7 @@ public class Login extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(psfContrasenia)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -112,7 +115,7 @@ public class Login extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblUsuario)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnOk))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -170,6 +173,14 @@ public class Login extends javax.swing.JDialog {
             }
         });
     }
+
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+
+    public JTextField getTxtNombreUsuario() {
+        return txtNombreUsuario;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
     private javax.swing.JButton jButton1;
@@ -178,14 +189,6 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JLabel lblPsychSysLogo;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPasswordField psfContrasenia;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtNombreUsuario;
     // End of variables declaration//GEN-END:variables
-
-    Usuario getUsuario() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    Object getTxtlNombreUsuario() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
 }
