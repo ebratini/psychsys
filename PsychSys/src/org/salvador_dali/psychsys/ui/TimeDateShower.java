@@ -23,15 +23,54 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-class TimeDateShower extends Thread {
+public class TimeDateShower extends Thread {
+    private JLabel label;
+    private boolean stop;
 
-    public TimeDateShower(JLabel timeDate) {
+    public TimeDateShower() {
+    }
+
+    public TimeDateShower(JLabel label) {
+        this.label = label;
+    }
+
+    public boolean isStop() {
+        return stop;
+    }
+
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+
+    public JLabel getLabel() {
+        return label;
+    }
+
+    public void setLabel(JLabel label) {
+        this.label = label;
     }
     
+    @Override
+    public void run() {
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, new Locale("es", "DO"));
+        while (!stop) {
+            label.setText(df.format(new Date()));
+            try {
+                Thread.sleep(900);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TimeDateShower.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
