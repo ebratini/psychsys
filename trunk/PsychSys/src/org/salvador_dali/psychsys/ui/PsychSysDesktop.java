@@ -551,7 +551,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 repp.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbEditarPruebaPsicologica")) {
                 RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.EDICION);
-                repp.setTitle("Editar Prueba Psicologicas");
+                repp.setTitle("Editar Prueba Psicologica");
                 repp.setLocationRelativeTo(PsychSysDesktop.this);
                 repp.setVisible(true);
             }

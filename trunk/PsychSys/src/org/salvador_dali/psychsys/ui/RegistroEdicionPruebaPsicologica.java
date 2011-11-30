@@ -45,6 +45,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
     }
 
     public RegistroEdicionPruebaPsicologica(RegistroEdicionModo modo) {
+        this();
         this.modo = modo;
     }
 
@@ -92,7 +93,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Prueba Psicologica");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
 
@@ -326,6 +327,11 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         btnAceptar.setText("Aceptar");
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -362,6 +368,11 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCorreccionAutomaticaActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_chkCorreccionAutomaticaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
