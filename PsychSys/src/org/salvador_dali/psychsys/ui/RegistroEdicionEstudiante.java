@@ -186,7 +186,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         });
         ppmTutores.add(mniRemoverTutor);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Estudiante");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
         setResizable(false);

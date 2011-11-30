@@ -31,6 +31,9 @@ package org.salvador_dali.psychsys.ui;
 
 import java.awt.Color;
 import java.awt.Toolkit;
+import org.salvador_dali.psychsys.business.EntitySearcher;
+import org.salvador_dali.psychsys.business.JpaEstudianteDao;
+import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 
 /**
@@ -40,6 +43,7 @@ import org.salvador_dali.psychsys.model.entities.Referimiento;
 public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private JpaEstudianteDao jpaEstDao = new JpaEstudianteDao();
     private Referimiento refAEditar;
 
     /** Creates new form RegistroEdicionReferimiento */
@@ -90,7 +94,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Crear Referimiento");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
         setResizable(false);
@@ -104,12 +108,19 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         lblEstudiante.setText("Estudiante");
 
+        txtEstudiante.setEditable(false);
+
         lblAnioEscolar.setText("Año Escolar");
 
         lblReferidor.setText("Referidor");
 
         btnBuscarEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
         btnBuscarEstudiante.setBorderPainted(false);
+        btnBuscarEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEstudianteActionPerformed(evt);
+            }
+        });
 
         lblMotivoReferimiento.setText("Motivo Referimiento");
 
@@ -126,17 +137,14 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         lblEstudianteValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblEstudianteValMarker.setLabelFor(lblEstudiante);
-        lblEstudianteValMarker.setText("*");
         lblEstudianteValMarker.setToolTipText("");
 
         lblMotivoRefValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblMotivoRefValMarker.setLabelFor(txaMotivoReferimiento);
-        lblMotivoRefValMarker.setText("*");
         lblMotivoRefValMarker.setToolTipText("");
 
         lblReferidorValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblReferidorValMarker.setLabelFor(txtReferidor);
-        lblReferidorValMarker.setText("*");
         lblReferidorValMarker.setToolTipText("");
 
         try {
@@ -159,10 +167,8 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         lblFechaValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblFechaValMarker.setLabelFor(ftfFecha);
-        lblFechaValMarker.setText("*");
 
         lblAnioEscolarValMarker1.setForeground(new java.awt.Color(255, 51, 51));
-        lblAnioEscolarValMarker1.setText("*");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -394,6 +400,22 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         ftfFecha.requestFocusInWindow();
         pc.stop();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnBuscarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEstudianteActionPerformed
+        // TODO add your handling code here:
+        BusquedaRapida brt = new BusquedaRapida(this, true);
+        brt.setTitle("Buscar Estudiante");
+        brt.setEntitySearcher(new EntitySearcher.EstudianteEntitySearcher());
+        brt.getLblEntidades().setText("Estudiantes");
+        brt.setLocationRelativeTo(this);
+        brt.setVisible(true);
+        
+        Object estId = brt.getEntitySelectedId();        
+        if (estId != null) {
+            Estudiante estSelected = jpaEstDao.findById(estId);
+            txtEstudiante.setText(estSelected.getEstPrimerNombre() + " " + estSelected.getEstPrimerApellido());
+        }
+    }//GEN-LAST:event_btnBuscarEstudianteActionPerformed
 
     /**
      * @param args the command line arguments
