@@ -56,6 +56,7 @@ import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 import org.pushingpixels.flamingo.api.ribbon.resize.RibbonBandResizePolicy;
 import org.pushingpixels.flamingo.internal.ui.common.JRichTooltipPanel;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
+import org.pushingpixels.flamingo.internal.ui.ribbon.JFlowBandControlPanel;
 
 /**
  *
@@ -199,7 +200,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 "jcbEditarTutor", new RichTooltip("Editar", "Click aqui para editar tutor"), buttonActHandler);
 
         jcbEliminarTutor = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
-                "jcbEliminarTutor", new RichTooltip("Eliminar", "Click aqui para eliminar tutor"), buttonActHandler);
+                "jcbEliminarTutor", new RichTooltip("Eliminar", "Click aqui para eliminar tutor(es)"), buttonActHandler);
 
         JRibbonBand jrbTutoresBand = new JRibbonBand("Tutores", getResizableIconFromResource("/resources/images/tutores.png"));
         jrbTutoresBand.addCommandButton(jcbVerTutores, RibbonElementPriority.TOP);
@@ -222,7 +223,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 "jcbEditarEstudiante", new RichTooltip("Editar", "Click aqui para editar estudiante"), buttonActHandler);
 
         jcbEliminarEstudiante = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
-                "jcbEliminarEstudiante", new RichTooltip("Eliminar", "Click aqui para eliminar estudiante"), buttonActHandler);
+                "jcbEliminarEstudiante", new RichTooltip("Eliminar", "Click aqui para eliminar estudiante(s)"), buttonActHandler);
 
         // creando la banda
         JRibbonBand jrbEstudiantesBand = new JRibbonBand("Estudiantes", getResizableIconFromResource("/resources/images/estudiantes.png"));
@@ -246,7 +247,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 "jcbEditarReferimiento", new RichTooltip("Editar", "Click aqui para editar referimiento"), buttonActHandler);
 
         jcbEliminarReferimiento = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
-                "jcbEliminarReferimiento", new RichTooltip("Eliminar", "Click aqui para eliminar referimiento"), buttonActHandler);
+                "jcbEliminarReferimiento", new RichTooltip("Eliminar", "Click aqui para eliminar referimiento(s)"), buttonActHandler);
 
         // creando la banda
         JRibbonBand jrbReferimientosBand = new JRibbonBand("Referimientos", getResizableIconFromResource("/resources/images/referimientos.png"));
@@ -260,7 +261,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         // on pruebas psicologicas band
 
-        JCommandButton jcbVerPruebasPsicologicas, jcbRegistrarPruebaPsicologica, jcbEditarPruebaPsicologica, jcbEliminarPruebaPsicologica;
+        JCommandButton jcbVerPruebasPsicologicas, jcbRegistrarPruebaPsicologica, jcbEditarPruebaPsicologica, jcbEliminarPruebaPsicologica, jcbCorregirPruebaPsicologica;
 
         jcbVerPruebasPsicologicas = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/pruebas_psicologicas.png"),
                 "jcbVerPruebasPsicologicas", new RichTooltip("Ver", "Click aqui para ver las pruebas psicologicas"), buttonActHandler);
@@ -272,7 +273,10 @@ public class PsychSysDesktop extends JRibbonFrame {
                 "jcbEditarPruebaPsicologica", new RichTooltip("Editar", "Click aqui para editar prueba psicologica"), buttonActHandler);
 
         jcbEliminarPruebaPsicologica = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
-                "jcbEliminarPruebaPsicologica", new RichTooltip("Eliminar", "Click aqui para eliminar prueba psicologica"), buttonActHandler);
+                "jcbEliminarPruebaPsicologica", new RichTooltip("Eliminar", "Click aqui para eliminar prueba(s) psicologica"), buttonActHandler);
+        
+        jcbCorregirPruebaPsicologica = createJCommandButton("Corregir", getResizableIconFromResource("/resources/images/corregir.png"),
+                "jcbCorregirPruebaPsicologica", new RichTooltip("Corregir", "Click aqui para corregir prueba(s) psicologica"), buttonActHandler);
 
         // creando la banda
         JRibbonBand jrbPruebasPsicologicasBand = new JRibbonBand("Pruebas Psicologicas", getResizableIconFromResource("/resources/images/pruebas_psicologicas.png"));
@@ -280,17 +284,82 @@ public class PsychSysDesktop extends JRibbonFrame {
         jrbPruebasPsicologicasBand.addCommandButton(jcbRegistrarPruebaPsicologica, RibbonElementPriority.MEDIUM);
         jrbPruebasPsicologicasBand.addCommandButton(jcbEditarPruebaPsicologica, RibbonElementPriority.MEDIUM);
         jrbPruebasPsicologicasBand.addCommandButton(jcbEliminarPruebaPsicologica, RibbonElementPriority.MEDIUM);
+        jrbPruebasPsicologicasBand.addCommandButton(jcbCorregirPruebaPsicologica, RibbonElementPriority.MEDIUM);
 
-        jrbPruebasPsicologicasBand.setResizePolicies(getRibbonBandResizePolicy(jrbPruebasPsicologicasBand));
+        jrbPruebasPsicologicasBand.setResizePolicies((List) Arrays.asList(new Object[]{
+                    new CoreRibbonResizePolicies.None(jrbPruebasPsicologicasBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mirror(jrbPruebasPsicologicasBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mid2Low(jrbPruebasPsicologicasBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.High2Mid(jrbPruebasPsicologicasBand.getControlPanel()),
+                    new IconRibbonBandResizePolicy(jrbPruebasPsicologicasBand.getControlPanel())}));
 
+        /*
         // casos band
+        JCommandButton jcbVerCasos, jcbRegistrarCaso, jcbEditarCaso, jcbEliminarCaso;
 
+        jcbVerCasos = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/casos.png"),
+                "jcbVerCasos", new RichTooltip("Ver", "Click aqui para ver los casos"), buttonActHandler);
+
+        jcbRegistrarCaso = createJCommandButton("Nuevo", getResizableIconFromResource("/resources/images/add.png"),
+                "jcbRegistrarCaso", new RichTooltip("Nuevo", "Click aqui para registrar caso"), buttonActHandler);
+
+        jcbEditarCaso = createJCommandButton("Editar", getResizableIconFromResource("/resources/images/editar.png"),
+                "jcbEditarCaso", new RichTooltip("Editar", "Click aqui para editar caso"), buttonActHandler);
+
+        jcbEliminarCaso = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
+                "jcbEliminarCaso", new RichTooltip("Eliminar", "Click aqui para eliminar caso(s)"), buttonActHandler);
+
+        // creando la banda
+        JRibbonBand jrbCasosBand = new JRibbonBand("Casos", getResizableIconFromResource("/resources/images/casos.png"));
+        jrbReferimientosBand.addCommandButton(jcbVerCasos, RibbonElementPriority.TOP);
+        jrbReferimientosBand.addCommandButton(jcbRegistrarCaso, RibbonElementPriority.MEDIUM);
+        jrbReferimientosBand.addCommandButton(jcbEditarCaso, RibbonElementPriority.MEDIUM);
+        jrbReferimientosBand.addCommandButton(jcbEliminarCaso, RibbonElementPriority.MEDIUM);
+
+        jrbCasosBand.setResizePolicies(getRibbonBandResizePolicy(jrbCasosBand));
+        /*jrbCasosBand.setResizePolicies((List) Arrays.asList(new Object[] {
+                    new CoreRibbonResizePolicies.None(jrbCasosBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mirror(jrbCasosBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mid2Low(jrbCasosBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.High2Mid(jrbCasosBand.getControlPanel()),
+                    new IconRibbonBandResizePolicy(jrbCasosBand.getControlPanel())}));*/
+
+        /*
         // historia clinica band
+        JCommandButton jcbVerHistoriasClinica, jcbRegistrarHistoriaClinica, jcbEditarHistoriaClinica, jcbEliminarHistoriaClinica;
+
+        jcbVerHistoriasClinica = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/historia_clinica.png"),
+                "jcbVerReferimientos", new RichTooltip("Ver", "Click aqui para ver historias clinicas"), buttonActHandler);
+
+        jcbRegistrarHistoriaClinica = createJCommandButton("Nuevo", getResizableIconFromResource("/resources/images/add.png"),
+                "jcbRegistrarReferimiento", new RichTooltip("Nuevo", "Click aqui para registrar referimiento"), buttonActHandler);
+
+        jcbEditarHistoriaClinica = createJCommandButton("Editar", getResizableIconFromResource("/resources/images/editar.png"),
+                "jcbEditarReferimiento", new RichTooltip("Editar", "Click aqui para editar referimiento"), buttonActHandler);
+
+        jcbEliminarHistoriaClinica = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
+                "jcbEliminarReferimiento", new RichTooltip("Eliminar", "Click aqui para eliminar historia(s) clinica(s)"), buttonActHandler);
+
+        // creando la banda
+        JRibbonBand jrbHistoriaClinicaBand = new JRibbonBand("Historias Clinicas", getResizableIconFromResource("/resources/images/historia_clinica.png"));
+        jrbReferimientosBand.addCommandButton(jcbVerHistoriasClinica, RibbonElementPriority.TOP);
+        jrbReferimientosBand.addCommandButton(jcbRegistrarHistoriaClinica, RibbonElementPriority.MEDIUM);
+        jrbReferimientosBand.addCommandButton(jcbEditarHistoriaClinica, RibbonElementPriority.MEDIUM);
+        jrbReferimientosBand.addCommandButton(jcbEliminarHistoriaClinica, RibbonElementPriority.MEDIUM);
+
+        jrbHistoriaClinicaBand.setResizePolicies((List) Arrays.asList(new Object[]{
+                    new CoreRibbonResizePolicies.None(jrbHistoriaClinicaBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mirror(jrbHistoriaClinicaBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mid2Low(jrbHistoriaClinicaBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.High2Mid(jrbHistoriaClinicaBand.getControlPanel()),
+                    new IconRibbonBandResizePolicy(jrbHistoriaClinicaBand.getControlPanel())}));
+         
+         */
 
 
         // creando el la task
         RibbonTask rtMantenimientoTask = new RibbonTask("Mantenimiento", jrbTutoresBand, jrbEstudiantesBand,
-                jrbReferimientosBand, jrbPruebasPsicologicasBand);
+                jrbReferimientosBand, jrbPruebasPsicologicasBand/*, jrbCasosBand, jrbHistoriaClinicaBand*/);
 
         return rtMantenimientoTask;
     }
