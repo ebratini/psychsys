@@ -29,11 +29,26 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
+import org.salvador_dali.psychsys.model.entities.Estudiante;
+
 /**
  *
  * @author Edwin Bratini
  */
 public class ConfirmarEstudiante extends javax.swing.JDialog {
+
+    private Object entitySelectedId;
+    private List<Estudiante> estudiantes;/* = new ArrayList<Estudiante>() {
+        {
+            add((Estudiante) new JpaEstudianteDao().findById(1));
+            add((Estudiante) new JpaEstudianteDao().getEstudiantesByPrimerApellido("bratini").get(0));
+        }
+    };*/
 
     /** Creates new form ConfirmarEstudiante */
     public ConfirmarEstudiante(java.awt.Frame parent, boolean modal) {
@@ -52,16 +67,23 @@ public class ConfirmarEstudiante extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tblEstudiantes = new javax.swing.JTable();
+        btnSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Confirmar Estudiante");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Por favor confirme estudiante"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jScrollPane1.setAutoscrolls(true);
+
+        tblEstudiantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,9 +94,19 @@ public class ConfirmarEstudiante extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblEstudiantes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEstudiantesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblEstudiantes);
 
-        jButton1.setText("Confirmar");
+        btnSeleccionar.setText("Confirmar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,7 +116,7 @@ public class ConfirmarEstudiante extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -92,7 +124,7 @@ public class ConfirmarEstudiante extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                .addComponent(btnSeleccionar))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,6 +146,39 @@ public class ConfirmarEstudiante extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+        if (tblEstudiantes.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Primero seleccione registro", "Seleccion", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        entitySelectedId = tblEstudiantes.getValueAt(tblEstudiantes.getSelectedRow(), 0);
+        this.dispose();
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void tblEstudiantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstudiantesMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            btnSeleccionar.doClick();
+        }
+    }//GEN-LAST:event_tblEstudiantesMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        tblEstudiantes.setColumnModel(new DefaultTableColumnModel() {
+
+            @Override
+            public void moveColumn(int columnIndex, int newIndex) {
+                if (columnIndex == 0 || newIndex == 0) {
+                    return;
+                }
+                super.moveColumn(columnIndex, newIndex);
+            }
+        });
+
+        showDataOnJTable();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -158,10 +223,52 @@ public class ConfirmarEstudiante extends javax.swing.JDialog {
             }
         });
     }
+
+    public Object getEntitySelectedId() {
+        return entitySelectedId;
+    }
+
+    public void setEntitySelectedId(Object entitySelectedId) {
+        this.entitySelectedId = entitySelectedId;
+    }
+
+    public JTable getTblEstudiantes() {
+        return tblEstudiantes;
+    }
+
+    public void setTblEstudiantes(JTable tblEstudiantes) {
+        this.tblEstudiantes = tblEstudiantes;
+    }
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(List<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
+    }
+
+    private void showDataOnJTable() {
+        int i = 0;
+        Object[][] data = new Object[estudiantes.size()][];
+        Object[] row = new Object[4];
+        for (Estudiante est : estudiantes) {
+            row[0] = est.getEstId();
+            row[1] = est.toString();
+            row[2] = String.format("%d de %s", est.getEstGradoEscolar(), est.getEstNivelEscolar());
+            row[3] = String.format("%1$td-%1$tm-%1$tY", est.getEstFechaNacimiento());
+
+            data[i] = row;
+            i++;
+        }
+
+        tblEstudiantes.setModel(new DefaultTableModel(data, new Object[]{"Id", "Nombre Estudiante", "Curso", "Fecha Nacimiento"}));
+        tblEstudiantes.repaint();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSeleccionar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblEstudiantes;
     // End of variables declaration//GEN-END:variables
 }

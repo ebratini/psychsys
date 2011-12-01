@@ -607,7 +607,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbVerReferimientos")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarReferimiento")) {
-                RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.REGISTRO);
+                RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.REGISTRO, usuario);
                 rer.setLocationRelativeTo(PsychSysDesktop.this);
                 rer.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbEditarReferimiento")) {
