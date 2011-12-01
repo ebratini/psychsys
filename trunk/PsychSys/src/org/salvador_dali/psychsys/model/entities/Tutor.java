@@ -272,7 +272,15 @@ public class Tutor implements Serializable {
 
     @Override
     public String toString() {
-        return "org.salvador_dali.psychsys.model.entities.Tutor[ tutId=" + tutId + " ]";
+        String pa, sa, pn, sn;
+        
+        pa = getTutPrimerApellido();
+        sa = (getTutSegundoApellido() != null && !getTutSegundoApellido().isEmpty() ) ? String.format("%s.,", getTutSegundoApellido().charAt(0)) : "";
+        pn = getTutPrimerNombre();
+        sn = (getTutSegundoNombre() != null && !getTutSegundoNombre().isEmpty() ) ? String.format("%s.", getTutSegundoNombre().charAt(0)) : "";
+        
+        return String.format("%s %s %s %s", pa, sa, pn, sn);
+        //return "org.salvador_dali.psychsys.model.entities.Tutor[ tutId=" + tutId + " ]";
     }
     
 }

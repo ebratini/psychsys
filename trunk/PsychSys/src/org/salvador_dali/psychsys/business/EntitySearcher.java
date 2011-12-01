@@ -163,7 +163,7 @@ public abstract class EntitySearcher {
                 if (tutores != null && tutores.size() > 0) {
                     data = new Object[tutores.size()][];
                     for (Tutor tut : tutores) {
-                        data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), String.format("%s %s", tut.getTutPrimerNombre(), tut.getTutPrimerApellido())};
+                        data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
                         i++;
                     }
                 }
@@ -172,22 +172,20 @@ public abstract class EntitySearcher {
                     if (isIdFieldValid(value)) {
                         Tutor tutSearched = jpaTutDao.findById(Integer.parseInt(value));
                         if (tutSearched != null) {
-                            data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(),
-                                    String.format("%s %s", tutSearched.getTutPrimerNombre(), tutSearched.getTutPrimerApellido())}};
+                            data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(), tutSearched.toString()}};
                         }
                     }
                 } else if (fieldToSearch.equalsIgnoreCase("dni")) {
                     Tutor tutSearched = jpaTutDao.getTutorByDNI(value);
                     if (tutSearched != null) {
-                        data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(),
-                                String.format("%s %s", tutSearched.getTutPrimerNombre(), tutSearched.getTutPrimerApellido())}};
+                        data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(), tutSearched.toString()}};
                     }
                 } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
                     List<Tutor> tutores = (List<Tutor>) jpaTutDao.getTutoresByPrimerNombre(value);
                     if (tutores != null && tutores.size() > 0) {
                         data = new Object[tutores.size()][];
                         for (Tutor tut : tutores) {
-                            data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), String.format("%s %s", tut.getTutPrimerNombre(), tut.getTutPrimerApellido())};
+                            data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
                             i++;
                         }
                     }
@@ -196,7 +194,7 @@ public abstract class EntitySearcher {
                     if (tutores != null && tutores.size() > 0) {
                         data = new Object[tutores.size()][];
                         for (Tutor tut : tutores) {
-                            data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), String.format("%s %s", tut.getTutPrimerNombre(), tut.getTutPrimerApellido())};
+                            data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
                             i++;
                         }
                     }
@@ -251,7 +249,7 @@ public abstract class EntitySearcher {
                 if (estudiantes != null && estudiantes.size() > 0) {
                     data = new Object[estudiantes.size()][];
                     for (Estudiante est : estudiantes) {
-                        data[i] = new Object[]{est.getEstId(), est.getEstDni(), String.format("%s %s", est.getEstPrimerNombre(), est.getEstPrimerApellido())};
+                        data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
                         i++;
                     }
                 }
@@ -260,22 +258,20 @@ public abstract class EntitySearcher {
                     if (isIdFieldValid(value)) {
                         Estudiante estSearched = jpaEstDao.findById(Integer.parseInt(value));
                         if (estSearched != null) {
-                            data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(),
-                                    String.format("%s %s", estSearched.getEstPrimerNombre(), estSearched.getEstPrimerApellido())}};
+                            data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(), estSearched.toString()}};
                         }
                     }
                 } else if (fieldToSearch.equalsIgnoreCase("dni")) {
                     Estudiante estSearched = jpaEstDao.getEstudianteByDNI(value);
                     if (estSearched != null) {
-                        data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(),
-                                String.format("%s %s", estSearched.getEstPrimerNombre(), estSearched.getEstPrimerApellido())}};
+                        data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(), estSearched.toString()}};
                     }
                 } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
                     List<Estudiante> estudiantes = (List<Estudiante>) jpaEstDao.getEstudiantesByPrimerNombre(value);
                     if (estudiantes != null && estudiantes.size() > 0) {
                         data = new Object[estudiantes.size()][];
                         for (Estudiante est : estudiantes) {
-                            data[i] = new Object[]{est.getEstId(), est.getEstDni(), String.format("%s %s", est.getEstPrimerNombre(), est.getEstPrimerApellido())};
+                            data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
                             i++;
                         }
                     }
@@ -284,7 +280,7 @@ public abstract class EntitySearcher {
                     if (estudiantes != null && estudiantes.size() > 0) {
                         data = new Object[estudiantes.size()][];
                         for (Estudiante est : estudiantes) {
-                            data[i] = new Object[]{est.getEstId(), est.getEstDni(), String.format("%s %s", est.getEstPrimerNombre(), est.getEstPrimerApellido())};
+                            data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
                             i++;
                         }
                     }
