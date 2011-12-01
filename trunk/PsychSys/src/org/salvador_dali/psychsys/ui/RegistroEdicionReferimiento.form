@@ -89,7 +89,7 @@
                       <Group type="102" attributes="0">
                           <Component id="ftfAnioEscolar" min="-2" pref="129" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblAnioEscolarValMarker1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAnioEscolarValMarker" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="ftfFecha" min="-2" pref="129" max="-2" attributes="0"/>
@@ -110,7 +110,6 @@
                       <Component id="lblMotivoRefValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="lblReferidorValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="lblEstudianteValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblAnioEscolarValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -121,11 +120,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="lblAnioEscolarValMarker" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="lblEstudianteValMarker" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblEstudianteValMarker" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblFecha" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -136,7 +131,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblAnioEscolar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ftfAnioEscolar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblAnioEscolarValMarker1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAnioEscolarValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -223,6 +218,7 @@
             <Component class="javax.swing.JTextArea" name="txaMotivoReferimiento">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
             </Component>
@@ -238,6 +234,7 @@
             <Component class="javax.swing.JTextArea" name="txaAccionesRefeidor">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
             </Component>
@@ -255,8 +252,9 @@
               <Color blue="33" green="33" red="ff" type="rgb"/>
             </Property>
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="lblEstudiante"/>
+              <ComponentRef name="txtEstudiante"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
@@ -268,6 +266,7 @@
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="txaMotivoReferimiento"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
@@ -279,6 +278,7 @@
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="txtReferidor"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
@@ -287,17 +287,6 @@
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="####-####" subtype="-1" type="5"/>
             </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblAnioEscolarValMarker">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="ff" type="rgb"/>
-            </Property>
-            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="ftfAnioEscolar"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="ftfFecha">
@@ -320,13 +309,18 @@
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="ftfFecha"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblAnioEscolarValMarker1">
+        <Component class="javax.swing.JLabel" name="lblAnioEscolarValMarker">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="ff" type="rgb"/>
             </Property>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="ftfAnioEscolar"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="*"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -79,8 +79,8 @@ public class JpaEstudianteDao extends JpaDao implements EstudianteDao {
 
     @Override
     public List getEstudiantesByNombreCompleto(String primerNombre, String primerApellido) {
-        String strQuery = "SELECT e FROM Estudiante e WHERE lower(e.estPrimerNombre) = :primerNombre";
-        strQuery += " AND lower(e.estPrimerApellido) = :primerApellido";
+        String strQuery = "SELECT e FROM Estudiante e WHERE lower(e.estPrimerNombre) = lower(:primerNombre)";
+        strQuery += " AND lower(e.estPrimerApellido) = lower(:primerApellido)";
         
         Query q = entityManager.createQuery(strQuery);
         q.setParameter("primerNombre", primerNombre.toLowerCase());

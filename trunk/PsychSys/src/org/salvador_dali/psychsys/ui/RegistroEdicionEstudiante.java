@@ -62,8 +62,8 @@ import org.salvador_dali.psychsys.model.entities.TutorEstudiantePK;
  */
 public class RegistroEdicionEstudiante extends javax.swing.JFrame {
 
-    private RegistroEdicionModo modo = RegistroEdicionModo.EDICION;
-    private Estudiante estAEditar = new Estudiante(1);
+    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private Estudiante estAEditar;
     private Map<Integer, Tutor> tutores = new HashMap<Integer, Tutor>();
     private Map<Integer, TutorEstudiante> tutoresEstudiantes = new HashMap<Integer, TutorEstudiante>();
     private Map<Integer, String> tutEstOpAccion = new HashMap<Integer, String>();
@@ -72,7 +72,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
     public RegistroEdicionEstudiante() {
         initComponents();
 
-        
+
     }
 
     public RegistroEdicionEstudiante(RegistroEdicionModo modo) {
@@ -693,10 +693,10 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                 return false;
             }
         };
-        
+
         return dtm;
     }
-    
+
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -706,7 +706,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         // TODO add your handling code here:
         statusMessageLabel.setVisible(false);
         statusAnimationLabel.setVisible(false);
-        
+
         // customizando el jtable y evitando que puedan mover las columnas
         tblTutores.setColumnModel(new DefaultTableColumnModel() {
 
@@ -718,7 +718,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                 super.moveColumn(columnIndex, newIndex);
             }
         });
-        
+
         if (modo.equals(RegistroEdicionModo.REGISTRO)) {
             tblTutores.setModel(getDefTblModel());
         } else {
@@ -727,7 +727,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                 return;
             }
             List<TutorEstudiante> tutEsts = (List<TutorEstudiante>) new JpaTutorEstudianteDao().getTutorEstudianteByEstId(estAEditar.getEstId());
-                        
+
             // llenando el map y mostrando en jtable
             Object[][] data = new Object[tutEsts.size()][];
             int i = 0;
@@ -737,8 +737,8 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                     tutEst.getTesRelacionFamiliar()};
                 i++;
             }
-            
-            DefaultTableModel dtm = new DefaultTableModel(data, new Object[] {"Nombre Tutor", "Relacion Familiar"});
+
+            DefaultTableModel dtm = new DefaultTableModel(data, new Object[]{"Nombre Tutor", "Relacion Familiar"});
             tblTutores.setModel(dtm);
         }
     }//GEN-LAST:event_formWindowOpened
@@ -792,18 +792,39 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
 
         //crear el objeto estudianteDao e invocar el metodo persist del mismo     
         if (this.modo.equals(RegistroEdicionModo.REGISTRO)) {
-            estDao.persist(estudiante);
+            try {
+                estDao.persist(estudiante);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, String.format("<html><p>Error al crear registro de estudiante<br />%s</p></html>",
+                        e.getMessage()), "Registrar Estudiante", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             // asegurando el estudiante persistido para relacionarlo con sus tutores
-            List estudiantesCheck = estDao.getEstudiantesByNombreCompleto(txtPrimerNombre.getText(), txtPrimerApellido.getText());
+            List<Estudiante> estudiantesCheck = (List<Estudiante>) estDao.getEstudiantesByNombreCompleto(txtPrimerNombre.getText(), txtPrimerApellido.getText());
 
-            Estudiante estudianteConfirmado = null;
-            if (estudiantesCheck.size() > 1) {
-                ConfirmarEstudiante ce = new ConfirmarEstudiante(this, true);
+            Estudiante estudianteConfirmado = estudiantesCheck.get(estudiantesCheck.size() - 1);
+            //Estudiante estudianteConfirmado = null;
+            /*if (estudiantesCheck.size() > 1) {
+                estudianteConfirmado = estudiantesCheck.get(estudiantesCheck.size() - 1);
+                /*ConfirmarEstudiante ce = new ConfirmarEstudiante(this, true);
+                ce.setEstudiantes(estudiantesCheck);
+                
                 // conseguir estudiante confirmado
-                // estudianteConfirmado = ce.getEstudianteConfirmado();
+                ce.setLocationRelativeTo(this);
+                ce.setVisible(true);
+                
+                if (ce.getEntitySelectedId() != null) {
+                    estudianteConfirmado = estDao.findById(ce.getEntitySelectedId());
+                }
             } else {
                 estudianteConfirmado = (Estudiante) estudiantesCheck.get(0);
+            }*/
+            
+            if (estudianteConfirmado == null) {
+                JOptionPane.showMessageDialog(this, "<html><p>Error al crear registro de estudiante<br />El estudiante no esta confirmado</p></html>",
+                        "Registrar Estudiante", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
             // relacionando estudiante con tutores
@@ -811,7 +832,14 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                 TutorEstudiante tutEst = new TutorEstudiante(new TutorEstudiantePK(tutEntry.getValue().getTutId(), estudianteConfirmado.getEstId()));
                 tutEst.setTesRelacionFamiliar(tblTutores.getValueAt(tutEntry.getKey(), 1).toString());
                 estudiante.getTutorEstudianteCollection().add(tutEst);
-                new JpaTutorEstudianteDao().persist(tutEst);
+
+                try {
+                    new JpaTutorEstudianteDao().persist(tutEst);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, String.format("<html><p>Error al crear registro de estudiante<br />%s</p></html>",
+                            e.getMessage()), "Registrar Estudiante", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
         } else {
             // TODO: ver como implementar lo de tutores (adicion, remocion)
@@ -898,8 +926,8 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         brt.getLblEntidades().setText("Tutores");
         brt.setLocationRelativeTo(this);
         brt.setVisible(true);
-        
-        Object tutId = brt.getEntitySelectedId();        
+
+        Object tutId = brt.getEntitySelectedId();
         if (tutId != null) {
             Tutor tut = new JpaTutorDao().findById(tutId);
             if ((modo.equals(RegistroEdicionModo.REGISTRO) && tutores.containsValue(tut))
@@ -910,7 +938,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
             String relFamiliar = JOptionPane.showInputDialog(this, "Relacion Familiar", "Relacion Familiar Tutor-Estudiante", JOptionPane.QUESTION_MESSAGE);
             //Tutor tut = new JpaTutorDao().findById(tutId);
             DefaultTableModel dtm = (DefaultTableModel) tblTutores.getModel();
-            dtm.addRow(new Object[]{String.format("%s %s", tut.getTutPrimerNombre(), tut.getTutPrimerApellido()), relFamiliar});
+            dtm.addRow(new Object[]{tut.toString(), relFamiliar});
             //if (modo.equals(RegistroEdicionModo.REGISTRO)) {
             tutores.put((dtm.getRowCount() - 1), tut);
             //} else {
@@ -930,7 +958,6 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
             }
             tblTutores.setValueAt(nuevoRelFamiliar, rowEditing, 1);
         } else {
-            
         }
     }//GEN-LAST:event_mniEditarRelFamiliarActionPerformed
 

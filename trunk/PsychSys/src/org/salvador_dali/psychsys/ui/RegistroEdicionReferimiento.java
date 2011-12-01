@@ -32,14 +32,20 @@ package org.salvador_dali.psychsys.ui;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.HashMap;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import org.salvador_dali.psychsys.business.DateFieldValidator;
 import org.salvador_dali.psychsys.business.DateUtils;
+import org.salvador_dali.psychsys.business.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
+import org.salvador_dali.psychsys.business.FieldValidator;
+import org.salvador_dali.psychsys.business.FormFieldValidator;
 import org.salvador_dali.psychsys.business.JpaEstudianteDao;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
+import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
  *
@@ -49,6 +55,8 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private JpaEstudianteDao jpaEstDao = new JpaEstudianteDao();
+    private Estudiante estudianteReferemiento;
+    private Usuario usuario;
     private Referimiento refAEditar;
 
     /** Creates new form RegistroEdicionReferimiento */
@@ -59,6 +67,11 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
     public RegistroEdicionReferimiento(RegistroEdicionModo modo) {
         this();
         this.modo = modo;
+    }
+
+    public RegistroEdicionReferimiento(RegistroEdicionModo modo, Usuario usuario) {
+        this(modo);
+        this.usuario = usuario;
     }
 
     /** This method is called from within the constructor to
@@ -87,11 +100,10 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         lblMotivoRefValMarker = new javax.swing.JLabel();
         lblReferidorValMarker = new javax.swing.JLabel();
         ftfAnioEscolar = new javax.swing.JFormattedTextField();
-        lblAnioEscolarValMarker = new javax.swing.JLabel();
         ftfFecha = new javax.swing.JFormattedTextField();
         lblFecha = new javax.swing.JLabel();
         lblFechaValMarker = new javax.swing.JLabel();
-        lblAnioEscolarValMarker1 = new javax.swing.JLabel();
+        lblAnioEscolarValMarker = new javax.swing.JLabel();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -130,10 +142,12 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         lblMotivoReferimiento.setText("Motivo Referimiento");
 
         txaMotivoReferimiento.setColumns(20);
+        txaMotivoReferimiento.setLineWrap(true);
         txaMotivoReferimiento.setRows(5);
         jScrollPane1.setViewportView(txaMotivoReferimiento);
 
         txaAccionesRefeidor.setColumns(20);
+        txaAccionesRefeidor.setLineWrap(true);
         txaAccionesRefeidor.setRows(5);
         jScrollPane2.setViewportView(txaAccionesRefeidor);
 
@@ -141,15 +155,18 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         lblAccionesReferidor.setToolTipText("");
 
         lblEstudianteValMarker.setForeground(new java.awt.Color(255, 51, 51));
-        lblEstudianteValMarker.setLabelFor(lblEstudiante);
+        lblEstudianteValMarker.setLabelFor(txtEstudiante);
+        lblEstudianteValMarker.setText("*");
         lblEstudianteValMarker.setToolTipText("");
 
         lblMotivoRefValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblMotivoRefValMarker.setLabelFor(txaMotivoReferimiento);
+        lblMotivoRefValMarker.setText("*");
         lblMotivoRefValMarker.setToolTipText("");
 
         lblReferidorValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblReferidorValMarker.setLabelFor(txtReferidor);
+        lblReferidorValMarker.setText("*");
         lblReferidorValMarker.setToolTipText("");
 
         try {
@@ -157,10 +174,6 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        lblAnioEscolarValMarker.setForeground(new java.awt.Color(255, 51, 51));
-        lblAnioEscolarValMarker.setLabelFor(ftfAnioEscolar);
-        lblAnioEscolarValMarker.setToolTipText("");
 
         try {
             ftfFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
@@ -172,8 +185,11 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         lblFechaValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblFechaValMarker.setLabelFor(ftfFecha);
+        lblFechaValMarker.setText("*");
 
-        lblAnioEscolarValMarker1.setForeground(new java.awt.Color(255, 51, 51));
+        lblAnioEscolarValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblAnioEscolarValMarker.setLabelFor(ftfAnioEscolar);
+        lblAnioEscolarValMarker.setText("*");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,7 +209,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(ftfAnioEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAnioEscolarValMarker1))
+                        .addComponent(lblAnioEscolarValMarker))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,8 +225,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblMotivoRefValMarker)
                     .addComponent(lblReferidorValMarker)
-                    .addComponent(lblEstudianteValMarker)
-                    .addComponent(lblAnioEscolarValMarker))
+                    .addComponent(lblEstudianteValMarker))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -218,10 +233,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblAnioEscolarValMarker)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblEstudianteValMarker))
+                    .addComponent(lblEstudianteValMarker)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblFecha)
@@ -231,7 +243,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAnioEscolar)
                             .addComponent(ftfAnioEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAnioEscolarValMarker1))
+                            .addComponent(lblAnioEscolarValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)
@@ -361,20 +373,37 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
             new Thread(new LabelToolTipShower(statusMessageLabel, 3000)).start();
             return;
         }
-        
+
         // si todo esta bien
         statusMessageLabel.setVisible(false);
-        
-        // creando el objeto referimiento
-        Referimiento referimiento = new Referimiento(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txtReferidor.getText(), txaMotivoReferimiento.getText(), 'A');
-        referimiento.setRefAccionesReferidor((!txaAccionesRefeidor.getText().isEmpty() ? txaAccionesRefeidor.getText() : null));
-        
         JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
+        String accion = null;
         try {
-            jpaRefDao.persist(referimiento);
+            if (modo.equals(RegistroEdicionModo.REGISTRO)) {
+                // creando el objeto referimiento
+                accion = "crear";
+                Referimiento referimiento = new Referimiento(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txtReferidor.getText(),
+                        txaMotivoReferimiento.getText(), 'A');
+                referimiento.setEstudiante(estudianteReferemiento);
+                referimiento.setUsuario(getUsuario());
+                referimiento.setRefAccionesReferidor((!txaAccionesRefeidor.getText().isEmpty() ? txaAccionesRefeidor.getText() : null));
+
+                jpaRefDao.persist(referimiento);
+            } else {
+                accion = "editar";
+                refAEditar.setEstudiante(estudianteReferemiento);
+                refAEditar.setRefFecha(DateUtils.parseDate(ftfFecha.getText()));
+                refAEditar.setRefAnioEscolar(ftfAnioEscolar.getText());
+                refAEditar.setRefNombreReferidor(txtReferidor.getText());
+                refAEditar.setRefMotivo(txaMotivoReferimiento.getText());
+                refAEditar.setRefAccionesReferidor(txaAccionesRefeidor.getText());
+                
+                jpaRefDao.update(refAEditar);
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al crear registro de referimiento<br />%s</p></html>",
-                    e.getMessage()), "Registrar Referimiento", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de referimiento<br /><br />%s</p></html>",
+                    e.getMessage()), "Referimiento", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         statusMessageLabel.setText(trabajoCompletoMensaje);
@@ -394,11 +423,11 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         bre.getLblEntidades().setText("Estudiantes");
         bre.setLocationRelativeTo(this);
         bre.setVisible(true);
-        
-        Object estId = bre.getEntitySelectedId();        
+
+        Object estId = bre.getEntitySelectedId();
         if (estId != null) {
-            Estudiante estSelected = jpaEstDao.findById(estId);
-            txtEstudiante.setText(estSelected.toString());
+            estudianteReferemiento = jpaEstDao.findById(estId);
+            txtEstudiante.setText(estudianteReferemiento.toString());
         }
     }//GEN-LAST:event_btnBuscarEstudianteActionPerformed
 
@@ -454,30 +483,31 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         this.refAEditar = refAEditar;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     private boolean checkFormFields() {
         boolean validFields = true;
 
-        /*FieldValidator emptynessVal, phoneVal, emailVal;
+        FieldValidator emptynessVal, dateVal;
         emptynessVal = new EmptyFieldValidator();
-        phoneVal = new PhoneFieldValidator();
-        emailVal = new EmailFieldValidator();
+        dateVal = new DateFieldValidator();
         
         FieldValidator[] emptynessArr = new FieldValidator[]{emptynessVal};
         
         HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
-        campos.put(lblDniValMarker, emptynessArr);
-        campos.put(lblPrimerNombreValMarker, emptynessArr);
-        campos.put(lblPrimerApellidoValMarker, emptynessArr);
-        campos.put(lblSegApellidoValMarker, emptynessArr);
-        campos.put(lblNacionalidadValMarker, emptynessArr);
-        campos.put(lblTelValMarker, new FieldValidator[]{emptynessVal, phoneVal});
+        campos.put(lblFechaValMarker, new FieldValidator[]{emptynessVal, dateVal});
+        campos.put(lblAnioEscolarValMarker, emptynessArr);
+        campos.put(lblEstudianteValMarker, emptynessArr);
+        campos.put(lblReferidorValMarker, emptynessArr);
+        campos.put(lblMotivoRefValMarker, emptynessArr);
         
-        if (!((JTextComponent) lblEmailValMarker.getLabelFor()).getText().isEmpty()) {
-        campos.put(lblEmailValMarker, new FieldValidator[]{emailVal});
-        }
-        campos.put(lblDirValMarker, emptynessArr);
-        
-        validFields = FormFieldValidator.verifyFormFields(campos);*/
+        validFields = FormFieldValidator.verifyFormFields(campos);
 
         return validFields;
     }
@@ -493,7 +523,6 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
     private javax.swing.JLabel lblAccionesReferidor;
     private javax.swing.JLabel lblAnioEscolar;
     private javax.swing.JLabel lblAnioEscolarValMarker;
-    private javax.swing.JLabel lblAnioEscolarValMarker1;
     private javax.swing.JLabel lblEstudiante;
     private javax.swing.JLabel lblEstudianteValMarker;
     private javax.swing.JLabel lblFecha;
