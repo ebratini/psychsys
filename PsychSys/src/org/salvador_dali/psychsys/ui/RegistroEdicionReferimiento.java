@@ -31,8 +31,13 @@ package org.salvador_dali.psychsys.ui;
 
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+import org.salvador_dali.psychsys.business.DateUtils;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.JpaEstudianteDao;
+import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 
@@ -337,6 +342,10 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         statusMessageLabel.setVisible(false);
         statusAnimationLabel.setVisible(false);
         LimpiadorComponentes.limpiarValidationMarkers(this);
+        Date currDate = new Date();
+        ftfFecha.setText(String.format("%1$td%1$tm%1$tY", currDate));
+        Integer year = new Integer(String.format("%tY", currDate));
+        ftfAnioEscolar.setText(year.toString() + (year + 1));
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -352,45 +361,21 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
             new Thread(new LabelToolTipShower(statusMessageLabel, 3000)).start();
             return;
         }
-
+        
         // si todo esta bien
         statusMessageLabel.setVisible(false);
-
-        // crear o editar el objeto tutor
-        /*TutorDao tutDao = new JpaTutorDao();
-
-        if (tutDao.getTutorByDNI(txtDni.getText()) != null) {
-            lblDniValMarker.setVisible(true);
-            statusMessageLabel.setText("Ya existe un tutor con DNI digitado.");
-            statusMessageLabel.setForeground(Color.red);
-            statusMessageLabel.setVisible(true);
-            return;
+        
+        // creando el objeto referimiento
+        Referimiento referimiento = new Referimiento(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txtReferidor.getText(), txaMotivoReferimiento.getText(), 'A');
+        referimiento.setRefAccionesReferidor((!txaAccionesRefeidor.getText().isEmpty() ? txaAccionesRefeidor.getText() : null));
+        
+        JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
+        try {
+            jpaRefDao.persist(referimiento);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al crear registro de referimiento<br />%s</p></html>",
+                    e.getMessage()), "Registrar Referimiento", JOptionPane.INFORMATION_MESSAGE);
         }
-
-
-        Tutor tutor = new Tutor(txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
-                txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
-                cmbEstadoCivil.getSelectedItem().toString(), 'A');
-
-        tutor.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
-        tutor.setTutTelefono((!ftfTelefono.getText().isEmpty() ? ftfTelefono.getText().replaceAll("-", "") : null));
-        tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
-
-        // crear el objeto tutorDao e invocar el metodo persist del mismo     
-        if (this.modo.equals(RegistroEdicionModo.REGISTRO)) {
-            tutDao.persist(tutor);
-        } else {
-            if (tutorAEditar != null) {
-                tutor.setTutId(tutorAEditar.getTutId());
-                tutDao.update(tutor);
-                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
-
-            } else {
-                statusMessageLabel.setText("Error al editar tutor, favor cierre y vuelva a intentarlo.");
-                statusMessageLabel.setForeground(Color.red);
-                return;
-            }
-        }*/
 
         statusMessageLabel.setText(trabajoCompletoMensaje);
         statusMessageLabel.setForeground(Color.GREEN);
@@ -403,17 +388,17 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
     private void btnBuscarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEstudianteActionPerformed
         // TODO add your handling code here:
-        BusquedaRapida brt = new BusquedaRapida(this, true);
-        brt.setTitle("Buscar Estudiante");
-        brt.setEntitySearcher(new EntitySearcher.EstudianteEntitySearcher());
-        brt.getLblEntidades().setText("Estudiantes");
-        brt.setLocationRelativeTo(this);
-        brt.setVisible(true);
+        BusquedaRapida bre = new BusquedaRapida(this, true);
+        bre.setTitle("Buscar Estudiante");
+        bre.setEntitySearcher(new EntitySearcher.EstudianteEntitySearcher());
+        bre.getLblEntidades().setText("Estudiantes");
+        bre.setLocationRelativeTo(this);
+        bre.setVisible(true);
         
-        Object estId = brt.getEntitySelectedId();        
+        Object estId = bre.getEntitySelectedId();        
         if (estId != null) {
             Estudiante estSelected = jpaEstDao.findById(estId);
-            txtEstudiante.setText(estSelected.getEstPrimerNombre() + " " + estSelected.getEstPrimerApellido());
+            txtEstudiante.setText(estSelected.toString());
         }
     }//GEN-LAST:event_btnBuscarEstudianteActionPerformed
 

@@ -63,7 +63,8 @@ public class TimeDateShower extends Thread {
     
     @Override
     public void run() {
-        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, new Locale("es", "DO"));
+       DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.MEDIUM, new Locale("es", "DO"));
+        
         while (!stop) {
             label.setText(df.format(new Date()));
             try {

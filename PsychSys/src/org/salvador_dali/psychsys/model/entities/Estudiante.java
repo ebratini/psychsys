@@ -405,7 +405,15 @@ public class Estudiante implements Serializable {
 
     @Override
     public String toString() {
-        return "org.salvador_dali.psychsys.model.entities.Estudiante[ estId=" + estId + " ]";
+        String pa, sa, pn, sn;
+        
+        pa = getEstPrimerApellido();
+        sa = (getEstSegundoApellido() != null && !getEstSegundoApellido().isEmpty() ) ? String.format("%s.,", getEstSegundoApellido().charAt(0)) : "";
+        pn = getEstPrimerNombre();
+        sn = (getEstSegundoNombre() != null && !getEstSegundoNombre().isEmpty() ) ? String.format("%s.", getEstSegundoNombre().charAt(0)) : "";
+        
+        return String.format("%s %s %s %s", pa, sa, pn, sn);
+        //return "org.salvador_dali.psychsys.model.entities.Estudiante[ estId=" + estId + " ]";
     }
     
 }

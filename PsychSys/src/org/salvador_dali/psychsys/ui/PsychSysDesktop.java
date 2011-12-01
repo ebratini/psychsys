@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.ui;
 
 import org.salvador_dali.psychsys.model.entities.Usuario;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -56,7 +57,6 @@ import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 import org.pushingpixels.flamingo.api.ribbon.resize.RibbonBandResizePolicy;
 import org.pushingpixels.flamingo.internal.ui.common.JRichTooltipPanel;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
-import org.pushingpixels.flamingo.internal.ui.ribbon.JFlowBandControlPanel;
 
 /**
  *
@@ -113,6 +113,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void initBodyContent() {
         pnlBody = new JPanel();
         pnlBody.setBorder(new EtchedBorder());
+        pnlBody.setBackground(Color.WHITE);
         backGroundImagePnlBody.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/psych_head.png")));
         backGroundImagePnlBody.setBounds(pnlBody.getBounds());
         pnlBody.add(backGroundImagePnlBody);
@@ -235,7 +236,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         jrbEstudiantesBand.setResizePolicies(getRibbonBandResizePolicy(jrbEstudiantesBand));
 
         // on referimientos band
-        JCommandButton jcbVerReferimientos, jcbRegistrarReferimiento, jcbEditarReferimiento, jcbEliminarReferimiento;
+        JCommandButton jcbVerReferimientos, jcbRegistrarReferimiento, jcbEditarReferimiento, jcbEliminarReferimiento, jcbCrearObservacion;
 
         jcbVerReferimientos = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/referimientos.png"),
                 "jcbVerReferimientos", new RichTooltip("Ver", "Click aqui para ver los referimientos"), buttonActHandler);
@@ -249,12 +250,16 @@ public class PsychSysDesktop extends JRibbonFrame {
         jcbEliminarReferimiento = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
                 "jcbEliminarReferimiento", new RichTooltip("Eliminar", "Click aqui para eliminar referimiento(s)"), buttonActHandler);
 
+        jcbCrearObservacion = createJCommandButton("Crear Observacion", getResizableIconFromResource("/resources/images/referimientos.png"),
+                "jcbCrearObservacion", new RichTooltip("Crear Observacion", "Click aqui para crear observacion de referimiento"), buttonActHandler);
+        
         // creando la banda
         JRibbonBand jrbReferimientosBand = new JRibbonBand("Referimientos", getResizableIconFromResource("/resources/images/referimientos.png"));
         jrbReferimientosBand.addCommandButton(jcbVerReferimientos, RibbonElementPriority.TOP);
         jrbReferimientosBand.addCommandButton(jcbRegistrarReferimiento, RibbonElementPriority.MEDIUM);
         jrbReferimientosBand.addCommandButton(jcbEditarReferimiento, RibbonElementPriority.MEDIUM);
         jrbReferimientosBand.addCommandButton(jcbEliminarReferimiento, RibbonElementPriority.MEDIUM);
+        //jrbReferimientosBand.addCommandButton(jcbCrearObservacion, RibbonElementPriority.MEDIUM);
 
         jrbReferimientosBand.setResizePolicies(getRibbonBandResizePolicy(jrbReferimientosBand));
 
