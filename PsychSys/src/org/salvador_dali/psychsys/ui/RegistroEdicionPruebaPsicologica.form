@@ -95,7 +95,7 @@
                               <Component id="ftfFechaAplicacionPPS" min="-2" pref="117" max="-2" attributes="1"/>
                               <Component id="cmbNombrePrueba" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txtCaso" min="-2" pref="215" max="-2" attributes="1"/>
+                                  <Component id="txtCasoEstudianteReferencia" min="-2" pref="215" max="-2" attributes="1"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnBuscar" min="-2" pref="23" max="-2" attributes="0"/>
                               </Group>
@@ -142,7 +142,7 @@
                                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   <Component id="lblCaso" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txtCaso" min="-2" max="-2" attributes="1"/>
+                              <Component id="txtCasoEstudianteReferencia" min="-2" max="-2" attributes="1"/>
                               <Component id="btnBuscar" alignment="0" min="-2" pref="20" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -336,7 +336,10 @@
             <Property name="text" type="java.lang.String" value="Caso/Estudiante"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCaso">
+        <Component class="javax.swing.JTextField" name="txtCasoEstudianteReferencia">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>

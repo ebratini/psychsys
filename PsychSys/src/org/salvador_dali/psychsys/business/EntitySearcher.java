@@ -31,7 +31,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import org.salvador_dali.psychsys.model.JpaDao;
+import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 import org.salvador_dali.psychsys.model.entities.Tutor;
 
@@ -406,7 +408,7 @@ public abstract class EntitySearcher {
 
         {
             setJpDao(new JpaCasoDao());
-            setFieldsToSearch(new Object[]{"Id", "Fecha Referimiento", "Año Escolar", "Estudiante", "Referidor"}); // estudiante = 1er nombre + 1er apellido
+            setFieldsToSearch(new Object[]{"Id", "Fecha Caso", "Año Escolar", "Referimiento"}); // estudiante = 1er nombre + 1er apellido
             setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
             setTableCols(getFieldsToSearch());
             setDefTableModel(new DefaultTableModel(new Object[][]{}, getTableCols()) {
@@ -420,16 +422,81 @@ public abstract class EntitySearcher {
 
         @Override
         public TableModel doSearch(String fieldToSearch, String value) {
-            throw new UnsupportedOperationException("Not supported yet.");
+            JpaCasoDao jpaCasoDao = (JpaCasoDao) getJpDao();
+            Object[][] data = null;
+            int i = 0;
+            if (value.equals("*")) {
+                List<Caso> casos = (List<Caso>) jpaCasoDao.retrieve();
+                if (casos != null && casos.size() > 0) {
+                    data = new Object[casos.size()][];
+                    for (Caso caso : casos) {
+                        data[i] = new Object[]{caso.getCsoId(), String.format("%1$td-%1$tm-%1$tY", caso.getCsoFecha()), caso.getCsoAnioEscolar(), caso.getReferimiento().toString()};
+                        i++;
+                    }
+                }
+            } else if (value.equalsIgnoreCase("id")) {
+                if (isIdFieldValid(value)) {
+                    Caso casoSearched = jpaCasoDao.findById(Integer.parseInt(value));
+                    if (casoSearched != null) {
+                        data = new Object[][]{new Object[]{casoSearched.getCsoId(), String.format("%1$td-%1$tm-%1$tY", casoSearched.getCsoFecha()), casoSearched.getCsoAnioEscolar(),
+                                casoSearched.getReferimiento().toString()}};
+                    }
+                }
+            } else if (value.equalsIgnoreCase("fecha caso")) {
+                if (new DateFieldValidator().validate(value)) {
+                    List<Caso> casos = (List<Caso>) jpaCasoDao.getCasosByFecha(DateUtils.parseDate(value));
+                    if (casos != null && casos.size() > 0) {
+                        data = new Object[casos.size()][];
+                        for (Caso caso : casos) {
+                            data[i] = new Object[]{caso.getCsoId(), String.format("%1$td-%1$tm-%1$tY", caso.getCsoFecha()), caso.getCsoAnioEscolar(),
+                                caso.getReferimiento().toString()};
+                            i++;
+                        }
+                    }
+                }
+            } else if (value.equalsIgnoreCase("año escolar")) {
+                List<Caso> casos = (List<Caso>) jpaCasoDao.getCasosByAnioEscolar(value);
+                if (casos != null && casos.size() > 0) {
+                    data = new Object[casos.size()][];
+                    for (Caso caso : casos) {
+                        data[i] = new Object[]{caso.getCsoId(), String.format("%1$td-%1$tm-%1$tY", caso.getCsoFecha()), caso.getCsoAnioEscolar(),
+                            caso.getReferimiento().toString()};
+                        i++;
+                    }
+                }
+            } else if (value.equalsIgnoreCase("referimiento")) {
+                String refId = value.split(" ")[0];
+                Referimiento ref = (Referimiento) new JpaReferimientoDao().findById(refId);
+
+                Caso caso = jpaCasoDao.getCasoByReferimiento(ref);
+                if (caso != null) {
+                    data = new Object[][]{new Object[]{caso.getCsoId(), String.format("%1$td-%1$tm-%1$tY", caso.getCsoFecha()), caso.getCsoAnioEscolar(), caso.getReferimiento().toString()}};
+                }
+            }
+
+            DefaultTableModel dtm = null;
+            if (data != null) {
+                dtm = new DefaultTableModel(data, getTableCols()) {
+
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        return false;
+                    }
+                };
+            }
+
+            return dtm;
         }
     }
 
     public static class HistoriaClinicaEntitySearcher extends EntitySearcher {
 
         {
-            Object[] fields = new Object[]{"Id", "Primer Nombre", "Primer Apellido"};
-            setDefComboBoxModel(new DefaultComboBoxModel(fields));
-            setDefTableModel(new DefaultTableModel(new Object[][]{}, fields) {
+            setJpDao(new JpaHistoriaClinicaDao());
+            setFieldsToSearch(new Object[]{"Id", "Fecha Creacion", "Estudiante"}); // estudiante = 1er nombre + 1er apellido
+            setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
+            setTableCols(getFieldsToSearch());
+            setDefTableModel(new DefaultTableModel(new Object[][]{}, getTableCols()) {
 
                 @Override
                 public boolean isCellEditable(int rowIndex, int mColIndex) {
@@ -440,7 +507,58 @@ public abstract class EntitySearcher {
 
         @Override
         public TableModel doSearch(String fieldToSearch, String value) {
-            throw new UnsupportedOperationException("Not supported yet.");
+            JpaHistoriaClinicaDao jpaHicDao = (JpaHistoriaClinicaDao) getJpDao();
+            Object[][] data = null;
+            int i = 0;
+            if (value.equals("*")) {
+                List<HistoriaClinica> hics = (List<HistoriaClinica>) jpaHicDao.retrieve();
+                if (hics != null && hics.size() > 0) {
+                    data = new Object[hics.size()][];
+                    for (HistoriaClinica hic : hics) {
+                        data[i] = new Object[]{hic.getHicId(), String.format("%1$td-%1$tm-%1$tY", hic.getHicFechaCreacion()), hic.getEstudiante().toString()};
+                        i++;
+                    }
+                }
+            } else if (value.equalsIgnoreCase("id")) {
+                if (isIdFieldValid(value)) {
+                    HistoriaClinica hicSearched = jpaHicDao.findById(Integer.parseInt(value));
+                    if (hicSearched != null) {
+                        data = new Object[][]{new Object[]{hicSearched.getHicId(), String.format("%1$td-%1$tm-%1$tY", hicSearched.getHicFechaCreacion()), hicSearched.getEstudiante().toString()}};
+                    }
+                }
+            } else if (value.equalsIgnoreCase("fecha creacion")) {
+                if (new DateFieldValidator().validate(value)) {
+                    List<HistoriaClinica> hics = (List<HistoriaClinica>) jpaHicDao.retrieve();
+                    if (hics != null && hics.size() > 0) {
+                        data = new Object[hics.size()][];
+                        for (HistoriaClinica hic : hics) {
+                            data[i] = new Object[]{hic.getHicId(), String.format("%1$td-%1$tm-%1$tY", hic.getHicFechaCreacion()), hic.getEstudiante().toString()};
+                            i++;
+                        }
+                    }
+                }
+            } else if (value.equalsIgnoreCase("estudiante")) {
+                String[] arrNombreEstudiante = value.trim().split(" ");
+                Estudiante est = (Estudiante) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
+
+                HistoriaClinica hic = jpaHicDao.getHistoriaClinicaByEstudiante(est);
+                if (hic != null) {
+                    data = new Object[][]{new Object[]{hic.getHicId(), String.format("%1$td-%1$tm-%1$tY", hic.getHicFechaCreacion()), hic.getEstudiante().toString()}};
+                }
+            }
+
+            DefaultTableModel dtm = null;
+            if (data != null) {
+                dtm = new DefaultTableModel(data, getTableCols()) {
+
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        return false;
+                    }
+                };
+            }
+
+            return dtm;
         }
     }
 }

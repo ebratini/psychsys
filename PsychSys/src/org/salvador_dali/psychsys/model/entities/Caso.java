@@ -59,9 +59,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Caso.findByCsoDiagnosticoDefinitivo", query = "SELECT c FROM Caso c WHERE c.csoDiagnosticoDefinitivo = :csoDiagnosticoDefinitivo"),
     @NamedQuery(name = "Caso.findByCsoEstadoCaso", query = "SELECT c FROM Caso c WHERE c.csoEstadoCaso = :csoEstadoCaso")})
 public class Caso implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "cso_id")
     private Integer csoId;
@@ -246,7 +247,7 @@ public class Caso implements Serializable {
 
     @Override
     public String toString() {
-        return "org.salvador_dali.psychsys.model.entities.Caso[ csoId=" + csoId + " ]";
+        return String.format("%d [%s]", getCsoId(), getReferimiento().getEstudiante().toString());
+        //return "org.salvador_dali.psychsys.model.entities.Caso[ csoId=" + csoId + " ]";
     }
-    
 }

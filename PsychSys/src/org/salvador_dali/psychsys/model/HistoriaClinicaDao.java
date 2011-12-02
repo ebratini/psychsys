@@ -26,6 +26,7 @@ package org.salvador_dali.psychsys.model;
 import java.util.Date;
 import java.util.List;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 
 /**
  *
@@ -33,7 +34,7 @@ import org.salvador_dali.psychsys.model.entities.Estudiante;
  */
 public interface HistoriaClinicaDao extends Dao {
 
-    public Estudiante getHistoriaClinicaByEstudiante(Estudiante estudiante);
+    public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante);
 
     public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
 
