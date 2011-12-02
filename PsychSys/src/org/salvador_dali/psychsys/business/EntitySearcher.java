@@ -32,6 +32,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.Referimiento;
 import org.salvador_dali.psychsys.model.entities.Tutor;
 
 /**
@@ -167,39 +168,38 @@ public abstract class EntitySearcher {
                         i++;
                     }
                 }
-            } else {
-                if (fieldToSearch.equalsIgnoreCase("id")) {
-                    if (isIdFieldValid(value)) {
-                        Tutor tutSearched = jpaTutDao.findById(Integer.parseInt(value));
-                        if (tutSearched != null) {
-                            data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(), tutSearched.toString()}};
-                        }
-                    }
-                } else if (fieldToSearch.equalsIgnoreCase("dni")) {
-                    Tutor tutSearched = jpaTutDao.getTutorByDNI(value);
+            } else if (fieldToSearch.equalsIgnoreCase("id")) {
+                if (isIdFieldValid(value)) {
+                    Tutor tutSearched = jpaTutDao.findById(Integer.parseInt(value));
                     if (tutSearched != null) {
                         data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(), tutSearched.toString()}};
                     }
-                } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
-                    List<Tutor> tutores = (List<Tutor>) jpaTutDao.getTutoresByPrimerNombre(value);
-                    if (tutores != null && tutores.size() > 0) {
-                        data = new Object[tutores.size()][];
-                        for (Tutor tut : tutores) {
-                            data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
-                            i++;
-                        }
+                }
+            } else if (fieldToSearch.equalsIgnoreCase("dni")) {
+                Tutor tutSearched = jpaTutDao.getTutorByDNI(value);
+                if (tutSearched != null) {
+                    data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(), tutSearched.toString()}};
+                }
+            } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
+                List<Tutor> tutores = (List<Tutor>) jpaTutDao.getTutoresByPrimerNombre(value);
+                if (tutores != null && tutores.size() > 0) {
+                    data = new Object[tutores.size()][];
+                    for (Tutor tut : tutores) {
+                        data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
+                        i++;
                     }
-                } else if (fieldToSearch.equalsIgnoreCase("primer apellido")) {
-                    List<Tutor> tutores = (List<Tutor>) jpaTutDao.getTutoresByPrimerApellido(value);
-                    if (tutores != null && tutores.size() > 0) {
-                        data = new Object[tutores.size()][];
-                        for (Tutor tut : tutores) {
-                            data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
-                            i++;
-                        }
+                }
+            } else if (fieldToSearch.equalsIgnoreCase("primer apellido")) {
+                List<Tutor> tutores = (List<Tutor>) jpaTutDao.getTutoresByPrimerApellido(value);
+                if (tutores != null && tutores.size() > 0) {
+                    data = new Object[tutores.size()][];
+                    for (Tutor tut : tutores) {
+                        data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
+                        i++;
                     }
                 }
             }
+
 
             DefaultTableModel dtm = null;
             if (data != null) {
@@ -253,41 +253,40 @@ public abstract class EntitySearcher {
                         i++;
                     }
                 }
-            } else {
-                if (fieldToSearch.equalsIgnoreCase("id")) {
-                    if (isIdFieldValid(value)) {
-                        Estudiante estSearched = jpaEstDao.findById(Integer.parseInt(value));
-                        if (estSearched != null) {
-                            data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(), estSearched.toString()}};
-                        }
-                    }
-                } else if (fieldToSearch.equalsIgnoreCase("dni")) {
-                    Estudiante estSearched = jpaEstDao.getEstudianteByDNI(value);
+            } else if (fieldToSearch.equalsIgnoreCase("id")) {
+                if (isIdFieldValid(value)) {
+                    Estudiante estSearched = jpaEstDao.findById(Integer.parseInt(value));
                     if (estSearched != null) {
                         data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(), estSearched.toString()}};
                     }
-                } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
-                    List<Estudiante> estudiantes = (List<Estudiante>) jpaEstDao.getEstudiantesByPrimerNombre(value);
-                    if (estudiantes != null && estudiantes.size() > 0) {
-                        data = new Object[estudiantes.size()][];
-                        for (Estudiante est : estudiantes) {
-                            data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
-                            i++;
-                        }
+                }
+            } else if (fieldToSearch.equalsIgnoreCase("dni")) {
+                Estudiante estSearched = jpaEstDao.getEstudianteByDNI(value);
+                if (estSearched != null) {
+                    data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(), estSearched.toString()}};
+                }
+            } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
+                List<Estudiante> estudiantes = (List<Estudiante>) jpaEstDao.getEstudiantesByPrimerNombre(value);
+                if (estudiantes != null && estudiantes.size() > 0) {
+                    data = new Object[estudiantes.size()][];
+                    for (Estudiante est : estudiantes) {
+                        data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
+                        i++;
                     }
-                } else if (fieldToSearch.equalsIgnoreCase("primer apellido")) {
-                    List<Estudiante> estudiantes = (List<Estudiante>) jpaEstDao.getEstudiantesByPrimerApellido(value);
-                    if (estudiantes != null && estudiantes.size() > 0) {
-                        data = new Object[estudiantes.size()][];
-                        for (Estudiante est : estudiantes) {
-                            data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
-                            i++;
-                        }
+                }
+            } else if (fieldToSearch.equalsIgnoreCase("primer apellido")) {
+                List<Estudiante> estudiantes = (List<Estudiante>) jpaEstDao.getEstudiantesByPrimerApellido(value);
+                if (estudiantes != null && estudiantes.size() > 0) {
+                    data = new Object[estudiantes.size()][];
+                    for (Estudiante est : estudiantes) {
+                        data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
+                        i++;
                     }
                 }
             }
 
             DefaultTableModel dtm = null;
+
             if (data != null) {
                 dtm = new DefaultTableModel(data, new Object[]{getFieldsToSearch()[0], getFieldsToSearch()[1], "Nombre Tutor"}) {
 
@@ -302,7 +301,108 @@ public abstract class EntitySearcher {
         }
     }
 
-    public class ReferimientoEntitySearcher extends EntitySearcher {
+    public static class ReferimientoEntitySearcher extends EntitySearcher {
+
+        {
+            setJpDao(new JpaReferimientoDao());
+            setFieldsToSearch(new Object[]{"Id", "Fecha Referimiento", "Año Escolar", "Estudiante", "Referidor"}); // estudiante = 1er nombre + 1er apellido
+            setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
+            setTableCols(getFieldsToSearch());
+            setDefTableModel(new DefaultTableModel(new Object[][]{}, getTableCols()) {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int mColIndex) {
+                    return false;
+                }
+            });
+        }
+
+        @Override
+        public TableModel doSearch(String fieldToSearch, String value) {
+            JpaReferimientoDao jpaRefDao = (JpaReferimientoDao) getJpDao();
+            Object[][] data = null;
+            int i = 0;
+            if (value.equals("*")) {
+                List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.retrieve();
+                if (referimientos != null && referimientos.size() > 0) {
+                    data = new Object[referimientos.size()][];
+                    for (Referimiento ref : referimientos) {
+                        data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
+                            ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
+                        i++;
+                    }
+                }
+            } else if (value.equalsIgnoreCase("id")) {
+                if (isIdFieldValid(value)) {
+                    Referimiento refSearched = jpaRefDao.findById(Integer.parseInt(value));
+                    if (refSearched != null) {
+                        data = new Object[][]{new Object[]{refSearched.getRefId(), String.format("%1$td-%1$tm-%1$tY", refSearched.getRefFecha()),
+                                refSearched.getRefAnioEscolar(), refSearched.getEstudiante().toString(), refSearched.getRefNombreReferidor()}};
+                    }
+                }
+            } else if (value.equalsIgnoreCase("fecha refermiento")) {
+                if (new DateFieldValidator().validate(value)) {
+                    List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByFecha(DateUtils.parseDate(value));
+                    if (referimientos != null && referimientos.size() > 0) {
+                        data = new Object[referimientos.size()][];
+                        for (Referimiento ref : referimientos) {
+                            data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
+                                ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
+                            i++;
+                        }
+                    }
+                }
+            } else if (value.equalsIgnoreCase("año escolar")) {
+                List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByAnioEscolar(value);
+                if (referimientos != null && referimientos.size() > 0) {
+                    data = new Object[referimientos.size()][];
+                    for (Referimiento ref : referimientos) {
+                        data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
+                            ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
+                        i++;
+                    }
+                }
+            } else if (value.equalsIgnoreCase("estudiante")) {
+                String[] arrNombreEstudiante = value.trim().split(" ");
+                Estudiante est = (Estudiante) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
+
+                List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByEstudiante(est);
+                if (referimientos != null && referimientos.size() > 0) {
+                    data = new Object[referimientos.size()][];
+                    for (Referimiento ref : referimientos) {
+                        data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
+                            ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
+                        i++;
+                    }
+                }
+            } else if (value.equalsIgnoreCase("referidor")) {
+                List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByReferidor(value);
+                if (referimientos != null && referimientos.size() > 0) {
+                    data = new Object[referimientos.size()][];
+                    for (Referimiento ref : referimientos) {
+                        data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
+                            ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
+                        i++;
+                    }
+                }
+            }
+
+            DefaultTableModel dtm = null;
+            if (data != null) {
+                dtm = new DefaultTableModel(data, getTableCols()) {
+
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                        return false;
+                    }
+                };
+            }
+
+            return dtm;
+        }
+    }
+
+    public static class CasoEntitySearcher extends EntitySearcher {
 
         {
             Object[] fields = new Object[]{"Id", "Primer Nombre", "Primer Apellido"};
@@ -322,27 +422,7 @@ public abstract class EntitySearcher {
         }
     }
 
-    public class CasoEntitySearcher extends EntitySearcher {
-
-        {
-            Object[] fields = new Object[]{"Id", "Primer Nombre", "Primer Apellido"};
-            setDefComboBoxModel(new DefaultComboBoxModel(fields));
-            setDefTableModel(new DefaultTableModel(new Object[][]{}, fields) {
-
-                @Override
-                public boolean isCellEditable(int rowIndex, int mColIndex) {
-                    return false;
-                }
-            });
-        }
-
-        @Override
-        public TableModel doSearch(String fieldToSearch, String value) {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-    }
-
-    public class HistoriaClinicaEntitySearcher extends EntitySearcher {
+    public static class HistoriaClinicaEntitySearcher extends EntitySearcher {
 
         {
             Object[] fields = new Object[]{"Id", "Primer Nombre", "Primer Apellido"};

@@ -89,7 +89,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         lblAnioEscolar = new javax.swing.JLabel();
         lblReferidor = new javax.swing.JLabel();
         txtReferidor = new javax.swing.JTextField();
-        btnBuscarEstudiante = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         lblMotivoReferimiento = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaMotivoReferimiento = new javax.swing.JTextArea();
@@ -131,11 +131,11 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         lblReferidor.setText("Referidor");
 
-        btnBuscarEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
-        btnBuscarEstudiante.setBorderPainted(false);
-        btnBuscarEstudiante.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarEstudianteActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -217,7 +217,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblMotivoRefValMarker)
@@ -243,7 +243,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                             .addComponent(lblAnioEscolarValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblEstudiante)
                                 .addComponent(txtEstudiante)))))
@@ -350,11 +350,15 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
         statusMessageLabel.setVisible(false);
         statusAnimationLabel.setVisible(false);
-        LimpiadorComponentes.limpiarValidationMarkers(this);
+        //LimpiadorComponentes.limpiarValidationMarkers(this);
         Date currDate = new Date();
         ftfFecha.setText(String.format("%1$td%1$tm%1$tY", currDate));
         Integer year = new Integer(String.format("%tY", currDate));
         ftfAnioEscolar.setText(year.toString() + (year + 1));
+
+        if (modo.equals(RegistroEdicionModo.EDICION)) {
+            btnBuscar.setEnabled(false);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -394,7 +398,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                 refAEditar.setRefNombreReferidor(txtReferidor.getText());
                 refAEditar.setRefMotivo(txaMotivoReferimiento.getText());
                 refAEditar.setRefAccionesReferidor(txaAccionesRefeidor.getText());
-                
+
                 jpaRefDao.update(refAEditar);
             }
         } catch (Exception e) {
@@ -412,7 +416,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         pc.stop();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void btnBuscarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEstudianteActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         BusquedaRapida bre = new BusquedaRapida(this, true);
         bre.setTitle("Buscar Estudiante");
@@ -426,7 +430,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
             estudianteReferemiento = jpaEstDao.findById(estId);
             txtEstudiante.setText(estudianteReferemiento.toString());
         }
-    }//GEN-LAST:event_btnBuscarEstudianteActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -494,23 +498,23 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         FieldValidator emptynessVal, dateVal;
         emptynessVal = new EmptyFieldValidator();
         dateVal = new DateFieldValidator();
-        
+
         FieldValidator[] emptynessArr = new FieldValidator[]{emptynessVal};
-        
+
         HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
         campos.put(lblFechaValMarker, new FieldValidator[]{emptynessVal, dateVal});
         campos.put(lblAnioEscolarValMarker, emptynessArr);
         campos.put(lblEstudianteValMarker, emptynessArr);
         campos.put(lblReferidorValMarker, emptynessArr);
         campos.put(lblMotivoRefValMarker, emptynessArr);
-        
+
         validFields = FormFieldValidator.verifyFormFields(campos);
 
         return validFields;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnBuscarEstudiante;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JFormattedTextField ftfAnioEscolar;
     private javax.swing.JFormattedTextField ftfFecha;

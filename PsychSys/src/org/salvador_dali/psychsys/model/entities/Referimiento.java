@@ -60,9 +60,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Referimiento.findByRefNombreReferidor", query = "SELECT r FROM Referimiento r WHERE r.refNombreReferidor = :refNombreReferidor"),
     @NamedQuery(name = "Referimiento.findByRefEstadoReferimiento", query = "SELECT r FROM Referimiento r WHERE r.refEstadoReferimiento = :refEstadoReferimiento")})
 public class Referimiento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ref_id")
     private Integer refId;
@@ -225,7 +226,7 @@ public class Referimiento implements Serializable {
 
     @Override
     public String toString() {
-        return "org.salvador_dali.psychsys.model.entities.Referimiento[ refId=" + refId + " ]";
+        return String.format("%d [%s]", getRefId(), getEstudiante().toString());
+        //return "org.salvador_dali.psychsys.model.entities.Referimiento[ refId=" + refId + " ]";
     }
-    
 }
