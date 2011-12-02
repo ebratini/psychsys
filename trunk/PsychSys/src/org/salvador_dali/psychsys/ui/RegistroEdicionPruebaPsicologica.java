@@ -30,9 +30,12 @@
 package org.salvador_dali.psychsys.ui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import org.salvador_dali.psychsys.business.DateFieldValidator;
 import org.salvador_dali.psychsys.business.EmptyFieldValidator;
@@ -141,6 +144,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         txaInterpretacionPrueba = new javax.swing.JTextArea();
         cmbCasoEstReferencia = new javax.swing.JComboBox();
+        txtOtroNombrePrueba = new javax.swing.JTextField();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -200,9 +204,19 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
         btnQuitar.setText("Quitar");
         btnQuitar.setEnabled(false);
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setEnabled(false);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         chkCorreccionAutomatica.setText("Correccion Automatica");
         chkCorreccionAutomatica.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -276,7 +290,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
         lblNombrePrueba.setText("Nombre Prueba");
 
-        cmbNombrePrueba.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bender", "DEI" }));
+        cmbNombrePrueba.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "VISC-R", "Blender", "DEH", "Familia", "Pata Negra", "KADER", "ABC", "Otro" }));
 
         lblResultados.setText("Resultados");
 
@@ -293,6 +307,9 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         jScrollPane4.setViewportView(txaInterpretacionPrueba);
 
         cmbCasoEstReferencia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Caso", "Estudiante" }));
+
+        txtOtroNombrePrueba.setEditable(false);
+        txtOtroNombrePrueba.setText("Otro nombre de prueba");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -315,14 +332,18 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                                     .addComponent(lblFechaAplicacionValMarker)
                                     .addComponent(lblCasoValMarker)))
                             .addComponent(ftfFechaAplicacionPPS, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtCasoEstudianteReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cmbCasoEstReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtOtroNombrePrueba))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(34, 34, 34)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -358,7 +379,8 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombrePrueba)
-                            .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtOtroNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblResultados)
@@ -585,6 +607,17 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chkCorreccionAutomaticaStateChanged
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        ((DefaultListModel) lstUbicacionPruebas.getModel()).removeAllElements();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        // TODO add your handling code here:
+        List selection = lstUbicacionPruebas.getSelectedValuesList();
+        selection.removeAll(selection);
+    }//GEN-LAST:event_btnQuitarActionPerformed
+
     private boolean checkFormFields() {
         boolean validFields = true;
         
@@ -673,5 +706,6 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
     private javax.swing.JTextArea txaInterpretacionPrueba;
     private javax.swing.JTextArea txaResultados;
     private javax.swing.JTextField txtCasoEstudianteReferencia;
+    private javax.swing.JTextField txtOtroNombrePrueba;
     // End of variables declaration//GEN-END:variables
 }

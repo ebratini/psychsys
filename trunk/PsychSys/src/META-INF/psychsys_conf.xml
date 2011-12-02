@@ -10,9 +10,19 @@
 
 <PsychSys>
     <InfoCentroEstudios>
-        <Nombre>Escuela Salvador Dali</Nombre>
-        <Slogan></Slogan>
-        <Telefono></Telefono>
-        <Direccion></Direccion>
+        <Nombre>Escuela Basica Salvador Dali</Nombre>
+        <Slogan>Fundada el 12 de Septiembre de 1983</Slogan>
+        <Telefono>8092372757</Telefono>
+        <Direccion>Calle 10 No. 97 del Ensanche Espaillat, Santo Domingo, Republica Dominicana</Direccion>
     </InfoCentroEstudios>
+    <Orientacion>
+        <PruebasPsicologicasComunes>
+            <Prueba  nombre = "" urlThumb = "" />
+            <Prueba  nombre = "" urlThumb = "" />
+            <Prueba  nombre = "" urlThumb = "" />
+            <Prueba  nombre = "" urlThumb = "" />
+            <Prueba  nombre = "" urlThumb = "" />
+            <Prueba  nombre = "" urlThumb = "" />
+        </PruebasPsicologicasComunes>
+    </Orientacion>
 </PsychSys>

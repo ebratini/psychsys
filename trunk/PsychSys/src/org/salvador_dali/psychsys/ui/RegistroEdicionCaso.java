@@ -42,6 +42,7 @@ import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
 import org.salvador_dali.psychsys.business.JpaCasoDao;
+import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 
@@ -641,7 +642,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         
         Object refId = brr.getEntitySelectedId();
         if (refId != null) {
-            referimientoCaso = jpaCasoDao.findById(refId);
+            referimientoCaso = new JpaReferimientoDao().findById(refId);
             txtReferimiento.setText(referimientoCaso.toString());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

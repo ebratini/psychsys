@@ -93,15 +93,21 @@
                                   </Group>
                               </Group>
                               <Component id="ftfFechaAplicacionPPS" min="-2" pref="117" max="-2" attributes="1"/>
-                              <Component id="cmbNombrePrueba" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="txtCasoEstudianteReferencia" min="-2" pref="215" max="-2" attributes="1"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnBuscar" min="-2" pref="23" max="-2" attributes="0"/>
                               </Group>
                               <Component id="cmbCasoEstReferencia" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="248" max="-2" attributes="1"/>
                               <Component id="jScrollPane4" min="-2" pref="248" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" attributes="1">
+                                      <Component id="cmbNombrePrueba" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtOtroNombrePrueba" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane1" alignment="0" min="-2" pref="248" max="-2" attributes="1"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="jPanel2" max="32767" attributes="0"/>
@@ -149,6 +155,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblNombrePrueba" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbNombrePrueba" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtOtroNombrePrueba" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -300,12 +307,18 @@
                 <Property name="text" type="java.lang.String" value="Quitar"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuitarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnLimpiar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Limpiar"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="chkCorreccionAutomatica">
               <Properties>
@@ -377,9 +390,15 @@
         <Component class="javax.swing.JComboBox" name="cmbNombrePrueba">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Bender"/>
-                <StringItem index="1" value="DEI"/>
+              <StringArray count="8">
+                <StringItem index="0" value="VISC-R"/>
+                <StringItem index="1" value="Blender"/>
+                <StringItem index="2" value="DEH"/>
+                <StringItem index="3" value="Familia"/>
+                <StringItem index="4" value="Pata Negra"/>
+                <StringItem index="5" value="KADER"/>
+                <StringItem index="6" value="ABC"/>
+                <StringItem index="7" value="Otro"/>
               </StringArray>
             </Property>
           </Properties>
@@ -434,6 +453,12 @@
                 <StringItem index="1" value="Estudiante"/>
               </StringArray>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtOtroNombrePrueba">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Otro nombre de prueba"/>
           </Properties>
         </Component>
       </SubComponents>
