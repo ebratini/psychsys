@@ -322,8 +322,8 @@ public class PsychSysDesktop extends JRibbonFrame {
         jrbReferimientosBand.addCommandButton(jcbEditarCaso, RibbonElementPriority.MEDIUM);
         jrbReferimientosBand.addCommandButton(jcbEliminarCaso, RibbonElementPriority.MEDIUM);
 
-        jrbCasosBand.setResizePolicies(getRibbonBandResizePolicy(jrbCasosBand));
-        /*jrbCasosBand.setResizePolicies((List) Arrays.asList(new Object[] {
+        //jrbCasosBand.setResizePolicies(getRibbonBandResizePolicy(jrbCasosBand));
+        jrbCasosBand.setResizePolicies((List) Arrays.asList(new Object[] {
                     new CoreRibbonResizePolicies.None(jrbCasosBand.getControlPanel()),
                     new CoreRibbonResizePolicies.Mirror(jrbCasosBand.getControlPanel()),
                     new CoreRibbonResizePolicies.Mid2Low(jrbCasosBand.getControlPanel()),
@@ -365,7 +365,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         // creando el la task
         RibbonTask rtMantenimientoTask = new RibbonTask("Mantenimiento", jrbTutoresBand, jrbEstudiantesBand,
-                jrbReferimientosBand, jrbPruebasPsicologicasBand/*, jrbCasosBand, jrbHistoriaClinicaBand*/);
+                jrbReferimientosBand, jrbPruebasPsicologicasBand /*,jrbCasosBand/*, jrbHistoriaClinicaBand*/);
 
         return rtMantenimientoTask;
     }

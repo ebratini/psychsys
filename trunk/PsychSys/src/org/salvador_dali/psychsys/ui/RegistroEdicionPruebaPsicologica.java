@@ -74,7 +74,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         ftfFechaAplicacion = new javax.swing.JFormattedTextField();
         lblCaso = new javax.swing.JLabel();
         txtCaso = new javax.swing.JTextField();
-        btnBuscarEstudiante = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         lblFechaAplicacionValMarker = new javax.swing.JLabel();
         lblCasoValMarker = new javax.swing.JLabel();
         lblNombrePrueba = new javax.swing.JLabel();
@@ -105,7 +105,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         pnlPreviewPrueba.setLayout(pnlPreviewPruebaLayout);
         pnlPreviewPruebaLayout.setHorizontalGroup(
             pnlPreviewPruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 384, Short.MAX_VALUE)
+            .addGap(0, 388, Short.MAX_VALUE)
         );
         pnlPreviewPruebaLayout.setVerticalGroup(
             pnlPreviewPruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +118,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +191,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
         lblCaso.setText("Caso/Estudiante");
 
-        btnBuscarEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
 
         lblFechaAplicacionValMarker.setForeground(new java.awt.Color(255, 51, 51));
 
@@ -242,7 +242,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -277,7 +277,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(lblCaso))
                             .addComponent(txtCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombrePrueba)
@@ -420,7 +420,7 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnBuscarEstudiante;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnQuitar;
