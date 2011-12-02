@@ -494,6 +494,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
         setApplicationIcon(getResizableIconFromResource("/resources/images/psych logo2 65x65.png"));
+        
         setPreferredSize(new Dimension(1100, 600));
         setLocationByPlatform(true);
         initJRibbon();
@@ -589,6 +590,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbEditarTutor")) {
                 RegistroEdicionTutor ret = new RegistroEdicionTutor(RegistroEdicionModo.EDICION);
                 ret.setTitle("Editar Tutor");
+                //ret.setTutorAEditar(tutor);
                 ret.setLocationRelativeTo(PsychSysDesktop.this);
                 ret.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarTutor")) {
@@ -615,6 +617,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbEditarReferimiento")) {
                 RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.EDICION);
                 rer.setTitle("Editar Referimiento");
+                //rer.setRefAEditar(referimiento);
                 rer.setLocationRelativeTo(PsychSysDesktop.this);
                 rer.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarReferimiento")) {
@@ -628,6 +631,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbEditarPruebaPsicologica")) {
                 RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.EDICION);
                 repp.setTitle("Editar Prueba Psicologica");
+                //repp.setPpsAEditar(pps);
                 repp.setLocationRelativeTo(PsychSysDesktop.this);
                 repp.setVisible(true);
             }

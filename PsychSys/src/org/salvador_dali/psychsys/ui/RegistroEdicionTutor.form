@@ -30,32 +30,32 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="488" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="511" max="-2" attributes="0"/>
               <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="statusPanel" alignment="0" max="32767" attributes="1"/>
+          <Component id="statusPanel" alignment="1" max="32767" attributes="1"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAceptar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="btnAceptar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Component id="statusPanel" min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -96,13 +96,13 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="pnlTutInfoContacto" alignment="0" min="0" pref="618" max="32767" attributes="1"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="pnlTutInfoContacto" alignment="0" max="32767" attributes="1"/>
                       <Component id="pnlTutInfoPersonal" alignment="0" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -111,9 +111,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="pnlTutInfoPersonal" min="-2" max="-2" attributes="1"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="pnlTutInfoContacto" min="-2" max="-2" attributes="1"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -140,22 +140,22 @@
                           <Component id="lblPrimerNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtPrimerApellido" max="32767" attributes="1"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtPrimerApellido" pref="201" max="32767" attributes="1"/>
                           <Component id="cmbTipoDni" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="txtDni" min="-2" pref="143" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblDniValMarker" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtPrimerNombre" alignment="0" pref="196" max="32767" attributes="1"/>
-                          <Component id="txtSegundoNombre" alignment="0" max="32767" attributes="1"/>
+                          <Component id="txtPrimerNombre" alignment="0" pref="201" max="32767" attributes="1"/>
+                          <Component id="txtSegundoNombre" alignment="0" pref="201" max="32767" attributes="1"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                               <Component id="lblPrimerNombreValMarker" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblGenero" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblEstadoCivil" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -171,7 +171,7 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblSegApellidoValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblSegApellidoValMarker" min="-2" max="-2" attributes="0"/>
                                           <Component id="lblNacionalidadValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -179,21 +179,47 @@
                                   <Component id="cmbEstadoCivil" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblPrimerApellidoValMarker" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblPrimerApellidoValMarker" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDniValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblTipoDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbTipoDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblPrimerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPrimerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPrimerNombreValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblSegundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSegundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblPrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPrimerApellidoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -216,35 +242,6 @@
                                   <Component id="cmbEstadoCivil" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDniValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblTipoDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbTipoDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblPrimerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtPrimerNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblPrimerNombreValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblSegundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtSegundoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblPrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPrimerApellidoValMarker" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -449,7 +446,6 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -457,25 +453,24 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="ftfTelefono" min="-2" pref="112" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblTelValMarker" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="429" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="txtEmail" max="32767" attributes="1"/>
-                                  <Component id="jScrollPane1" alignment="0" pref="365" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane1" alignment="0" min="-2" pref="365" max="-2" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblEmailValMarker" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblDirValMarker" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEmailValMarker" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="201" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -589,11 +584,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="statusPanelSeparator" alignment="0" pref="662" max="32767" attributes="0"/>
+              <Component id="statusPanelSeparator" alignment="0" pref="677" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="472" max="32767" attributes="0"/>
+                  <EmptySpace pref="487" max="32767" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
