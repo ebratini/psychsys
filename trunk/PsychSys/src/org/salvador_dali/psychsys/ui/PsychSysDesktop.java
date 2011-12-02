@@ -58,6 +58,7 @@ import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 import org.pushingpixels.flamingo.api.ribbon.resize.RibbonBandResizePolicy;
 import org.pushingpixels.flamingo.internal.ui.common.JRichTooltipPanel;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
+import psychsys.PsychSys;
 
 /**
  *
@@ -449,6 +450,13 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void initJRibbon() {
         RibbonApplicationMenu ram = new RibbonApplicationMenu();
         JRibbon jr = getRibbon();
+        jr.configureHelp(getResizableIconFromResource("/resources/images/help_icon.png"), new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(getRootPane(), "No Implementado Todavia");
+            }
+        });
         jr.addTask(getHomeTask());
         jr.addTask(getMantenimientoTask());
         jr.addTask(getReportesTask());
@@ -494,7 +502,6 @@ public class PsychSysDesktop extends JRibbonFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
         setApplicationIcon(getResizableIconFromResource("/resources/images/psych logo2 65x65.png"));
-        
         setPreferredSize(new Dimension(1100, 600));
         setLocationByPlatform(true);
         initJRibbon();
