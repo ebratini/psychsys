@@ -41,6 +41,7 @@ import org.salvador_dali.psychsys.business.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
+import org.salvador_dali.psychsys.business.JpaEstudianteDao;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
@@ -430,7 +431,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         Object estId = bre.getEntitySelectedId();
         if (estId != null) {
-            estudianteReferemiento = jpaRefDao.findById(estId);
+            estudianteReferemiento = new JpaEstudianteDao().findById(estId);
             txtEstudiante.setText(estudianteReferemiento.toString());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

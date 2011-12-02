@@ -29,7 +29,14 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.HashMap;
+import javax.swing.JLabel;
+import org.salvador_dali.psychsys.business.EmptyFieldValidator;
+import org.salvador_dali.psychsys.business.EntitySearcher;
+import org.salvador_dali.psychsys.business.FieldValidator;
+import org.salvador_dali.psychsys.business.FormFieldValidator;
 
 /**
  *
@@ -58,7 +65,7 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txaObservacion = new javax.swing.JTextArea();
         lblReferimientoValMarker = new javax.swing.JLabel();
-        btnBuscarEstudiante = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         statusPanel = new javax.swing.JPanel();
@@ -75,16 +82,25 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
 
         lblReferimiento.setText("Referimiento");
 
+        txtReferimiento.setEditable(false);
+
         lblObservacion.setText("Observacion");
 
         txaObservacion.setColumns(20);
+        txaObservacion.setLineWrap(true);
         txaObservacion.setRows(5);
         jScrollPane1.setViewportView(txaObservacion);
 
         lblReferimientoValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblReferimientoValMarker.setLabelFor(txtReferimiento);
+        lblReferimientoValMarker.setText("*");
 
-        btnBuscarEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,13 +115,10 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtReferimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                                .addComponent(lblReferimientoValMarker))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblReferimientoValMarker))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -114,11 +127,11 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblReferimientoValMarker)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnBuscarEstudiante, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                         .addComponent(txtReferimiento, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblReferimiento)))
+                        .addComponent(lblReferimiento))
+                    .addComponent(lblReferimientoValMarker))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -130,8 +143,18 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         statusMessageLabel.setForeground(new java.awt.Color(0, 153, 51));
         statusMessageLabel.setText("Observacion creada exitosamente.");
@@ -194,6 +217,116 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean checkFormFields() {
+        boolean validFields = true;
+        
+        FieldValidator[] emptynessArr = new FieldValidator[]{new EmptyFieldValidator()};
+        
+        HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
+        campos.put(lblReferimientoValMarker, emptynessArr);
+        
+        validFields = FormFieldValidator.verifyFormFields(campos);
+        
+        return validFields;
+    }
+    
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        // TODO: implementar correctamente el spinning progress bar
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        String trabajoCompletoMensaje = "Caso registrado exitosamente.";
+        pc.start();
+        LimpiadorComponentes.limpiarValidationMarkers(this);
+        if (!checkFormFields()) {
+            statusMessageLabel.setText("Por favor corriga los campos marcados.");
+            statusMessageLabel.setForeground(Color.red);
+            new Thread(new LabelToolTipShower(statusMessageLabel, 3000)).start();
+            return;
+        }
+        
+        /*if (txaJuicioClinico.getText().isEmpty()) {
+            statusMessageLabel.setText("El campo juicio clinico no puede estar vacio");
+            statusMessageLabel.setForeground(Color.red);
+            statusMessageLabel.setVisible(true);
+            lpnDetallesCaso.moveToFront(pnlJuicioClinico);
+            return;
+        }
+
+        // si todo esta bien
+        statusMessageLabel.setVisible(false);
+        String accion = null;
+        try {
+            if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+                // creando el objeto referimiento
+                accion = "crear";
+                Caso caso = new Caso(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txaJuicioClinico.getText(),
+                        (rbnSi.isSelected() ? 'S' : 'N'), cmbEstadoCaso.getSelectedItem().toString().charAt(0));
+                caso.setReferimiento(referimientoCaso);
+                caso.setCsoAnalisisResultadosPruebas((!txaAnalisisResPruebas.getText().isEmpty() ? txaAnalisisResPruebas.getText() : null));
+                caso.setCsoDiagnostico((!txaDiagnostico.getText().isEmpty() ? txaDiagnostico.getText() : null));
+                caso.setCsoTratamiento((!txaTratamiento.getText().isEmpty() ? txaTratamiento.getText() : null));
+                caso.setCsoResumenEvolucion((!txaResumenEvolucion.getText().isEmpty() ? txaResumenEvolucion.getText() : null));
+                caso.setCsoRecomendaciones((!txaRecomendaciones.getText().isEmpty() ? txaRecomendaciones.getText() : null));
+                
+                jpaCasoDao.persist(caso);
+            } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+                if (casoAEditar == null) {
+                    throw new Exception("El caso a editar no ha sido establecido");
+                }
+                accion = "editar";
+                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+                
+                casoAEditar.setCsoFecha(DateUtils.parseDate(ftfFecha.getText()));
+                casoAEditar.setCsoAnioEscolar(ftfAnioEscolar.getText());
+                casoAEditar.setCsoJuicioClinico(txaJuicioClinico.getText());
+                casoAEditar.setCsoDiagnosticoDefinitivo((rbnSi.isSelected() ? 'S' : 'N'));
+                casoAEditar.setCsoEstadoCaso(cmbEstadoCaso.getSelectedItem().toString().charAt(0));
+                
+                casoAEditar.setReferimiento(referimientoCaso);
+                casoAEditar.setCsoAnalisisResultadosPruebas((!txaAnalisisResPruebas.getText().isEmpty() ? txaAnalisisResPruebas.getText() : null));
+                casoAEditar.setCsoDiagnostico((!txaDiagnostico.getText().isEmpty() ? txaDiagnostico.getText() : null));
+                casoAEditar.setCsoTratamiento((!txaTratamiento.getText().isEmpty() ? txaTratamiento.getText() : null));
+                casoAEditar.setCsoResumenEvolucion((!txaResumenEvolucion.getText().isEmpty() ? txaResumenEvolucion.getText() : null));
+                casoAEditar.setCsoRecomendaciones((!txaRecomendaciones.getText().isEmpty() ? txaRecomendaciones.getText() : null));
+                
+                jpaCasoDao.update(casoAEditar);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de caso<br /><br />%s</p></html>",
+                    e.getMessage()), "Caso", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        statusMessageLabel.setText(trabajoCompletoMensaje);
+        statusMessageLabel.setForeground(Color.GREEN);
+        statusMessageLabel.setVisible(true);
+        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
+        LimpiadorComponentes.limpiarComponentes(this);
+        ftfFecha.requestFocusInWindow();
+        pc.stop();*/
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        BusquedaRapida brr = new BusquedaRapida(this, true);
+        brr.setTitle("Buscar Referimiento");
+        brr.setEntitySearcher(new EntitySearcher.ReferimientoEntitySearcher());
+        brr.getLblEntidades().setText("Referimientos");
+        brr.setLocationRelativeTo(this);
+        brr.setVisible(true);
+        
+        Object refId = brr.getEntitySelectedId();
+        if (refId != null) {
+            //referimientoCaso = new JpaReferimientoDao().findById(refId);
+            //txtReferimiento.setText(referimientoCaso.toString());
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,7 +364,7 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnBuscarEstudiante;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
