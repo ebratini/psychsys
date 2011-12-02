@@ -398,7 +398,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                                 .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                                 .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, Short.MAX_VALUE))))
                     .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         pnlInfoPersonalLayout.setVerticalGroup(
             pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -577,7 +577,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         pnlTutores.setLayout(pnlTutoresLayout);
         pnlTutoresLayout.setHorizontalGroup(
             pnlTutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
         );
         pnlTutoresLayout.setVerticalGroup(
             pnlTutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -860,6 +860,8 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         statusMessageLabel.setVisible(true);
         new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         LimpiadorComponentes.limpiarComponentes(this);
+        spnHermanos.setValue(0);
+        spnLugarEntreHermanos.setValue(0);
         tblTutores.setModel(getDefTblModel());
         tutores.clear();
         txtDni.requestFocusInWindow();

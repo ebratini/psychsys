@@ -156,18 +156,15 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         lblEstudianteValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblEstudianteValMarker.setLabelFor(txtEstudiante);
-        lblEstudianteValMarker.setText("*");
-        lblEstudianteValMarker.setToolTipText("");
+        lblEstudianteValMarker.setToolTipText(null);
 
         lblMotivoRefValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblMotivoRefValMarker.setLabelFor(txaMotivoReferimiento);
-        lblMotivoRefValMarker.setText("*");
-        lblMotivoRefValMarker.setToolTipText("");
+        lblMotivoRefValMarker.setToolTipText(null);
 
         lblReferidorValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblReferidorValMarker.setLabelFor(txtReferidor);
-        lblReferidorValMarker.setText("*");
-        lblReferidorValMarker.setToolTipText("");
+        lblReferidorValMarker.setToolTipText(null);
 
         try {
             ftfAnioEscolar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
@@ -185,11 +182,11 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         lblFechaValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblFechaValMarker.setLabelFor(ftfFecha);
-        lblFechaValMarker.setText("*");
+        lblFechaValMarker.setToolTipText(null);
 
         lblAnioEscolarValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblAnioEscolarValMarker.setLabelFor(ftfAnioEscolar);
-        lblAnioEscolarValMarker.setText("*");
+        lblAnioEscolarValMarker.setToolTipText(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -279,11 +276,11 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -322,7 +319,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                 .addContainerGap())
             .addComponent(statusPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(272, Short.MAX_VALUE)
+                .addContainerGap(266, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
