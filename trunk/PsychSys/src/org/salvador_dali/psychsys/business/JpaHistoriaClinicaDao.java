@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.business;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.HistoriaClinicaDao;
@@ -37,6 +38,14 @@ import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class JpaHistoriaClinicaDao extends JpaDao implements HistoriaClinicaDao {
+
+    public JpaHistoriaClinicaDao() {
+        super(HistoriaClinica.class);
+    }
+    
+    public JpaHistoriaClinicaDao(Class entityClass, Map properties) {
+        super(HistoriaClinica.class, properties);
+    }
 
     @Override
     public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante) {

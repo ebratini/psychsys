@@ -39,6 +39,7 @@ import org.salvador_dali.psychsys.business.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
+import org.salvador_dali.psychsys.business.JpaEstudianteDao;
 import org.salvador_dali.psychsys.business.JpaPruebaPsicologicaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
@@ -118,7 +119,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         pnlPreviewPrueba = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        lstUbicacionPruebas = new javax.swing.JList();
         btnAgregar = new javax.swing.JButton();
         btnQuitar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
@@ -186,28 +187,32 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Correccion de Prueba"));
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        lstUbicacionPruebas.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "c:\\program files\\psychsys\\pruebas\\prueba_11-11-2011.gif" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        lstUbicacionPruebas.setEnabled(false);
+        jScrollPane2.setViewportView(lstUbicacionPruebas);
 
         btnAgregar.setText("Agregar");
+        btnAgregar.setEnabled(false);
 
         btnQuitar.setText("Quitar");
+        btnQuitar.setEnabled(false);
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setEnabled(false);
 
-        chkCorreccionAutomatica.setSelected(true);
         chkCorreccionAutomatica.setText("Correccion Automatica");
-        chkCorreccionAutomatica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkCorreccionAutomaticaActionPerformed(evt);
+        chkCorreccionAutomatica.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                chkCorreccionAutomaticaStateChanged(evt);
             }
         });
 
         lblUbicacionPrueba.setText("Ubicacion Prueba");
+        lblUbicacionPrueba.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -442,10 +447,6 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCorreccionAutomaticaActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_chkCorreccionAutomaticaActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -561,11 +562,28 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
                 casoPPS = jpaPPSDao.findById(objId);
                 txtCasoEstudianteReferencia.setText(casoPPS.toString());
             } else {
-                estudiantePPS = jpaPPSDao.findById(objId);
+                estudiantePPS = new JpaEstudianteDao().findById(objId);
                 txtCasoEstudianteReferencia.setText(estudiantePPS.toString());
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void chkCorreccionAutomaticaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkCorreccionAutomaticaStateChanged
+        // TODO add your handling code here:
+        if (!chkCorreccionAutomatica.isSelected()) {
+            lblUbicacionPrueba.setEnabled(false);
+            lstUbicacionPruebas.setEnabled(false);
+            btnAgregar.setEnabled(false);
+            btnQuitar.setEnabled(false);
+            btnLimpiar.setEnabled(false);
+        } else if (chkCorreccionAutomatica.isSelected()){
+            lblUbicacionPrueba.setEnabled(true);
+            lstUbicacionPruebas.setEnabled(true);
+            btnAgregar.setEnabled(true);
+            btnQuitar.setEnabled(true);
+            btnLimpiar.setEnabled(true);
+        }
+    }//GEN-LAST:event_chkCorreccionAutomaticaStateChanged
 
     private boolean checkFormFields() {
         boolean validFields = true;
@@ -632,7 +650,6 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
     private javax.swing.JComboBox cmbCasoEstReferencia;
     private javax.swing.JComboBox cmbNombrePrueba;
     private javax.swing.JFormattedTextField ftfFechaAplicacionPPS;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -648,6 +665,7 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
     private javax.swing.JLabel lblNombrePrueba;
     private javax.swing.JLabel lblResultados;
     private javax.swing.JLabel lblUbicacionPrueba;
+    private javax.swing.JList lstUbicacionPruebas;
     private javax.swing.JPanel pnlPreviewPrueba;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;

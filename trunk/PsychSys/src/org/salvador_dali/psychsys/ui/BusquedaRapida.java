@@ -54,6 +54,7 @@ public class BusquedaRapida extends javax.swing.JDialog {
     public BusquedaRapida(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(btnBuscar);
     }
 
     public BusquedaRapida(EntitySearcher entitySearcher, Frame owner, boolean modal) {
