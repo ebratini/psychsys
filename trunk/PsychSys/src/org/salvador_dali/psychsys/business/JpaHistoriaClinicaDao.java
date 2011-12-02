@@ -30,6 +30,7 @@ import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.HistoriaClinicaDao;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 
 /**
  *
@@ -38,11 +39,11 @@ import org.salvador_dali.psychsys.model.entities.Estudiante;
 public class JpaHistoriaClinicaDao extends JpaDao implements HistoriaClinicaDao {
 
     @Override
-    public Estudiante getHistoriaClinicaByEstudiante(Estudiante estudiante) {
+    public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante) {
         try {
             Query q = entityManager.createQuery("SELECT hc FROM Caso hc WHERE hc.estudiante = :hicEstudiante");
             q.setParameter("hicEstudiante", estudiante);
-            return (Estudiante) q.getSingleResult();
+            return (HistoriaClinica) q.getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }

@@ -127,7 +127,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         lblFechaAplicacion = new javax.swing.JLabel();
         ftfFechaAplicacionPPS = new javax.swing.JFormattedTextField();
         lblCaso = new javax.swing.JLabel();
-        txtCaso = new javax.swing.JTextField();
+        txtCasoEstudianteReferencia = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         lblFechaAplicacionValMarker = new javax.swing.JLabel();
         lblCasoValMarker = new javax.swing.JLabel();
@@ -256,6 +256,8 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
         lblCaso.setText("Caso/Estudiante");
 
+        txtCasoEstudianteReferencia.setEditable(false);
+
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,7 +312,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                             .addComponent(ftfFechaAplicacionPPS, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCasoEstudianteReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cmbCasoEstReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -346,7 +348,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(lblCaso))
-                            .addComponent(txtCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCasoEstudianteReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -557,8 +559,10 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
         if (objId != null) {
             if (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso")) {
                 casoPPS = jpaPPSDao.findById(objId);
+                txtCasoEstudianteReferencia.setText(casoPPS.toString());
             } else {
                 estudiantePPS = jpaPPSDao.findById(objId);
+                txtCasoEstudianteReferencia.setText(estudiantePPS.toString());
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -650,6 +654,6 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
     private javax.swing.JPanel statusPanel;
     private javax.swing.JTextArea txaInterpretacionPrueba;
     private javax.swing.JTextArea txaResultados;
-    private javax.swing.JTextField txtCaso;
+    private javax.swing.JTextField txtCasoEstudianteReferencia;
     // End of variables declaration//GEN-END:variables
 }
