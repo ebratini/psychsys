@@ -41,7 +41,6 @@ import org.salvador_dali.psychsys.business.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
-import org.salvador_dali.psychsys.business.JpaEstudianteDao;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
@@ -53,8 +52,8 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  */
 public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
-    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
-    private JpaEstudianteDao jpaEstDao = new JpaEstudianteDao();
+    private RegistroEdicionModo modo;
+    private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
     private Estudiante estudianteReferemiento;
     private Usuario usuario;
     private Referimiento refAEditar;
@@ -356,7 +355,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         Integer year = new Integer(String.format("%tY", currDate));
         ftfAnioEscolar.setText(year.toString() + (year + 1));
 
-        if (modo.equals(RegistroEdicionModo.EDICION)) {
+        if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             btnBuscar.setEnabled(false);
         }
     }//GEN-LAST:event_formWindowOpened
@@ -377,10 +376,9 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
-        JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
         String accion = null;
         try {
-            if (modo.equals(RegistroEdicionModo.REGISTRO)) {
+            if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
                 // creando el objeto referimiento
                 accion = "crear";
                 Referimiento referimiento = new Referimiento(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txtReferidor.getText(),
@@ -390,8 +388,13 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                 referimiento.setRefAccionesReferidor((!txaAccionesRefeidor.getText().isEmpty() ? txaAccionesRefeidor.getText() : null));
 
                 jpaRefDao.persist(referimiento);
-            } else {
+            } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+                if (refAEditar == null) {
+                    throw new Exception("El caso a editar no ha sido establecido");
+                }
                 accion = "editar";
+                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+                
                 refAEditar.setEstudiante(estudianteReferemiento);
                 refAEditar.setRefFecha(DateUtils.parseDate(ftfFecha.getText()));
                 refAEditar.setRefAnioEscolar(ftfAnioEscolar.getText());
@@ -427,7 +430,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         Object estId = bre.getEntitySelectedId();
         if (estId != null) {
-            estudianteReferemiento = jpaEstDao.findById(estId);
+            estudianteReferemiento = jpaRefDao.findById(estId);
             txtEstudiante.setText(estudianteReferemiento.toString());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

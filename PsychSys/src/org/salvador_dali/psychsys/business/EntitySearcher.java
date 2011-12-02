@@ -405,9 +405,11 @@ public abstract class EntitySearcher {
     public static class CasoEntitySearcher extends EntitySearcher {
 
         {
-            Object[] fields = new Object[]{"Id", "Primer Nombre", "Primer Apellido"};
-            setDefComboBoxModel(new DefaultComboBoxModel(fields));
-            setDefTableModel(new DefaultTableModel(new Object[][]{}, fields) {
+            setJpDao(new JpaCasoDao());
+            setFieldsToSearch(new Object[]{"Id", "Fecha Referimiento", "Año Escolar", "Estudiante", "Referidor"}); // estudiante = 1er nombre + 1er apellido
+            setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
+            setTableCols(getFieldsToSearch());
+            setDefTableModel(new DefaultTableModel(new Object[][]{}, getTableCols()) {
 
                 @Override
                 public boolean isCellEditable(int rowIndex, int mColIndex) {

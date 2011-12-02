@@ -398,7 +398,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                                 .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                                 .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, Short.MAX_VALUE))))
                     .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         pnlInfoPersonalLayout.setVerticalGroup(
             pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -620,11 +620,11 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 594, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 602, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -658,7 +658,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(635, Short.MAX_VALUE)
+                .addContainerGap(643, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -719,9 +719,9 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
             }
         });
 
-        if (modo.equals(RegistroEdicionModo.REGISTRO)) {
+        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             tblTutores.setModel(getDefTblModel());
-        } else {
+        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)){
             if (estAEditar == null) {
                 JOptionPane.showMessageDialog(this, "El estudiante a editar no esta establecido", "Editar Estudiante", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -847,7 +847,6 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                 estudiante.setEstId(estAEditar.getEstId());
                 estDao.update(estudiante);
                 trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
-
             } else {
                 statusMessageLabel.setText("Error al editar estudiante, favor cierre y vuelva a intentarlo.");
                 statusMessageLabel.setForeground(Color.red);

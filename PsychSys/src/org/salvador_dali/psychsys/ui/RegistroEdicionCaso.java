@@ -51,7 +51,7 @@ import org.salvador_dali.psychsys.model.entities.Referimiento;
  */
 public class RegistroEdicionCaso extends javax.swing.JFrame {
     
-    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private RegistroEdicionModo modo;
     private JpaCasoDao jpaCasoDao = new JpaCasoDao();
     private Referimiento referimientoCaso;
     private Caso casoAEditar;
@@ -158,11 +158,11 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 251, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -272,7 +272,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
         );
 
-        pnlAnalisisResPruebas.setBounds(0, 0, 390, 250);
+        pnlAnalisisResPruebas.setBounds(0, 0, 394, 247);
         lpnDetallesCaso.add(pnlAnalisisResPruebas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         pnlJuicioClinico.setBorder(javax.swing.BorderFactory.createTitledBorder("Juicio Clinico"));
@@ -286,11 +286,11 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlJuicioClinico.setLayout(pnlJuicioClinicoLayout);
         pnlJuicioClinicoLayout.setHorizontalGroup(
             pnlJuicioClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
         );
         pnlJuicioClinicoLayout.setVerticalGroup(
             pnlJuicioClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
         );
 
         pnlJuicioClinico.setBounds(0, 0, 390, 250);
@@ -321,7 +321,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
                 .addComponent(rbnSi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rbnNo)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(278, Short.MAX_VALUE))
         );
         pnlDefinitivoLayout.setVerticalGroup(
             pnlDefinitivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,12 +335,12 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlDiagnosticoLayout.setHorizontalGroup(
             pnlDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlDefinitivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
         );
         pnlDiagnosticoLayout.setVerticalGroup(
             pnlDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDiagnosticoLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDefinitivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -360,11 +360,11 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlTratamiento.setLayout(pnlTratamientoLayout);
         pnlTratamientoLayout.setHorizontalGroup(
             pnlTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
         );
         pnlTratamientoLayout.setVerticalGroup(
             pnlTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
         );
 
         pnlTratamiento.setBounds(0, 0, 390, 250);
@@ -381,11 +381,11 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlResumenEvolucion.setLayout(pnlResumenEvolucionLayout);
         pnlResumenEvolucionLayout.setHorizontalGroup(
             pnlResumenEvolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
         );
         pnlResumenEvolucionLayout.setVerticalGroup(
             pnlResumenEvolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
         );
 
         pnlResumenEvolucion.setBounds(0, 0, 390, 250);
@@ -402,11 +402,11 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlRecomendaciones.setLayout(pnlRecomendacionesLayout);
         pnlRecomendacionesLayout.setHorizontalGroup(
             pnlRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
         );
         pnlRecomendacionesLayout.setVerticalGroup(
             pnlRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
         );
 
         pnlRecomendaciones.setBounds(0, 0, 390, 250);
@@ -459,7 +459,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
                         .addComponent(lblEstadoCaso)
                         .addGap(19, 19, 19)
                         .addComponent(cmbEstadoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
             .addComponent(pnlDetallesCaso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -553,7 +553,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         // TODO add your handling code here:
         // TODO: implementar correctamente el spinning progress bar
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
-        String trabajoCompletoMensaje = "Referimiento registrado exitosamente.";
+        String trabajoCompletoMensaje = "Caso registrado exitosamente.";
         pc.start();
         LimpiadorComponentes.limpiarValidationMarkers(this);
         if (!checkFormFields()) {
@@ -575,7 +575,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         statusMessageLabel.setVisible(false);
         String accion = null;
         try {
-            if (modo.equals(RegistroEdicionModo.REGISTRO)) {
+            if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
                 // creando el objeto referimiento
                 accion = "crear";
                 Caso caso = new Caso(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txaJuicioClinico.getText(),
@@ -588,8 +588,12 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
                 caso.setCsoRecomendaciones((!txaRecomendaciones.getText().isEmpty() ? txaRecomendaciones.getText() : null));
                 
                 jpaCasoDao.persist(caso);
-            } else {
+            } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+                if (casoAEditar == null) {
+                    throw new Exception("El caso a editar no ha sido establecido");
+                }
                 accion = "editar";
+                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
                 
                 casoAEditar.setCsoFecha(DateUtils.parseDate(ftfFecha.getText()));
                 casoAEditar.setCsoAnioEscolar(ftfAnioEscolar.getText());
@@ -651,7 +655,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         Integer year = new Integer(String.format("%tY", currDate));
         ftfAnioEscolar.setText(year.toString() + (year + 1));
         
-        if (modo.equals(RegistroEdicionModo.EDICION)) {
+        if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             btnBuscar.setEnabled(false);
         }
     }//GEN-LAST:event_formWindowOpened

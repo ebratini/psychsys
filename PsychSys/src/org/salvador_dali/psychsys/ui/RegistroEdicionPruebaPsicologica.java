@@ -29,7 +29,20 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.Date;
+import java.util.HashMap;
+import javax.swing.JLabel;
+import org.salvador_dali.psychsys.business.DateFieldValidator;
+import org.salvador_dali.psychsys.business.EmptyFieldValidator;
+import org.salvador_dali.psychsys.business.EntitySearcher;
+import org.salvador_dali.psychsys.business.FieldValidator;
+import org.salvador_dali.psychsys.business.FormFieldValidator;
+import org.salvador_dali.psychsys.business.JpaPruebaPsicologicaDao;
+import org.salvador_dali.psychsys.model.entities.Caso;
+import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
 
 /**
  *
@@ -38,6 +51,10 @@ import java.awt.Toolkit;
 public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo;
+    private JpaPruebaPsicologicaDao jpaPPSDao = new JpaPruebaPsicologicaDao();
+    private Caso casoPPS;
+    private Estudiante estudiantePPS;
+    private PruebaPsicologica ppsAEditar;
 
     /** Creates new form RegistroEdicionPruebaPsicologica */
     public RegistroEdicionPruebaPsicologica() {
@@ -46,6 +63,43 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
     public RegistroEdicionPruebaPsicologica(RegistroEdicionModo modo) {
         this();
+        this.modo = modo;
+    }
+
+    public RegistroEdicionPruebaPsicologica(RegistroEdicionModo modo, PruebaPsicologica ppsAEditar) {
+        this(modo);
+        this.ppsAEditar = ppsAEditar;
+    }
+
+    public Caso getCasoPPS() {
+        return casoPPS;
+    }
+
+    public void setCasoPPS(Caso casoPPS) {
+        this.casoPPS = casoPPS;
+    }
+
+    public Estudiante getEstudiantePPS() {
+        return estudiantePPS;
+    }
+
+    public void setEstudiantePPS(Estudiante estudiantePPS) {
+        this.estudiantePPS = estudiantePPS;
+    }
+
+    public PruebaPsicologica getPpsAEditar() {
+        return ppsAEditar;
+    }
+
+    public void setPpsAEditar(PruebaPsicologica ppsAEditar) {
+        this.ppsAEditar = ppsAEditar;
+    }
+
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
         this.modo = modo;
     }
 
@@ -71,7 +125,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         chkCorreccionAutomatica = new javax.swing.JCheckBox();
         lblUbicacionPrueba = new javax.swing.JLabel();
         lblFechaAplicacion = new javax.swing.JLabel();
-        ftfFechaAplicacion = new javax.swing.JFormattedTextField();
+        ftfFechaAplicacionPPS = new javax.swing.JFormattedTextField();
         lblCaso = new javax.swing.JLabel();
         txtCaso = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
@@ -85,7 +139,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         lblInterpretacionPrueba = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         txaInterpretacionPrueba = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox();
+        cmbCasoEstReferencia = new javax.swing.JComboBox();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -96,6 +150,11 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Prueba Psicologica");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -189,9 +248,20 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
         lblFechaAplicacion.setText("Fecha Aplicacion");
 
+        try {
+            ftfFechaAplicacionPPS.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         lblCaso.setText("Caso/Estudiante");
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/detalles.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         lblFechaAplicacionValMarker.setForeground(new java.awt.Color(255, 51, 51));
 
@@ -215,7 +285,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         txaInterpretacionPrueba.setRows(5);
         jScrollPane4.setViewportView(txaInterpretacionPrueba);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Caso", "Estudiante" }));
+        cmbCasoEstReferencia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Caso", "Estudiante" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -237,13 +307,13 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblFechaAplicacionValMarker)
                                     .addComponent(lblCasoValMarker)))
-                            .addComponent(ftfFechaAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ftfFechaAplicacionPPS, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbCasoEstReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
@@ -266,11 +336,11 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblFechaAplicacion)
                             .addComponent(lblFechaAplicacionValMarker)
-                            .addComponent(ftfFechaAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ftfFechaAplicacionPPS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCasoValMarker)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbCasoEstReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -305,11 +375,11 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 617, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 621, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -325,6 +395,11 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -339,7 +414,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(641, Short.MAX_VALUE)
+                .addContainerGap(645, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -374,6 +449,139 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        // TODO: implementar correctamente el spinning progress bar
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        String trabajoCompletoMensaje = "Caso registrado exitosamente.";
+        pc.start();
+        LimpiadorComponentes.limpiarValidationMarkers(this);
+        if (!checkFormFields()) {
+            statusMessageLabel.setText("Por favor corriga los campos marcados.");
+            statusMessageLabel.setForeground(Color.red);
+            new Thread(new LabelToolTipShower(statusMessageLabel, 3000)).start();
+            return;
+        }
+        
+        /*if (txaJuicioClinico.getText().isEmpty()) {
+            statusMessageLabel.setText("El campo juicio clinico no puede estar vacio");
+            statusMessageLabel.setForeground(Color.red);
+            statusMessageLabel.setVisible(true);
+            lpnDetallesCaso.moveToFront(pnlJuicioClinico);
+            return;
+        }
+
+        // si todo esta bien
+        statusMessageLabel.setVisible(false);
+        String accion = null;
+        try {
+            if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+                // creando el objeto referimiento
+                accion = "crear";
+                Caso caso = new Caso(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txaJuicioClinico.getText(),
+                        (rbnSi.isSelected() ? 'S' : 'N'), cmbEstadoCaso.getSelectedItem().toString().charAt(0));
+                caso.setReferimiento(referimientoCaso);
+                caso.setCsoAnalisisResultadosPruebas((!txaAnalisisResPruebas.getText().isEmpty() ? txaAnalisisResPruebas.getText() : null));
+                caso.setCsoDiagnostico((!txaDiagnostico.getText().isEmpty() ? txaDiagnostico.getText() : null));
+                caso.setCsoTratamiento((!txaTratamiento.getText().isEmpty() ? txaTratamiento.getText() : null));
+                caso.setCsoResumenEvolucion((!txaResumenEvolucion.getText().isEmpty() ? txaResumenEvolucion.getText() : null));
+                caso.setCsoRecomendaciones((!txaRecomendaciones.getText().isEmpty() ? txaRecomendaciones.getText() : null));
+                
+                jpaCasoDao.persist(caso);
+            } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+                if (casoAEditar == null) {
+                    throw new Exception("El caso a editar no ha sido establecido");
+                }
+                accion = "editar";
+                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+                
+                casoAEditar.setCsoFecha(DateUtils.parseDate(ftfFecha.getText()));
+                casoAEditar.setCsoAnioEscolar(ftfAnioEscolar.getText());
+                casoAEditar.setCsoJuicioClinico(txaJuicioClinico.getText());
+                casoAEditar.setCsoDiagnosticoDefinitivo((rbnSi.isSelected() ? 'S' : 'N'));
+                casoAEditar.setCsoEstadoCaso(cmbEstadoCaso.getSelectedItem().toString().charAt(0));
+                
+                casoAEditar.setReferimiento(referimientoCaso);
+                casoAEditar.setCsoAnalisisResultadosPruebas((!txaAnalisisResPruebas.getText().isEmpty() ? txaAnalisisResPruebas.getText() : null));
+                casoAEditar.setCsoDiagnostico((!txaDiagnostico.getText().isEmpty() ? txaDiagnostico.getText() : null));
+                casoAEditar.setCsoTratamiento((!txaTratamiento.getText().isEmpty() ? txaTratamiento.getText() : null));
+                casoAEditar.setCsoResumenEvolucion((!txaResumenEvolucion.getText().isEmpty() ? txaResumenEvolucion.getText() : null));
+                casoAEditar.setCsoRecomendaciones((!txaRecomendaciones.getText().isEmpty() ? txaRecomendaciones.getText() : null));
+                
+                jpaCasoDao.update(casoAEditar);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de caso<br /><br />%s</p></html>",
+                    e.getMessage()), "Caso", JOptionPane.ERROR_MESSAGE);
+            return;
+        }*/
+        
+        statusMessageLabel.setText(trabajoCompletoMensaje);
+        statusMessageLabel.setForeground(Color.GREEN);
+        statusMessageLabel.setVisible(true);
+        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
+        LimpiadorComponentes.limpiarComponentes(this);
+        ftfFechaAplicacionPPS.requestFocusInWindow();
+        pc.stop();
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        statusMessageLabel.setVisible(false);
+        statusAnimationLabel.setVisible(false);
+        Date currDate = new Date();
+        ftfFechaAplicacionPPS.setText(String.format("%1$td%1$tm%1$tY", currDate));
+        Integer year = new Integer(String.format("%tY", currDate));
+        ftfFechaAplicacionPPS.setText(year.toString() + (year + 1));
+        
+        if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            btnBuscar.setEnabled(false);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        BusquedaRapida br = new BusquedaRapida(this, true);
+        String title = (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso") ? "Buscar Caso" : "Buscar Estudiante");
+        String strEntidades = (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso") ? "Casos" : "Estudiantes");
+        EntitySearcher entitySearcher = (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso")
+                ? new EntitySearcher.CasoEntitySearcher() : new EntitySearcher.EstudianteEntitySearcher());
+        
+        br.setTitle(title);
+        br.setEntitySearcher(entitySearcher);
+        br.getLblEntidades().setText(strEntidades);
+        br.setLocationRelativeTo(this);
+        br.setVisible(true);
+        
+        Object objId = br.getEntitySelectedId();
+        if (objId != null) {
+            if (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso")) {
+                casoPPS = jpaPPSDao.findById(objId);
+            } else {
+                estudiantePPS = jpaPPSDao.findById(objId);
+            }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private boolean checkFormFields() {
+        boolean validFields = true;
+        
+        FieldValidator emptynessVal, dateVal;
+        emptynessVal = new EmptyFieldValidator();
+        dateVal = new DateFieldValidator();
+        
+        FieldValidator[] emptynessArr = new FieldValidator[]{emptynessVal};
+        
+        HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
+        //campos.put(lblFechaValMarker, new FieldValidator[]{emptynessVal, dateVal});
+        //campos.put(lblAnioEscolarValMarker, emptynessArr);
+        //campos.put(lblReferimientoValMarker, emptynessArr);
+        
+        validFields = FormFieldValidator.verifyFormFields(campos);
+        
+        return validFields;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -409,14 +617,6 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
             }
         });
     }
-
-    public RegistroEdicionModo getModo() {
-        return modo;
-    }
-
-    public void setModo(RegistroEdicionModo modo) {
-        this.modo = modo;
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAgregar;
@@ -425,9 +625,9 @@ private void chkCorreccionAutomaticaActionPerformed(java.awt.event.ActionEvent e
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnQuitar;
     private javax.swing.JCheckBox chkCorreccionAutomatica;
+    private javax.swing.JComboBox cmbCasoEstReferencia;
     private javax.swing.JComboBox cmbNombrePrueba;
-    private javax.swing.JFormattedTextField ftfFechaAplicacion;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JFormattedTextField ftfFechaAplicacionPPS;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
