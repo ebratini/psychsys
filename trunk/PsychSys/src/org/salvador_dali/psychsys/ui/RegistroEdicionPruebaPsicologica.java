@@ -52,7 +52,7 @@ import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
  */
 public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
-    private RegistroEdicionModo modo;
+    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private JpaPruebaPsicologicaDao jpaPPSDao = new JpaPruebaPsicologicaDao();
     private Caso casoPPS;
     private Estudiante estudiantePPS;
@@ -289,6 +289,11 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         lblNombrePrueba.setText("Nombre Prueba");
 
         cmbNombrePrueba.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "VISC-R", "Blender", "DEH", "Familia", "Pata Negra", "KADER", "ABC", "Otro" }));
+        cmbNombrePrueba.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbNombrePruebaItemStateChanged(evt);
+            }
+        });
 
         lblResultados.setText("Resultados");
 
@@ -307,6 +312,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         cmbCasoEstReferencia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Caso", "Estudiante" }));
 
         txtOtroNombrePrueba.setEditable(false);
+        txtOtroNombrePrueba.setForeground(new java.awt.Color(204, 204, 204));
         txtOtroNombrePrueba.setText("Otro nombre de prueba");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -615,6 +621,17 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         //List selection = lstUbicacionPruebas;
         //selection.removeAll(selection);
     }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void cmbNombrePruebaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNombrePruebaItemStateChanged
+        // TODO add your handling code here:
+        if (cmbNombrePrueba.getSelectedItem().toString().equalsIgnoreCase("Otro")) {
+            txtOtroNombrePrueba.setEditable(true);
+            txtOtroNombrePrueba.setForeground(Color.BLACK);
+        } else {
+            txtOtroNombrePrueba.setEditable(false);
+            txtOtroNombrePrueba.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_cmbNombrePruebaItemStateChanged
 
     private boolean checkFormFields() {
         boolean validFields = true;

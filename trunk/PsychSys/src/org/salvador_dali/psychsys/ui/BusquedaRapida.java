@@ -389,8 +389,6 @@ private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GE
             }
         });
     }
-
-    
     
     private void doSearch() {
         if (cmbCampoBuscar.getSelectedItem().toString().equalsIgnoreCase("id") && !txtBusqueda.getText().equals("*")) {
