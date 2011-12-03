@@ -30,6 +30,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class ImageUtil {
 
@@ -63,10 +65,36 @@ public class ImageUtil {
         BufferedImage bimg = null;
         try {
             bimg = ImageIO.read(new File(ref));
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         return bimg;
+    }
+    
+    public static void loadAndDisplayImage(String imagePath, JFrame frame) {
+        // Load the img
+        BufferedImage loadImg = ImageUtil.loadImage(imagePath);
+        frame.setBounds(0, 0, loadImg.getWidth(), loadImg.getHeight());
+        // Set the panel visible and add it to the frame
+        frame.setVisible(true);
+        // Get the surfaces Graphics object
+        Graphics2D g = (Graphics2D) frame.getRootPane().getGraphics();
+        // Now draw the image
+        g.drawImage(loadImg, null, 0, 0);
+    }
+    
+    public static void loadAndDisplayImage(String imagePath, JPanel panel) {
+        // Load the img
+        BufferedImage loadImg = ImageUtil.loadImage(imagePath);
+        
+        panel.setBounds(panel.getX(), panel.getY(), loadImg.getWidth(), loadImg.getHeight());
+        // Set the panel visible and add it to the frame
+        //panel.setVisible(true);
+        // Get the surfaces Graphics object
+        Graphics2D g = (Graphics2D) panel.getRootPane().getGraphics();
+        // Now draw the image
+        g.drawImage(loadImg, null, 0, 0);
     }
 
     /**
