@@ -30,11 +30,9 @@
 package org.salvador_dali.psychsys.ui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import org.salvador_dali.psychsys.business.DateFieldValidator;
@@ -169,7 +167,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         pnlPreviewPrueba.setLayout(pnlPreviewPruebaLayout);
         pnlPreviewPruebaLayout.setHorizontalGroup(
             pnlPreviewPruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGap(0, 392, Short.MAX_VALUE)
         );
         pnlPreviewPruebaLayout.setVerticalGroup(
             pnlPreviewPruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +180,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -614,8 +612,8 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
         // TODO add your handling code here:
-        List selection = lstUbicacionPruebas.getSelectedValuesList();
-        selection.removeAll(selection);
+        //List selection = lstUbicacionPruebas;
+        //selection.removeAll(selection);
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private boolean checkFormFields() {

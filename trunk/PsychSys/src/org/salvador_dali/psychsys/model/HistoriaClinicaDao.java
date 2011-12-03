@@ -35,7 +35,7 @@ import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 public interface HistoriaClinicaDao extends Dao {
 
     public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante);
-
+    
     public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
 
     public List getHistoriasClinicasByStatus(char status);
