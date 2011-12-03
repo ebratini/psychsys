@@ -505,7 +505,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         // TODO add your handling code here:
         // TODO: implementar correctamente el spinning progress bar
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
-        String trabajoCompletoMensaje = "Caso registrado exitosamente.";
+        String trabajoCompletoMensaje = "Prueba psicologica registrada exitosamente.";
         pc.start();
         LimpiadorComponentes.limpiarValidationMarkers(this);
         if (!checkFormFields()) {
@@ -556,15 +556,15 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                 
             } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
                 if (ppsAEditar == null) {
-                    throw new Exception("El caso a editar no ha sido establecido");
+                    throw new Exception("La prueba psicologica a editar no ha sido establecido");
                 }
                 accion = "editar";
-                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrada", "editada");
                 
                 
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de caso<br /><br />%s</p></html>",
+            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de prueba psicologica<br /><br />%s</p></html>",
                     e.getMessage()), "Prueba Psicologica", JOptionPane.ERROR_MESSAGE);
             return;
         }
