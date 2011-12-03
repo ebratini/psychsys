@@ -32,29 +32,35 @@ package org.salvador_dali.psychsys.ui;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.salvador_dali.psychsys.business.DateFieldValidator;
+import org.salvador_dali.psychsys.business.DateUtils;
 import org.salvador_dali.psychsys.business.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
 import org.salvador_dali.psychsys.business.JpaEstudianteDao;
 import org.salvador_dali.psychsys.business.JpaPruebaPsicologicaDao;
+import org.salvador_dali.psychsys.business.JpaUbicacionPruebaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
+import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
-
+    
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private JpaPruebaPsicologicaDao jpaPPSDao = new JpaPruebaPsicologicaDao();
     private Caso casoPPS;
@@ -65,45 +71,45 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
     public RegistroEdicionPruebaPsicologica() {
         initComponents();
     }
-
+    
     public RegistroEdicionPruebaPsicologica(RegistroEdicionModo modo) {
         this();
         this.modo = modo;
     }
-
+    
     public RegistroEdicionPruebaPsicologica(RegistroEdicionModo modo, PruebaPsicologica ppsAEditar) {
         this(modo);
         this.ppsAEditar = ppsAEditar;
     }
-
+    
     public Caso getCasoPPS() {
         return casoPPS;
     }
-
+    
     public void setCasoPPS(Caso casoPPS) {
         this.casoPPS = casoPPS;
     }
-
+    
     public Estudiante getEstudiantePPS() {
         return estudiantePPS;
     }
-
+    
     public void setEstudiantePPS(Estudiante estudiantePPS) {
         this.estudiantePPS = estudiantePPS;
     }
-
+    
     public PruebaPsicologica getPpsAEditar() {
         return ppsAEditar;
     }
-
+    
     public void setPpsAEditar(PruebaPsicologica ppsAEditar) {
         this.ppsAEditar = ppsAEditar;
     }
-
+    
     public RegistroEdicionModo getModo() {
         return modo;
     }
-
+    
     public void setModo(RegistroEdicionModo modo) {
         this.modo = modo;
     }
@@ -119,8 +125,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        pnlPreviewPrueba = new javax.swing.JPanel();
+        spnPreviewPrueba = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstUbicacionPruebas = new javax.swing.JList();
@@ -129,13 +134,14 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         chkCorreccionAutomatica = new javax.swing.JCheckBox();
         lblUbicacionPrueba = new javax.swing.JLabel();
+        lblUbicacionPruebaValMarker = new javax.swing.JLabel();
         lblFechaAplicacion = new javax.swing.JLabel();
         ftfFechaAplicacionPPS = new javax.swing.JFormattedTextField();
         lblCaso = new javax.swing.JLabel();
         txtCasoEstudianteReferencia = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         lblFechaAplicacionValMarker = new javax.swing.JLabel();
-        lblCasoValMarker = new javax.swing.JLabel();
+        lblCasoEstudianteValMarker = new javax.swing.JLabel();
         lblNombrePrueba = new javax.swing.JLabel();
         cmbNombrePrueba = new javax.swing.JComboBox();
         lblResultados = new javax.swing.JLabel();
@@ -146,6 +152,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         txaInterpretacionPrueba = new javax.swing.JTextArea();
         cmbCasoEstReferencia = new javax.swing.JComboBox();
         txtOtroNombrePrueba = new javax.swing.JTextField();
+        lblNombrePruebaValMarker = new javax.swing.JLabel();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -167,30 +174,15 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Preview"));
         jPanel2.setAutoscrolls(true);
 
-        pnlPreviewPrueba.setAutoscrolls(true);
-
-        javax.swing.GroupLayout pnlPreviewPruebaLayout = new javax.swing.GroupLayout(pnlPreviewPrueba);
-        pnlPreviewPrueba.setLayout(pnlPreviewPruebaLayout);
-        pnlPreviewPruebaLayout.setHorizontalGroup(
-            pnlPreviewPruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 392, Short.MAX_VALUE)
-        );
-        pnlPreviewPruebaLayout.setVerticalGroup(
-            pnlPreviewPruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 516, Short.MAX_VALUE)
-        );
-
-        jScrollPane3.setViewportView(pnlPreviewPrueba);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+            .addComponent(spnPreviewPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+            .addComponent(spnPreviewPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Correccion de Prueba"));
@@ -238,28 +230,33 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         lblUbicacionPrueba.setText("Ubicacion Prueba");
         lblUbicacionPrueba.setEnabled(false);
 
+        lblUbicacionPruebaValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblUbicacionPruebaValMarker.setLabelFor(txtCasoEstudianteReferencia);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(86, 86, 86)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnQuitar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnQuitar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chkCorreccionAutomatica)
-                            .addComponent(lblUbicacionPrueba))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblUbicacionPrueba)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
+                                .addComponent(lblUbicacionPruebaValMarker)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -267,7 +264,9 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(chkCorreccionAutomatica)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblUbicacionPrueba)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUbicacionPrueba)
+                    .addComponent(lblUbicacionPruebaValMarker))
                 .addGap(1, 1, 1)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,8 +296,10 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         });
 
         lblFechaAplicacionValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblFechaAplicacionValMarker.setLabelFor(ftfFechaAplicacionPPS);
 
-        lblCasoValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblCasoEstudianteValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblCasoEstudianteValMarker.setLabelFor(txtCasoEstudianteReferencia);
 
         lblNombrePrueba.setText("Nombre Prueba");
 
@@ -327,7 +328,10 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
         txtOtroNombrePrueba.setEditable(false);
         txtOtroNombrePrueba.setForeground(new java.awt.Color(204, 204, 204));
-        txtOtroNombrePrueba.setText("Otro nombre de prueba");
+        txtOtroNombrePrueba.setText("Otro nombre prueba");
+
+        lblNombrePruebaValMarker.setForeground(new java.awt.Color(255, 51, 51));
+        lblNombrePruebaValMarker.setLabelFor(ftfFechaAplicacionPPS);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -347,25 +351,28 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(252, 252, 252)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblFechaAplicacionValMarker)
-                                            .addComponent(lblCasoValMarker)))
-                                    .addComponent(ftfFechaAplicacionPPS, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtCasoEstudianteReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ftfFechaAplicacionPPS, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblFechaAplicacionValMarker))
                                     .addComponent(cmbCasoEstReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtOtroNombrePrueba))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtOtroNombrePrueba))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtCasoEstudianteReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(4, 4, 4)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblNombrePruebaValMarker)
+                                            .addComponent(lblCasoEstudianteValMarker)))))
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(34, 34, 34)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -374,31 +381,33 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblFechaAplicacion)
-                            .addComponent(lblFechaAplicacionValMarker)
-                            .addComponent(ftfFechaAplicacionPPS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCasoValMarker)
-                            .addComponent(cmbCasoEstReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblCaso))
-                            .addComponent(txtCasoEstudianteReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblFechaAplicacion)
+                                    .addComponent(ftfFechaAplicacionPPS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFechaAplicacionValMarker))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbCasoEstReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCasoEstudianteReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(lblCaso))
+                                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblCasoEstudianteValMarker))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombrePrueba)
                             .addComponent(cmbNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtOtroNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtOtroNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombrePruebaValMarker))
                         .addGap(6, 6, 6)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblResultados)
@@ -491,7 +500,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         // TODO: implementar correctamente el spinning progress bar
@@ -506,68 +515,70 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
             return;
         }
 
-        /*if (txaJuicioClinico.getText().isEmpty()) {
-        statusMessageLabel.setText("El campo juicio clinico no puede estar vacio");
-        statusMessageLabel.setForeground(Color.red);
-        statusMessageLabel.setVisible(true);
-        lpnDetallesCaso.moveToFront(pnlJuicioClinico);
-        return;
-        }
-        
         // si todo esta bien
         statusMessageLabel.setVisible(false);
         String accion = null;
         try {
-        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-        // creando el objeto referimiento
-        accion = "crear";
-        Caso caso = new Caso(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txaJuicioClinico.getText(),
-        (rbnSi.isSelected() ? 'S' : 'N'), cmbEstadoCaso.getSelectedItem().toString().charAt(0));
-        caso.setReferimiento(referimientoCaso);
-        caso.setCsoAnalisisResultadosPruebas((!txaAnalisisResPruebas.getText().isEmpty() ? txaAnalisisResPruebas.getText() : null));
-        caso.setCsoDiagnostico((!txaDiagnostico.getText().isEmpty() ? txaDiagnostico.getText() : null));
-        caso.setCsoTratamiento((!txaTratamiento.getText().isEmpty() ? txaTratamiento.getText() : null));
-        caso.setCsoResumenEvolucion((!txaResumenEvolucion.getText().isEmpty() ? txaResumenEvolucion.getText() : null));
-        caso.setCsoRecomendaciones((!txaRecomendaciones.getText().isEmpty() ? txaRecomendaciones.getText() : null));
-        
-        jpaCasoDao.persist(caso);
-        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
-        if (casoAEditar == null) {
-        throw new Exception("El caso a editar no ha sido establecido");
-        }
-        accion = "editar";
-        trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
-        
-        casoAEditar.setCsoFecha(DateUtils.parseDate(ftfFecha.getText()));
-        casoAEditar.setCsoAnioEscolar(ftfAnioEscolar.getText());
-        casoAEditar.setCsoJuicioClinico(txaJuicioClinico.getText());
-        casoAEditar.setCsoDiagnosticoDefinitivo((rbnSi.isSelected() ? 'S' : 'N'));
-        casoAEditar.setCsoEstadoCaso(cmbEstadoCaso.getSelectedItem().toString().charAt(0));
-        
-        casoAEditar.setReferimiento(referimientoCaso);
-        casoAEditar.setCsoAnalisisResultadosPruebas((!txaAnalisisResPruebas.getText().isEmpty() ? txaAnalisisResPruebas.getText() : null));
-        casoAEditar.setCsoDiagnostico((!txaDiagnostico.getText().isEmpty() ? txaDiagnostico.getText() : null));
-        casoAEditar.setCsoTratamiento((!txaTratamiento.getText().isEmpty() ? txaTratamiento.getText() : null));
-        casoAEditar.setCsoResumenEvolucion((!txaResumenEvolucion.getText().isEmpty() ? txaResumenEvolucion.getText() : null));
-        casoAEditar.setCsoRecomendaciones((!txaRecomendaciones.getText().isEmpty() ? txaRecomendaciones.getText() : null));
-        
-        jpaCasoDao.update(casoAEditar);
-        }
+            if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+                // creando el objeto referimiento
+                accion = "crear";
+                
+                PruebaPsicologica pps = new PruebaPsicologica(null, DateUtils.parseDate(ftfFechaAplicacionPPS.getText()),
+                        (!cmbNombrePrueba.getSelectedItem().toString().equalsIgnoreCase("otro") ? cmbNombrePrueba.getSelectedItem().toString()
+                        : txtOtroNombrePrueba.getText()), (chkCorreccionAutomatica.isSelected() ? 'S' : 'N'));
+                
+                pps.setEstudiante(estudiantePPS);
+                pps.setCaso((cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso") && casoPPS != null) ? casoPPS : null);
+                pps.setPpsResultados(!txaResultados.getText().isEmpty() ? txaResultados.getText() : null);
+                pps.setPpsInterpretacion(!txaInterpretacionPrueba.getText().isEmpty() ? txaInterpretacionPrueba.getText() : null);
+                
+                jpaPPSDao.persist(pps);
+                
+                if (chkCorreccionAutomatica.isSelected()) {
+                    List<PruebaPsicologica> pruebas = (List<PruebaPsicologica>) jpaPPSDao.getPruebasPsicologicasByFechaAplicacion(DateUtils.parseDate(ftfFechaAplicacionPPS.getText()));
+                    
+                    int last = pruebas.size() - 1;                    
+                    PruebaPsicologica pruebaConfirmada = pruebas.get(last);
+                    ArrayList<UbicacionPrueba> ubicacionesPrueba = new ArrayList<UbicacionPrueba>();
+                    
+                    UbicacionPrueba ubp = null;
+                    for (int i = 0; i < lstUbicacionPruebas.getModel().getSize(); i++) {
+                        ubp = new UbicacionPrueba(null, lstUbicacionPruebas.getModel().getElementAt(i).toString());
+                        ubp.setPruebaPsicologica(pruebaConfirmada);
+                        ubicacionesPrueba.add(ubp);
+                    }
+                    
+                    JpaUbicacionPruebaDao jpaUbpDao = new JpaUbicacionPruebaDao();
+                    for (UbicacionPrueba up : ubicacionesPrueba) {
+                        jpaUbpDao.persist(up);
+                    }
+                }
+                
+            } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+                if (ppsAEditar == null) {
+                    throw new Exception("El caso a editar no ha sido establecido");
+                }
+                accion = "editar";
+                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+                
+                
+            }
         } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de caso<br /><br />%s</p></html>",
-        e.getMessage()), "Caso", JOptionPane.ERROR_MESSAGE);
-        return;
-        }*/
-
+            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de caso<br /><br />%s</p></html>",
+                    e.getMessage()), "Prueba Psicologica", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         statusMessageLabel.setText(trabajoCompletoMensaje);
         statusMessageLabel.setForeground(Color.GREEN);
         statusMessageLabel.setVisible(true);
         new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         LimpiadorComponentes.limpiarComponentes(this);
+        limpiarUbpSeccion();
         ftfFechaAplicacionPPS.requestFocusInWindow();
         pc.stop();
     }//GEN-LAST:event_btnAceptarActionPerformed
-
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         statusMessageLabel.setVisible(false);
@@ -576,12 +587,12 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         ftfFechaAplicacionPPS.setText(String.format("%1$td%1$tm%1$tY", currDate));
         Integer year = new Integer(String.format("%tY", currDate));
         ftfFechaAplicacionPPS.setText(year.toString() + (year + 1));
-
+        
         if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             btnBuscar.setEnabled(false);
         }
     }//GEN-LAST:event_formWindowOpened
-
+    
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         BusquedaRapida br = new BusquedaRapida(this, true);
@@ -589,53 +600,54 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         String strEntidades = (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso") ? "Casos" : "Estudiantes");
         EntitySearcher entitySearcher = (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso")
                 ? new EntitySearcher.CasoEntitySearcher() : new EntitySearcher.EstudianteEntitySearcher());
-
+        
         br.setTitle(title);
         br.setEntitySearcher(entitySearcher);
         br.getLblEntidades().setText(strEntidades);
         br.setLocationRelativeTo(this);
         br.setVisible(true);
-
+        
         Object objId = br.getEntitySelectedId();
         if (objId != null) {
             if (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso")) {
                 casoPPS = jpaPPSDao.findById(objId);
                 txtCasoEstudianteReferencia.setText(casoPPS.toString());
+                estudiantePPS = casoPPS.getReferimiento().getEstudiante();
             } else {
                 estudiantePPS = new JpaEstudianteDao().findById(objId);
                 txtCasoEstudianteReferencia.setText(estudiantePPS.toString());
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    
     private void chkCorreccionAutomaticaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_chkCorreccionAutomaticaStateChanged
         // TODO add your handling code here:
         if (!chkCorreccionAutomatica.isSelected()) {
             lblUbicacionPrueba.setEnabled(false);
             lstUbicacionPruebas.setEnabled(false);
             btnAgregar.setEnabled(false);
-
+            
             btnQuitar.setEnabled(false);
             btnLimpiar.setEnabled(false);
         } else if (chkCorreccionAutomatica.isSelected()) {
             lblUbicacionPrueba.setEnabled(true);
             lstUbicacionPruebas.setEnabled(true);
             btnAgregar.setEnabled(true);
-
+            
             if (lstUbicacionPruebas.getModel().getSize() != 0) {
                 btnQuitar.setEnabled(true);
                 btnLimpiar.setEnabled(true);
             }
         }
     }//GEN-LAST:event_chkCorreccionAutomaticaStateChanged
-
+    
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         ((DefaultListModel) lstUbicacionPruebas.getModel()).removeAllElements();
         btnQuitar.setEnabled(false);
         btnLimpiar.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
-
+    
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
         // TODO add your handling code here:
         DefaultListModel dlm = (DefaultListModel) lstUbicacionPruebas.getModel();
@@ -649,7 +661,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
             btnLimpiar.setEnabled(false);
         }
     }//GEN-LAST:event_btnQuitarActionPerformed
-
+    
     private void cmbNombrePruebaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbNombrePruebaItemStateChanged
         // TODO add your handling code here:
         if (cmbNombrePrueba.getSelectedItem().toString().equalsIgnoreCase("Otro")) {
@@ -660,7 +672,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
             txtOtroNombrePrueba.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_cmbNombrePruebaItemStateChanged
-
+    
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
@@ -677,40 +689,66 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                     dlm.addElement(imagePath);
                 }
             }
-
+            
             if (!btnQuitar.isEnabled()) {
                 btnQuitar.setEnabled(true);
             }
-
+            
             if (!btnLimpiar.isEnabled()) {
                 btnLimpiar.setEnabled(true);
             }
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
-
+    
     private void lstUbicacionPruebasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstUbicacionPruebasValueChanged
         // TODO add your handling code here:
         if (lstUbicacionPruebas.getSelectedIndices().length == 1) {
             //ImageUtil.loadAndDisplayImage(lstUbicacionPruebas.getSelectedValue().toString(), pnlPreviewPrueba);
+            spnPreviewPrueba.add(new JImagePanel(ImageUtil.loadImage(lstUbicacionPruebas.getSelectedValue().toString()), 0, 0));
+            spnPreviewPrueba.repaint();
         }
     }//GEN-LAST:event_lstUbicacionPruebasValueChanged
-
+    
+    private void limpiarUbpSeccion() {
+        btnLimpiar.doClick();
+        lblUbicacionPrueba.setEnabled(false);
+        lstUbicacionPruebas.setEnabled(false);
+        btnAgregar.setEnabled(false);
+        btnQuitar.setEnabled(false);
+        btnLimpiar.setEnabled(false);
+    }
+    
     private boolean checkFormFields() {
         boolean validFields = true;
-
+        LimpiadorComponentes.limpiarValidationMarkers(this);
+        
         FieldValidator emptynessVal, dateVal;
         emptynessVal = new EmptyFieldValidator();
         dateVal = new DateFieldValidator();
-
+        
         FieldValidator[] emptynessArr = new FieldValidator[]{emptynessVal};
-
+        
         HashMap<JLabel, FieldValidator[]> campos = new HashMap<JLabel, FieldValidator[]>();
-        //campos.put(lblFechaValMarker, new FieldValidator[]{emptynessVal, dateVal});
-        //campos.put(lblAnioEscolarValMarker, emptynessArr);
-        //campos.put(lblReferimientoValMarker, emptynessArr);
-
-        validFields = FormFieldValidator.verifyFormFields(campos);
-
+        campos.put(lblFechaAplicacionValMarker, new FieldValidator[]{emptynessVal, dateVal});
+        campos.put(lblCasoEstudianteValMarker, emptynessArr);
+        
+        validFields &= FormFieldValidator.verifyFormFields(campos);
+        
+        if (cmbNombrePrueba.getSelectedItem().toString().equalsIgnoreCase("otro")
+                && (txtCasoEstudianteReferencia.getText().isEmpty() || txtCasoEstudianteReferencia.getText().equalsIgnoreCase("otro nombre prueba"))) {
+            lblNombrePruebaValMarker.setText("*");
+            lblNombrePruebaValMarker.setToolTipText("Porfavor digite nombre prueba valido");
+            lblNombrePruebaValMarker.setVisible(true);
+            validFields &= false;
+        }
+        
+        if (chkCorreccionAutomatica.isSelected() && lstUbicacionPruebas.getModel().getSize() < 1) {
+            lblUbicacionPruebaValMarker.setText("*");
+            lblUbicacionPruebaValMarker.setToolTipText("Porfavor indique ubicacion(es) de la prueba");
+            lblUbicacionPruebaValMarker.setVisible(true);
+            validFields &= false;
+        }
+        
         return validFields;
     }
 
@@ -743,7 +781,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             public void run() {
                 new RegistroEdicionPruebaPsicologica().setVisible(true);
             }
@@ -765,18 +803,19 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblCaso;
-    private javax.swing.JLabel lblCasoValMarker;
+    private javax.swing.JLabel lblCasoEstudianteValMarker;
     private javax.swing.JLabel lblFechaAplicacion;
     private javax.swing.JLabel lblFechaAplicacionValMarker;
     private javax.swing.JLabel lblInterpretacionPrueba;
     private javax.swing.JLabel lblNombrePrueba;
+    private javax.swing.JLabel lblNombrePruebaValMarker;
     private javax.swing.JLabel lblResultados;
     private javax.swing.JLabel lblUbicacionPrueba;
+    private javax.swing.JLabel lblUbicacionPruebaValMarker;
     private javax.swing.JList lstUbicacionPruebas;
-    private javax.swing.JPanel pnlPreviewPrueba;
+    private javax.swing.JScrollPane spnPreviewPrueba;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;

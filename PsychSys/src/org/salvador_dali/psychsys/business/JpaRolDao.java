@@ -24,6 +24,7 @@
 package org.salvador_dali.psychsys.business;
 
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.RolDao;
@@ -35,6 +36,14 @@ import org.salvador_dali.psychsys.model.entities.Rol;
  */
 public class JpaRolDao extends JpaDao implements RolDao {
 
+    public JpaRolDao() {
+        super(Rol.class);
+    }
+
+    public JpaRolDao(Class entityClass, Map properties) {
+        super(entityClass, properties);
+    }
+    
     @Override
     public Rol getRolByNombre(String nombre) {
         Query q = entityManager.createNamedQuery("Rol.findByRolNombre");
