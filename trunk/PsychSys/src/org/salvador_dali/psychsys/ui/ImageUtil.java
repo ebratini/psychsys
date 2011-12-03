@@ -40,8 +40,8 @@ public class ImageUtil {
             "C:\\Documents and Settings\\Edwin Bratini\\My Documents\\NetBeansProjects\\PsychSys\\src\\resources\\images\\historia_clinica.jpg",
             "C:\\Documents and Settings\\Edwin Bratini\\My Documents\\NetBeansProjects\\PsychSys\\src\\resources\\images\\historia_clinica.png"
         };
-        BufferedImage bimImagetTransparented = makeColorTransparent(args[0], Color.white);
-        saveImage(bimImagetTransparented, args[1]);
+        BufferedImage bimImageTransparented = makeColorTransparent(args[0], Color.white);
+        saveImage(bimImageTransparented, args[1]);
     }
 
     public static BufferedImage makeColorTransparent(String ref, Color color) {

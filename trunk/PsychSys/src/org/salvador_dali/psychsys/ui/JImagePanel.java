@@ -21,34 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.ui;
 
-import java.util.List;
-import java.util.Map;
-import javax.persistence.Query;
-import org.salvador_dali.psychsys.model.JpaDao;
-import org.salvador_dali.psychsys.model.UbicacionPruebaDao;
-import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
-import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaUbicacionPruebaDao extends JpaDao implements UbicacionPruebaDao {
+public class JImagePanel extends JPanel {
 
-    public JpaUbicacionPruebaDao() {
-        super(UbicacionPrueba.class);
-    }
+    private BufferedImage image;
+    int x, y;
 
-    public JpaUbicacionPruebaDao(Class entityClass, Map properties) {
-        super(entityClass, properties);
+    public JImagePanel(BufferedImage image, int x, int y) {
+        super();
+        this.image = image;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
-    public List getUbicacionesPruebasByPruebaPsicologica(PruebaPsicologica pruebaPsicologica) {
-        Query q = entityManager.createQuery("SELECT ubp FROM UbicacionPrueba ubp WHERE ubp.pruebaPsicologica = :ubpPruebaPsicologica");
-        q.setParameter("ubpPruebaPsicologica", pruebaPsicologica);
-        return q.getResultList();
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(image, x, y, null);
     }
 }
