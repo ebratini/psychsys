@@ -29,16 +29,34 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Component;
+import java.awt.Container;
+import javax.swing.JCheckBox;
+import org.salvador_dali.psychsys.model.entities.AntPersMadre;
+import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
+
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
 
+    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private HistoriaClinica hicAEditar;
+    private AntPersMadre antPersMadre;
+
     /** Creates new form RegistroEdicionAntPersMadre */
     public RegistroEdicionAntPersMadre(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public AntPersMadre getAntPersMadre() {
+        return antPersMadre;
+    }
+
+    public void setAntPersMadre(AntPersMadre antPersMadre) {
+        this.antPersMadre = antPersMadre;
     }
 
     /** This method is called from within the constructor to
@@ -54,6 +72,10 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         bgrAmenazaAborto = new javax.swing.ButtonGroup();
         bgrIntentoAborto = new javax.swing.ButtonGroup();
         bgrSexoPreferido = new javax.swing.ButtonGroup();
+        ppmAntPersMadre = new javax.swing.JPopupMenu();
+        mniAgregarHabitoToxico = new javax.swing.JMenuItem();
+        mniEditarHabitoToxico = new javax.swing.JMenuItem();
+        mniEliminarHabitoToxico = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblEmbarazoDeseado = new javax.swing.JLabel();
@@ -88,9 +110,23 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
 
+        mniAgregarHabitoToxico.setText("jMenuItem1");
+        ppmAntPersMadre.add(mniAgregarHabitoToxico);
+
+        mniEditarHabitoToxico.setText("jMenuItem1");
+        ppmAntPersMadre.add(mniEditarHabitoToxico);
+
+        mniEliminarHabitoToxico.setText("jMenuItem1");
+        ppmAntPersMadre.add(mniEliminarHabitoToxico);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Antecedentes Personales Madre");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Antecedentes Personales Madre"));
 
@@ -193,6 +229,11 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
 
         chkEmbarazo.setSelected(true);
         chkEmbarazo.setText("Embarazo");
+        chkEmbarazo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkEmbarazoActionPerformed(evt);
+            }
+        });
 
         bgrSexoPreferido.add(jRadioButton9);
         jRadioButton9.setSelected(true);
@@ -389,6 +430,33 @@ private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void setEnabledState(Container cont, boolean state) {
+        for (Component comp : cont.getComponents()) {
+            if (comp instanceof JCheckBox) {
+                continue;
+            }
+            if (comp instanceof Container) {
+                setEnabledState((Container) comp, state);
+            }
+            comp.setEnabled(state);
+        }
+    }
+
+    private void chkEmbarazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEmbarazoActionPerformed
+        // TODO add your handling code here:
+        if (!chkEmbarazo.isSelected()) {
+            setEnabledState(jPanel2, false);
+        } else {
+            setEnabledState(jPanel2, true);
+        }
+    }//GEN-LAST:event_chkEmbarazoActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        statusMessageLabel.setVisible(false);
+        statusAnimationLabel.setVisible(false);
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -463,6 +531,10 @@ private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JLabel lblHabitosToxicos;
     private javax.swing.JLabel lblIntentoAborto;
     private javax.swing.JLabel lblSexoPreferido;
+    private javax.swing.JMenuItem mniAgregarHabitoToxico;
+    private javax.swing.JMenuItem mniEditarHabitoToxico;
+    private javax.swing.JMenuItem mniEliminarHabitoToxico;
+    private javax.swing.JPopupMenu ppmAntPersMadre;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;

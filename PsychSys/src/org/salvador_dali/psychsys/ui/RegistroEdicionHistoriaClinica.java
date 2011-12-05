@@ -101,18 +101,11 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         lblEstudianteValMarker = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         pnlAntecedentesEscolaridad = new javax.swing.JPanel();
-        lblAntPersMadre = new javax.swing.JLabel();
-        btnAntPersMadreRegistrar = new javax.swing.JButton();
-        lblAntNeonatal = new javax.swing.JLabel();
-        btnAntNeonatalRegistrar = new javax.swing.JButton();
-        lblAntRecienNacido = new javax.swing.JLabel();
-        btnAntRecienNacidoRegistrar = new javax.swing.JButton();
-        lblAntPsicomotrizLenguaje = new javax.swing.JLabel();
-        btnAntPsicomotrizLenguajeRegistrar = new javax.swing.JButton();
-        lblAntPsicosocialSexual = new javax.swing.JLabel();
-        btnAntPsicosocialSexualRegistrar = new javax.swing.JButton();
-        lblEscolaridad = new javax.swing.JLabel();
-        btnEscolaridadRegistrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstAntecedentes = new javax.swing.JList();
+        btnRegistrar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -194,65 +187,38 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlInformacionHistoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
-                            .addGroup(pnlInformacionHistoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtEstudiante)
-                                .addComponent(lblEstudiante)))))
+                            .addComponent(txtEstudiante, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEstudiante))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlAntecedentesEscolaridad.setBorder(javax.swing.BorderFactory.createTitledBorder("Antecedentes y Escolaridad"));
 
-        lblAntPersMadre.setText("Antecedentes Personales Madre");
+        lstAntecedentes.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Antecedentes Personales Madre", "Antecedentes Neonatal", "Antecedentes Recien Nacido", "Antecedentes Psicomotriz-Lenguaje", "Antecedentes Psicosocial-Sexual", "Escolaridad" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(lstAntecedentes);
 
-        btnAntPersMadreRegistrar.setText("Registrar");
-        btnAntPersMadreRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAntPersMadreRegistrarActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
-        lblAntNeonatal.setText("Antecedentes Neonatal");
-
-        btnAntNeonatalRegistrar.setText("Registrar");
-        btnAntNeonatalRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAntNeonatalRegistrarActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        lblAntRecienNacido.setText("Antecedentes Recien Nacido");
-
-        btnAntRecienNacidoRegistrar.setText("Registrar");
-        btnAntRecienNacidoRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAntRecienNacidoRegistrarActionPerformed(evt);
-            }
-        });
-
-        lblAntPsicomotrizLenguaje.setText("Antecedentes Psicomotriz-Lenguaje");
-
-        btnAntPsicomotrizLenguajeRegistrar.setText("Registrar");
-        btnAntPsicomotrizLenguajeRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAntPsicomotrizLenguajeRegistrarActionPerformed(evt);
-            }
-        });
-
-        lblAntPsicosocialSexual.setText("Antecedentes Psicosocial-Sexual");
-
-        btnAntPsicosocialSexualRegistrar.setText("Registrar");
-        btnAntPsicosocialSexualRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAntPsicosocialSexualRegistrarActionPerformed(evt);
-            }
-        });
-
-        lblEscolaridad.setText("Escolaridad");
-
-        btnEscolaridadRegistrar.setText("Registrar");
-        btnEscolaridadRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEscolaridadRegistrarActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -260,60 +226,26 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         pnlAntecedentesEscolaridad.setLayout(pnlAntecedentesEscolaridadLayout);
         pnlAntecedentesEscolaridadLayout.setHorizontalGroup(
             pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(lblAntPersMadre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                        .addComponent(btnAntPersMadreRegistrar))
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(lblAntNeonatal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
-                        .addComponent(btnAntNeonatalRegistrar))
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(lblAntRecienNacido)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
-                        .addComponent(btnAntRecienNacidoRegistrar))
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(lblAntPsicomotrizLenguaje)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                        .addComponent(btnAntPsicomotrizLenguajeRegistrar))
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(lblAntPsicosocialSexual)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-                        .addComponent(btnAntPsicosocialSexualRegistrar))
-                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                        .addComponent(lblEscolaridad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
-                        .addComponent(btnEscolaridadRegistrar))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         pnlAntecedentesEscolaridadLayout.setVerticalGroup(
             pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAntPersMadre)
-                    .addComponent(btnAntPersMadreRegistrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAntNeonatal)
-                    .addComponent(btnAntNeonatalRegistrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAntRecienNacido)
-                    .addComponent(btnAntRecienNacidoRegistrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAntPsicomotrizLenguaje)
-                    .addComponent(btnAntPsicomotrizLenguajeRegistrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAntPsicosocialSexual)
-                    .addComponent(btnAntPsicosocialSexualRegistrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEscolaridad)
-                    .addComponent(btnEscolaridadRegistrar))
+                .addGap(11, 11, 11)
+                .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlAntecedentesEscolaridadLayout.createSequentialGroup()
+                        .addComponent(btnRegistrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -440,33 +372,33 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                 jpaHicDao.persist(hic);
 
                 // manejar los antecedentes
-                /*if (antPersMadre != null || antNeonatal != null || antRecienNacido != null || antPL != null || antPS != null || escolaridad != null) {
-                ArrayList<HistoriaClinica> hics = (ArrayList<HistoriaClinica>) jpaHicDao.getHistoriasClinicasByFechaCreacion(DateUtils.parseDate(ftfFecha.getText()));
-                int last = hics.size() - 1;
-                
-                HistoriaClinica hicConfirmada = hics.get(last);
-                
-                if (antPersMadre != null) {
-                antPersMadre.setHistoriaClinica(hicConfirmada);
-                jpaHicDao.persist(antPersMadre);
+                if (antPersMadre != null || antNeonatal != null || antRecienNacido != null || antPL != null || antPS != null || escolaridad != null) {
+                    ArrayList<HistoriaClinica> hics = (ArrayList<HistoriaClinica>) jpaHicDao.getHistoriasClinicasByFechaCreacion(DateUtils.parseDate(ftfFecha.getText()));
+                    int last = hics.size() - 1;
+
+                    HistoriaClinica hicConfirmada = hics.get(last);
+
+                    if (antPersMadre != null) {
+                        antPersMadre.setHistoriaClinica(hicConfirmada);
+                        jpaHicDao.persist(antPersMadre);
+                    }
+                    if (antNeonatal != null) {
+                        antNeonatal.setHistoriaClinica(hicConfirmada);
+                        jpaHicDao.persist(antNeonatal);
+                    }
+                    if (antRecienNacido != null) {
+                        antRecienNacido.setHistoriaClinica(hicConfirmada);
+                        jpaHicDao.persist(antRecienNacido);
+                    }
+                    if (antPL != null) {
+                        antPL.setHistoriaClinica(hicConfirmada);
+                        jpaHicDao.persist(antPL);
+                    }
+                    if (antPS != null) {
+                        antPS.setHistoriaClinica(hicConfirmada);
+                        jpaHicDao.persist(antPS);
+                    }
                 }
-                if (antNeonatal != null) {
-                antNeonatal.setHistoriaClinica(hicConfirmada);
-                jpaHicDao.persist(antNeonatal);
-                }
-                if (antRecienNacido != null) {
-                antRecienNacido.setHistoriaClinica(hicConfirmada);
-                jpaHicDao.persist(antRecienNacido);
-                }
-                if (antPL != null) {
-                antPL.setHistoriaClinica(hicConfirmada);
-                jpaHicDao.persist(antPL);
-                }
-                if (antPS != null) {
-                antPS.setHistoriaClinica(hicConfirmada);
-                jpaHicDao.persist(antPS);
-                }
-                }*/
             } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
                 if (hicAEditar == null) {
                     throw new Exception("Historia clinica a editar no ha sido establecida");
@@ -503,48 +435,6 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnAntPersMadreRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAntPersMadreRegistrarActionPerformed
-        // TODO add your handling code here:
-        RegistroEdicionAntPersMadre apm = new RegistroEdicionAntPersMadre(this, true);
-        apm.setLocationRelativeTo(this);
-        apm.setVisible(true);
-    }//GEN-LAST:event_btnAntPersMadreRegistrarActionPerformed
-
-    private void btnAntNeonatalRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAntNeonatalRegistrarActionPerformed
-        // TODO add your handling code here:
-        RegistroEdicionAntNeonatal an = new RegistroEdicionAntNeonatal(this, true);
-        an.setLocationRelativeTo(this);
-        an.setVisible(true);
-    }//GEN-LAST:event_btnAntNeonatalRegistrarActionPerformed
-
-    private void btnAntRecienNacidoRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAntRecienNacidoRegistrarActionPerformed
-        // TODO add your handling code here:
-        RegistroEdicionAntRecienNacido arn = new RegistroEdicionAntRecienNacido(this, true);
-        arn.setLocationRelativeTo(this);
-        arn.setVisible(true);
-    }//GEN-LAST:event_btnAntRecienNacidoRegistrarActionPerformed
-
-    private void btnAntPsicomotrizLenguajeRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAntPsicomotrizLenguajeRegistrarActionPerformed
-        // TODO add your handling code here:
-        RegistroEdicionAntPsicomotrizLenguaje apl = new RegistroEdicionAntPsicomotrizLenguaje(this, true);
-        apl.setLocationRelativeTo(this);
-        apl.setVisible(true);
-    }//GEN-LAST:event_btnAntPsicomotrizLenguajeRegistrarActionPerformed
-
-    private void btnAntPsicosocialSexualRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAntPsicosocialSexualRegistrarActionPerformed
-        // TODO add your handling code here:
-        RegistroEdicionAntPsicosocialSexual aps = new RegistroEdicionAntPsicosocialSexual(this, true);
-        aps.setLocationRelativeTo(this);
-        aps.setVisible(true);
-    }//GEN-LAST:event_btnAntPsicosocialSexualRegistrarActionPerformed
-
-    private void btnEscolaridadRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscolaridadRegistrarActionPerformed
-        // TODO add your handling code here:
-        RegistroEdicionEscolaridad esc = new RegistroEdicionEscolaridad(this, true);
-        esc.setLocationRelativeTo(this);
-        esc.setVisible(true);
-    }//GEN-LAST:event_btnEscolaridadRegistrarActionPerformed
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         BusquedaRapida bre = new BusquedaRapida(this, true);
@@ -560,6 +450,114 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
             txtEstudiante.setText(estudiante.toString());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        switch (lstAntecedentes.getSelectedIndex()) {
+            case 0:
+                RegistroEdicionAntPersMadre apm = new RegistroEdicionAntPersMadre(this, true);
+                apm.setLocationRelativeTo(this);
+                apm.setVisible(true);
+                break;
+            case 1:
+                RegistroEdicionAntNeonatal an = new RegistroEdicionAntNeonatal(this, true);
+                an.setLocationRelativeTo(this);
+                an.setVisible(true);
+                break;
+            case 2:
+                RegistroEdicionAntRecienNacido arn = new RegistroEdicionAntRecienNacido(this, true);
+                arn.setLocationRelativeTo(this);
+                arn.setVisible(true);
+                break;
+            case 3:
+                RegistroEdicionAntPsicomotrizLenguaje apl = new RegistroEdicionAntPsicomotrizLenguaje(this, true);
+                apl.setLocationRelativeTo(this);
+                apl.setVisible(true);
+                break;
+            case 4:
+                RegistroEdicionAntPsicosocialSexual aps = new RegistroEdicionAntPsicosocialSexual(this, true);
+                aps.setLocationRelativeTo(this);
+                aps.setVisible(true);
+                break;
+            case 5:
+                RegistroEdicionEscolaridad esc = new RegistroEdicionEscolaridad(this, true);
+                esc.setLocationRelativeTo(this);
+                esc.setVisible(true);
+                break;
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        switch (lstAntecedentes.getSelectedIndex()) {
+            case 0:
+                RegistroEdicionAntPersMadre apm = new RegistroEdicionAntPersMadre(this, true);
+                apm.setLocationRelativeTo(this);
+                apm.setVisible(true);
+                break;
+            case 1:
+                RegistroEdicionAntNeonatal an = new RegistroEdicionAntNeonatal(this, true);
+                an.setLocationRelativeTo(this);
+                an.setVisible(true);
+                break;
+            case 2:
+                RegistroEdicionAntRecienNacido arn = new RegistroEdicionAntRecienNacido(this, true);
+                arn.setLocationRelativeTo(this);
+                arn.setVisible(true);
+                break;
+            case 3:
+                RegistroEdicionAntPsicomotrizLenguaje apl = new RegistroEdicionAntPsicomotrizLenguaje(this, true);
+                apl.setLocationRelativeTo(this);
+                apl.setVisible(true);
+                break;
+            case 4:
+                RegistroEdicionAntPsicosocialSexual aps = new RegistroEdicionAntPsicosocialSexual(this, true);
+                aps.setLocationRelativeTo(this);
+                aps.setVisible(true);
+                break;
+            case 5:
+                RegistroEdicionEscolaridad esc = new RegistroEdicionEscolaridad(this, true);
+                esc.setLocationRelativeTo(this);
+                esc.setVisible(true);
+                break;
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        switch (lstAntecedentes.getSelectedIndex()) {
+            case 0:
+                RegistroEdicionAntPersMadre apm = new RegistroEdicionAntPersMadre(this, true);
+                apm.setLocationRelativeTo(this);
+                apm.setVisible(true);
+                break;
+            case 1:
+                RegistroEdicionAntNeonatal an = new RegistroEdicionAntNeonatal(this, true);
+                an.setLocationRelativeTo(this);
+                an.setVisible(true);
+                break;
+            case 2:
+                RegistroEdicionAntRecienNacido arn = new RegistroEdicionAntRecienNacido(this, true);
+                arn.setLocationRelativeTo(this);
+                arn.setVisible(true);
+                break;
+            case 3:
+                RegistroEdicionAntPsicomotrizLenguaje apl = new RegistroEdicionAntPsicomotrizLenguaje(this, true);
+                apl.setLocationRelativeTo(this);
+                apl.setVisible(true);
+                break;
+            case 4:
+                RegistroEdicionAntPsicosocialSexual aps = new RegistroEdicionAntPsicosocialSexual(this, true);
+                aps.setLocationRelativeTo(this);
+                aps.setVisible(true);
+                break;
+            case 5:
+                RegistroEdicionEscolaridad esc = new RegistroEdicionEscolaridad(this, true);
+                esc.setLocationRelativeTo(this);
+                esc.setVisible(true);
+                break;
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private boolean checkFormFields() {
         boolean validFields = true;
@@ -641,25 +639,18 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnAntNeonatalRegistrar;
-    private javax.swing.JButton btnAntPersMadreRegistrar;
-    private javax.swing.JButton btnAntPsicomotrizLenguajeRegistrar;
-    private javax.swing.JButton btnAntPsicosocialSexualRegistrar;
-    private javax.swing.JButton btnAntRecienNacidoRegistrar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEscolaridadRegistrar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JFormattedTextField ftfFecha;
-    private javax.swing.JLabel lblAntNeonatal;
-    private javax.swing.JLabel lblAntPersMadre;
-    private javax.swing.JLabel lblAntPsicomotrizLenguaje;
-    private javax.swing.JLabel lblAntPsicosocialSexual;
-    private javax.swing.JLabel lblAntRecienNacido;
-    private javax.swing.JLabel lblEscolaridad;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEstudiante;
     private javax.swing.JLabel lblEstudianteValMarker;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFechaValMarker;
+    private javax.swing.JList lstAntecedentes;
     private javax.swing.JPanel pnlAntecedentesEscolaridad;
     private javax.swing.JPanel pnlInformacionHistoria;
     private javax.swing.JLabel statusAnimationLabel;
