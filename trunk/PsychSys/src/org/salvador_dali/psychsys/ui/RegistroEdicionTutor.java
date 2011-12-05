@@ -496,7 +496,7 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
         tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
 
         // crear el objeto tutorDao e invocar el metodo persist del mismo     
-        if (this.modo.equals(RegistroEdicionModo.REGISTRO)) {
+        if (this.modo != null && this.modo.equals(RegistroEdicionModo.REGISTRO)) {
             tutDao.persist(tutor);
         } else {
             if (tutorAEditar != null) {

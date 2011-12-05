@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.business;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.JpaDao;
@@ -38,6 +39,14 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  */
 public class JpaUsuarioDao extends JpaDao implements UsuarioDao {
 
+    public JpaUsuarioDao() {
+        super(Usuario.class);
+    }
+
+    public JpaUsuarioDao(Class entityClass, Map properties) {
+        super(Usuario.class, properties);
+    }
+    
     @Override
     public List getUsuariosByRol(Rol rol) {
         Query q = entityManager.createQuery("SELECT usr FROM Usuario usr WHERE usr.rol = :usrRol");

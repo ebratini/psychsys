@@ -171,38 +171,39 @@ public abstract class EntitySearcher {
                         i++;
                     }
                 }
-            } else if (fieldToSearch.equalsIgnoreCase("id")) {
-                if (isIdFieldValid(value)) {
-                    Tutor tutSearched = jpaTutDao.findById(Integer.parseInt(value));
+            } else {
+                if (fieldToSearch.equalsIgnoreCase("id")) {
+                    if (isIdFieldValid(value)) {
+                        Tutor tutSearched = jpaTutDao.findById(Integer.parseInt(value));
+                        if (tutSearched != null) {
+                            data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(), tutSearched.toString()}};
+                        }
+                    }
+                } else if (fieldToSearch.equalsIgnoreCase("dni")) {
+                    Tutor tutSearched = jpaTutDao.getTutorByDNI(value);
                     if (tutSearched != null) {
                         data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(), tutSearched.toString()}};
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("dni")) {
-                Tutor tutSearched = jpaTutDao.getTutorByDNI(value);
-                if (tutSearched != null) {
-                    data = new Object[][]{new Object[]{tutSearched.getTutId(), tutSearched.getTutDni(), tutSearched.toString()}};
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
-                List<Tutor> tutores = (List<Tutor>) jpaTutDao.getTutoresByPrimerNombre(value);
-                if (tutores != null && tutores.size() > 0) {
-                    data = new Object[tutores.size()][];
-                    for (Tutor tut : tutores) {
-                        data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
-                        i++;
+                } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
+                    List<Tutor> tutores = (List<Tutor>) jpaTutDao.getTutoresByPrimerNombre(value);
+                    if (tutores != null && tutores.size() > 0) {
+                        data = new Object[tutores.size()][];
+                        for (Tutor tut : tutores) {
+                            data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
+                            i++;
+                        }
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("primer apellido")) {
-                List<Tutor> tutores = (List<Tutor>) jpaTutDao.getTutoresByPrimerApellido(value);
-                if (tutores != null && tutores.size() > 0) {
-                    data = new Object[tutores.size()][];
-                    for (Tutor tut : tutores) {
-                        data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
-                        i++;
+                } else if (fieldToSearch.equalsIgnoreCase("primer apellido")) {
+                    List<Tutor> tutores = (List<Tutor>) jpaTutDao.getTutoresByPrimerApellido(value);
+                    if (tutores != null && tutores.size() > 0) {
+                        data = new Object[tutores.size()][];
+                        for (Tutor tut : tutores) {
+                            data[i] = new Object[]{tut.getTutId(), tut.getTutDni(), tut.toString()};
+                            i++;
+                        }
                     }
                 }
             }
-
 
             DefaultTableModel dtm = null;
             if (data != null) {
@@ -256,34 +257,36 @@ public abstract class EntitySearcher {
                         i++;
                     }
                 }
-            } else if (fieldToSearch.equalsIgnoreCase("id")) {
-                if (isIdFieldValid(value)) {
-                    Estudiante estSearched = jpaEstDao.findById(Integer.parseInt(value));
+            } else {
+                if (fieldToSearch.equalsIgnoreCase("id")) {
+                    if (isIdFieldValid(value)) {
+                        Estudiante estSearched = jpaEstDao.findById(Integer.parseInt(value));
+                        if (estSearched != null) {
+                            data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(), estSearched.toString()}};
+                        }
+                    }
+                } else if (fieldToSearch.equalsIgnoreCase("dni")) {
+                    Estudiante estSearched = jpaEstDao.getEstudianteByDNI(value);
                     if (estSearched != null) {
                         data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(), estSearched.toString()}};
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("dni")) {
-                Estudiante estSearched = jpaEstDao.getEstudianteByDNI(value);
-                if (estSearched != null) {
-                    data = new Object[][]{new Object[]{estSearched.getEstId(), estSearched.getEstDni(), estSearched.toString()}};
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
-                List<Estudiante> estudiantes = (List<Estudiante>) jpaEstDao.getEstudiantesByPrimerNombre(value);
-                if (estudiantes != null && estudiantes.size() > 0) {
-                    data = new Object[estudiantes.size()][];
-                    for (Estudiante est : estudiantes) {
-                        data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
-                        i++;
+                } else if (fieldToSearch.equalsIgnoreCase("primer nombre")) {
+                    List<Estudiante> estudiantes = (List<Estudiante>) jpaEstDao.getEstudiantesByPrimerNombre(value);
+                    if (estudiantes != null && estudiantes.size() > 0) {
+                        data = new Object[estudiantes.size()][];
+                        for (Estudiante est : estudiantes) {
+                            data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
+                            i++;
+                        }
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("primer apellido")) {
-                List<Estudiante> estudiantes = (List<Estudiante>) jpaEstDao.getEstudiantesByPrimerApellido(value);
-                if (estudiantes != null && estudiantes.size() > 0) {
-                    data = new Object[estudiantes.size()][];
-                    for (Estudiante est : estudiantes) {
-                        data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
-                        i++;
+                } else if (fieldToSearch.equalsIgnoreCase("primer apellido")) {
+                    List<Estudiante> estudiantes = (List<Estudiante>) jpaEstDao.getEstudiantesByPrimerApellido(value);
+                    if (estudiantes != null && estudiantes.size() > 0) {
+                        data = new Object[estudiantes.size()][];
+                        for (Estudiante est : estudiantes) {
+                            data[i] = new Object[]{est.getEstId(), est.getEstDni(), est.toString()};
+                            i++;
+                        }
                     }
                 }
             }
@@ -335,17 +338,29 @@ public abstract class EntitySearcher {
                         i++;
                     }
                 }
-            } else if (fieldToSearch.equalsIgnoreCase("id")) {
-                if (isIdFieldValid(value)) {
-                    Referimiento refSearched = jpaRefDao.findById(Integer.parseInt(value));
-                    if (refSearched != null) {
-                        data = new Object[][]{new Object[]{refSearched.getRefId(), String.format("%1$td-%1$tm-%1$tY", refSearched.getRefFecha()),
-                                refSearched.getRefAnioEscolar(), refSearched.getEstudiante().toString(), refSearched.getRefNombreReferidor()}};
+            } else {
+                if (fieldToSearch.equalsIgnoreCase("id")) {
+                    if (isIdFieldValid(value)) {
+                        Referimiento refSearched = jpaRefDao.findById(Integer.parseInt(value));
+                        if (refSearched != null) {
+                            data = new Object[][]{new Object[]{refSearched.getRefId(), String.format("%1$td-%1$tm-%1$tY", refSearched.getRefFecha()),
+                                    refSearched.getRefAnioEscolar(), refSearched.getEstudiante().toString(), refSearched.getRefNombreReferidor()}};
+                        }
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("fecha referimiento")) {
-                if (new DateFieldValidator().validate(value)) {
-                    List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByFecha(DateUtils.parseDate(value));
+                } else if (fieldToSearch.equalsIgnoreCase("fecha referimiento")) {
+                    if (new DateFieldValidator().validate(value)) {
+                        List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByFecha(DateUtils.parseDate(value));
+                        if (referimientos != null && referimientos.size() > 0) {
+                            data = new Object[referimientos.size()][];
+                            for (Referimiento ref : referimientos) {
+                                data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
+                                    ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
+                                i++;
+                            }
+                        }
+                    }
+                } else if (fieldToSearch.equalsIgnoreCase("año escolar")) {
+                    List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByAnioEscolar(value);
                     if (referimientos != null && referimientos.size() > 0) {
                         data = new Object[referimientos.size()][];
                         for (Referimiento ref : referimientos) {
@@ -354,41 +369,31 @@ public abstract class EntitySearcher {
                             i++;
                         }
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("año escolar")) {
-                List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByAnioEscolar(value);
-                if (referimientos != null && referimientos.size() > 0) {
-                    data = new Object[referimientos.size()][];
-                    for (Referimiento ref : referimientos) {
-                        data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
-                            ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
-                        i++;
-                    }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("estudiante")) {
-                String[] arrNombreEstudiante = value.trim().split(" ");
-                List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
+                } else if (fieldToSearch.equalsIgnoreCase("estudiante")) {
+                    String[] arrNombreEstudiante = value.trim().split(" ");
+                    List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
 
-                List<Referimiento> referimientos = new ArrayList<Referimiento>();
-                for (Estudiante est : estudiantes) {
-                    referimientos.addAll((List<Referimiento>) jpaRefDao.getReferimientosByEstudiante(est));
-                }
-                if (referimientos != null && referimientos.size() > 0) {
-                    data = new Object[referimientos.size()][];
-                    for (Referimiento ref : referimientos) {
-                        data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
-                            ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
-                        i++;
+                    List<Referimiento> referimientos = new ArrayList<Referimiento>();
+                    for (Estudiante est : estudiantes) {
+                        referimientos.addAll((List<Referimiento>) jpaRefDao.getReferimientosByEstudiante(est));
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("referidor")) {
-                List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByReferidor(value);
-                if (referimientos != null && referimientos.size() > 0) {
-                    data = new Object[referimientos.size()][];
-                    for (Referimiento ref : referimientos) {
-                        data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
-                            ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
-                        i++;
+                    if (referimientos != null && referimientos.size() > 0) {
+                        data = new Object[referimientos.size()][];
+                        for (Referimiento ref : referimientos) {
+                            data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
+                                ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
+                            i++;
+                        }
+                    }
+                } else if (fieldToSearch.equalsIgnoreCase("referidor")) {
+                    List<Referimiento> referimientos = (List<Referimiento>) jpaRefDao.getReferimientosByReferidor(value);
+                    if (referimientos != null && referimientos.size() > 0) {
+                        data = new Object[referimientos.size()][];
+                        for (Referimiento ref : referimientos) {
+                            data[i] = new Object[]{ref.getRefId(), String.format("%1$td-%1$tm-%1$tY", ref.getRefFecha()), ref.getRefAnioEscolar(),
+                                ref.getEstudiante().toString(), ref.getRefNombreReferidor()};
+                            i++;
+                        }
                     }
                 }
             }
@@ -438,17 +443,29 @@ public abstract class EntitySearcher {
                         i++;
                     }
                 }
-            } else if (fieldToSearch.equalsIgnoreCase("id")) {
-                if (isIdFieldValid(value)) {
-                    Caso casoSearched = jpaCasoDao.findById(Integer.parseInt(value));
-                    if (casoSearched != null) {
-                        data = new Object[][]{new Object[]{casoSearched.getCsoId(), String.format("%1$td-%1$tm-%1$tY", casoSearched.getCsoFecha()), casoSearched.getCsoAnioEscolar(),
-                                casoSearched.getReferimiento().toString()}};
+            } else {
+                if (fieldToSearch.equalsIgnoreCase("id")) {
+                    if (isIdFieldValid(value)) {
+                        Caso casoSearched = jpaCasoDao.findById(Integer.parseInt(value));
+                        if (casoSearched != null) {
+                            data = new Object[][]{new Object[]{casoSearched.getCsoId(), String.format("%1$td-%1$tm-%1$tY", casoSearched.getCsoFecha()), casoSearched.getCsoAnioEscolar(),
+                                    casoSearched.getReferimiento().toString()}};
+                        }
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("fecha caso")) {
-                if (new DateFieldValidator().validate(value)) {
-                    List<Caso> casos = (List<Caso>) jpaCasoDao.getCasosByFecha(DateUtils.parseDate(value));
+                } else if (fieldToSearch.equalsIgnoreCase("fecha caso")) {
+                    if (new DateFieldValidator().validate(value)) {
+                        List<Caso> casos = (List<Caso>) jpaCasoDao.getCasosByFecha(DateUtils.parseDate(value));
+                        if (casos != null && casos.size() > 0) {
+                            data = new Object[casos.size()][];
+                            for (Caso caso : casos) {
+                                data[i] = new Object[]{caso.getCsoId(), String.format("%1$td-%1$tm-%1$tY", caso.getCsoFecha()), caso.getCsoAnioEscolar(),
+                                    caso.getReferimiento().toString()};
+                                i++;
+                            }
+                        }
+                    }
+                } else if (fieldToSearch.equalsIgnoreCase("año escolar")) {
+                    List<Caso> casos = (List<Caso>) jpaCasoDao.getCasosByAnioEscolar(value);
                     if (casos != null && casos.size() > 0) {
                         data = new Object[casos.size()][];
                         for (Caso caso : casos) {
@@ -457,24 +474,14 @@ public abstract class EntitySearcher {
                             i++;
                         }
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("año escolar")) {
-                List<Caso> casos = (List<Caso>) jpaCasoDao.getCasosByAnioEscolar(value);
-                if (casos != null && casos.size() > 0) {
-                    data = new Object[casos.size()][];
-                    for (Caso caso : casos) {
-                        data[i] = new Object[]{caso.getCsoId(), String.format("%1$td-%1$tm-%1$tY", caso.getCsoFecha()), caso.getCsoAnioEscolar(),
-                            caso.getReferimiento().toString()};
-                        i++;
-                    }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("referimiento")) {
-                String refId = value.split(" ")[0];
-                Referimiento ref = (Referimiento) new JpaReferimientoDao().findById(refId);
+                } else if (fieldToSearch.equalsIgnoreCase("referimiento")) {
+                    String refId = value.split(" ")[0];
+                    Referimiento ref = (Referimiento) new JpaReferimientoDao().findById(refId);
 
-                Caso caso = jpaCasoDao.getCasoByReferimiento(ref);
-                if (caso != null) {
-                    data = new Object[][]{new Object[]{caso.getCsoId(), String.format("%1$td-%1$tm-%1$tY", caso.getCsoFecha()), caso.getCsoAnioEscolar(), caso.getReferimiento().toString()}};
+                    Caso caso = jpaCasoDao.getCasoByReferimiento(ref);
+                    if (caso != null) {
+                        data = new Object[][]{new Object[]{caso.getCsoId(), String.format("%1$td-%1$tm-%1$tY", caso.getCsoFecha()), caso.getCsoAnioEscolar(), caso.getReferimiento().toString()}};
+                    }
                 }
             }
 
@@ -523,37 +530,39 @@ public abstract class EntitySearcher {
                         i++;
                     }
                 }
-            } else if (fieldToSearch.equalsIgnoreCase("id")) {
-                if (isIdFieldValid(value)) {
-                    HistoriaClinica hicSearched = jpaHicDao.findById(Integer.parseInt(value));
-                    if (hicSearched != null) {
-                        data = new Object[][]{new Object[]{hicSearched.getHicId(), String.format("%1$td-%1$tm-%1$tY", hicSearched.getHicFechaCreacion()), hicSearched.getEstudiante().toString()}};
+            } else {
+                if (fieldToSearch.equalsIgnoreCase("id")) {
+                    if (isIdFieldValid(value)) {
+                        HistoriaClinica hicSearched = jpaHicDao.findById(Integer.parseInt(value));
+                        if (hicSearched != null) {
+                            data = new Object[][]{new Object[]{hicSearched.getHicId(), String.format("%1$td-%1$tm-%1$tY", hicSearched.getHicFechaCreacion()), hicSearched.getEstudiante().toString()}};
+                        }
                     }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("fecha creacion")) {
-                if (new DateFieldValidator().validate(value)) {
-                    List<HistoriaClinica> hics = (List<HistoriaClinica>) jpaHicDao.retrieve();
+                } else if (fieldToSearch.equalsIgnoreCase("fecha creacion")) {
+                    if (new DateFieldValidator().validate(value)) {
+                        List<HistoriaClinica> hics = (List<HistoriaClinica>) jpaHicDao.retrieve();
+                        if (hics != null && hics.size() > 0) {
+                            data = new Object[hics.size()][];
+                            for (HistoriaClinica hic : hics) {
+                                data[i] = new Object[]{hic.getHicId(), String.format("%1$td-%1$tm-%1$tY", hic.getHicFechaCreacion()), hic.getEstudiante().toString()};
+                                i++;
+                            }
+                        }
+                    }
+                } else if (fieldToSearch.equalsIgnoreCase("estudiante")) {
+                    String[] arrNombreEstudiante = value.trim().split(" ");
+                    List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
+
+                    List<HistoriaClinica> hics = new ArrayList<HistoriaClinica>();
+                    for (Estudiante est : estudiantes) {
+                        hics.add(jpaHicDao.getHistoriaClinicaByEstudiante(est));
+                    }
                     if (hics != null && hics.size() > 0) {
                         data = new Object[hics.size()][];
                         for (HistoriaClinica hic : hics) {
                             data[i] = new Object[]{hic.getHicId(), String.format("%1$td-%1$tm-%1$tY", hic.getHicFechaCreacion()), hic.getEstudiante().toString()};
                             i++;
                         }
-                    }
-                }
-            } else if (fieldToSearch.equalsIgnoreCase("estudiante")) {
-                String[] arrNombreEstudiante = value.trim().split(" ");
-                List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
-
-                List<HistoriaClinica> hics = new ArrayList<HistoriaClinica>();
-                for (Estudiante est : estudiantes) {
-                    hics.add(jpaHicDao.getHistoriaClinicaByEstudiante(est));
-                }
-                if (hics != null && hics.size() > 0) {
-                    data = new Object[hics.size()][];
-                    for (HistoriaClinica hic : hics) {
-                        data[i] = new Object[]{hic.getHicId(), String.format("%1$td-%1$tm-%1$tY", hic.getHicFechaCreacion()), hic.getEstudiante().toString()};
-                        i++;
                     }
                 }
             }
