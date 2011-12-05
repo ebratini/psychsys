@@ -36,7 +36,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="statusPanel" alignment="0" max="32767" attributes="1"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="252" max="32767" attributes="0"/>
+              <EmptySpace pref="256" max="32767" attributes="0"/>
               <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
@@ -340,16 +340,11 @@
                       </Border>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="3">
+                      <Table columnCount="1" rowCount="3">
                         <Column editable="true" title="Habito Toxico" type="java.lang.Object">
                           <Data value="Alcohol"/>
                           <Data value="Tabaco"/>
                           <Data value="Nuevo"/>
-                        </Column>
-                        <Column editable="true" title="Seleccionar" type="java.lang.Object">
-                          <Data value="null"/>
-                          <Data value=""/>
-                          <Data value="null"/>
                         </Column>
                       </Table>
                     </Property>
@@ -369,11 +364,10 @@
                       </Border>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="2" rowCount="1">
+                      <Table columnCount="1" rowCount="1">
                         <Column editable="true" title="Enfermedad" type="java.lang.Object">
                           <Data value="Nuevo"/>
                         </Column>
-                        <Column editable="true" title="Seleccionar" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -392,6 +386,7 @@
                     <Property name="columns" type="int" value="20"/>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="wrapStyleWord" type="boolean" value="true"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -439,17 +434,20 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="statusPanel">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="statusPanelSeparator" alignment="0" pref="418" max="32767" attributes="0"/>
+              <Component id="statusPanelSeparator" alignment="0" pref="422" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="99" max="32767" attributes="0"/>
+                  <EmptySpace pref="103" max="32767" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

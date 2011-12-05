@@ -158,12 +158,12 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         tblHabitosToxicos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblHabitosToxicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Alcohol", null},
-                {"Tabaco", ""},
-                {"Nuevo", null}
+                {"Alcohol"},
+                {"Tabaco"},
+                {"Nuevo"}
             },
             new String [] {
-                "Habito Toxico", "Seleccionar"
+                "Habito Toxico"
             }
         ));
         jScrollPane1.setViewportView(tblHabitosToxicos);
@@ -171,10 +171,10 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         tblEnfermedadesEnEmbarazo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         tblEnfermedadesEnEmbarazo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Nuevo", null}
+                {"Nuevo"}
             },
             new String [] {
-                "Enfermedad", "Seleccionar"
+                "Enfermedad"
             }
         ));
         jScrollPane2.setViewportView(tblEnfermedadesEnEmbarazo);
@@ -182,6 +182,7 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         txaAlteracionesPsiquicas.setColumns(20);
         txaAlteracionesPsiquicas.setLineWrap(true);
         txaAlteracionesPsiquicas.setRows(5);
+        txaAlteracionesPsiquicas.setWrapStyleWord(true);
         jScrollPane3.setViewportView(txaAlteracionesPsiquicas);
 
         lblHabitosToxicos.setText("Habitos Toxicos");
@@ -300,6 +301,11 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         btnAceptar.setText("Aceptar");
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         statusMessageLabel.setForeground(new java.awt.Color(0, 153, 51));
         statusMessageLabel.setText("Antecedentes personales madre registrado exitosamente.");
@@ -311,11 +317,11 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -336,7 +342,7 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(252, Short.MAX_VALUE)
+                .addContainerGap(256, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelar)
@@ -377,6 +383,11 @@ private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_jRadioButton8ActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

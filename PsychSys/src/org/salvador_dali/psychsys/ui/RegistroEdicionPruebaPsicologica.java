@@ -431,11 +431,11 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 621, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 674, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -470,7 +470,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(645, Short.MAX_VALUE)
+                .addContainerGap(698, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
@@ -537,7 +537,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                 if (chkCorreccionAutomatica.isSelected()) {
                     List<PruebaPsicologica> pruebas = (List<PruebaPsicologica>) jpaPPSDao.getPruebasPsicologicasByFechaAplicacion(DateUtils.parseDate(ftfFechaAplicacionPPS.getText()));
                     
-                    int last = pruebas.size() - 1;                    
+                    int last = pruebas.size() - 1;
                     PruebaPsicologica pruebaConfirmada = pruebas.get(last);
                     ArrayList<UbicacionPrueba> ubicacionesPrueba = new ArrayList<UbicacionPrueba>();
                     
@@ -556,12 +556,25 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                 
             } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
                 if (ppsAEditar == null) {
-                    throw new Exception("La prueba psicologica a editar no ha sido establecido");
+                    throw new Exception("La prueba psicologica a editar no ha sido establecida");
                 }
                 accion = "editar";
                 trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrada", "editada");
                 
+                ppsAEditar.setPpsFechaAplicacion(DateUtils.parseDate(ftfFechaAplicacionPPS.getText()));
+                ppsAEditar.setCaso(casoPPS);
+                ppsAEditar.setEstudiante(estudiantePPS);
+                ppsAEditar.setPpsNombrePrueba(!cmbNombrePrueba.getSelectedItem().toString().equalsIgnoreCase("otro") ? cmbNombrePrueba.getSelectedItem().toString()
+                        : txtOtroNombrePrueba.getText());
+                ppsAEditar.setPpsResultados(!txaResultados.getText().isEmpty() ? txaResultados.getText() : null);
+                ppsAEditar.setPpsInterpretacion(!txaInterpretacionPrueba.getText().isEmpty() ? txaInterpretacionPrueba.getText() : null);
+                ppsAEditar.setPpsCorrecionAutomatica(chkCorreccionAutomatica.isSelected() ? 'S' : 'N');
                 
+                jpaPPSDao.update(ppsAEditar);
+                
+                // manejar edicion de ubicacion de las pruebas
+                
+                // ------
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de prueba psicologica<br /><br />%s</p></html>",

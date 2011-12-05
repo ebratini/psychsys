@@ -50,7 +50,7 @@ public class JpaHistoriaClinicaDao extends JpaDao implements HistoriaClinicaDao 
     @Override
     public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante) {
         try {
-            Query q = entityManager.createQuery("SELECT hc FROM Caso hc WHERE hc.estudiante = :hicEstudiante");
+            Query q = entityManager.createQuery("SELECT hc FROM HistoriaClinica hc WHERE hc.estudiante = :hicEstudiante");
             q.setParameter("hicEstudiante", estudiante);
             return (HistoriaClinica) q.getSingleResult();
         } catch (NoResultException nre) {
