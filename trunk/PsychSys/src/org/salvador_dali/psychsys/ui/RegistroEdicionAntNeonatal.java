@@ -29,16 +29,40 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
+import java.math.BigDecimal;
+import javax.swing.JOptionPane;
+import org.salvador_dali.psychsys.model.entities.AntNeonatal;
+
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
 
+    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private AntNeonatal antNeonatal;
+
     /** Creates new form RegistroEdicionAntNeonatal */
     public RegistroEdicionAntNeonatal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public AntNeonatal getAntNeonatal() {
+        return antNeonatal;
+    }
+
+    public void setAntNeonatal(AntNeonatal antNeonatal) {
+        this.antNeonatal = antNeonatal;
+    }
+
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
+        this.modo = modo;
     }
 
     /** This method is called from within the constructor to
@@ -57,20 +81,19 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
         lblTipoParto = new javax.swing.JLabel();
         cmbTipoParto = new javax.swing.JComboBox();
         lblPeso = new javax.swing.JLabel();
-        txtPeso = new javax.swing.JTextField();
         lblLloro = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbnLloroSi = new javax.swing.JRadioButton();
+        rbnLloroNo = new javax.swing.JRadioButton();
         lblAsistenciaMedica = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        rbnAsisMedSi = new javax.swing.JRadioButton();
+        rbnAsisMedNo = new javax.swing.JRadioButton();
         lblColaboracion = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        rbnColSi = new javax.swing.JRadioButton();
+        rbnColNo = new javax.swing.JRadioButton();
         lblEstadoGralNinio = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        lblPesoValMarker = new javax.swing.JLabel();
+        txaEstadoGralNinio = new javax.swing.JTextArea();
+        ftfPeso = new javax.swing.JFormattedTextField();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -81,6 +104,11 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Antecedentes Neonatal");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -90,44 +118,42 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
 
         lblPeso.setText("Peso");
 
-        txtPeso.setToolTipText("Peso en kilogramos");
-
         lblLloro.setText("Lloro");
 
-        bgrLloro.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Si");
+        bgrLloro.add(rbnLloroSi);
+        rbnLloroSi.setSelected(true);
+        rbnLloroSi.setText("Si");
 
-        bgrLloro.add(jRadioButton2);
-        jRadioButton2.setText("No");
+        bgrLloro.add(rbnLloroNo);
+        rbnLloroNo.setText("No");
 
         lblAsistenciaMedica.setText("Asistencia Medica");
 
-        bgrAsistenciaMedica.add(jRadioButton3);
-        jRadioButton3.setSelected(true);
-        jRadioButton3.setText("Si");
+        bgrAsistenciaMedica.add(rbnAsisMedSi);
+        rbnAsisMedSi.setSelected(true);
+        rbnAsisMedSi.setText("Si");
 
-        bgrAsistenciaMedica.add(jRadioButton4);
-        jRadioButton4.setText("No");
+        bgrAsistenciaMedica.add(rbnAsisMedNo);
+        rbnAsisMedNo.setText("No");
 
         lblColaboracion.setText("Colaboracion");
 
-        bgrColaboracion.add(jRadioButton5);
-        jRadioButton5.setSelected(true);
-        jRadioButton5.setText("Si");
+        bgrColaboracion.add(rbnColSi);
+        rbnColSi.setSelected(true);
+        rbnColSi.setText("Si");
 
-        bgrColaboracion.add(jRadioButton6);
-        jRadioButton6.setText("No");
+        bgrColaboracion.add(rbnColNo);
+        rbnColNo.setText("No");
 
         lblEstadoGralNinio.setText("Estado General del Ninño(a)");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txaEstadoGralNinio.setColumns(20);
+        txaEstadoGralNinio.setLineWrap(true);
+        txaEstadoGralNinio.setRows(5);
+        txaEstadoGralNinio.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(txaEstadoGralNinio);
 
-        lblPesoValMarker.setForeground(new java.awt.Color(255, 0, 0));
-        lblPesoValMarker.setLabelFor(txtPeso);
+        ftfPeso.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,27 +169,28 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
                     .addComponent(lblLloro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtPeso)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbnColSi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbnColNo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbnAsisMedSi)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbnAsisMedNo))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(ftfPeso, 0, 0, Short.MAX_VALUE)
                         .addComponent(cmbTipoParto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton5)
+                        .addComponent(rbnLloroSi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton6))
+                        .addComponent(rbnLloroNo)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblEstadoGralNinio))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPesoValMarker)
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEstadoGralNinio)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -179,23 +206,22 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPeso)
-                            .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPesoValMarker))
+                            .addComponent(ftfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblLloro)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
+                            .addComponent(rbnLloroSi)
+                            .addComponent(rbnLloroNo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAsistenciaMedica)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton4))
+                            .addComponent(rbnAsisMedSi)
+                            .addComponent(rbnAsisMedNo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblColaboracion)
-                            .addComponent(jRadioButton5)
-                            .addComponent(jRadioButton6)))
+                            .addComponent(rbnColSi)
+                            .addComponent(rbnColNo)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -230,8 +256,18 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -263,6 +299,41 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        statusMessageLabel.setVisible(false);
+        statusAnimationLabel.setVisible(false);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        String trabajoCompletoMensaje = "Antecedentes Neonatal registrado exitosamente.";
+        pc.start();
+
+        // si todo esta bien
+        statusMessageLabel.setVisible(false);
+        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+            antNeonatal = new AntNeonatal(null, cmbTipoParto.getSelectedItem().toString(), rbnAsisMedSi.isSelected() ? 'S' : 'N');
+            antNeonatal.setAnePeso(!ftfPeso.getText().isEmpty() ? BigDecimal.valueOf(Double.parseDouble(ftfPeso.getText())) : null);
+            antNeonatal.setAneLloro(rbnLloroSi.isSelected() ? 'S' : 'N');
+            antNeonatal.setAneColaboracion(rbnColSi.isSelected() ? 'S' : 'N');
+            antNeonatal.setAneEstadoGeneral(!txaEstadoGralNinio.getText().isEmpty() ? txaEstadoGralNinio.getText() : null);
+        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+        }
+
+        statusMessageLabel.setText(trabajoCompletoMensaje);
+        statusMessageLabel.setForeground(Color.GREEN);
+        statusMessageLabel.setVisible(true);
+        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
+        pc.stop();
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,25 +385,24 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox cmbTipoParto;
+    private javax.swing.JFormattedTextField ftfPeso;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblAsistenciaMedica;
     private javax.swing.JLabel lblColaboracion;
     private javax.swing.JLabel lblEstadoGralNinio;
     private javax.swing.JLabel lblLloro;
     private javax.swing.JLabel lblPeso;
-    private javax.swing.JLabel lblPesoValMarker;
     private javax.swing.JLabel lblTipoParto;
+    private javax.swing.JRadioButton rbnAsisMedNo;
+    private javax.swing.JRadioButton rbnAsisMedSi;
+    private javax.swing.JRadioButton rbnColNo;
+    private javax.swing.JRadioButton rbnColSi;
+    private javax.swing.JRadioButton rbnLloroNo;
+    private javax.swing.JRadioButton rbnLloroSi;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
-    private javax.swing.JTextField txtPeso;
+    private javax.swing.JTextArea txaEstadoGralNinio;
     // End of variables declaration//GEN-END:variables
 }
