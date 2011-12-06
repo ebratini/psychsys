@@ -10,29 +10,6 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="bgrSexoPreferido">
     </Component>
-    <Container class="javax.swing.JPopupMenu" name="ppmAntPersMadre">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-      <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="mniAgregarHabitoToxico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
-          </Properties>
-        </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="mniEditarHabitoToxico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
-          </Properties>
-        </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="mniEliminarHabitoToxico">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
-          </Properties>
-        </MenuItem>
-      </SubComponents>
-    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -62,7 +39,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="statusPanel" alignment="0" max="32767" attributes="1"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="256" max="32767" attributes="0"/>
+              <EmptySpace pref="229" max="32767" attributes="0"/>
               <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
@@ -70,7 +47,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="pnlAntPersMadre" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -79,8 +56,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <Component id="pnlAntPersMadre" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCancelar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="btnAceptar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
@@ -92,7 +69,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="pnlAntPersMadre">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -104,12 +81,18 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -126,86 +109,96 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblAmenazaAborto" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblIntentoAborto" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblSexoPreferido" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblEmbarazoDeseado" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDuracion" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cmbDuracionEmbarazo" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jRadioButton5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jRadioButton6" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jRadioButton7" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jRadioButton8" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jRadioButton9" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="chkEmbarazo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jScrollPane1" pref="329" max="32767" attributes="1"/>
                           </Group>
-                          <Component id="lblHabitosToxicos" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEnfermedadesEnEmbarazo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jScrollPane2" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
-                              <Component id="jScrollPane1" alignment="0" pref="362" max="32767" attributes="1"/>
+                              <Group type="102" alignment="0" attributes="1">
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblAmenazaAborto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblIntentoAborto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblSexoPreferido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblEmbarazoDeseado" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblDuracion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cmbDuracionEmbarazo" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rbnEmbDesSi" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="rbnEmbDesNo" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rbnAmAbSi" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="rbnAmAbNo" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rbnInAbSi" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="rbnInAbNo" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rbnSexPrefFem" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="rbnSexPrefMas" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="rbnSexPrefInd" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="chkEmbarazo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="lblHabitosToxicos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblEnfermedadesEnEmbarazo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane3" alignment="0" pref="329" max="32767" attributes="1"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="chkEmbarazo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblEmbarazoDeseado" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbnEmbDesSi" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbnEmbDesNo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblAmenazaAborto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbnAmAbSi" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbnAmAbNo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblIntentoAborto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbnInAbSi" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbnInAbNo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblSexoPreferido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbnSexPrefFem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbnSexPrefMas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbnSexPrefInd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -215,15 +208,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblHabitosToxicos" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="74" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblEnfermedadesEnEmbarazo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="50" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="73" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="67" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -235,7 +228,7 @@
                 <Property name="text" type="java.lang.String" value="Embarazo Deseado"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+            <Component class="javax.swing.JRadioButton" name="rbnEmbDesSi">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="bgrEmbarazoDeseado"/>
@@ -244,7 +237,7 @@
                 <Property name="text" type="java.lang.String" value="Si"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+            <Component class="javax.swing.JRadioButton" name="rbnEmbDesNo">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="bgrEmbarazoDeseado"/>
@@ -252,7 +245,7 @@
                 <Property name="text" type="java.lang.String" value="No"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbnEmbDesNoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAmenazaAborto">
@@ -260,7 +253,7 @@
                 <Property name="text" type="java.lang.String" value="Amenaza de Aborto"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+            <Component class="javax.swing.JRadioButton" name="rbnAmAbSi">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="bgrAmenazaAborto"/>
@@ -268,7 +261,7 @@
                 <Property name="text" type="java.lang.String" value="Si"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+            <Component class="javax.swing.JRadioButton" name="rbnAmAbNo">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="bgrAmenazaAborto"/>
@@ -277,7 +270,7 @@
                 <Property name="text" type="java.lang.String" value="No"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton4ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbnAmAbNoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblIntentoAborto">
@@ -285,7 +278,7 @@
                 <Property name="text" type="java.lang.String" value="Intento de Aborto"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton5">
+            <Component class="javax.swing.JRadioButton" name="rbnInAbSi">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="bgrIntentoAborto"/>
@@ -293,7 +286,7 @@
                 <Property name="text" type="java.lang.String" value="Si"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton6">
+            <Component class="javax.swing.JRadioButton" name="rbnInAbNo">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="bgrIntentoAborto"/>
@@ -302,7 +295,7 @@
                 <Property name="text" type="java.lang.String" value="No"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton6ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbnInAbNoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblSexoPreferido">
@@ -310,7 +303,7 @@
                 <Property name="text" type="java.lang.String" value="Sexo Preferido"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton7">
+            <Component class="javax.swing.JRadioButton" name="rbnSexPrefFem">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="bgrSexoPreferido"/>
@@ -318,7 +311,7 @@
                 <Property name="text" type="java.lang.String" value="Femenino"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton8">
+            <Component class="javax.swing.JRadioButton" name="rbnSexPrefMas">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="bgrSexoPreferido"/>
@@ -326,7 +319,7 @@
                 <Property name="text" type="java.lang.String" value="Masculino"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton8ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbnSexPrefMasActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblDuracion">
@@ -354,52 +347,6 @@
                 </Property>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTable" name="tblHabitosToxicos">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                        <EtchetBorder/>
-                      </Border>
-                    </Property>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="1" rowCount="3">
-                        <Column editable="true" title="Habito Toxico" type="java.lang.Object">
-                          <Data value="Alcohol"/>
-                          <Data value="Tabaco"/>
-                          <Data value="Nuevo"/>
-                        </Column>
-                      </Table>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTable" name="tblEnfermedadesEnEmbarazo">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                        <EtchetBorder/>
-                      </Border>
-                    </Property>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="1" rowCount="1">
-                        <Column editable="true" title="Enfermedad" type="java.lang.Object">
-                          <Data value="Nuevo"/>
-                        </Column>
-                      </Table>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -411,7 +358,7 @@
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="lineWrap" type="boolean" value="true"/>
-                    <Property name="rows" type="int" value="5"/>
+                    <Property name="rows" type="int" value="3"/>
                     <Property name="wrapStyleWord" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -441,7 +388,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkEmbarazoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton9">
+            <Component class="javax.swing.JRadioButton" name="rbnSexPrefInd">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="bgrSexoPreferido"/>
@@ -450,6 +397,40 @@
                 <Property name="text" type="java.lang.String" value="Indiferente"/>
               </Properties>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="txaHabitosToxicos">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="lineWrap" type="boolean" value="true"/>
+                    <Property name="rows" type="int" value="3"/>
+                    <Property name="wrapStyleWord" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="txaEnfDuranteEmbarazo">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="lineWrap" type="boolean" value="true"/>
+                    <Property name="rows" type="int" value="3"/>
+                    <Property name="wrapStyleWord" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -458,6 +439,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Aceptar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
@@ -472,11 +456,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="statusPanelSeparator" alignment="0" pref="422" max="32767" attributes="0"/>
+              <Component id="statusPanelSeparator" alignment="0" pref="395" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="103" max="32767" attributes="0"/>
+                  <EmptySpace pref="76" max="32767" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

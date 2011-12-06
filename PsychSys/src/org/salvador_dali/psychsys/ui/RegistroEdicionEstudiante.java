@@ -952,7 +952,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (modo.equals(RegistroEdicionModo.REGISTRO)) {
             int rowEditing = tblTutores.getSelectedRow();
-            String oldRelFam = tblTutores.getValueAt(rowEditing, 1).toString();
+            String oldRelFam = tblTutores.getValueAt(rowEditing, 1) != null ? tblTutores.getValueAt(rowEditing, 1).toString() : "";
             String nuevoRelFamiliar = JOptionPane.showInputDialog(this, "Relacion Familiar", tblTutores.getValueAt(rowEditing, 1));
             if (nuevoRelFamiliar == null || (nuevoRelFamiliar != null && nuevoRelFamiliar.isEmpty())) {
                 nuevoRelFamiliar = oldRelFam;

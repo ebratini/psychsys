@@ -29,11 +29,11 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JCheckBox;
 import org.salvador_dali.psychsys.model.entities.AntPersMadre;
-import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 
 /**
  *
@@ -42,7 +42,6 @@ import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
-    private HistoriaClinica hicAEditar;
     private AntPersMadre antPersMadre;
 
     /** Creates new form RegistroEdicionAntPersMadre */
@@ -59,6 +58,14 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         this.antPersMadre = antPersMadre;
     }
 
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
+        this.modo = modo;
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -72,52 +79,39 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         bgrAmenazaAborto = new javax.swing.ButtonGroup();
         bgrIntentoAborto = new javax.swing.ButtonGroup();
         bgrSexoPreferido = new javax.swing.ButtonGroup();
-        ppmAntPersMadre = new javax.swing.JPopupMenu();
-        mniAgregarHabitoToxico = new javax.swing.JMenuItem();
-        mniEditarHabitoToxico = new javax.swing.JMenuItem();
-        mniEliminarHabitoToxico = new javax.swing.JMenuItem();
-        jPanel1 = new javax.swing.JPanel();
+        pnlAntPersMadre = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblEmbarazoDeseado = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbnEmbDesSi = new javax.swing.JRadioButton();
+        rbnEmbDesNo = new javax.swing.JRadioButton();
         lblAmenazaAborto = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        rbnAmAbSi = new javax.swing.JRadioButton();
+        rbnAmAbNo = new javax.swing.JRadioButton();
         lblIntentoAborto = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        rbnInAbSi = new javax.swing.JRadioButton();
+        rbnInAbNo = new javax.swing.JRadioButton();
         lblSexoPreferido = new javax.swing.JLabel();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
+        rbnSexPrefFem = new javax.swing.JRadioButton();
+        rbnSexPrefMas = new javax.swing.JRadioButton();
         lblDuracion = new javax.swing.JLabel();
         cmbDuracionEmbarazo = new javax.swing.JComboBox();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblHabitosToxicos = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblEnfermedadesEnEmbarazo = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         txaAlteracionesPsiquicas = new javax.swing.JTextArea();
         lblHabitosToxicos = new javax.swing.JLabel();
         lblEnfermedadesEnEmbarazo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         chkEmbarazo = new javax.swing.JCheckBox();
-        jRadioButton9 = new javax.swing.JRadioButton();
+        rbnSexPrefInd = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txaHabitosToxicos = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaEnfDuranteEmbarazo = new javax.swing.JTextArea();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
-
-        mniAgregarHabitoToxico.setText("jMenuItem1");
-        ppmAntPersMadre.add(mniAgregarHabitoToxico);
-
-        mniEditarHabitoToxico.setText("jMenuItem1");
-        ppmAntPersMadre.add(mniEditarHabitoToxico);
-
-        mniEliminarHabitoToxico.setText("jMenuItem1");
-        ppmAntPersMadre.add(mniEliminarHabitoToxico);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Antecedentes Personales Madre");
@@ -128,62 +122,62 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Antecedentes Personales Madre"));
+        pnlAntPersMadre.setBorder(javax.swing.BorderFactory.createTitledBorder("Antecedentes Personales Madre"));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblEmbarazoDeseado.setText("Embarazo Deseado");
 
-        bgrEmbarazoDeseado.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Si");
+        bgrEmbarazoDeseado.add(rbnEmbDesSi);
+        rbnEmbDesSi.setSelected(true);
+        rbnEmbDesSi.setText("Si");
 
-        bgrEmbarazoDeseado.add(jRadioButton2);
-        jRadioButton2.setText("No");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        bgrEmbarazoDeseado.add(rbnEmbDesNo);
+        rbnEmbDesNo.setText("No");
+        rbnEmbDesNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rbnEmbDesNoActionPerformed(evt);
             }
         });
 
         lblAmenazaAborto.setText("Amenaza de Aborto");
 
-        bgrAmenazaAborto.add(jRadioButton3);
-        jRadioButton3.setText("Si");
+        bgrAmenazaAborto.add(rbnAmAbSi);
+        rbnAmAbSi.setText("Si");
 
-        bgrAmenazaAborto.add(jRadioButton4);
-        jRadioButton4.setSelected(true);
-        jRadioButton4.setText("No");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+        bgrAmenazaAborto.add(rbnAmAbNo);
+        rbnAmAbNo.setSelected(true);
+        rbnAmAbNo.setText("No");
+        rbnAmAbNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
+                rbnAmAbNoActionPerformed(evt);
             }
         });
 
         lblIntentoAborto.setText("Intento de Aborto");
 
-        bgrIntentoAborto.add(jRadioButton5);
-        jRadioButton5.setText("Si");
+        bgrIntentoAborto.add(rbnInAbSi);
+        rbnInAbSi.setText("Si");
 
-        bgrIntentoAborto.add(jRadioButton6);
-        jRadioButton6.setSelected(true);
-        jRadioButton6.setText("No");
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+        bgrIntentoAborto.add(rbnInAbNo);
+        rbnInAbNo.setSelected(true);
+        rbnInAbNo.setText("No");
+        rbnInAbNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
+                rbnInAbNoActionPerformed(evt);
             }
         });
 
         lblSexoPreferido.setText("Sexo Preferido");
 
-        bgrSexoPreferido.add(jRadioButton7);
-        jRadioButton7.setText("Femenino");
+        bgrSexoPreferido.add(rbnSexPrefFem);
+        rbnSexPrefFem.setText("Femenino");
 
-        bgrSexoPreferido.add(jRadioButton8);
-        jRadioButton8.setText("Masculino");
-        jRadioButton8.addActionListener(new java.awt.event.ActionListener() {
+        bgrSexoPreferido.add(rbnSexPrefMas);
+        rbnSexPrefMas.setText("Masculino");
+        rbnSexPrefMas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton8ActionPerformed(evt);
+                rbnSexPrefMasActionPerformed(evt);
             }
         });
 
@@ -191,33 +185,9 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
 
         cmbDuracionEmbarazo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
-        tblHabitosToxicos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tblHabitosToxicos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Alcohol"},
-                {"Tabaco"},
-                {"Nuevo"}
-            },
-            new String [] {
-                "Habito Toxico"
-            }
-        ));
-        jScrollPane1.setViewportView(tblHabitosToxicos);
-
-        tblEnfermedadesEnEmbarazo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        tblEnfermedadesEnEmbarazo.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Nuevo"}
-            },
-            new String [] {
-                "Enfermedad"
-            }
-        ));
-        jScrollPane2.setViewportView(tblEnfermedadesEnEmbarazo);
-
         txaAlteracionesPsiquicas.setColumns(20);
         txaAlteracionesPsiquicas.setLineWrap(true);
-        txaAlteracionesPsiquicas.setRows(5);
+        txaAlteracionesPsiquicas.setRows(3);
         txaAlteracionesPsiquicas.setWrapStyleWord(true);
         jScrollPane3.setViewportView(txaAlteracionesPsiquicas);
 
@@ -235,54 +205,72 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
             }
         });
 
-        bgrSexoPreferido.add(jRadioButton9);
-        jRadioButton9.setSelected(true);
-        jRadioButton9.setText("Indiferente");
+        bgrSexoPreferido.add(rbnSexPrefInd);
+        rbnSexPrefInd.setSelected(true);
+        rbnSexPrefInd.setText("Indiferente");
+
+        txaHabitosToxicos.setColumns(20);
+        txaHabitosToxicos.setLineWrap(true);
+        txaHabitosToxicos.setRows(3);
+        txaHabitosToxicos.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(txaHabitosToxicos);
+
+        txaEnfDuranteEmbarazo.setColumns(20);
+        txaEnfDuranteEmbarazo.setLineWrap(true);
+        txaEnfDuranteEmbarazo.setRows(3);
+        txaEnfDuranteEmbarazo.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(txaEnfDuranteEmbarazo);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAmenazaAborto)
-                            .addComponent(lblIntentoAborto)
-                            .addComponent(lblSexoPreferido)
-                            .addComponent(lblEmbarazoDeseado)
-                            .addComponent(lblDuracion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbDuracionEmbarazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton2))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton4))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton6))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButton7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton9))
-                            .addComponent(chkEmbarazo)))
-                    .addComponent(lblHabitosToxicos)
-                    .addComponent(lblEnfermedadesEnEmbarazo)
-                    .addComponent(jLabel8)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(jScrollPane2))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblAmenazaAborto)
+                                        .addComponent(lblIntentoAborto)
+                                        .addComponent(lblSexoPreferido)
+                                        .addComponent(lblEmbarazoDeseado)
+                                        .addComponent(lblDuracion))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbDuracionEmbarazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(rbnEmbDesSi)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(rbnEmbDesNo))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(rbnAmAbSi)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(rbnAmAbNo))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(rbnInAbSi)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(rbnInAbNo))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(rbnSexPrefFem)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(rbnSexPrefMas)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(rbnSexPrefInd))
+                                        .addComponent(chkEmbarazo)))
+                                .addComponent(lblHabitosToxicos)
+                                .addComponent(lblEnfermedadesEnEmbarazo)
+                                .addComponent(jLabel8)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,24 +279,24 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmbarazoDeseado)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rbnEmbDesSi)
+                    .addComponent(rbnEmbDesNo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAmenazaAborto)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4))
+                    .addComponent(rbnAmAbSi)
+                    .addComponent(rbnAmAbNo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIntentoAborto)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6))
+                    .addComponent(rbnInAbSi)
+                    .addComponent(rbnInAbNo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSexoPreferido)
-                    .addComponent(jRadioButton7)
-                    .addComponent(jRadioButton8)
-                    .addComponent(jRadioButton9))
+                    .addComponent(rbnSexPrefFem)
+                    .addComponent(rbnSexPrefMas)
+                    .addComponent(rbnSexPrefInd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDuracion)
@@ -316,30 +304,39 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHabitosToxicos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblEnfermedadesEnEmbarazo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout pnlAntPersMadreLayout = new javax.swing.GroupLayout(pnlAntPersMadre);
+        pnlAntPersMadre.setLayout(pnlAntPersMadreLayout);
+        pnlAntPersMadreLayout.setHorizontalGroup(
+            pnlAntPersMadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAntPersMadreLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pnlAntPersMadreLayout.setVerticalGroup(
+            pnlAntPersMadreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAntPersMadreLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -358,11 +355,11 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -383,22 +380,22 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(statusPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(256, Short.MAX_VALUE)
+                .addContainerGap(229, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelar)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlAntPersMadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(pnlAntPersMadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -409,21 +406,21 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+private void rbnEmbDesNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnEmbDesNoActionPerformed
 // TODO add your handling code here:
-}//GEN-LAST:event_jRadioButton2ActionPerformed
+}//GEN-LAST:event_rbnEmbDesNoActionPerformed
 
-private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+private void rbnAmAbNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnAmAbNoActionPerformed
 // TODO add your handling code here:
-}//GEN-LAST:event_jRadioButton4ActionPerformed
+}//GEN-LAST:event_rbnAmAbNoActionPerformed
 
-private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+private void rbnInAbNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnInAbNoActionPerformed
 // TODO add your handling code here:
-}//GEN-LAST:event_jRadioButton6ActionPerformed
+}//GEN-LAST:event_rbnInAbNoActionPerformed
 
-private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
+private void rbnSexPrefMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnSexPrefMasActionPerformed
 // TODO add your handling code here:
-}//GEN-LAST:event_jRadioButton8ActionPerformed
+}//GEN-LAST:event_rbnSexPrefMasActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
@@ -445,9 +442,9 @@ private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private void chkEmbarazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEmbarazoActionPerformed
         // TODO add your handling code here:
         if (!chkEmbarazo.isSelected()) {
-            setEnabledState(jPanel2, false);
+            setEnabledState(pnlAntPersMadre, false);
         } else {
-            setEnabledState(jPanel2, true);
+            setEnabledState(pnlAntPersMadre, true);
         }
     }//GEN-LAST:event_chkEmbarazoActionPerformed
 
@@ -456,6 +453,33 @@ private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         statusMessageLabel.setVisible(false);
         statusAnimationLabel.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        String trabajoCompletoMensaje = "Antecedentes Personales de Madre registrado exitosamente.";
+        pc.start();
+
+        // si todo esta bien
+        statusMessageLabel.setVisible(false);
+        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) { 
+            antPersMadre = new AntPersMadre(null, chkEmbarazo.isSelected() ? 'S' : 'N', rbnAmAbSi.isSelected() ? 'S' : 'N',
+                    rbnInAbSi.isSelected() ? 'S' : 'N', rbnEmbDesSi.isSelected() ? 'S' : 'N',
+                    rbnSexPrefFem.isSelected() ? 'F' : (rbnSexPrefMas.isSelected() ? 'M' : 'I'));
+
+            antPersMadre.setApmDuracionEmbarazo(Integer.parseInt(cmbDuracionEmbarazo.getSelectedItem().toString()));
+            antPersMadre.setApmHabitosToxicos(txaHabitosToxicos.getText());
+            antPersMadre.setApmEnfermedadesEmbarazo(!txaEnfDuranteEmbarazo.getText().isEmpty() ? txaEnfDuranteEmbarazo.getText() : null);
+            antPersMadre.setApmAlteracionesPsiquicas(!txaAlteracionesPsiquicas.getText().isEmpty() ? txaAlteracionesPsiquicas.getText() : null);
+        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+        }
+
+        statusMessageLabel.setText(trabajoCompletoMensaje);
+        statusMessageLabel.setForeground(Color.GREEN);
+        statusMessageLabel.setVisible(true);
+        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
+        pc.stop();
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,17 +534,7 @@ private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JCheckBox chkEmbarazo;
     private javax.swing.JComboBox cmbDuracionEmbarazo;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -531,15 +545,21 @@ private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     private javax.swing.JLabel lblHabitosToxicos;
     private javax.swing.JLabel lblIntentoAborto;
     private javax.swing.JLabel lblSexoPreferido;
-    private javax.swing.JMenuItem mniAgregarHabitoToxico;
-    private javax.swing.JMenuItem mniEditarHabitoToxico;
-    private javax.swing.JMenuItem mniEliminarHabitoToxico;
-    private javax.swing.JPopupMenu ppmAntPersMadre;
+    private javax.swing.JPanel pnlAntPersMadre;
+    private javax.swing.JRadioButton rbnAmAbNo;
+    private javax.swing.JRadioButton rbnAmAbSi;
+    private javax.swing.JRadioButton rbnEmbDesNo;
+    private javax.swing.JRadioButton rbnEmbDesSi;
+    private javax.swing.JRadioButton rbnInAbNo;
+    private javax.swing.JRadioButton rbnInAbSi;
+    private javax.swing.JRadioButton rbnSexPrefFem;
+    private javax.swing.JRadioButton rbnSexPrefInd;
+    private javax.swing.JRadioButton rbnSexPrefMas;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
-    private javax.swing.JTable tblEnfermedadesEnEmbarazo;
-    private javax.swing.JTable tblHabitosToxicos;
     private javax.swing.JTextArea txaAlteracionesPsiquicas;
+    private javax.swing.JTextArea txaEnfDuranteEmbarazo;
+    private javax.swing.JTextArea txaHabitosToxicos;
     // End of variables declaration//GEN-END:variables
 }
