@@ -43,6 +43,7 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private AntPersMadre antPersMadre;
+    private AntPersMadre apmEditar;
 
     /** Creates new form RegistroEdicionAntPersMadre */
     public RegistroEdicionAntPersMadre(java.awt.Frame parent, boolean modal) {
@@ -471,7 +472,21 @@ private void rbnSexPrefMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             antPersMadre.setApmHabitosToxicos(txaHabitosToxicos.getText());
             antPersMadre.setApmEnfermedadesEmbarazo(!txaEnfDuranteEmbarazo.getText().isEmpty() ? txaEnfDuranteEmbarazo.getText() : null);
             antPersMadre.setApmAlteracionesPsiquicas(!txaAlteracionesPsiquicas.getText().isEmpty() ? txaAlteracionesPsiquicas.getText() : null);
+            
+            // se registra cuando le dan aceptar en ventana de historia clinica
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            apmEditar.setApmEmbarazo(chkEmbarazo.isSelected() ? 'S' : 'N');
+            apmEditar.setApmAmenazaAborto(rbnAmAbSi.isSelected() ? 'S' : 'N');
+            apmEditar.setApmIntentoAborto(rbnInAbSi.isSelected() ? 'S' : 'N');
+            apmEditar.setApmEmbarazoDeseado(rbnEmbDesSi.isSelected() ? 'S' : 'N');
+            apmEditar.setApmSexoPreferido(rbnSexPrefFem.isSelected() ? 'F' : (rbnSexPrefMas.isSelected() ? 'M' : 'I'));
+            
+            apmEditar.setApmDuracionEmbarazo(Integer.parseInt(cmbDuracionEmbarazo.getSelectedItem().toString()));
+            apmEditar.setApmHabitosToxicos(txaHabitosToxicos.getText());
+            apmEditar.setApmEnfermedadesEmbarazo(!txaEnfDuranteEmbarazo.getText().isEmpty() ? txaEnfDuranteEmbarazo.getText() : null);
+            apmEditar.setApmAlteracionesPsiquicas(!txaAlteracionesPsiquicas.getText().isEmpty() ? txaAlteracionesPsiquicas.getText() : null);
+            
+            // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 
         statusMessageLabel.setText(trabajoCompletoMensaje);

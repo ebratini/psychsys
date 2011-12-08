@@ -31,7 +31,6 @@ package org.salvador_dali.psychsys.ui;
 
 import java.awt.Color;
 import java.math.BigDecimal;
-import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.model.entities.AntNeonatal;
 
 /**
@@ -42,6 +41,7 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private AntNeonatal antNeonatal;
+    private AntNeonatal anEditar;
 
     /** Creates new form RegistroEdicionAntNeonatal */
     public RegistroEdicionAntNeonatal(java.awt.Frame parent, boolean modal) {
@@ -184,8 +184,8 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
                         .addComponent(rbnLloroSi)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rbnLloroNo)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(lblEstadoGralNinio))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -202,8 +202,8 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
                     .addComponent(cmbTipoParto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEstadoGralNinio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPeso)
                             .addComponent(ftfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,7 +222,7 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
                             .addComponent(lblColaboracion)
                             .addComponent(rbnColSi)
                             .addComponent(rbnColNo)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -325,7 +325,18 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
             antNeonatal.setAneLloro(rbnLloroSi.isSelected() ? 'S' : 'N');
             antNeonatal.setAneColaboracion(rbnColSi.isSelected() ? 'S' : 'N');
             antNeonatal.setAneEstadoGeneral(!txaEstadoGralNinio.getText().isEmpty() ? txaEstadoGralNinio.getText() : null);
+            
+            // se registra cuando le dan aceptar en ventana de historia clinica
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            anEditar.setAneTipoParto(cmbTipoParto.getSelectedItem().toString());
+            anEditar.setAneAsistenciaMedica(rbnAsisMedSi.isSelected() ? 'S' : 'N');
+            
+            anEditar.setAnePeso(!ftfPeso.getText().isEmpty() ? BigDecimal.valueOf(Double.parseDouble(ftfPeso.getText())) : null);
+            anEditar.setAneLloro(rbnLloroSi.isSelected() ? 'S' : 'N');
+            anEditar.setAneColaboracion(rbnColSi.isSelected() ? 'S' : 'N');
+            anEditar.setAneEstadoGeneral(!txaEstadoGralNinio.getText().isEmpty() ? txaEstadoGralNinio.getText() : null);
+            
+            // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 
         statusMessageLabel.setText(trabajoCompletoMensaje);
