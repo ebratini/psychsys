@@ -77,7 +77,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     private JPanel pnlStatusBar;
     private JLabel statusMessageLabel = new JLabel("Ready");
     private JLabel taskSelectedLabel = new JLabel();
-    private JLabel usuarioLogeado = new JLabel("Usuario no logeado");
+    private JLabel usuariologueado = new JLabel("Usuario no logueado");
     private JLabel timeDate = new JLabel("Time/Date");
 
     public PsychSysDesktop() {
@@ -130,13 +130,13 @@ public class PsychSysDesktop extends JRibbonFrame {
         pnlStatusBar.setPreferredSize(new Dimension(400, 25));
         pnlStatusBar.add(statusMessageLabel, BorderLayout.WEST);
 
-        usuarioLogeado.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
+        usuariologueado.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
         taskSelectedLabel.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
         timeDate.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 
         JPanel pnl = new JPanel(new BorderLayout(2, 0));
         pnl.add(taskSelectedLabel, BorderLayout.WEST);
-        pnl.add(usuarioLogeado, BorderLayout.CENTER);
+        pnl.add(usuariologueado, BorderLayout.CENTER);
         pnl.add(timeDate, BorderLayout.EAST);
 
         pnlStatusBar.add(pnl, BorderLayout.EAST);
@@ -517,7 +517,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         login.setVisible(true);
         usuario = login.getUsuario();
         if (usuario != null) {
-            usuarioLogeado.setText(String.format(" %s ", usuario.getUsrLogin()));
+            usuariologueado.setText(String.format(" %s ", usuario.getUsrLogin()));
             JRichTooltipPanel rtp = new JRichTooltipPanel(new RichTooltip("Login", "Bienvenido, " + login.getTxtNombreUsuario().getText()));
             pnlBody.add(rtp, BorderLayout.SOUTH);
             new Thread(new ToolTipShower(rtp)).start();
@@ -530,7 +530,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void doLogout(JCommandButton logInOutButton) {
         usuario = null;
-        usuarioLogeado.setText("Usuario no logeado");
+        usuariologueado.setText("Usuario no logueado");
         logInOutButton.setName("jcbLogIn");
         logInOutButton.setIcon(getResizableIconFromResource("/resources/images/login.png"));
         logInOutButton.setText("Log In");
@@ -553,8 +553,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         } else {
             logged = false;
             if (showWarnMessage) {
-                JOptionPane.showMessageDialog(PsychSysDesktop.this, "Usuario no logeado",
-                        "Login / Logout", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(PsychSysDesktop.this, "Usuario no logueado", "Login / Logout", JOptionPane.ERROR_MESSAGE);
             }
         }
         return logged;
