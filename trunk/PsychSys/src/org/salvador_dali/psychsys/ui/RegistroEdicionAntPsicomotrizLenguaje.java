@@ -29,11 +29,18 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
+import org.salvador_dali.psychsys.model.entities.AntPsicomotrizLenguaje;
+
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class RegistroEdicionAntPsicomotrizLenguaje extends javax.swing.JDialog {
+
+    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private AntPsicomotrizLenguaje apl;
+    private AntPsicomotrizLenguaje aplEditar;
 
     /** Creates new form RegistroEdicionAntPsicomotrizLenguaje */
     public RegistroEdicionAntPsicomotrizLenguaje(java.awt.Frame parent, boolean modal) {
@@ -109,8 +116,18 @@ public class RegistroEdicionAntPsicomotrizLenguaje extends javax.swing.JDialog {
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -221,6 +238,32 @@ public class RegistroEdicionAntPsicomotrizLenguaje extends javax.swing.JDialog {
         statusMessageLabel.setVisible(false);
         statusAnimationLabel.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        String trabajoCompletoMensaje = "Antecedentes psicomotriz lenguaje registrado exitosamente.";
+        pc.start();
+
+        // si todo esta bien
+        statusMessageLabel.setVisible(false);
+        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+            // se registra cuando le dan aceptar en ventana de historia clinica
+        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            // se actualiza cuando le dan aceptar en ventana de historia clinica
+        }
+
+        statusMessageLabel.setText(trabajoCompletoMensaje);
+        statusMessageLabel.setForeground(Color.GREEN);
+        statusMessageLabel.setVisible(true);
+        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
+        pc.stop();
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments

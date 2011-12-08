@@ -29,12 +29,19 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
+import org.salvador_dali.psychsys.model.entities.Escolaridad;
+
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
 
+    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private Escolaridad esc;
+    private Escolaridad escEditar;
+    
     /** Creates new form RegistroEdicionEscolaridad */
     public RegistroEdicionEscolaridad(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -87,6 +94,11 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Informacion de Escolaridad");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         statusMessageLabel.setForeground(new java.awt.Color(0, 153, 51));
         statusMessageLabel.setText("Informacion de escolaridad registrada exitosamente.");
@@ -118,8 +130,18 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -297,6 +319,38 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        statusMessageLabel.setVisible(false);
+        statusAnimationLabel.setVisible(false);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        String trabajoCompletoMensaje = "Antecedentes psicomotriz lenguaje registrado exitosamente.";
+        pc.start();
+
+        // si todo esta bien
+        statusMessageLabel.setVisible(false);
+        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+            // se registra cuando le dan aceptar en ventana de historia clinica
+        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            // se actualiza cuando le dan aceptar en ventana de historia clinica
+        }
+
+        statusMessageLabel.setText(trabajoCompletoMensaje);
+        statusMessageLabel.setForeground(Color.GREEN);
+        statusMessageLabel.setVisible(true);
+        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
+        pc.stop();
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments

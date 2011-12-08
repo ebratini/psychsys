@@ -29,11 +29,18 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.Color;
+import org.salvador_dali.psychsys.model.entities.AntRecienNacido;
+
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
+
+    private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private AntRecienNacido arn;
+    private AntRecienNacido arnEditar;
 
     /** Creates new form RegistroEdicionAntRecienNacido */
     public RegistroEdicionAntRecienNacido(java.awt.Frame parent, boolean modal) {
@@ -59,8 +66,8 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblLactanciaMaterna = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbnLacMatSi = new javax.swing.JRadioButton();
+        rbnLacMatNo = new javax.swing.JRadioButton();
         lblTiempoLactancia = new javax.swing.JLabel();
         lblProblemasEspeciales = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -71,6 +78,11 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Antecedentes Recien Nacido");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         statusMessageLabel.setForeground(new java.awt.Color(0, 153, 51));
         statusMessageLabel.setText("Antecedentes recien nacido registrado exitosamente.");
@@ -102,19 +114,29 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblLactanciaMaterna.setText("Lactancia Materna");
 
-        bgrLactanaciaMaterna.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Si");
+        bgrLactanaciaMaterna.add(rbnLacMatSi);
+        rbnLacMatSi.setSelected(true);
+        rbnLacMatSi.setText("Si");
 
-        bgrLactanaciaMaterna.add(jRadioButton2);
-        jRadioButton2.setText("No");
+        bgrLactanaciaMaterna.add(rbnLacMatNo);
+        rbnLacMatNo.setText("No");
 
         lblTiempoLactancia.setText("Tiempo Lactancia");
 
@@ -127,6 +149,8 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
 
         lblTiempoLactanciaValMarker.setForeground(new java.awt.Color(255, 51, 51));
         lblTiempoLactanciaValMarker.setLabelFor(spnTiempoLactancia);
+
+        spnTiempoLactancia.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,10 +167,10 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(spnTiempoLactancia, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(rbnLacMatSi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
+                            .addComponent(rbnLacMatNo)
                             .addComponent(lblTiempoLactanciaValMarker))
                         .addGap(2, 2, 2))
                     .addComponent(lblProblemasEspeciales))
@@ -158,8 +182,8 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLactanciaMaterna)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rbnLacMatSi)
+                    .addComponent(rbnLacMatNo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTiempoLactancia)
@@ -203,6 +227,38 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        statusMessageLabel.setVisible(false);
+        statusAnimationLabel.setVisible(false);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
+        String trabajoCompletoMensaje = "Antecedentes recien nacido registrado exitosamente.";
+        pc.start();
+
+        // si todo esta bien
+        statusMessageLabel.setVisible(false);
+        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+            // se registra cuando le dan aceptar en ventana de historia clinica
+        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            // se actualiza cuando le dan aceptar en ventana de historia clinica
+        }
+
+        statusMessageLabel.setText(trabajoCompletoMensaje);
+        statusMessageLabel.setForeground(Color.GREEN);
+        statusMessageLabel.setVisible(true);
+        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
+        pc.stop();
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,13 +308,13 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLactanciaMaterna;
     private javax.swing.JLabel lblProblemasEspeciales;
     private javax.swing.JLabel lblTiempoLactancia;
     private javax.swing.JLabel lblTiempoLactanciaValMarker;
+    private javax.swing.JRadioButton rbnLacMatNo;
+    private javax.swing.JRadioButton rbnLacMatSi;
     private javax.swing.JSpinner spnTiempoLactancia;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
