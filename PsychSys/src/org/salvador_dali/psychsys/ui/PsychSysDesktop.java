@@ -27,6 +27,7 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -71,6 +72,7 @@ import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 import org.salvador_dali.psychsys.model.entities.Tutor;
+import psychsys.PsychSys;
 
 /**
  *
@@ -170,9 +172,9 @@ public class PsychSysDesktop extends JRibbonFrame {
         return (List) Arrays.asList(new Object[]{
                     //new CoreRibbonResizePolicies.None(jrbAfiliadosBand.getControlPanel()),
                     new CoreRibbonResizePolicies.Mirror(jRibbonBand.getControlPanel()),
-                    new CoreRibbonResizePolicies.High2Mid(jRibbonBand.getControlPanel()),
-                    new CoreRibbonResizePolicies.Mid2Low(jRibbonBand.getControlPanel())} //new CoreRibbonResizePolicies.High2Low(jrbAfiliadosBand.getControlPanel()),
-                /*new IconRibbonBandResizePolicy(jrbAfiliadosBand.getControlPanel())*/);
+                    /*new CoreRibbonResizePolicies.High2Mid(jRibbonBand.getControlPanel()),*/
+                    new CoreRibbonResizePolicies.Mid2Low(jRibbonBand.getControlPanel()), //new CoreRibbonResizePolicies.High2Low(jrbAfiliadosBand.getControlPanel()),
+                    new IconRibbonBandResizePolicy(jRibbonBand.getControlPanel())});
     }
 
     private RibbonTask getHomeTask() {
@@ -297,9 +299,56 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         jcbVerReferimientos = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/referimientos.png"),
                 "jcbVerReferimientos", new RichTooltip("Ver", "Click aqui para ver los referimientos"), buttonActHandler);
+        jcbVerReferimientos.setCommandButtonKind(CommandButtonKind.ACTION_AND_POPUP_MAIN_ACTION);
+        jcbVerReferimientos.setPopupCallback(new PopupPanelCallback() {
+
+            @Override
+            public JPopupPanel getPopupPanel(JCommandButton commandButton) {
+                return new JCommandPopupMenu() {
+                    {
+                        JCommandMenuButton verReferimientoButton = new JCommandMenuButton("Observacion Referimiento", new EmptyResizableIcon(16));
+                        verReferimientoButton.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                verObservacionReferimiento();
+                            }
+                        });
+                        verReferimientoButton.setActionKeyTip("Observacion Referimiento");
+                        this.addMenuButton(verReferimientoButton);
+                    }
+                };
+            }
+        });
+        jcbVerReferimientos.setPopupRichTooltip(new RichTooltip("Ver", "Click aqui para mas opciones"));
+        
 
         jcbRegistrarReferimiento = createJCommandButton("Nuevo", getResizableIconFromResource("/resources/images/add.png"),
                 "jcbRegistrarReferimiento", new RichTooltip("Nuevo", "Click aqui para registrar referimiento"), buttonActHandler);
+        jcbRegistrarReferimiento.setCommandButtonKind(CommandButtonKind.ACTION_AND_POPUP_MAIN_ACTION);
+        //jcbRegistrarReferimiento.setPopupOrientationKind(JCommandButton.CommandButtonPopupOrientationKind.SIDEWARD);
+        jcbRegistrarReferimiento.setPopupCallback(new PopupPanelCallback() {
+
+            @Override
+            public JPopupPanel getPopupPanel(JCommandButton commandButton) {
+                return new JCommandPopupMenu() {
+                    {
+                        JCommandMenuButton nuevoReferimientoButton = new JCommandMenuButton("Observacion Referimiento", new EmptyResizableIcon(16));
+                        nuevoReferimientoButton.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                registrarEditarObservacionReferimiento(RegistroEdicionModo.REGISTRO, null);
+                            }
+                        });
+                        nuevoReferimientoButton.setActionKeyTip("Observacion Referimiento");
+                        this.addMenuButton(nuevoReferimientoButton);
+                    }
+                };
+            }
+        });
+        jcbRegistrarReferimiento.setPopupRichTooltip(new RichTooltip("Nuevo", "Click aqui para mas opciones"));
+
 
         jcbEditarReferimiento = createJCommandButton("Editar", getResizableIconFromResource("/resources/images/editar.png"),
                 "jcbEditarReferimiento", new RichTooltip("Editar", "Click aqui para editar referimiento"), buttonActHandler);
@@ -307,22 +356,23 @@ public class PsychSysDesktop extends JRibbonFrame {
         jcbEliminarReferimiento = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
                 "jcbEliminarReferimiento", new RichTooltip("Eliminar", "Click aqui para eliminar referimiento(s)"), buttonActHandler);
 
-        jcbCrearObservacion = createJCommandButton("Crear Observacion", getResizableIconFromResource("/resources/images/referimientos.png"),
-                "jcbCrearObservacion", new RichTooltip("Crear Observacion", "Click aqui para crear observacion de referimiento"), buttonActHandler);
+        //jcbCrearObservacion = createJCommandButton("Crear Observacion", getResizableIconFromResource("/resources/images/referimientos.png"),
+        //      "jcbCrearObservacion", new RichTooltip("Crear Observacion", "Click aqui para crear observacion de referimiento"), buttonActHandler);
 
         // creando la banda
         JRibbonBand jrbReferimientosBand = new JRibbonBand("Referimientos", getResizableIconFromResource("/resources/images/referimientos.png"));
         jrbReferimientosBand.addCommandButton(jcbVerReferimientos, RibbonElementPriority.TOP);
-        jrbReferimientosBand.addCommandButton(jcbRegistrarReferimiento, RibbonElementPriority.TOP);
+        jrbReferimientosBand.addCommandButton(jcbRegistrarReferimiento, RibbonElementPriority.MEDIUM);
         jrbReferimientosBand.addCommandButton(jcbEditarReferimiento, RibbonElementPriority.MEDIUM);
         jrbReferimientosBand.addCommandButton(jcbEliminarReferimiento, RibbonElementPriority.MEDIUM);
-        jrbReferimientosBand.addCommandButton(jcbCrearObservacion, RibbonElementPriority.MEDIUM);
+        //jrbReferimientosBand.addCommandButton(jcbCrearObservacion, RibbonElementPriority.MEDIUM);
 
+        //jrbReferimientosBand.setResizePolicies(this.getRibbonBandResizePolicy(jrbReferimientosBand));
         jrbReferimientosBand.setResizePolicies((List) Arrays.asList(new Object[]{
-                    new CoreRibbonResizePolicies.None(jrbReferimientosBand.getControlPanel()),
-                    new CoreRibbonResizePolicies.Mirror(jrbReferimientosBand.getControlPanel()),
-                    new CoreRibbonResizePolicies.Mid2Low(jrbReferimientosBand.getControlPanel()),
+                    /*new CoreRibbonResizePolicies.None(jrbReferimientosBand.getControlPanel()),*/
+                    new CoreRibbonResizePolicies.Mirror(jrbReferimientosBand.getControlPanel()),                    
                     new CoreRibbonResizePolicies.High2Mid(jrbReferimientosBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mid2Low(jrbReferimientosBand.getControlPanel()),
                     new IconRibbonBandResizePolicy(jrbReferimientosBand.getControlPanel())}));
 
 
@@ -347,19 +397,18 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         // creando la banda
         JRibbonBand jrbPruebasPsicologicasBand = new JRibbonBand("Pruebas Psicologicas", getResizableIconFromResource("/resources/images/pruebas_psicologicas.png"));
+        
+        jrbPruebasPsicologicasBand.addCommandButton(jcbCorregirPruebaPsicologica, RibbonElementPriority.TOP);
+        jrbPruebasPsicologicasBand.startGroup();
         jrbPruebasPsicologicasBand.addCommandButton(jcbVerPruebasPsicologicas, RibbonElementPriority.TOP);
         jrbPruebasPsicologicasBand.addCommandButton(jcbRegistrarPruebaPsicologica, RibbonElementPriority.MEDIUM);
         jrbPruebasPsicologicasBand.addCommandButton(jcbEditarPruebaPsicologica, RibbonElementPriority.MEDIUM);
         jrbPruebasPsicologicasBand.addCommandButton(jcbEliminarPruebaPsicologica, RibbonElementPriority.MEDIUM);
-        jrbPruebasPsicologicasBand.addCommandButton(jcbCorregirPruebaPsicologica, RibbonElementPriority.MEDIUM);
-
+        
         jrbPruebasPsicologicasBand.setResizePolicies((List) Arrays.asList(new Object[]{
-                    new CoreRibbonResizePolicies.None(jrbPruebasPsicologicasBand.getControlPanel()),
                     new CoreRibbonResizePolicies.Mirror(jrbPruebasPsicologicasBand.getControlPanel()),
                     new CoreRibbonResizePolicies.Mid2Low(jrbPruebasPsicologicasBand.getControlPanel()),
-                    new CoreRibbonResizePolicies.High2Mid(jrbPruebasPsicologicasBand.getControlPanel()),
                     new IconRibbonBandResizePolicy(jrbPruebasPsicologicasBand.getControlPanel())}));
-
 
         // casos band
         JCommandButton jcbVerCasos, jcbRegistrarCaso, jcbEditarCaso, jcbEliminarCaso;
@@ -383,50 +432,45 @@ public class PsychSysDesktop extends JRibbonFrame {
         jrbCasosBand.addCommandButton(jcbEditarCaso, RibbonElementPriority.MEDIUM);
         jrbCasosBand.addCommandButton(jcbEliminarCaso, RibbonElementPriority.MEDIUM);
 
-        //jrbCasosBand.setResizePolicies(getRibbonBandResizePolicy(jrbCasosBand));
         jrbCasosBand.setResizePolicies((List) Arrays.asList(new Object[]{
                     new CoreRibbonResizePolicies.None(jrbCasosBand.getControlPanel()),
                     new CoreRibbonResizePolicies.Mirror(jrbCasosBand.getControlPanel()),
                     new CoreRibbonResizePolicies.Mid2Low(jrbCasosBand.getControlPanel()),
-                    /*new CoreRibbonResizePolicies.High2Mid(jrbCasosBand.getControlPanel()),*/
                     new IconRibbonBandResizePolicy(jrbCasosBand.getControlPanel())}));
 
-        /*
+        
         // historia clinica band
         JCommandButton jcbVerHistoriasClinica, jcbRegistrarHistoriaClinica, jcbEditarHistoriaClinica, jcbEliminarHistoriaClinica;
         
         jcbVerHistoriasClinica = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/historia_clinica.png"),
-        "jcbVerReferimientos", new RichTooltip("Ver", "Click aqui para ver historias clinicas"), buttonActHandler);
+        "jcbVerHics", new RichTooltip("Ver", "Click aqui para ver historias clinicas"), buttonActHandler);
         
         jcbRegistrarHistoriaClinica = createJCommandButton("Nuevo", getResizableIconFromResource("/resources/images/add.png"),
-        "jcbRegistrarReferimiento", new RichTooltip("Nuevo", "Click aqui para registrar referimiento"), buttonActHandler);
+        "jcbRegistrarHic", new RichTooltip("Nuevo", "Click aqui para registrar referimiento"), buttonActHandler);
         
         jcbEditarHistoriaClinica = createJCommandButton("Editar", getResizableIconFromResource("/resources/images/editar.png"),
-        "jcbEditarReferimiento", new RichTooltip("Editar", "Click aqui para editar referimiento"), buttonActHandler);
+        "jcbEditarHic", new RichTooltip("Editar", "Click aqui para editar referimiento"), buttonActHandler);
         
         jcbEliminarHistoriaClinica = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
-        "jcbEliminarReferimiento", new RichTooltip("Eliminar", "Click aqui para eliminar historia(s) clinica(s)"), buttonActHandler);
+        "jcbEliminarHic", new RichTooltip("Eliminar", "Click aqui para eliminar historia(s) clinica(s)"), buttonActHandler);
         
         // creando la banda
         JRibbonBand jrbHistoriaClinicaBand = new JRibbonBand("Historias Clinicas", getResizableIconFromResource("/resources/images/historia_clinica.png"));
-        jrbReferimientosBand.addCommandButton(jcbVerHistoriasClinica, RibbonElementPriority.TOP);
-        jrbReferimientosBand.addCommandButton(jcbRegistrarHistoriaClinica, RibbonElementPriority.MEDIUM);
-        jrbReferimientosBand.addCommandButton(jcbEditarHistoriaClinica, RibbonElementPriority.MEDIUM);
-        jrbReferimientosBand.addCommandButton(jcbEliminarHistoriaClinica, RibbonElementPriority.MEDIUM);
+        jrbHistoriaClinicaBand.addCommandButton(jcbVerHistoriasClinica, RibbonElementPriority.TOP);
+        jrbHistoriaClinicaBand.addCommandButton(jcbRegistrarHistoriaClinica, RibbonElementPriority.MEDIUM);
+        jrbHistoriaClinicaBand.addCommandButton(jcbEditarHistoriaClinica, RibbonElementPriority.MEDIUM);
+        jrbHistoriaClinicaBand.addCommandButton(jcbEliminarHistoriaClinica, RibbonElementPriority.MEDIUM);
         
         jrbHistoriaClinicaBand.setResizePolicies((List) Arrays.asList(new Object[]{
         new CoreRibbonResizePolicies.None(jrbHistoriaClinicaBand.getControlPanel()),
-        new CoreRibbonResizePolicies.Mirror(jrbHistoriaClinicaBand.getControlPanel()),
+        new CoreRibbonResizePolicies.Mirror(jrbHistoriaClinicaBand.getControlPanel()),        
+        new CoreRibbonResizePolicies.High2Mid(jrbHistoriaClinicaBand.getControlPanel()), 
         new CoreRibbonResizePolicies.Mid2Low(jrbHistoriaClinicaBand.getControlPanel()),
-        new CoreRibbonResizePolicies.High2Mid(jrbHistoriaClinicaBand.getControlPanel()),
         new IconRibbonBandResizePolicy(jrbHistoriaClinicaBand.getControlPanel())}));
         
-         */
-
-
         // creando el la task
         RibbonTask rtMantenimientoTask = new RibbonTask("Mantenimiento", jrbTutoresBand, jrbEstudiantesBand,
-                jrbReferimientosBand, jrbPruebasPsicologicasBand, jrbCasosBand/*, jrbHistoriaClinicaBand*/);
+                jrbReferimientosBand, jrbPruebasPsicologicasBand, jrbCasosBand, jrbHistoriaClinicaBand);
 
         return rtMantenimientoTask;
     }
@@ -458,37 +502,25 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         // informes especiales
 
+        JCommandButton jcbInformePsicologico, jcbHicInfantil;
+        
+        jcbInformePsicologico = createJCommandButton("Informe Psicologico", getResizableIconFromResource("/resources/images/casos.png"),
+                "jcbInformePsicologico", new RichTooltip("Informe Psicologico", "Click aqui para ver reporte de informe psicologico"), buttonActHandler);
 
-        // Master/Details Band
-        /*JCommandButton jcbEmpresasAfiliados, jcbAfiliadosDependientes, jcbAfiliadosFacturas, jcbPlanesAfiliados;
+        jcbHicInfantil = createJCommandButton("Historia Clinica", getResizableIconFromResource("/resources/images/historia_clinica.png"),
+                "jcbHicInfantil", new RichTooltip("Reporte Historia Clinica Infantil", "Click aqui para ver reporte de historia clinica infantil"), buttonActHandler);
         
-        jcbEmpresasAfiliados = createJCommandButton("Empresas - Afiliados", getResizableIconFromResource("/resources/imagenes/empresas4.png"),
-        "jcbEmpresasAfiliados", new RichTooltip("Master/Details", "Click aqui para ver reporte master/detail de empresas y afiliados"), buttonActHandler);
+        JRibbonBand jrbInfEspeciales = new JRibbonBand("Informes Especiales", getResizableIconFromResource("/resources/images/listados.png"));
+        jrbInfEspeciales.addCommandButton(jcbInformePsicologico, RibbonElementPriority.TOP);
+        jrbInfEspeciales.addCommandButton(jcbHicInfantil, RibbonElementPriority.TOP);
+        jrbInfEspeciales.setResizePolicies((List) Arrays.asList(new Object[]{
+                    new CoreRibbonResizePolicies.None(jrbInfEspeciales.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mirror(jrbInfEspeciales.getControlPanel()),
+                    new CoreRibbonResizePolicies.High2Mid(jrbInfEspeciales.getControlPanel()),
+                    new IconRibbonBandResizePolicy(jrbInfEspeciales.getControlPanel())}));
         
-        jcbAfiliadosDependientes = createJCommandButton("Afiliados - Dependientes", getResizableIconFromResource("/resources/imagenes/afiliados.png"),
-        "jcbAfiliadosDependientes", new RichTooltip("Master/Details", "Click aqui para ver reporte master/detail de afiliados y dependientes"), buttonActHandler);
-        
-        jcbAfiliadosFacturas = createJCommandButton("Afiliados - Facturas", getResizableIconFromResource("/resources/imagenes/dependientes2.png"),
-        "jcbAfiliadosFacturas", new RichTooltip("Master/Details", "Click aqui para ver reporte master/detail de afiliados y facturas"), buttonActHandler);
-        
-        jcbPlanesAfiliados = createJCommandButton("Planes - Afiliados", getResizableIconFromResource("/resources/imagenes/paloma3.png"),
-        "jcbPlanesAfiliados", new RichTooltip("Master/Details", "Click aqui para ver reporte master/detail de planes y afiliados"), buttonActHandler);
-        
-        JRibbonBand jrbMasterDetailsBand = new JRibbonBand("Master/Details", getResizableIconFromResource("/resources/imagenes/listado.png"));
-        jrbListadosBand.addCommandButton(jcbEmpresasAfiliados, RibbonElementPriority.TOP);
-        jrbListadosBand.addCommandButton(jcbAfiliadosDependientes, RibbonElementPriority.TOP);
-        jrbListadosBand.addCommandButton(jcbAfiliadosFacturas, RibbonElementPriority.TOP);
-        jrbListadosBand.addCommandButton(jcbPlanesAfiliados, RibbonElementPriority.TOP);
-        
-        jrbMasterDetailsBand.setResizePolicies((List) Arrays.asList(
-        new CoreRibbonResizePolicies.Mirror(jrbMasterDetailsBand.getControlPanel()),
-        //new CoreRibbonResizePolicies.Mid2Low(jrbMasterDetailsBand.getControlPanel()),
-        new IconRibbonBandResizePolicy(jrbMasterDetailsBand.getControlPanel())));
-        
-        jrbMasterDetailsBand.setResizePolicies(getRibbonBandResizePolicy(jrbMasterDetailsBand));*/
-
         // creando el la task
-        RibbonTask rtReportesTask = new RibbonTask("Reportes", jrbListadosBand);
+        RibbonTask rtReportesTask = new RibbonTask("Reportes", jrbListadosBand, jrbInfEspeciales);
 
         return rtReportesTask;
     }
@@ -551,7 +583,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         // nuevo button
         JCommandButton taskbarNuevoButton = new JCommandButton("", getResizableIconFromResource("/resources/images/new_15x15.png"));
-        taskbarNuevoButton.setCommandButtonKind(CommandButtonKind.ACTION_AND_POPUP_MAIN_ACTION);
+        taskbarNuevoButton.setCommandButtonKind(CommandButtonKind.POPUP_ONLY);
         taskbarNuevoButton.addActionListener(new ActionListener() {
 
             @Override
@@ -563,30 +595,18 @@ public class PsychSysDesktop extends JRibbonFrame {
 
             @Override
             public JPopupPanel getPopupPanel(JCommandButton commandButton) {
-                return new NuevoPopupMenu();
+                return new TaskbarNuevoPopupMenu();
             }
         });
         taskbarNuevoButton.setActionRichTooltip(new RichTooltip("Nuevo", "Click aqui para registrar nueva entidad"));
         taskbarNuevoButton.setPopupRichTooltip(new RichTooltip("Nuevo", "Click aqui para mas opciones"));
         taskbarNuevoButton.setActionKeyTip("Nuevo Taskbar");
 
-        /*// busqueda rapida button
-        JCommandButton taskbarBRButton = new JCommandButton("", getResizableIconFromResource("/resources/images/buscar.png"));
-        taskbarBRButton.addActionListener(new ActionListener() {
-        
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        System.out.println("Taskbar Busqueda Rapida");
-        }
-        });
-        taskbarBRButton.setActionRichTooltip(new RichTooltip("Busqueda Rapida", "Click aqui para hacer una busqueda rapida"));*/
-
         this.getRibbon().addTaskbarComponent(taskbarPasteButton);
         this.getRibbon().addTaskbarComponent(taskbarCortarButton);
         this.getRibbon().addTaskbarComponent(taskbarCopiarButton);
         this.getRibbon().addTaskbarComponent(new JSeparator(SwingConstants.VERTICAL));
         this.getRibbon().addTaskbarComponent(taskbarNuevoButton);
-        //this.getRibbon().addTaskbarComponent(taskbarBRButton);
     }
 
     private void initJRibbon() {
@@ -603,7 +623,6 @@ public class PsychSysDesktop extends JRibbonFrame {
         jr.addTask(getMantenimientoTask());
         jr.addTask(getReportesTask());
 
-        //jr.addTaskbarComponent(getTaskBar());
         configureTaskBar();
         jr.addChangeListener(new ChangeListener() {
 
@@ -713,13 +732,14 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void registrarEditarTutor(RegistroEdicionModo modo, Tutor tutor) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
-            ret.setLocationRelativeTo(PsychSysDesktop.this);
+            ret.setLocationRelativeTo(this);
             ret.setVisible(true);
+            //ret.requestFocus();
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
             ret.setTitle("Editar Tutor");
             ret.setTutorAEditar(tutor);
-            ret.setLocationRelativeTo(PsychSysDesktop.this);
+            ret.setLocationRelativeTo(this);
             ret.setVisible(true);
         }
     }
@@ -733,7 +753,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void registrarEditarEstudiante(RegistroEdicionModo modo, Estudiante est) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             RegistroEdicionEstudiante ree = new RegistroEdicionEstudiante(RegistroEdicionModo.REGISTRO);
-            ree.setLocationRelativeTo(PsychSysDesktop.this);
+            ree.setLocationRelativeTo(this);
             ree.setVisible(true);
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
         }
@@ -748,18 +768,33 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void registrarEditarReferimiento(RegistroEdicionModo modo, Referimiento ref) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.REGISTRO, usuario);
-            rer.setLocationRelativeTo(PsychSysDesktop.this);
+            rer.setLocationRelativeTo(this);
             rer.setVisible(true);
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
-            RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.EDICION);
+            RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.EDICION, usuario);
             rer.setTitle("Editar Referimiento");
             //rer.setRefAEditar(referimiento);
-            rer.setLocationRelativeTo(PsychSysDesktop.this);
+            rer.setLocationRelativeTo(this);
             rer.setVisible(true);
         }
     }
 
     private void eliminarReferimiento(Referimiento ref) {
+    }
+
+    private void registrarEditarObservacionReferimiento(RegistroEdicionModo modo, Referimiento ref) {
+        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+            RegistroEdicionObservacionReferimiento reor = new RegistroEdicionObservacionReferimiento(RegistroEdicionModo.REGISTRO, usuario);
+            reor.setLocationRelativeTo(this);
+            reor.setVisible(true);
+        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+        }
+    }
+
+    private void verObservacionReferimiento() {
+    }
+
+    private void eliminarObservacionReferimiento(RegistroEdicionModo modo, Referimiento ref) {
     }
 
     private void verPruebasPsicologicas() {
@@ -768,13 +803,13 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void registrarEditarPruebasPsicologicas(RegistroEdicionModo modo, PruebaPsicologica pps) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.REGISTRO);
-            repp.setLocationRelativeTo(PsychSysDesktop.this);
+            repp.setLocationRelativeTo(this);
             repp.setVisible(true);
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.EDICION);
             repp.setTitle("Editar Prueba Psicologica");
             //repp.setPpsAEditar(pps);
-            repp.setLocationRelativeTo(PsychSysDesktop.this);
+            repp.setLocationRelativeTo(this);
             repp.setVisible(true);
         }
     }
@@ -869,9 +904,9 @@ public class PsychSysDesktop extends JRibbonFrame {
         }
     }
 
-    private class NuevoPopupMenu extends JCommandPopupMenu {
+    private class TaskbarNuevoPopupMenu extends JCommandPopupMenu {
 
-        public NuevoPopupMenu() {
+        public TaskbarNuevoPopupMenu() {
 
             JCommandMenuButton tutorButton = new JCommandMenuButton("Tutor", new EmptyResizableIcon(16));
             tutorButton.addActionListener(new ActionListener() {
