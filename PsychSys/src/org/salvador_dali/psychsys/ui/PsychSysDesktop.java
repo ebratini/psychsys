@@ -25,9 +25,7 @@ package org.salvador_dali.psychsys.ui;
 
 import org.salvador_dali.psychsys.model.entities.Usuario;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -41,6 +39,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
@@ -64,7 +63,6 @@ import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
 import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
 import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 import org.pushingpixels.flamingo.api.ribbon.resize.RibbonBandResizePolicy;
-import org.pushingpixels.flamingo.internal.ui.common.JRichTooltipPanel;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
@@ -72,7 +70,6 @@ import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 import org.salvador_dali.psychsys.model.entities.Tutor;
-import psychsys.PsychSys;
 
 /**
  *
@@ -86,8 +83,8 @@ public class PsychSysDesktop extends JRibbonFrame {
     // button action handler
     private ButtonActionHandler buttonActHandler = new ButtonActionHandler();
     // body content
-    private JPanel pnlBody;
-    private JLabel backGroundImagePnlBody = new JLabel();
+    //private WelcomePage welcomePage = new WelcomePage();
+    private JTabbedPane pnlBody;
     // for the status bar
     private JPanel pnlStatusBar;
     private JLabel statusMessageLabel = new JLabel("Ready");
@@ -114,26 +111,16 @@ public class PsychSysDesktop extends JRibbonFrame {
         sd.setLocationRelativeTo(null);
         sd.setVisible(true);
     }
-
-    private void addGap(int width, int height) {
-        JPanel gap = new JPanel();
-        gap.setSize(width, height);
-        //gap.getBorder()
-        add(gap);
-    }
-
+    
     private ResizableIcon getResizableIconFromResource(String resource) {
         return ImageWrapperResizableIcon.getIcon(getClass().getResource(resource), new Dimension(48, 48));
     }
 
     private void initBodyContent() {
-        pnlBody = new JPanel();
-        pnlBody.setBorder(new EtchedBorder());
-        pnlBody.setBackground(Color.WHITE);
-        backGroundImagePnlBody.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/psych_head.png")));
-        backGroundImagePnlBody.setBounds(pnlBody.getBounds());
-        pnlBody.add(backGroundImagePnlBody);
-        add(pnlBody, BorderLayout.CENTER);
+        pnlBody = new JTabbedPane() {{
+            addTab("Start", new WelcomePage());
+        }};
+        add(pnlBody);
     }
 
     private void initTimeDate() {
@@ -305,6 +292,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             @Override
             public JPopupPanel getPopupPanel(JCommandButton commandButton) {
                 return new JCommandPopupMenu() {
+
                     {
                         JCommandMenuButton verReferimientoButton = new JCommandMenuButton("Observacion Referimiento", new EmptyResizableIcon(16));
                         verReferimientoButton.addActionListener(new ActionListener() {
@@ -321,7 +309,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             }
         });
         jcbVerReferimientos.setPopupRichTooltip(new RichTooltip("Ver", "Click aqui para mas opciones"));
-        
+
 
         jcbRegistrarReferimiento = createJCommandButton("Nuevo", getResizableIconFromResource("/resources/images/add.png"),
                 "jcbRegistrarReferimiento", new RichTooltip("Nuevo", "Click aqui para registrar referimiento"), buttonActHandler);
@@ -332,6 +320,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             @Override
             public JPopupPanel getPopupPanel(JCommandButton commandButton) {
                 return new JCommandPopupMenu() {
+
                     {
                         JCommandMenuButton nuevoReferimientoButton = new JCommandMenuButton("Observacion Referimiento", new EmptyResizableIcon(16));
                         nuevoReferimientoButton.addActionListener(new ActionListener() {
@@ -352,6 +341,29 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         jcbEditarReferimiento = createJCommandButton("Editar", getResizableIconFromResource("/resources/images/editar.png"),
                 "jcbEditarReferimiento", new RichTooltip("Editar", "Click aqui para editar referimiento"), buttonActHandler);
+        jcbEditarReferimiento.setCommandButtonKind(CommandButtonKind.ACTION_AND_POPUP_MAIN_ACTION);
+        jcbEditarReferimiento.setPopupCallback(new PopupPanelCallback() {
+
+            @Override
+            public JPopupPanel getPopupPanel(JCommandButton commandButton) {
+                return new JCommandPopupMenu() {
+
+                    {
+                        JCommandMenuButton nuevoReferimientoButton = new JCommandMenuButton("Observacion Referimiento", new EmptyResizableIcon(16));
+                        nuevoReferimientoButton.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                registrarEditarObservacionReferimiento(RegistroEdicionModo.EDICION, null);
+                            }
+                        });
+                        nuevoReferimientoButton.setActionKeyTip("Observacion Referimiento");
+                        this.addMenuButton(nuevoReferimientoButton);
+                    }
+                };
+            }
+        });
+        jcbEditarReferimiento.setPopupRichTooltip(new RichTooltip("Editar", "Click aqui para mas opciones"));
 
         jcbEliminarReferimiento = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
                 "jcbEliminarReferimiento", new RichTooltip("Eliminar", "Click aqui para eliminar referimiento(s)"), buttonActHandler);
@@ -370,7 +382,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         //jrbReferimientosBand.setResizePolicies(this.getRibbonBandResizePolicy(jrbReferimientosBand));
         jrbReferimientosBand.setResizePolicies((List) Arrays.asList(new Object[]{
                     /*new CoreRibbonResizePolicies.None(jrbReferimientosBand.getControlPanel()),*/
-                    new CoreRibbonResizePolicies.Mirror(jrbReferimientosBand.getControlPanel()),                    
+                    new CoreRibbonResizePolicies.Mirror(jrbReferimientosBand.getControlPanel()),
                     new CoreRibbonResizePolicies.High2Mid(jrbReferimientosBand.getControlPanel()),
                     new CoreRibbonResizePolicies.Mid2Low(jrbReferimientosBand.getControlPanel()),
                     new IconRibbonBandResizePolicy(jrbReferimientosBand.getControlPanel())}));
@@ -379,6 +391,9 @@ public class PsychSysDesktop extends JRibbonFrame {
         // on pruebas psicologicas band
 
         JCommandButton jcbVerPruebasPsicologicas, jcbRegistrarPruebaPsicologica, jcbEditarPruebaPsicologica, jcbEliminarPruebaPsicologica, jcbCorregirPruebaPsicologica;
+
+        jcbCorregirPruebaPsicologica = createJCommandButton("Corregir", getResizableIconFromResource("/resources/images/corregir.png"),
+                "jcbCorregirPruebaPsicologica", new RichTooltip("Corregir", "Click aqui para corregir prueba(s) psicologica"), buttonActHandler);
 
         jcbVerPruebasPsicologicas = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/pruebas_psicologicas.png"),
                 "jcbVerPruebasPsicologicas", new RichTooltip("Ver", "Click aqui para ver las pruebas psicologicas"), buttonActHandler);
@@ -392,19 +407,16 @@ public class PsychSysDesktop extends JRibbonFrame {
         jcbEliminarPruebaPsicologica = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
                 "jcbEliminarPruebaPsicologica", new RichTooltip("Eliminar", "Click aqui para eliminar prueba(s) psicologica"), buttonActHandler);
 
-        jcbCorregirPruebaPsicologica = createJCommandButton("Corregir", getResizableIconFromResource("/resources/images/corregir.png"),
-                "jcbCorregirPruebaPsicologica", new RichTooltip("Corregir", "Click aqui para corregir prueba(s) psicologica"), buttonActHandler);
-
         // creando la banda
         JRibbonBand jrbPruebasPsicologicasBand = new JRibbonBand("Pruebas Psicologicas", getResizableIconFromResource("/resources/images/pruebas_psicologicas.png"));
-        
+
         jrbPruebasPsicologicasBand.addCommandButton(jcbCorregirPruebaPsicologica, RibbonElementPriority.TOP);
         jrbPruebasPsicologicasBand.startGroup();
         jrbPruebasPsicologicasBand.addCommandButton(jcbVerPruebasPsicologicas, RibbonElementPriority.TOP);
         jrbPruebasPsicologicasBand.addCommandButton(jcbRegistrarPruebaPsicologica, RibbonElementPriority.MEDIUM);
         jrbPruebasPsicologicasBand.addCommandButton(jcbEditarPruebaPsicologica, RibbonElementPriority.MEDIUM);
         jrbPruebasPsicologicasBand.addCommandButton(jcbEliminarPruebaPsicologica, RibbonElementPriority.MEDIUM);
-        
+
         jrbPruebasPsicologicasBand.setResizePolicies((List) Arrays.asList(new Object[]{
                     new CoreRibbonResizePolicies.Mirror(jrbPruebasPsicologicasBand.getControlPanel()),
                     new CoreRibbonResizePolicies.Mid2Low(jrbPruebasPsicologicasBand.getControlPanel()),
@@ -438,36 +450,36 @@ public class PsychSysDesktop extends JRibbonFrame {
                     new CoreRibbonResizePolicies.Mid2Low(jrbCasosBand.getControlPanel()),
                     new IconRibbonBandResizePolicy(jrbCasosBand.getControlPanel())}));
 
-        
+
         // historia clinica band
         JCommandButton jcbVerHistoriasClinica, jcbRegistrarHistoriaClinica, jcbEditarHistoriaClinica, jcbEliminarHistoriaClinica;
-        
+
         jcbVerHistoriasClinica = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/historia_clinica.png"),
-        "jcbVerHics", new RichTooltip("Ver", "Click aqui para ver historias clinicas"), buttonActHandler);
-        
+                "jcbVerHics", new RichTooltip("Ver", "Click aqui para ver historias clinicas"), buttonActHandler);
+
         jcbRegistrarHistoriaClinica = createJCommandButton("Nuevo", getResizableIconFromResource("/resources/images/add.png"),
-        "jcbRegistrarHic", new RichTooltip("Nuevo", "Click aqui para registrar referimiento"), buttonActHandler);
-        
+                "jcbRegistrarHic", new RichTooltip("Nuevo", "Click aqui para registrar referimiento"), buttonActHandler);
+
         jcbEditarHistoriaClinica = createJCommandButton("Editar", getResizableIconFromResource("/resources/images/editar.png"),
-        "jcbEditarHic", new RichTooltip("Editar", "Click aqui para editar referimiento"), buttonActHandler);
-        
+                "jcbEditarHic", new RichTooltip("Editar", "Click aqui para editar referimiento"), buttonActHandler);
+
         jcbEliminarHistoriaClinica = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
-        "jcbEliminarHic", new RichTooltip("Eliminar", "Click aqui para eliminar historia(s) clinica(s)"), buttonActHandler);
-        
+                "jcbEliminarHic", new RichTooltip("Eliminar", "Click aqui para eliminar historia(s) clinica(s)"), buttonActHandler);
+
         // creando la banda
         JRibbonBand jrbHistoriaClinicaBand = new JRibbonBand("Historias Clinicas", getResizableIconFromResource("/resources/images/historia_clinica.png"));
         jrbHistoriaClinicaBand.addCommandButton(jcbVerHistoriasClinica, RibbonElementPriority.TOP);
         jrbHistoriaClinicaBand.addCommandButton(jcbRegistrarHistoriaClinica, RibbonElementPriority.MEDIUM);
         jrbHistoriaClinicaBand.addCommandButton(jcbEditarHistoriaClinica, RibbonElementPriority.MEDIUM);
         jrbHistoriaClinicaBand.addCommandButton(jcbEliminarHistoriaClinica, RibbonElementPriority.MEDIUM);
-        
+
         jrbHistoriaClinicaBand.setResizePolicies((List) Arrays.asList(new Object[]{
-        new CoreRibbonResizePolicies.None(jrbHistoriaClinicaBand.getControlPanel()),
-        new CoreRibbonResizePolicies.Mirror(jrbHistoriaClinicaBand.getControlPanel()),        
-        new CoreRibbonResizePolicies.High2Mid(jrbHistoriaClinicaBand.getControlPanel()), 
-        new CoreRibbonResizePolicies.Mid2Low(jrbHistoriaClinicaBand.getControlPanel()),
-        new IconRibbonBandResizePolicy(jrbHistoriaClinicaBand.getControlPanel())}));
-        
+                    new CoreRibbonResizePolicies.None(jrbHistoriaClinicaBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mirror(jrbHistoriaClinicaBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.High2Mid(jrbHistoriaClinicaBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mid2Low(jrbHistoriaClinicaBand.getControlPanel()),
+                    new IconRibbonBandResizePolicy(jrbHistoriaClinicaBand.getControlPanel())}));
+
         // creando el la task
         RibbonTask rtMantenimientoTask = new RibbonTask("Mantenimiento", jrbTutoresBand, jrbEstudiantesBand,
                 jrbReferimientosBand, jrbPruebasPsicologicasBand, jrbCasosBand, jrbHistoriaClinicaBand);
@@ -484,7 +496,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 "jcbListadoTutores", new RichTooltip("Listado Tutores", "Click aqui para ver reporte listado de tutores"), buttonActHandler);
 
         jcbListadoEstudiantes = createJCommandButton("Estudiantes", getResizableIconFromResource("/resources/images/estudiantes.png"),
-                "jcbListadoEstudiantes", new RichTooltip("Listado Afiliados", "Click aqui para ver reporte listado de estudiantes"), buttonActHandler);
+                "jcbListadoEstudiantes", new RichTooltip("Listado Estudiantes", "Click aqui para ver reporte listado de estudiantes"), buttonActHandler);
 
         jcbListadoReferimientos = createJCommandButton("Referimientos", getResizableIconFromResource("/resources/images/referimientos.png"),
                 "jcbListadoReferimientos", new RichTooltip("Listado Referimientos", "Click aqui para ver reporte listado de referimientos"), buttonActHandler);
@@ -503,13 +515,13 @@ public class PsychSysDesktop extends JRibbonFrame {
         // informes especiales
 
         JCommandButton jcbInformePsicologico, jcbHicInfantil;
-        
+
         jcbInformePsicologico = createJCommandButton("Informe Psicologico", getResizableIconFromResource("/resources/images/casos.png"),
                 "jcbInformePsicologico", new RichTooltip("Informe Psicologico", "Click aqui para ver reporte de informe psicologico"), buttonActHandler);
 
         jcbHicInfantil = createJCommandButton("Historia Clinica", getResizableIconFromResource("/resources/images/historia_clinica.png"),
                 "jcbHicInfantil", new RichTooltip("Reporte Historia Clinica Infantil", "Click aqui para ver reporte de historia clinica infantil"), buttonActHandler);
-        
+
         JRibbonBand jrbInfEspeciales = new JRibbonBand("Informes Especiales", getResizableIconFromResource("/resources/images/listados.png"));
         jrbInfEspeciales.addCommandButton(jcbInformePsicologico, RibbonElementPriority.TOP);
         jrbInfEspeciales.addCommandButton(jcbHicInfantil, RibbonElementPriority.TOP);
@@ -518,35 +530,131 @@ public class PsychSysDesktop extends JRibbonFrame {
                     new CoreRibbonResizePolicies.Mirror(jrbInfEspeciales.getControlPanel()),
                     new CoreRibbonResizePolicies.High2Mid(jrbInfEspeciales.getControlPanel()),
                     new IconRibbonBandResizePolicy(jrbInfEspeciales.getControlPanel())}));
-        
+
         // creando el la task
         RibbonTask rtReportesTask = new RibbonTask("Reportes", jrbListadosBand, jrbInfEspeciales);
 
         return rtReportesTask;
     }
 
-    private RibbonTask getToolsTask() {
-        return null;
-    }
+    private RibbonTask getToolsAndSettingsTask() {
+        // Roles & Permisos Band
+        JCommandButton jcbManRolesPermisos = createJCommandButton("Administrar", getResizableIconFromResource("/resources/images/corregir.png"),
+                "jcbManRolesPermisos", new RichTooltip("Administrar", "Click aqui para manejar los roles y permisos del sistema"), buttonActHandler);;
+        JRibbonBand jrbRolesPermisos = new JRibbonBand("Roles & Permisos", getResizableIconFromResource("/resources/images/listados.png"));
+        jrbRolesPermisos.addCommandButton(jcbManRolesPermisos, RibbonElementPriority.TOP);
+        jrbRolesPermisos.setResizePolicies((List) Arrays.asList(new Object[]{
+                    new CoreRibbonResizePolicies.Mirror(jrbRolesPermisos.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mid2Low(jrbRolesPermisos.getControlPanel())}));        
+        
+        // Usuarios band
+        JCommandButton jcbVerUsuarios, jcbRegistrarUsuario, jcbEditarUsuario, jcbEliminarUsuario;
 
-    private RibbonTask getSettingsTask() {
-        return null;
-    }
+        jcbVerUsuarios = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/corregir.png"),
+                "jcbVerUsuarios", new RichTooltip("Ver", "Click aqui para ver usuarios"), buttonActHandler);
 
-    private JCommandButton getPasteButton() {
-        JCommandButton PasteButton = new JCommandButton("", getResizableIconFromResource("/resources/images/paste.png"));
-        PasteButton.addActionListener(new ActionListener() {
+        jcbRegistrarUsuario = createJCommandButton("Nuevo", getResizableIconFromResource("/resources/images/add.png"),
+                "jcbRegistrarUsuario", new RichTooltip("Nuevo", "Click aqui para registrar usuario"), buttonActHandler);
+
+        jcbEditarUsuario = createJCommandButton("Editar", getResizableIconFromResource("/resources/images/editar.png"),
+                "jcbEditarUsuario", new RichTooltip("Editar", "Click aqui para editar usuario"), buttonActHandler);
+
+        jcbEliminarUsuario = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
+                "jcbEliminarUsuario", new RichTooltip("Eliminar", "Click aqui para eliminar usuario(s)"), buttonActHandler);
+
+        JRibbonBand jrbUsuarios = new JRibbonBand("Usuarios", getResizableIconFromResource("/resources/images/listados.png"));        
+        jrbUsuarios.addCommandButton(jcbVerUsuarios, RibbonElementPriority.TOP);
+        jrbUsuarios.addCommandButton(jcbRegistrarUsuario, RibbonElementPriority.MEDIUM);
+        jrbUsuarios.addCommandButton(jcbEditarUsuario, RibbonElementPriority.MEDIUM);
+        jrbUsuarios.addCommandButton(jcbEliminarUsuario, RibbonElementPriority.MEDIUM);
+
+        jrbUsuarios.setResizePolicies((List) Arrays.asList(new Object[]{
+                    new CoreRibbonResizePolicies.Mirror(jrbUsuarios.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mid2Low(jrbUsuarios.getControlPanel()),
+                    new IconRibbonBandResizePolicy(jrbUsuarios.getControlPanel())}));
+
+        // Look and feel band
+
+        JCommandButton jcbLaf;
+
+        jcbLaf = createJCommandButton("Configurar", getResizableIconFromResource("/resources/images/corregir.png"), "jcbLaf", null, buttonActHandler);
+        jcbLaf.setCommandButtonKind(CommandButtonKind.POPUP_ONLY);
+        jcbLaf.setPopupCallback(new PopupPanelCallback() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Taskbar Paste");
+            public JPopupPanel getPopupPanel(JCommandButton commandButton) {
+                return new JCommandPopupMenu() {
+
+                    {
+                        JCommandMenuButton windowsLaf = new JCommandMenuButton("Windows", new EmptyResizableIcon(16));
+                        windowsLaf.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                java.awt.EventQueue.invokeLater(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.WINDOWS);
+                                    }
+                                });
+                            }
+                        });
+                        windowsLaf.setActionKeyTip("Windows LAF");
+                        this.addMenuButton(windowsLaf);
+                        
+                        JCommandMenuButton nimbusLaf = new JCommandMenuButton("Nimbus", new EmptyResizableIcon(16));
+                        nimbusLaf.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                java.awt.EventQueue.invokeLater(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.NIMBUS);
+                                    }
+                                });
+                            }
+                        });
+                        nimbusLaf.setActionKeyTip("Nimbus LAF");
+                        this.addMenuButton(nimbusLaf);
+                        
+                        JCommandMenuButton metalLaf = new JCommandMenuButton("Metal", new EmptyResizableIcon(16));
+                        metalLaf.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                java.awt.EventQueue.invokeLater(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.METAL);
+                                    }
+                                });
+                            }
+                        });
+                        metalLaf.setActionKeyTip("Metal LAF");
+                        this.addMenuButton(metalLaf);
+                    }
+                };
             }
         });
-        PasteButton.setActionRichTooltip(new RichTooltip("Pegar", "Click aqui para pegar"));
+        jcbLaf.setPopupOrientationKind(JCommandButton.CommandButtonPopupOrientationKind.SIDEWARD);
+        jcbLaf.setPopupRichTooltip(new RichTooltip("Configurar", "Click aqui para seleccionar look and feel del sistema"));
+        
+        JRibbonBand jrbLookAndFeel = new JRibbonBand("Look & Feel", getResizableIconFromResource("/resources/images/listados.png"));
+        jrbLookAndFeel.addCommandButton(jcbLaf, RibbonElementPriority.TOP);
+        jrbLookAndFeel.setResizePolicies((List) Arrays.asList(new Object[]{
+                    new CoreRibbonResizePolicies.Mirror(jrbLookAndFeel.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mid2Low(jrbLookAndFeel.getControlPanel()),
+                    new IconRibbonBandResizePolicy(jrbLookAndFeel.getControlPanel())}));
+        
+        RibbonTask rtToolsAndSettings = new RibbonTask("Tools & Settings", jrbRolesPermisos, jrbUsuarios, jrbLookAndFeel);
 
-        return PasteButton;
+        return rtToolsAndSettings;
     }
-
+    
     private void configureTaskBar() {
         // paste button        
         JCommandButton taskbarPasteButton = new JCommandButton("", getResizableIconFromResource("/resources/images/paste.png"));
@@ -622,6 +730,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         jr.addTask(getHomeTask());
         jr.addTask(getMantenimientoTask());
         jr.addTask(getReportesTask());
+        jr.addTask(getToolsAndSettingsTask());
 
         configureTaskBar();
         jr.addChangeListener(new ChangeListener() {
@@ -685,9 +794,9 @@ public class PsychSysDesktop extends JRibbonFrame {
         usuario = login.getUsuario();
         if (usuario != null) {
             usuariologueado.setText(String.format(" %s ", usuario.getUsrLogin()));
-            JRichTooltipPanel rtp = new JRichTooltipPanel(new RichTooltip("Login", "Bienvenido, " + login.getTxtNombreUsuario().getText()));
-            pnlBody.add(rtp, BorderLayout.SOUTH);
-            new Thread(new ToolTipShower(rtp)).start();
+            JLabel lblBienvMsj = ((WelcomePage) pnlBody.getComponent(0)).getLblBienvenidaMensaje();
+            lblBienvMsj.setText("Bienvenido, " + login.getTxtNombreUsuario().getText());
+            new Thread(new LabelToolTipShower(lblBienvMsj, 3500)).start();
             logInOutButton.setName("jcbLogOut");
             logInOutButton.setIcon(getResizableIconFromResource("/resources/images/logout.png"));
             logInOutButton.setText("Log Out");
@@ -731,16 +840,27 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void registrarEditarTutor(RegistroEdicionModo modo, Tutor tutor) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-            RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
+            final RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
             ret.setLocationRelativeTo(this);
-            ret.setVisible(true);
-            //ret.requestFocus();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    ret.setVisible(true);
+                }
+            });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
-            RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
+            final RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
             ret.setTitle("Editar Tutor");
             ret.setTutorAEditar(tutor);
             ret.setLocationRelativeTo(this);
-            ret.setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    ret.setVisible(true);
+                }
+            });
         }
     }
 
@@ -752,9 +872,15 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void registrarEditarEstudiante(RegistroEdicionModo modo, Estudiante est) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-            RegistroEdicionEstudiante ree = new RegistroEdicionEstudiante(RegistroEdicionModo.REGISTRO);
+            final RegistroEdicionEstudiante ree = new RegistroEdicionEstudiante(RegistroEdicionModo.REGISTRO);
             ree.setLocationRelativeTo(this);
-            ree.setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    ree.setVisible(true);
+                }
+            });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
         }
     }
@@ -767,9 +893,15 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void registrarEditarReferimiento(RegistroEdicionModo modo, Referimiento ref) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-            RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.REGISTRO, usuario);
+            final RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.REGISTRO, usuario);
             rer.setLocationRelativeTo(this);
-            rer.setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    rer.setVisible(true);
+                }
+            });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.EDICION, usuario);
             rer.setTitle("Editar Referimiento");
@@ -784,9 +916,15 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void registrarEditarObservacionReferimiento(RegistroEdicionModo modo, Referimiento ref) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-            RegistroEdicionObservacionReferimiento reor = new RegistroEdicionObservacionReferimiento(RegistroEdicionModo.REGISTRO, usuario);
+            final RegistroEdicionObservacionReferimiento reor = new RegistroEdicionObservacionReferimiento(RegistroEdicionModo.REGISTRO, usuario);
             reor.setLocationRelativeTo(this);
-            reor.setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    reor.setVisible(true);
+                }
+            });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
         }
     }
@@ -802,15 +940,27 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void registrarEditarPruebasPsicologicas(RegistroEdicionModo modo, PruebaPsicologica pps) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-            RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.REGISTRO);
+            final RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.REGISTRO);
             repp.setLocationRelativeTo(this);
-            repp.setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    repp.setVisible(true);
+                }
+            });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
-            RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.EDICION);
+            final RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.EDICION);
             repp.setTitle("Editar Prueba Psicologica");
             //repp.setPpsAEditar(pps);
             repp.setLocationRelativeTo(this);
-            repp.setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    repp.setVisible(true);
+                }
+            });
         }
     }
 
@@ -819,9 +969,15 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void registrarEditarCaso(RegistroEdicionModo modo, Caso caso) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-            RegistroEdicionCaso rec = new RegistroEdicionCaso(modo);
+            final RegistroEdicionCaso rec = new RegistroEdicionCaso(modo);
             rec.setLocationRelativeTo(this);
-            rec.setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    rec.setVisible(true);
+                }
+            });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
         }
     }
@@ -834,9 +990,15 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void registrarEditarHistoriaClinica(RegistroEdicionModo modo, HistoriaClinica hic) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-            RegistroEdicionHistoriaClinica rehic = new RegistroEdicionHistoriaClinica(modo);
+            final RegistroEdicionHistoriaClinica rehic = new RegistroEdicionHistoriaClinica(modo);
             rehic.setLocationRelativeTo(this);
-            rehic.setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    rehic.setVisible(true);
+                }
+            });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
         }
     }

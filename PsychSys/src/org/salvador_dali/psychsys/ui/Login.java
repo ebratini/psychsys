@@ -68,7 +68,6 @@ public class Login extends javax.swing.JDialog {
         btnOk = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         psfContrasenia = new javax.swing.JPasswordField();
-        lblProgressBar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Log In");
@@ -106,8 +105,6 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        lblProgressBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,15 +125,11 @@ public class Login extends javax.swing.JDialog {
                     .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCancelar))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(399, Short.MAX_VALUE)
-                .addComponent(lblProgressBar)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblPsychSysLogo)
                     .addGroup(layout.createSequentialGroup()
@@ -149,8 +142,7 @@ public class Login extends javax.swing.JDialog {
                             .addComponent(lblContrasenia)
                             .addComponent(btnCancelar)
                             .addComponent(psfContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblProgressBar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -274,7 +266,6 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel lblContrasenia;
-    private javax.swing.JLabel lblProgressBar;
     private javax.swing.JLabel lblPsychSysLogo;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPasswordField psfContrasenia;
