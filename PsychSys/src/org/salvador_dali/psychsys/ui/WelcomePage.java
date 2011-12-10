@@ -81,14 +81,15 @@ public class WelcomePage extends javax.swing.JPanel {
         lblDesktopImage = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setAutoscrolls(true);
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
-        lblBienvenida.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblBienvenida.setFont(new java.awt.Font("Tahoma", 1, 24));
         lblBienvenida.setForeground(new java.awt.Color(102, 102, 102));
         lblBienvenida.setText("Bienvenid@ a PsychSys");
 
-        lblBienvenidaMensaje.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblBienvenidaMensaje.setFont(new java.awt.Font("Tahoma", 1, 14));
         lblBienvenidaMensaje.setForeground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -119,18 +120,18 @@ public class WelcomePage extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(336, 336, 336)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(330, 330, 330)
                 .addComponent(lblDesktopImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(334, 334, 334))
+                .addGap(340, 340, 340))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addGap(56, 56, 56)
                 .addComponent(lblDesktopImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(55, 55, 55))
+                .addGap(52, 52, 52))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables

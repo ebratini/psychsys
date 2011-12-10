@@ -25,9 +25,8 @@ package org.salvador_dali.psychsys.ui;
 
 import com.bric.plaf.AquaSpinningProgressBarUI;
 import com.bric.plaf.BasicSpinningProgressBarUI;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
+import java.util.Timer;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
@@ -38,14 +37,21 @@ import javax.swing.JProgressBar;
 public class ProgressCircle {
 
     private JLabel progressCircleLabel;
+    private JComponent progressComp;
     private JProgressBar progressBar = new JProgressBar();
-    private Timer progressTimer;
+    private Timer progressTimer = new Timer();
+    private javax.swing.Timer timer;
+    //private AquaSpinningProgressBarUI aspb = new AquaSpinningProgressBarUI();
 
     public ProgressCircle() {
     }
 
     public ProgressCircle(JLabel progressCircleLabel) {
         this.progressCircleLabel = progressCircleLabel;
+    }
+    
+    public ProgressCircle(JComponent progressComp) {
+        this.progressComp = progressComp;
     }
 
     public JLabel getProgressCircleImage() {
@@ -59,21 +65,35 @@ public class ProgressCircle {
     public void start() {
         progressBar.setUI(new AquaSpinningProgressBarUI());
         progressBar.putClientProperty("period", new Long(BasicSpinningProgressBarUI.DEFAULT_PERIOD.longValue()*4));
-        progressCircleLabel.add(progressBar);
         
-        progressTimer = new Timer(20, new ActionListener() {
+        //progressCircleLabel.add(progressBar);
+        progressComp.add(progressBar);
+        /*progressTimer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                progressComp.repaint();
+            }
+        }, 20);*/
+        /*timer = new javax.swing.Timer(2, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                progressCircleLabel.repaint();
+                progressComp.repaint();
             }
         });
-        progressTimer.start();
-        progressCircleLabel.setVisible(true);
+        timer.start();**/
+        //progressCircleLabel.setVisible(true);
+        progressComp.setVisible(true);
+        //AquaSpinningProgressBarUI aqpb = new AquaSpinningProgressBarUI();
+        //aspb.installUI(progressCircleLabel);
     }
     
     public void stop() {
-        progressTimer.stop();
-        progressCircleLabel.setVisible(false);
+        //progressTimer.cancel();
+        /*timer.stop();*/
+        //progressCircleLabel.setVisible(false);
+        progressComp.setVisible(false);
+        //aspb.uninstallUI(progressCircleLabel);
     }
 }
