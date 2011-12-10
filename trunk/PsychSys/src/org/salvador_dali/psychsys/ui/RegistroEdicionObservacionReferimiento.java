@@ -40,6 +40,7 @@ import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
+import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
  *
@@ -48,6 +49,7 @@ import org.salvador_dali.psychsys.model.entities.Referimiento;
 public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private Usuario usuario;
     private Referimiento referimiento, refAEditar;
     private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
 
@@ -59,6 +61,11 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
     public RegistroEdicionObservacionReferimiento(RegistroEdicionModo modo) {
         this();
         this.modo = modo;
+    }
+    
+    public RegistroEdicionObservacionReferimiento(RegistroEdicionModo modo, Usuario usuario) {
+        this(modo);
+        this.usuario = usuario;
     }
 
     public RegistroEdicionModo getModo() {
