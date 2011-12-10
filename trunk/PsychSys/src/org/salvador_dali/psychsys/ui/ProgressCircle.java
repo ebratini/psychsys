@@ -23,7 +23,13 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import com.bric.plaf.AquaSpinningProgressBarUI;
+import com.bric.plaf.BasicSpinningProgressBarUI;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -31,26 +37,43 @@ import javax.swing.JLabel;
  */
 public class ProgressCircle {
 
-    private JLabel progressCircleImage;
+    private JLabel progressCircleLabel;
+    private JProgressBar progressBar = new JProgressBar();
+    private Timer progressTimer;
 
     public ProgressCircle() {
     }
 
-    public ProgressCircle(JLabel progressCircleImage) {
-        this.progressCircleImage = progressCircleImage;
+    public ProgressCircle(JLabel progressCircleLabel) {
+        this.progressCircleLabel = progressCircleLabel;
     }
 
     public JLabel getProgressCircleImage() {
-        return progressCircleImage;
+        return progressCircleLabel;
     }
 
-    public void setProgressCircleImage(JLabel progressCircleImage) {
-        this.progressCircleImage = progressCircleImage;
+    public void setProgressCircleImage(JLabel progressCircleLabel) {
+        this.progressCircleLabel = progressCircleLabel;
     }
     
     public void start() {
+        progressBar.setUI(new AquaSpinningProgressBarUI());
+        progressBar.putClientProperty("period", new Long(BasicSpinningProgressBarUI.DEFAULT_PERIOD.longValue()*4));
+        progressCircleLabel.add(progressBar);
+        
+        progressTimer = new Timer(20, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                progressCircleLabel.repaint();
+            }
+        });
+        progressTimer.start();
+        progressCircleLabel.setVisible(true);
     }
     
     public void stop() {
+        progressTimer.stop();
+        progressCircleLabel.setVisible(false);
     }
 }
