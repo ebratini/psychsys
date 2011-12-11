@@ -85,12 +85,13 @@ public class WelcomePage extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
-        lblBienvenida.setFont(new java.awt.Font("Tahoma", 1, 24));
+        lblBienvenida.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblBienvenida.setForeground(new java.awt.Color(102, 102, 102));
         lblBienvenida.setText("Bienvenid@ a PsychSys");
 
-        lblBienvenidaMensaje.setFont(new java.awt.Font("Tahoma", 1, 14));
+        lblBienvenidaMensaje.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblBienvenidaMensaje.setForeground(new java.awt.Color(102, 102, 102));
+        lblBienvenidaMensaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,39 +100,40 @@ public class WelcomePage extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblBienvenidaMensaje)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 772, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 836, Short.MAX_VALUE)
                 .addComponent(lblBienvenida)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBienvenida)
                     .addComponent(lblBienvenidaMensaje))
                 .addContainerGap())
         );
 
+        lblDesktopImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDesktopImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/psych_head.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(330, 330, 330)
                 .addComponent(lblDesktopImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(340, 340, 340))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addGap(73, 73, 73)
                 .addComponent(lblDesktopImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(52, 52, 52))
+                .addGap(59, 59, 59))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
