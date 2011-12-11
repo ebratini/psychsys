@@ -23,8 +23,10 @@
  */
 package psychsys;
 
+import java.util.ArrayList;
 import org.salvador_dali.psychsys.business.PsychSysLogger;
 import org.salvador_dali.psychsys.business.PsychSysConfManager;
+import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
  *
@@ -37,5 +39,13 @@ public class PsychSys {
 
     public static void main(String[] args) {
         // TODO code application logic here
+    }
+    
+    public static ArrayList<String> getRecentDocs(Usuario usuario) {
+        return null;
+    }
+    
+    public static void addRecentDoc(Usuario usuario, String doc) {
+    
     }
 }

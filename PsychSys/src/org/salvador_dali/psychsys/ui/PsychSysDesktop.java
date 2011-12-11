@@ -27,6 +27,7 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,11 +44,12 @@ import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import org.pushingpixels.flamingo.api.common.CommandButtonDisplayState;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
 import org.pushingpixels.flamingo.api.common.JCommandButton.CommandButtonKind;
+import org.pushingpixels.flamingo.api.common.JCommandButtonPanel;
 import org.pushingpixels.flamingo.api.common.JCommandMenuButton;
 import org.pushingpixels.flamingo.api.common.RichTooltip;
 import org.pushingpixels.flamingo.api.common.icon.EmptyResizableIcon;
@@ -60,6 +62,9 @@ import org.pushingpixels.flamingo.api.ribbon.JRibbon;
 import org.pushingpixels.flamingo.api.ribbon.JRibbonBand;
 import org.pushingpixels.flamingo.api.ribbon.JRibbonFrame;
 import org.pushingpixels.flamingo.api.ribbon.RibbonApplicationMenu;
+import org.pushingpixels.flamingo.api.ribbon.RibbonApplicationMenuEntryFooter;
+import org.pushingpixels.flamingo.api.ribbon.RibbonApplicationMenuEntryPrimary;
+import org.pushingpixels.flamingo.api.ribbon.RibbonApplicationMenuEntrySecondary;
 import org.pushingpixels.flamingo.api.ribbon.RibbonElementPriority;
 import org.pushingpixels.flamingo.api.ribbon.RibbonTask;
 import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
@@ -72,6 +77,19 @@ import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 import org.salvador_dali.psychsys.model.entities.Tutor;
+import test.svg.transcoded.document_new;
+import test.svg.transcoded.document_open;
+import test.svg.transcoded.document_print;
+import test.svg.transcoded.document_properties;
+import test.svg.transcoded.document_save;
+import test.svg.transcoded.document_save_as;
+import test.svg.transcoded.mail_forward;
+import test.svg.transcoded.mail_message_new;
+import test.svg.transcoded.network_wireless;
+import test.svg.transcoded.printer;
+import test.svg.transcoded.system_log_out;
+import test.svg.transcoded.text_html;
+import test.svg.transcoded.x_office_document;
 
 /**
  *
@@ -101,7 +119,8 @@ public class PsychSysDesktop extends JRibbonFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 //super.windowClosing(e);
-                ((JCommandButton) getRibbon().getTask(0).getBand(0).getControlPanel().getComponent(1)).doActionClick();
+                doExit();
+                //((JCommandButton) getRibbon().getTask(0).getBand(0).getControlPanel().getComponent(1)).doActionClick();
             }
         });
         initComponents();
@@ -722,9 +741,264 @@ public class PsychSysDesktop extends JRibbonFrame {
         this.getRibbon().addTaskbarComponent(taskbarNuevoButton);
     }
     
+    private void configureApplicationMenu() {
+        
+        // entry nuevo
+        RibbonApplicationMenuEntryPrimary amEntryNew = new RibbonApplicationMenuEntryPrimary(new document_new(), "Nuevo",
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Invoked creating new document");
+                    }
+                }, CommandButtonKind.ACTION_ONLY);
+        amEntryNew.setActionKeyTip("N");
+        
+        // entry abrir
+        RibbonApplicationMenuEntryPrimary amEntryOpen = new RibbonApplicationMenuEntryPrimary(new document_open(), "Abrir",
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Invoked opening document");
+                    }
+                }, CommandButtonKind.ACTION_ONLY);
+        amEntryOpen.setRolloverCallback(new RibbonApplicationMenuEntryPrimary.PrimaryRolloverCallback() {
+
+            @Override
+            public void menuEntryActivated(JPanel targetPanel) {
+                targetPanel.removeAll();
+                JCommandButtonPanel openHistoryPanel = new JCommandButtonPanel(
+                        CommandButtonDisplayState.MEDIUM);
+                String groupName = "Documentos Recientes";
+                openHistoryPanel.addButtonGroup(groupName);
+                
+                for (int i = 0; i < 5; i++) {
+                    JCommandButton historyButton = new JCommandButton(String.format("Recent Doc %d", i), new text_html());
+                    historyButton.setHorizontalAlignment(SwingUtilities.LEFT);
+                    openHistoryPanel.addButtonToLastGroup(historyButton);
+                }
+                openHistoryPanel.setMaxButtonColumns(1);
+                targetPanel.setLayout(new BorderLayout());
+                targetPanel.add(openHistoryPanel, BorderLayout.CENTER);
+            }
+        });
+        amEntryOpen.setActionKeyTip("O");
+        
+        
+        RibbonApplicationMenuEntryPrimary amEntrySave = new RibbonApplicationMenuEntryPrimary(new document_save(), "Guardar",
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Invoked saving document");
+                    }
+                }, CommandButtonKind.ACTION_ONLY);
+        amEntrySave.setEnabled(false);
+        amEntrySave.setActionKeyTip("S");
+
+        RibbonApplicationMenuEntryPrimary amEntrySaveAs = new RibbonApplicationMenuEntryPrimary(new document_save_as(), "Guardar Como",
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Invoked saving document as");
+                    }
+                }, CommandButtonKind.ACTION_AND_POPUP_MAIN_ACTION);
+        amEntrySaveAs.setActionKeyTip("A");
+        amEntrySaveAs.setPopupKeyTip("F");
+
+        RibbonApplicationMenuEntrySecondary amEntrySaveAsWord = new RibbonApplicationMenuEntrySecondary(new x_office_document(), "Word", null,
+                CommandButtonKind.ACTION_ONLY);
+        amEntrySaveAsWord.setDescriptionText("Guarda el documento en el formato por defecto");
+        amEntrySaveAsWord.setActionKeyTip("W");
+        
+        RibbonApplicationMenuEntrySecondary amEntrySaveAsOtherFormats = new RibbonApplicationMenuEntrySecondary(new document_save_as(), "Otros Formatos",
+                null, CommandButtonKind.ACTION_ONLY);
+        amEntrySaveAsOtherFormats.setDescriptionText("Abre la ventana de dialogo guardar como, para seleccionar los posibles formatos de archivo");
+        amEntrySaveAsOtherFormats.setActionKeyTip("O");
+
+        amEntrySaveAs.addSecondaryMenuGroup("Guarda una copia del documento", amEntrySaveAsWord, amEntrySaveAsOtherFormats);
+
+        RibbonApplicationMenuEntryPrimary amEntryPrint = new RibbonApplicationMenuEntryPrimary(new document_print(), "Imprimir",
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Invoked printing document");
+                    }
+                }, CommandButtonKind.ACTION_AND_POPUP_MAIN_ACTION);
+        amEntryPrint.setActionKeyTip("P");
+        amEntryPrint.setPopupKeyTip("W");
+
+        RibbonApplicationMenuEntrySecondary amEntryPrintSelect = new RibbonApplicationMenuEntrySecondary(new printer(),"Imprimir", null,
+                CommandButtonKind.ACTION_ONLY);
+        amEntryPrintSelect.setDescriptionText("Selecciona impresora, numero de copias y otras opciones de impresion antes de imprimir");
+        amEntryPrintSelect.setActionKeyTip("P");
+        RibbonApplicationMenuEntrySecondary amEntryPrintDefault = new RibbonApplicationMenuEntrySecondary(new document_print(), "Ipresion Rapida", null,
+                CommandButtonKind.ACTION_ONLY);
+        amEntryPrintDefault.setDescriptionText("Envia el documento directo a la impresora por defecto sin hacer cambios");
+        amEntryPrintDefault.setActionKeyTip("Q");
+        
+        amEntryPrint.addSecondaryMenuGroup("Imprime el documento", amEntryPrintSelect, amEntryPrintDefault);
+      
+        RibbonApplicationMenuEntryPrimary amEntrySend = new RibbonApplicationMenuEntryPrimary(new mail_forward(), "Enviar",
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Invoked sending document");
+                    }
+                }, CommandButtonKind.POPUP_ONLY);
+        amEntrySend.setPopupKeyTip("D");
+
+        RibbonApplicationMenuEntrySecondary amEntrySendMail = new RibbonApplicationMenuEntrySecondary(new mail_message_new(), "E-Mail", null,
+                CommandButtonKind.ACTION_ONLY);
+        amEntrySendMail.setDescriptionText("Envia una copia del documento como un atajo, en un mensaje de correo");
+        amEntrySendMail.setActionKeyTip("E");
+                
+        RibbonApplicationMenuEntrySecondary amEntrySendDoc = new RibbonApplicationMenuEntrySecondary(
+                new x_office_document(), "Enviar por correo como un atajo de word", null,
+                CommandButtonKind.ACTION_ONLY);
+        amEntrySendDoc.setDescriptionText("Envia una copia del documento como un atajo de word, en un mensaje de correo");
+        amEntrySendDoc.setActionKeyTip("W");
+        RibbonApplicationMenuEntrySecondary amEntrySendWireless = new RibbonApplicationMenuEntrySecondary(new network_wireless(), "Wireless", null,
+                CommandButtonKind.POPUP_ONLY);
+        amEntrySendWireless.setPopupKeyTip("X");
+
+        amEntrySendWireless.setPopupCallback(new PopupPanelCallback() {
+
+            @Override
+            public JPopupPanel getPopupPanel(JCommandButton commandButton) {
+                JCommandPopupMenu wirelessChoices = new JCommandPopupMenu();
+
+                JCommandMenuButton wiFiMenuButton = new JCommandMenuButton("Via WiFi", new EmptyResizableIcon(16));
+                wiFiMenuButton.setActionKeyTip("W");
+                wiFiMenuButton.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("WiFi activated");
+                    }
+                });
+                wirelessChoices.addMenuButton(wiFiMenuButton);
+
+                JCommandMenuButton blueToothMenuButton = new JCommandMenuButton("Via BlueTooth", new EmptyResizableIcon(16));
+                blueToothMenuButton.setActionKeyTip("B");
+                blueToothMenuButton.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("BlueTooth activated");
+                    }
+                });
+                wirelessChoices.addMenuButton(blueToothMenuButton);
+                return wirelessChoices;
+            }
+        });        
+        
+        amEntrySendWireless.setDescriptionText("Localiza un dispositivo wireless y envia una copia del documento a el");
+        amEntrySend.addSecondaryMenuGroup("Envia una copia del documento a otra(s) persona(s)", amEntrySendMail, amEntrySendDoc, amEntrySendWireless);
+
+        // import export
+        RibbonApplicationMenuEntryPrimary amEntryImportExport = new RibbonApplicationMenuEntryPrimary(getResizableIconFromResource("/resources/images/data-import-export.png"), "Importar/Exportar",
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Invoked printing document");
+                    }
+                }, CommandButtonKind.ACTION_AND_POPUP_MAIN_ACTION);
+        amEntryImportExport.setActionKeyTip("I");
+        amEntryImportExport.setPopupKeyTip("U");
+
+        RibbonApplicationMenuEntrySecondary amEntryImport = new RibbonApplicationMenuEntrySecondary(getResizableIconFromResource("/resources/images/import_data.png"),"Importar", null,
+                CommandButtonKind.ACTION_ONLY);
+        amEntryImport.setDescriptionText("Selecciona entidad y ubicacion de archivo a importar");
+        amEntryImport.setActionKeyTip("I");
+        
+        RibbonApplicationMenuEntrySecondary amEntryExport = new RibbonApplicationMenuEntrySecondary(getResizableIconFromResource("/resources/images/export_data.png"), "Exportar", null,
+                CommandButtonKind.ACTION_ONLY);
+        amEntryExport.setDescriptionText("Selecciona entidad y nombre de archivo a exportar");
+        amEntryExport.setActionKeyTip("E");
+        
+        amEntryImportExport.addSecondaryMenuGroup("Importa/Exporta Entidades", amEntryImport, amEntryExport);
+        
+        // cerrar entry
+        RibbonApplicationMenuEntryPrimary amEntryClose = new RibbonApplicationMenuEntryPrimary(getResizableIconFromResource("/resources/images/folder-close-icon.png"),
+                "Cerrar", new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cerrarTabs();
+            }
+        }, CommandButtonKind.ACTION_ONLY);
+        amEntryClose.setActionKeyTip("C");
+        
+                       
+        // creando app menu
+        RibbonApplicationMenu applicationMenu = new RibbonApplicationMenu();
+        applicationMenu.addMenuEntry(amEntryNew);
+        applicationMenu.addMenuEntry(amEntryOpen);
+        applicationMenu.addMenuEntry(amEntrySave);
+        applicationMenu.addMenuEntry(amEntrySaveAs);
+        applicationMenu.addMenuSeparator();
+        applicationMenu.addMenuEntry(amEntryPrint);
+        applicationMenu.addMenuEntry(amEntrySend);
+        applicationMenu.addMenuEntry(amEntryImportExport);        
+        applicationMenu.addMenuSeparator();
+        applicationMenu.addMenuEntry(amEntryClose);
+        
+        applicationMenu.setDefaultCallback(new RibbonApplicationMenuEntryPrimary.PrimaryRolloverCallback() {
+
+            @Override
+            public void menuEntryActivated(JPanel targetPanel) {
+                targetPanel.removeAll();
+                JCommandButtonPanel defaultDocsPanel = new JCommandButtonPanel(CommandButtonDisplayState.MEDIUM);
+                String groupName = "Documentos por Defecto";
+                defaultDocsPanel.addButtonGroup(groupName);
+                
+                for (int i = 0; i < 5; i++) {
+                    JCommandButton historyButton = new JCommandButton(String.format("Default Doc %d", i), new text_html());
+                    historyButton.setHorizontalAlignment(SwingUtilities.LEFT);
+                    defaultDocsPanel.addButtonToLastGroup(historyButton);
+                }
+                defaultDocsPanel.setMaxButtonColumns(1);
+                targetPanel.setLayout(new BorderLayout());
+                targetPanel.add(defaultDocsPanel, BorderLayout.CENTER);
+            }
+        });
+
+        RibbonApplicationMenuEntryFooter amFooterProps = new RibbonApplicationMenuEntryFooter(new document_properties(), "Opciones",
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Invoked Options");
+                    }
+                });
+        RibbonApplicationMenuEntryFooter amFooterExit = new RibbonApplicationMenuEntryFooter(new system_log_out(), "Salir",
+                new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        doExit();
+                    }
+                });
+        //amFooterExit.setEnabled(false);
+        applicationMenu.addFooterEntry(amFooterProps);
+        applicationMenu.addFooterEntry(amFooterExit);
+
+        this.getRibbon().setApplicationMenu(applicationMenu);
+    }
+    
     private void initJRibbon() {
         RibbonApplicationMenu ram = new RibbonApplicationMenu();
         JRibbon jr = getRibbon();
+        jr.setApplicationMenu(ram);
+        configureTaskBar();
+        configureApplicationMenu();
+        
         jr.configureHelp(getResizableIconFromResource("/resources/images/help_icon.png"), new ActionListener() {
             
             @Override
@@ -732,22 +1006,20 @@ public class PsychSysDesktop extends JRibbonFrame {
                 JOptionPane.showMessageDialog(getRootPane(), "No Implementado Todavia");
             }
         });
+        
         jr.addTask(getHomeTask());
         jr.addTask(getMantenimientoTask());
         jr.addTask(getReportesTask());
         jr.addTask(getToolsAndSettingsTask());
         
-        configureTaskBar();
-        jr.addChangeListener(new ChangeListener() {
+        /*jr.addChangeListener(new ChangeListener() {
             
             @Override
             public void stateChanged(ChangeEvent e) {
                 taskSelectedLabel.setText(getRibbon().getSelectedTask().getTitle());
                 JOptionPane.showMessageDialog(rootPane, "No Implementado Todavia");
             }
-        });
-        
-        jr.setApplicationMenu(ram);
+        });*/
     }
     
     private void setJRibbonComponentsEnabled(boolean state) {
@@ -785,9 +1057,9 @@ public class PsychSysDesktop extends JRibbonFrame {
         setPreferredSize(new Dimension(1100, 600));
         setLocationByPlatform(true);
         initJRibbon();
-        initBodyContent();
-        initStatusBar();
+        initBodyContent();        
         initTimeDate();
+        initStatusBar();
         setJRibbonComponentsEnabled(false);
         pack();
     }
@@ -801,7 +1073,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             usuariologueado.setText(String.format(" %s ", usuario.getUsrLogin()));
             JViewport startVP = (JViewport) ((JScrollPane) pnlBody.getComponent(0)).getComponent(0);
             JLabel lblBienvMsj = ((WelcomePage) startVP.getComponent(0)).getLblBienvenidaMensaje();
-            lblBienvMsj.setText("Bienvenido, " + login.getTxtNombreUsuario().getText());
+            lblBienvMsj.setText("Bienvenid@, " + login.getTxtNombreUsuario().getText());
             new Thread(new LabelToolTipShower(lblBienvMsj, 3500)).start();
             logInOutButton.setName("jcbLogOut");
             logInOutButton.setIcon(getResizableIconFromResource("/resources/images/logout.png"));
@@ -821,9 +1093,17 @@ public class PsychSysDesktop extends JRibbonFrame {
         //Syscafil.sl.flushToDataBase();
     }
     
-    private void doExit(JCommandButton logInOutButton) {
+    private void cerrarTabs() {
+        int tabCount = pnlBody.getTabCount();
+        for (int i = tabCount - 1; i >= 1; i-- ) {
+            pnlBody.remove(i);
+        }
+    }
+    
+    private void doExit() {
+        JCommandButton loginLogoutButton = (JCommandButton) getRibbon().getTask(0).getBand(0).getControlPanel().getComponent(1);
         if (usuario != null) {
-            doLogout(logInOutButton);
+            doLogout(loginLogoutButton);
         }
         System.exit(0);
     }
@@ -842,6 +1122,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
     
     private void verTutores() {
+        pnlBody.addTab("Tutores", new JScrollPane(new Panel()));
     }
     
     private void registrarEditarTutor(RegistroEdicionModo modo, Tutor tutor) {
@@ -1038,9 +1319,9 @@ public class PsychSysDesktop extends JRibbonFrame {
                     doLogout(buttonClicked);
                 }
             } else if (buttonName.equalsIgnoreCase("jcbSalir")) {
-                doExit(buttonClicked);
+                doExit();
             } else if (buttonName.equalsIgnoreCase("jcbVerTutores")) {
-                throwNoImplMsj();
+                verTutores();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarTutor")) {
                 registrarEditarTutor(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbEditarTutor")) {
