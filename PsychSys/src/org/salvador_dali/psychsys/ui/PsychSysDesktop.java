@@ -33,8 +33,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -990,6 +992,18 @@ public class PsychSysDesktop extends JRibbonFrame {
         applicationMenu.addFooterEntry(amFooterExit);
 
         this.getRibbon().setApplicationMenu(applicationMenu);
+        
+        RichTooltip appMenuRichTooltip = new RichTooltip();
+        appMenuRichTooltip.setTitle("PsychSys Button");
+        appMenuRichTooltip.addDescriptionSection("Click aqui para abrir, guardar, imprimir y demas opciones del sistema");
+        try {
+            appMenuRichTooltip.setMainImage(ImageIO.read(getClass().getResource("/resources/images/psychsys_app_menu_174x1514.png")));
+            appMenuRichTooltip.setFooterImage(ImageIO.read(getClass().getResource("/resources/images/help-browser.png")));
+        } catch (IOException ioe) {
+        }
+        appMenuRichTooltip.addFooterSection("Presione F1 para ayuda");
+        this.getRibbon().setApplicationMenuRichTooltip(appMenuRichTooltip);
+        this.getRibbon().setApplicationMenuKeyTip("P");
     }
     
     private void initJRibbon() {
