@@ -74,6 +74,7 @@ import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
 import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 import org.pushingpixels.flamingo.api.ribbon.resize.RibbonBandResizePolicy;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
+import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
@@ -113,6 +114,9 @@ public class PsychSysDesktop extends JRibbonFrame {
     private JLabel taskSelectedLabel = new JLabel();
     private JLabel usuarioLogueado = new JLabel("Usuario no logueado");
     private JLabel timeDate = new JLabel("Time/Date");
+    
+    // jpas
+    private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
 
     public PsychSysDesktop() {
         super("PsychSys");
@@ -1291,6 +1295,12 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void eliminarObservacionReferimiento() {
     }
+    
+    private void cambiarEstadoReferimiento(Referimiento ref) {
+        CambiarEstadoRefermiento cer = new CambiarEstadoRefermiento(ref, jpaRefDao, this, true);
+        cer.setLocationRelativeTo(this);
+        cer.setVisible(true);
+    }
 
     private void verPruebasPsicologicas() {
     }
@@ -1414,6 +1424,10 @@ public class PsychSysDesktop extends JRibbonFrame {
                 registrarEditarReferimiento(RegistroEdicionModo.EDICION, null);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarReferimiento")) {
                 throwNoImplMsj();
+            } else if (buttonName.equalsIgnoreCase("jcbObservacionReferimiento")) {
+                registrarEditarObservacionReferimiento(RegistroEdicionModo.REGISTRO, null);
+            } else if (buttonName.equalsIgnoreCase("jcbCambiarEstadoReferimiento")) {
+                cambiarEstadoReferimiento(null);
             } else if (buttonName.equalsIgnoreCase("jcbVerPruebasPsicologicas")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarPruebaPsicologica")) {
