@@ -40,6 +40,7 @@ public class WelcomePage extends javax.swing.JPanel {
     /** Creates new form WelcomePage */
     public WelcomePage() {
         initComponents();
+        lblBienvenidaMensaje.setVisible(false);
     }
 
     public JLabel getLblBienvenida() {
@@ -85,13 +86,14 @@ public class WelcomePage extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
-        lblBienvenida.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblBienvenida.setFont(new java.awt.Font("Arial", 1, 18));
         lblBienvenida.setForeground(new java.awt.Color(102, 102, 102));
         lblBienvenida.setText("Bienvenid@ a PsychSys");
 
-        lblBienvenidaMensaje.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblBienvenidaMensaje.setFont(new java.awt.Font("Arial", 1, 14));
         lblBienvenidaMensaje.setForeground(new java.awt.Color(102, 102, 102));
         lblBienvenidaMensaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblBienvenidaMensaje.setText("Bienvenid@ Usuario Bienvenid@ Usuario");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,7 +102,7 @@ public class WelcomePage extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblBienvenidaMensaje)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 836, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
                 .addComponent(lblBienvenida)
                 .addContainerGap())
         );

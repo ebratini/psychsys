@@ -150,19 +150,13 @@ public class Login extends javax.swing.JDialog {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-        char[] pass = psfContrasenia.getPassword();
-        int charCount = pass.length;
-        clearArray(pass);
-
-        if (txtNombreUsuario.getText().isEmpty() || charCount == 0) {
+        if (txtNombreUsuario.getText().isEmpty() || psfContrasenia.getPassword().length == 0) {
             JOptionPane.showMessageDialog(this, "Los campos nombre usuario y contraseña son obligatorios",
                     "Validacion de Usuario", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (esUsuarioValido(txtNombreUsuario.getText())) {
-            this.usuario = jpaUsrDao.getUsuarioByLogin(txtNombreUsuario.getText());
-            //JOptionPane.showMessageDialog(this, "Bienvenido, " + txtlNombreUsuario.getText(), "Validacion de Usuario", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Usuario / Contraseña Invalido", "Validacion de Usuario", JOptionPane.ERROR_MESSAGE);
@@ -235,31 +229,35 @@ public class Login extends javax.swing.JDialog {
     }
     
     private void clearArray(char[] array) {
-        for (int i = 0; i < array.length; i++) {
-            array[i] = 0;
+        if (array != null) {
+            for (int i = 0; i < array.length; i++) {
+                array[i] = 0;
+            }
         }
     }
     
     private boolean esUsuarioValido(String nombreUsuario) {
-        Usuario user = jpaUsrDao.getUsuarioByLogin(nombreUsuario);
+        this.usuario = jpaUsrDao.getUsuarioByLogin(nombreUsuario);
         boolean usuarioValido = false;
-
-        if (user != null) {
-            char[] usrPass = user.getUsrPassword().toCharArray();
-            char[] passToComp = psfContrasenia.getPassword();
+        
+        char[] usrPass = null;
+        char[] passToComp = null;
+        if (this.usuario != null) {
+            usrPass = this.usuario.getUsrPassword().toCharArray();
+            passToComp = psfContrasenia.getPassword();
 
             if (Arrays.equals(usrPass, passToComp)) {
                 usuarioValido = true;
-                clearArray(usrPass);
             } else {
                 usuarioValido = false;
             }
-
-            clearArray(usrPass);
-            clearArray(passToComp);
         } else {
             usuarioValido = false;
         }
+        
+        clearArray(usrPass);
+        clearArray(passToComp);        
+        
         return usuarioValido;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
