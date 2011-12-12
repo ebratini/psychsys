@@ -35,6 +35,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableColumnModel;
@@ -309,6 +310,11 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
 
         cmbGradoEscolar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
         cmbGradoEscolar.setNextFocusableComponent(cmbNivelEscolar);
+        cmbGradoEscolar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbGradoEscolarActionPerformed(evt);
+            }
+        });
 
         cmbNivelEscolar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basica", "Media", "Pre-Primaria" }));
         cmbNivelEscolar.setNextFocusableComponent(txtEscuelaProcedencia);
@@ -980,6 +986,18 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_mniRemoverTutorActionPerformed
+
+    private void cmbGradoEscolarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGradoEscolarActionPerformed
+        // TODO add your handling code here:
+        int gradoEscolar = Integer.parseInt(cmbGradoEscolar.getSelectedItem().toString());
+        if (gradoEscolar >= 5) {
+            cmbNivelEscolar.setModel(new DefaultComboBoxModel(new String[] {"Basica"}));
+        } else if (gradoEscolar >= 2) {
+            cmbNivelEscolar.setModel(new DefaultComboBoxModel(new String[] {"Basica", "Media"}));
+        } else if (gradoEscolar >= 1) {
+            cmbNivelEscolar.setModel(new DefaultComboBoxModel(new String[] {"Basica", "Inicial", "Media"}));
+        }
+    }//GEN-LAST:event_cmbGradoEscolarActionPerformed
 
     /**
      * @param args the command line arguments

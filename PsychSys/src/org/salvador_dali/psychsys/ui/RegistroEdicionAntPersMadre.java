@@ -463,6 +463,7 @@ private void rbnSexPrefMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
+        
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) { 
             antPersMadre = new AntPersMadre(null, chkEmbarazo.isSelected() ? 'S' : 'N', rbnAmAbSi.isSelected() ? 'S' : 'N',
                     rbnInAbSi.isSelected() ? 'S' : 'N', rbnEmbDesSi.isSelected() ? 'S' : 'N',

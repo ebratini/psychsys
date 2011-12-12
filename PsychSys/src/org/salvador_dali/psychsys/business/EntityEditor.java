@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.business;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import org.salvador_dali.psychsys.model.JpaDao;
 
 /**
  *
@@ -32,9 +33,17 @@ import java.util.ArrayList;
  */
 public class EntityEditor {
 
+    private JpaDao jpaDao;
     private ArrayList<Serializable> nuevos = new ArrayList<Serializable>();
     private ArrayList<Serializable> editados = new ArrayList<Serializable>();
     private ArrayList<Serializable> elimados = new ArrayList<Serializable>();
+
+    public EntityEditor() {
+    }
+
+    public EntityEditor(JpaDao jpaDao) {
+        this.jpaDao = jpaDao;
+    }
 
     public ArrayList<Serializable> getEditados() {
         return editados;
@@ -59,16 +68,36 @@ public class EntityEditor {
     public void setNuevos(ArrayList<Serializable> nuevos) {
         this.nuevos = nuevos;
     }
-    
+
+    public JpaDao getJpaDao() {
+        return jpaDao;
+    }
+
+    public void setJpaDao(JpaDao jpaDao) {
+        this.jpaDao = jpaDao;
+    }
+
     public void agregarNuevo(Serializable entity) {
         this.nuevos.add(entity);
     }
-    
+
     public void agregarEditado(Serializable entity) {
         this.editados.add(entity);
     }
-    
+
     public void agregarEliminado(Serializable entity) {
         this.elimados.add(entity);
+    }
+
+    public void doDMLAction() {
+        for (Serializable entity : nuevos) {
+            jpaDao.persist(entity);
+        }
+        for (Serializable entity : editados) {
+            jpaDao.update(entity);
+        }
+        for (Serializable entity : elimados) {
+            jpaDao.remove(entity);
+        }
     }
 }

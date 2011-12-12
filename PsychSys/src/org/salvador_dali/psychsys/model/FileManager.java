@@ -39,7 +39,7 @@ import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.salvador_dali.psychsys.business.BehaviorNotImplementedException;
 
 /**
  *
@@ -143,7 +143,7 @@ public class FileManager {
     }
 
     public static void extractJarFile(JarFile jarFile, String destPath) {
-        throw new NotImplementedException();
+        throw new BehaviorNotImplementedException();
     }
 
     public static File extractFileFromJar(JarFile jarFile, String destPath, String entryName) {

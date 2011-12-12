@@ -672,6 +672,9 @@
                   <ComponentRef name="cmbNivelEscolar"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbGradoEscolarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbNivelEscolar">
               <Properties>

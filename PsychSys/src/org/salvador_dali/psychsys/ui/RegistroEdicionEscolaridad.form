@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="bgrRecuperacion">
     </Component>
@@ -164,26 +164,26 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jRadioButton5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbnCambioEscuelaSi" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbnCambioEscuelaNo" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="spnEdadInicioEscolaridad" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="cmbCurso" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbGradoEscolar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="cmbNivelEscolar" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="cmbTipoEscuelaActual" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbnRecSi" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbnRecNo" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbnRepSi" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbnRepNo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="lblVecesReprobacion" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -211,7 +211,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblCursoActual" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbCurso" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbGradoEscolar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cmbNivelEscolar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -222,22 +222,22 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblRecuperacion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbnRecSi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbnRecNo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbnRepSi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbnRepNo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblVecesReprobacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="spnVecesReprobacion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jRadioButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbnCambioEscuelaSi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbnCambioEscuelaNo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="69" max="-2" attributes="0"/>
@@ -257,19 +257,24 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="spnEdadInicioEscolaridad">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" maximum="99" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbNivelEscolar">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
                 <StringItem index="0" value="Basica"/>
-                <StringItem index="1" value="Media"/>
-                <StringItem index="2" value="Pre-Primaria"/>
+                <StringItem index="1" value="Inicial"/>
+                <StringItem index="2" value="Media"/>
               </StringArray>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbCurso">
+        <Component class="javax.swing.JComboBox" name="cmbGradoEscolar">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="8">
@@ -284,6 +289,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbGradoEscolarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCursoActual">
           <Properties>
@@ -311,7 +319,7 @@
             <Property name="text" type="java.lang.String" value="Recuperacion"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+        <Component class="javax.swing.JRadioButton" name="rbnRecSi">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgrRecuperacion"/>
@@ -320,7 +328,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Si el ni&#xf1;o(a) ha estado en recuperacion"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+        <Component class="javax.swing.JRadioButton" name="rbnRecNo">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgrRecuperacion"/>
@@ -335,7 +343,7 @@
             <Property name="text" type="java.lang.String" value="Ha Reprobado"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+        <Component class="javax.swing.JRadioButton" name="rbnRepSi">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgrReprobado"/>
@@ -343,7 +351,7 @@
             <Property name="text" type="java.lang.String" value="Si"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+        <Component class="javax.swing.JRadioButton" name="rbnRepNo">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgrReprobado"/>
@@ -357,7 +365,7 @@
             <Property name="text" type="java.lang.String" value="Ha Cambiado de Escuela"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton5">
+        <Component class="javax.swing.JRadioButton" name="rbnCambioEscuelaSi">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgrCambioEscuela"/>
@@ -365,7 +373,7 @@
             <Property name="text" type="java.lang.String" value="Si"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton6">
+        <Component class="javax.swing.JRadioButton" name="rbnCambioEscuelaNo">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="bgrCambioEscuela"/>
@@ -381,12 +389,17 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextArea1">
+            <Component class="javax.swing.JTextArea" name="txaRazonCambioEscuela">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                </Property>
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="3"/>
                 <Property name="text" type="java.lang.String" value="Escriba por que?"/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -403,11 +416,12 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextArea2">
+            <Component class="javax.swing.JTextArea" name="txaRendimientoActual">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="wrapStyleWord" type="boolean" value="true"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -418,6 +432,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="spnVecesReprobacion">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0" maximum="99" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

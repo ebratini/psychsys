@@ -48,6 +48,30 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
         initComponents();
     }
 
+    public AntRecienNacido getArn() {
+        return arn;
+    }
+
+    public void setArn(AntRecienNacido arn) {
+        this.arn = arn;
+    }
+
+    public AntRecienNacido getArnEditar() {
+        return arnEditar;
+    }
+
+    public void setArnEditar(AntRecienNacido arnEditar) {
+        this.arnEditar = arnEditar;
+    }
+
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
+        this.modo = modo;
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -242,15 +266,22 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
-        String trabajoCompletoMensaje = "Antecedentes recien nacido registrado exitosamente.";
         pc.start();
+        String trabajoCompletoMensaje = "Antecedentes recien nacido registrado exitosamente.";
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
+        
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             // se registra cuando le dan aceptar en ventana de historia clinica
+            arn = new AntRecienNacido(null, rbnLacMatSi.isSelected() ? 'S' : 'N');
+            arn.setArnTiempoLactancia(Integer.parseInt(spnTiempoLactancia.getValue().toString()));
+            arn.setArnProblemasEspeciales(!txaProblemasEspeciales.getText().isEmpty() ? txaProblemasEspeciales.getText() : null);
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             // se actualiza cuando le dan aceptar en ventana de historia clinica
+            arnEditar.setArnLactanciaMaterna(rbnLacMatSi.isSelected() ? 'S' : 'N');
+            arnEditar.setArnTiempoLactancia(Integer.parseInt(spnTiempoLactancia.getValue().toString()));
+            arnEditar.setArnProblemasEspeciales(!txaProblemasEspeciales.getText().isEmpty() ? txaProblemasEspeciales.getText() : null);
         }
 
         statusMessageLabel.setText(trabajoCompletoMensaje);

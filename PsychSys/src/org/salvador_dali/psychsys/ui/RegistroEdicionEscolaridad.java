@@ -30,6 +30,7 @@
 package org.salvador_dali.psychsys.ui;
 
 import java.awt.Color;
+import javax.swing.DefaultComboBoxModel;
 import org.salvador_dali.psychsys.model.entities.Escolaridad;
 
 /**
@@ -41,11 +42,35 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private Escolaridad esc;
     private Escolaridad escEditar;
-    
+
     /** Creates new form RegistroEdicionEscolaridad */
     public RegistroEdicionEscolaridad(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public Escolaridad getEsc() {
+        return esc;
+    }
+
+    public void setEsc(Escolaridad esc) {
+        this.esc = esc;
+    }
+
+    public Escolaridad getEscEditar() {
+        return escEditar;
+    }
+
+    public void setEscEditar(Escolaridad escEditar) {
+        this.escEditar = escEditar;
+    }
+
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
+        this.modo = modo;
     }
 
     /** This method is called from within the constructor to
@@ -70,24 +95,24 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
         lblEdadInicioEscolaridad = new javax.swing.JLabel();
         spnEdadInicioEscolaridad = new javax.swing.JSpinner();
         cmbNivelEscolar = new javax.swing.JComboBox();
-        cmbCurso = new javax.swing.JComboBox();
+        cmbGradoEscolar = new javax.swing.JComboBox();
         lblCursoActual = new javax.swing.JLabel();
         lblTipoEscuelaActual = new javax.swing.JLabel();
         cmbTipoEscuelaActual = new javax.swing.JComboBox();
         lblRecuperacion = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbnRecSi = new javax.swing.JRadioButton();
+        rbnRecNo = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        rbnRepSi = new javax.swing.JRadioButton();
+        rbnRepNo = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        rbnCambioEscuelaSi = new javax.swing.JRadioButton();
+        rbnCambioEscuelaNo = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txaRazonCambioEscuela = new javax.swing.JTextArea();
         lblRendimientoActual = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txaRendimientoActual = new javax.swing.JTextArea();
         lblVecesReprobacion = new javax.swing.JLabel();
         spnVecesReprobacion = new javax.swing.JSpinner();
 
@@ -147,9 +172,16 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
 
         lblEdadInicioEscolaridad.setText("Edad Inicio Escolaridad");
 
-        cmbNivelEscolar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basica", "Media", "Pre-Primaria" }));
+        spnEdadInicioEscolaridad.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
 
-        cmbCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
+        cmbNivelEscolar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Basica", "Inicial", "Media" }));
+
+        cmbGradoEscolar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
+        cmbGradoEscolar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbGradoEscolarActionPerformed(evt);
+            }
+        });
 
         lblCursoActual.setText("Curso Actual");
 
@@ -159,47 +191,53 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
 
         lblRecuperacion.setText("Recuperacion");
 
-        bgrRecuperacion.add(jRadioButton1);
-        jRadioButton1.setText("Si");
-        jRadioButton1.setToolTipText("Si el niño(a) ha estado en recuperacion");
+        bgrRecuperacion.add(rbnRecSi);
+        rbnRecSi.setText("Si");
+        rbnRecSi.setToolTipText("Si el niño(a) ha estado en recuperacion");
 
-        bgrRecuperacion.add(jRadioButton2);
-        jRadioButton2.setSelected(true);
-        jRadioButton2.setText("No");
-        jRadioButton2.setToolTipText("Si el niño(a) ha estado en recuperacion");
+        bgrRecuperacion.add(rbnRecNo);
+        rbnRecNo.setSelected(true);
+        rbnRecNo.setText("No");
+        rbnRecNo.setToolTipText("Si el niño(a) ha estado en recuperacion");
 
         jLabel4.setText("Ha Reprobado");
 
-        bgrReprobado.add(jRadioButton3);
-        jRadioButton3.setText("Si");
+        bgrReprobado.add(rbnRepSi);
+        rbnRepSi.setText("Si");
 
-        bgrReprobado.add(jRadioButton4);
-        jRadioButton4.setSelected(true);
-        jRadioButton4.setText("No");
+        bgrReprobado.add(rbnRepNo);
+        rbnRepNo.setSelected(true);
+        rbnRepNo.setText("No");
 
         jLabel5.setText("Ha Cambiado de Escuela");
 
-        bgrCambioEscuela.add(jRadioButton5);
-        jRadioButton5.setText("Si");
+        bgrCambioEscuela.add(rbnCambioEscuelaSi);
+        rbnCambioEscuelaSi.setText("Si");
 
-        bgrCambioEscuela.add(jRadioButton6);
-        jRadioButton6.setSelected(true);
-        jRadioButton6.setText("No");
+        bgrCambioEscuela.add(rbnCambioEscuelaNo);
+        rbnCambioEscuelaNo.setSelected(true);
+        rbnCambioEscuelaNo.setText("No");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(3);
-        jTextArea1.setText("Escriba por que?");
-        jScrollPane1.setViewportView(jTextArea1);
+        txaRazonCambioEscuela.setColumns(20);
+        txaRazonCambioEscuela.setForeground(new java.awt.Color(204, 204, 204));
+        txaRazonCambioEscuela.setLineWrap(true);
+        txaRazonCambioEscuela.setRows(3);
+        txaRazonCambioEscuela.setText("Escriba por que?");
+        txaRazonCambioEscuela.setWrapStyleWord(true);
+        txaRazonCambioEscuela.setEnabled(false);
+        jScrollPane1.setViewportView(txaRazonCambioEscuela);
 
         lblRendimientoActual.setText("Rendimiento Actual");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        txaRendimientoActual.setColumns(20);
+        txaRendimientoActual.setLineWrap(true);
+        txaRendimientoActual.setRows(5);
+        txaRendimientoActual.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(txaRendimientoActual);
 
         lblVecesReprobacion.setText("Veces");
+
+        spnVecesReprobacion.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -219,23 +257,23 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton5)
+                                .addComponent(rbnCambioEscuelaSi)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton6))
+                                .addComponent(rbnCambioEscuelaNo))
                             .addComponent(spnEdadInicioEscolaridad, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cmbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbGradoEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbNivelEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cmbTipoEscuelaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(rbnRecSi)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton2))
+                                .addComponent(rbnRecNo))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton3)
+                                .addComponent(rbnRepSi)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton4)
+                                .addComponent(rbnRepNo)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblVecesReprobacion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -256,7 +294,7 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCursoActual)
-                    .addComponent(cmbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbGradoEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbNivelEscolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -265,20 +303,20 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRecuperacion)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rbnRecSi)
+                    .addComponent(rbnRecNo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4)
+                    .addComponent(rbnRepSi)
+                    .addComponent(rbnRepNo)
                     .addComponent(lblVecesReprobacion)
                     .addComponent(spnVecesReprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6))
+                    .addComponent(rbnCambioEscuelaSi)
+                    .addComponent(rbnCambioEscuelaNo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -320,12 +358,6 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        statusMessageLabel.setVisible(false);
-        statusAnimationLabel.setVisible(false);
-    }//GEN-LAST:event_formWindowOpened
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -334,14 +366,32 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
-        String trabajoCompletoMensaje = "Antecedentes psicomotriz lenguaje registrado exitosamente.";
         pc.start();
+        String trabajoCompletoMensaje = "Antecedentes psicomotriz lenguaje registrado exitosamente.";
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
+
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+            esc = new Escolaridad(null, Integer.parseInt(spnEdadInicioEscolaridad.getValue().toString()), cmbNivelEscolar.getSelectedItem().toString(),
+                    Integer.parseInt(cmbGradoEscolar.getSelectedItem().toString()), cmbTipoEscuelaActual.getSelectedItem().toString(), rbnRecSi.isSelected() ? 'S' : 'N',
+                    rbnRepSi.isSelected() ? 'S' : 'N', Integer.parseInt(spnVecesReprobacion.getValue().toString()), rbnCambioEscuelaSi.isSelected() ? 'S' : 'N');
+            esc.setEscRazonCambioEscuela(!txaRazonCambioEscuela.getText().isEmpty() ? txaRazonCambioEscuela.getText() : null);
+            esc.setEscRendimientoActual(!txaRendimientoActual.getText().isEmpty() ? txaRendimientoActual.getText() : null);
+
             // se registra cuando le dan aceptar en ventana de historia clinica
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            escEditar.setEscEdadInicioEscolaridad(Integer.parseInt(spnEdadInicioEscolaridad.getValue().toString()));
+            escEditar.setEscNivelEscolar(cmbNivelEscolar.getSelectedItem().toString());
+            escEditar.setEscGradoEscolarActual(Integer.parseInt(cmbGradoEscolar.getSelectedItem().toString()));
+            escEditar.setEscTipoEscuelaActual(cmbTipoEscuelaActual.getSelectedItem().toString());
+            escEditar.setEscRecuperacion(rbnRecSi.isSelected() ? 'S' : 'N');
+            escEditar.setEscHaReprobado(rbnRepSi.isSelected() ? 'S' : 'N');
+            escEditar.setEscCantVecesReprobacion(Integer.parseInt(spnVecesReprobacion.getValue().toString()));
+            escEditar.setEscCambioEscuela(rbnCambioEscuelaSi.isSelected() ? 'S' : 'N');
+            escEditar.setEscRazonCambioEscuela(!txaRazonCambioEscuela.getText().isEmpty() ? txaRazonCambioEscuela.getText() : null);
+            escEditar.setEscRendimientoActual(!txaRendimientoActual.getText().isEmpty() ? txaRendimientoActual.getText() : null);
+
             // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 
@@ -351,6 +401,24 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
         new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         pc.stop();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        statusMessageLabel.setVisible(false);
+        statusAnimationLabel.setVisible(false);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cmbGradoEscolarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGradoEscolarActionPerformed
+        // TODO add your handling code here:
+        int gradoEscolar = Integer.parseInt(cmbGradoEscolar.getSelectedItem().toString());
+        if (gradoEscolar >= 5) {
+            cmbNivelEscolar.setModel(new DefaultComboBoxModel(new String[]{"Basica"}));
+        } else if (gradoEscolar >= 2) {
+            cmbNivelEscolar.setModel(new DefaultComboBoxModel(new String[]{"Basica", "Media"}));
+        } else if (gradoEscolar >= 1) {
+            cmbNivelEscolar.setModel(new DefaultComboBoxModel(new String[]{"Basica", "Inicial", "Media"}));
+        }
+    }//GEN-LAST:event_cmbGradoEscolarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -401,32 +469,32 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
     private javax.swing.ButtonGroup bgrReprobado;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JComboBox cmbCurso;
+    private javax.swing.JComboBox cmbGradoEscolar;
     private javax.swing.JComboBox cmbNivelEscolar;
     private javax.swing.JComboBox cmbTipoEscuelaActual;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblCursoActual;
     private javax.swing.JLabel lblEdadInicioEscolaridad;
     private javax.swing.JLabel lblRecuperacion;
     private javax.swing.JLabel lblRendimientoActual;
     private javax.swing.JLabel lblTipoEscuelaActual;
     private javax.swing.JLabel lblVecesReprobacion;
+    private javax.swing.JRadioButton rbnCambioEscuelaNo;
+    private javax.swing.JRadioButton rbnCambioEscuelaSi;
+    private javax.swing.JRadioButton rbnRecNo;
+    private javax.swing.JRadioButton rbnRecSi;
+    private javax.swing.JRadioButton rbnRepNo;
+    private javax.swing.JRadioButton rbnRepSi;
     private javax.swing.JSpinner spnEdadInicioEscolaridad;
     private javax.swing.JSpinner spnVecesReprobacion;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JTextArea txaRazonCambioEscuela;
+    private javax.swing.JTextArea txaRendimientoActual;
     // End of variables declaration//GEN-END:variables
 }
