@@ -48,6 +48,30 @@ public class RegistroEdicionAntPsicomotrizLenguaje extends javax.swing.JDialog {
         initComponents();
     }
 
+    public AntPsicomotrizLenguaje getApl() {
+        return apl;
+    }
+
+    public void setApl(AntPsicomotrizLenguaje apl) {
+        this.apl = apl;
+    }
+
+    public AntPsicomotrizLenguaje getAplEditar() {
+        return aplEditar;
+    }
+
+    public void setAplEditar(AntPsicomotrizLenguaje aplEditar) {
+        this.aplEditar = aplEditar;
+    }
+
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
+        this.modo = modo;
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -133,11 +157,14 @@ public class RegistroEdicionAntPsicomotrizLenguaje extends javax.swing.JDialog {
 
         lblEdadInicioMarcha.setText("Edad Inicio Marcha");
 
+        spnEdadInicioMarcha.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
+
         lblMotricidadActual.setText("Motricidad Actual");
 
         txaMotricidadActual.setColumns(20);
         txaMotricidadActual.setLineWrap(true);
         txaMotricidadActual.setRows(5);
+        txaMotricidadActual.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txaMotricidadActual);
 
         lblPrimerasPalabras.setText("Primeras Palabras");
@@ -145,6 +172,7 @@ public class RegistroEdicionAntPsicomotrizLenguaje extends javax.swing.JDialog {
         txaPrimerasPalabras.setColumns(20);
         txaPrimerasPalabras.setLineWrap(true);
         txaPrimerasPalabras.setRows(5);
+        txaPrimerasPalabras.setWrapStyleWord(true);
         jScrollPane2.setViewportView(txaPrimerasPalabras);
 
         lblVocabularioActual.setText("Vocubalario Actual");
@@ -152,6 +180,7 @@ public class RegistroEdicionAntPsicomotrizLenguaje extends javax.swing.JDialog {
         txaVocabularioActual.setColumns(20);
         txaVocabularioActual.setLineWrap(true);
         txaVocabularioActual.setRows(5);
+        txaVocabularioActual.setWrapStyleWord(true);
         jScrollPane3.setViewportView(txaVocabularioActual);
 
         lblEdadInicioMarchaValMarker.setForeground(new java.awt.Color(255, 51, 51));
@@ -247,14 +276,25 @@ public class RegistroEdicionAntPsicomotrizLenguaje extends javax.swing.JDialog {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
-        String trabajoCompletoMensaje = "Antecedentes psicomotriz lenguaje registrado exitosamente.";
         pc.start();
+        String trabajoCompletoMensaje = "Antecedentes psicomotriz lenguaje registrado exitosamente.";
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
+
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+            apl = new AntPsicomotrizLenguaje(null, Integer.parseInt(spnEdadInicioMarcha.getValue().toString()));
+            apl.setAplMotricidadActual(!txaMotricidadActual.getText().isEmpty() ? txaMotricidadActual.getText() : null);
+            apl.setAplPrimerasPalabras(!txaPrimerasPalabras.getText().isEmpty() ? txaPrimerasPalabras.getText() : null);
+            apl.setAplVocabularioActual(!txaVocabularioActual.getText().isEmpty() ? txaVocabularioActual.getText() : null);
+
             // se registra cuando le dan aceptar en ventana de historia clinica
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            aplEditar.setAplEdadInicioMarcha(Integer.parseInt(spnEdadInicioMarcha.getValue().toString()));
+            aplEditar.setAplMotricidadActual(!txaMotricidadActual.getText().isEmpty() ? txaMotricidadActual.getText() : null);
+            aplEditar.setAplPrimerasPalabras(!txaPrimerasPalabras.getText().isEmpty() ? txaPrimerasPalabras.getText() : null);
+            aplEditar.setAplVocabularioActual(!txaVocabularioActual.getText().isEmpty() ? txaVocabularioActual.getText() : null);
+
             // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 

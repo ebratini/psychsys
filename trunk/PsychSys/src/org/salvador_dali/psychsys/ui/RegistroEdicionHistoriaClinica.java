@@ -39,6 +39,7 @@ import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.business.DateFieldValidator;
 import org.salvador_dali.psychsys.business.DateUtils;
 import org.salvador_dali.psychsys.business.EmptyFieldValidator;
+import org.salvador_dali.psychsys.business.EntityEditor;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
@@ -62,9 +63,10 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
 public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
+    private JpaHistoriaClinicaDao jpaHicDao = new JpaHistoriaClinicaDao();
+    private EntityEditor enityEditor = new EntityEditor(jpaHicDao);
     private Usuario usuario;
     private Estudiante estudiante;
-    private JpaHistoriaClinicaDao jpaHicDao = new JpaHistoriaClinicaDao();
     private HistoriaClinica hicAEditar;
     private AntPersMadre antPersMadre;
     private AntNeonatal antNeonatal;
@@ -112,7 +114,6 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         statusAnimationLabel = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        pnlSpining = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Historia Clinica Infantil");
@@ -259,11 +260,11 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -292,19 +293,6 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
             }
         });
 
-        pnlSpining.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout pnlSpiningLayout = new javax.swing.GroupLayout(pnlSpining);
-        pnlSpining.setLayout(pnlSpiningLayout);
-        pnlSpiningLayout.setHorizontalGroup(
-            pnlSpiningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-        pnlSpiningLayout.setVerticalGroup(
-            pnlSpiningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,11 +300,9 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlInformacionHistoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addComponent(pnlInformacionHistoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addComponent(pnlAntecedentesEscolaridad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlSpining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar)))
@@ -330,17 +316,11 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                 .addComponent(pnlInformacionHistoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlAntecedentesEscolaridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(pnlSpining, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -362,9 +342,9 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         // TODO: implementar correctamente el spinning progress bar
-        ProgressCircle pc = new ProgressCircle(pnlSpining);        
+        ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
         pc.start();
-        String trabajoCompletoMensaje = "Historia clinica registrada exitosamente.";        
+        String trabajoCompletoMensaje = "Historia clinica registrada exitosamente.";
         LimpiadorComponentes.limpiarValidationMarkers(this);
         if (!checkFormFields()) {
             statusMessageLabel.setText("Por favor corriga los campos marcados.");
@@ -434,6 +414,7 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
 
                 // manejar los antecedentes
 
+                
                 jpaHicDao.update(hicAEditar);
             }
         } catch (Exception e) {
@@ -479,6 +460,10 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                 RegistroEdicionAntPersMadre apm = new RegistroEdicionAntPersMadre(this, true);
                 apm.setLocationRelativeTo(this);
                 apm.setVisible(true);
+                
+                if (apm.getAntPersMadre() != null) {
+                    enityEditor.agregarNuevo(apm.getAntPersMadre());
+                }
                 break;
             case 1:
                 RegistroEdicionAntNeonatal an = new RegistroEdicionAntNeonatal(this, true);
@@ -513,31 +498,47 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         switch (lstAntecedentes.getSelectedIndex()) {
             case 0:
                 RegistroEdicionAntPersMadre apm = new RegistroEdicionAntPersMadre(this, true);
+                apm.setModo(RegistroEdicionModo.EDICION);
+                apm.setTitle(apm.getTitle().replace("Registrar", "Editar"));
                 apm.setLocationRelativeTo(this);
                 apm.setVisible(true);
+                
+                if (apm.getAntPersMadre() != null) {
+                    enityEditor.agregarEditado(apm.getAntPersMadre());
+                }
                 break;
             case 1:
                 RegistroEdicionAntNeonatal an = new RegistroEdicionAntNeonatal(this, true);
+                an.setModo(RegistroEdicionModo.EDICION);
+                an.setTitle(an.getTitle().replace("Registrar", "Editar"));
                 an.setLocationRelativeTo(this);
                 an.setVisible(true);
                 break;
             case 2:
                 RegistroEdicionAntRecienNacido arn = new RegistroEdicionAntRecienNacido(this, true);
+                arn.setModo(RegistroEdicionModo.EDICION);
+                arn.setTitle(arn.getTitle().replace("Registrar", "Editar"));
                 arn.setLocationRelativeTo(this);
                 arn.setVisible(true);
                 break;
             case 3:
                 RegistroEdicionAntPsicomotrizLenguaje apl = new RegistroEdicionAntPsicomotrizLenguaje(this, true);
+                apl.setModo(RegistroEdicionModo.EDICION);
+                apl.setTitle(apl.getTitle().replace("Registrar", "Editar"));
                 apl.setLocationRelativeTo(this);
                 apl.setVisible(true);
                 break;
             case 4:
                 RegistroEdicionAntPsicosocialSexual aps = new RegistroEdicionAntPsicosocialSexual(this, true);
+                aps.setModo(RegistroEdicionModo.EDICION);
+                aps.setTitle(aps.getTitle().replace("Registrar", "Editar"));
                 aps.setLocationRelativeTo(this);
                 aps.setVisible(true);
                 break;
             case 5:
                 RegistroEdicionEscolaridad esc = new RegistroEdicionEscolaridad(this, true);
+                esc.setModo(RegistroEdicionModo.EDICION);
+                esc.setTitle(esc.getTitle().replace("Registrar", "Editar"));
                 esc.setLocationRelativeTo(this);
                 esc.setVisible(true);
                 break;
@@ -548,41 +549,28 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         // TODO add your handling code here:
         switch (lstAntecedentes.getSelectedIndex()) {
             case 0:
-                RegistroEdicionAntPersMadre apm = new RegistroEdicionAntPersMadre(this, true);
-                apm.setLocationRelativeTo(this);
-                apm.setVisible(true);
+
                 break;
             case 1:
-                RegistroEdicionAntNeonatal an = new RegistroEdicionAntNeonatal(this, true);
-                an.setLocationRelativeTo(this);
-                an.setVisible(true);
+
                 break;
             case 2:
-                RegistroEdicionAntRecienNacido arn = new RegistroEdicionAntRecienNacido(this, true);
-                arn.setLocationRelativeTo(this);
-                arn.setVisible(true);
+
                 break;
             case 3:
-                RegistroEdicionAntPsicomotrizLenguaje apl = new RegistroEdicionAntPsicomotrizLenguaje(this, true);
-                apl.setLocationRelativeTo(this);
-                apl.setVisible(true);
+
                 break;
             case 4:
-                RegistroEdicionAntPsicosocialSexual aps = new RegistroEdicionAntPsicosocialSexual(this, true);
-                aps.setLocationRelativeTo(this);
-                aps.setVisible(true);
+
                 break;
             case 5:
-                RegistroEdicionEscolaridad esc = new RegistroEdicionEscolaridad(this, true);
-                esc.setLocationRelativeTo(this);
-                esc.setVisible(true);
+
                 break;
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private boolean checkFormFields() {
         boolean validFields = true;
-        LimpiadorComponentes.limpiarValidationMarkers(this);
 
         FieldValidator emptynessVal, dateVal;
         emptynessVal = new EmptyFieldValidator();
@@ -674,7 +662,6 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
     private javax.swing.JList lstAntecedentes;
     private javax.swing.JPanel pnlAntecedentesEscolaridad;
     private javax.swing.JPanel pnlInformacionHistoria;
-    private javax.swing.JPanel pnlSpining;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;

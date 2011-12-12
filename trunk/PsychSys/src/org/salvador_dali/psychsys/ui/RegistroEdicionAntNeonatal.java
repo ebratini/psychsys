@@ -65,6 +65,14 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
         this.modo = modo;
     }
 
+    public AntNeonatal getAnEditar() {
+        return anEditar;
+    }
+
+    public void setAnEditar(AntNeonatal anEditar) {
+        this.anEditar = anEditar;
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -314,28 +322,29 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
-        String trabajoCompletoMensaje = "Antecedentes Neonatal registrado exitosamente.";
         pc.start();
+        String trabajoCompletoMensaje = "Antecedentes Neonatal registrado exitosamente.";
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
+
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             antNeonatal = new AntNeonatal(null, cmbTipoParto.getSelectedItem().toString(), rbnAsisMedSi.isSelected() ? 'S' : 'N');
             antNeonatal.setAnePeso(!ftfPeso.getText().isEmpty() ? BigDecimal.valueOf(Double.parseDouble(ftfPeso.getText())) : null);
             antNeonatal.setAneLloro(rbnLloroSi.isSelected() ? 'S' : 'N');
             antNeonatal.setAneColaboracion(rbnColSi.isSelected() ? 'S' : 'N');
             antNeonatal.setAneEstadoGeneral(!txaEstadoGralNinio.getText().isEmpty() ? txaEstadoGralNinio.getText() : null);
-            
+
             // se registra cuando le dan aceptar en ventana de historia clinica
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             anEditar.setAneTipoParto(cmbTipoParto.getSelectedItem().toString());
             anEditar.setAneAsistenciaMedica(rbnAsisMedSi.isSelected() ? 'S' : 'N');
-            
+
             anEditar.setAnePeso(!ftfPeso.getText().isEmpty() ? BigDecimal.valueOf(Double.parseDouble(ftfPeso.getText())) : null);
             anEditar.setAneLloro(rbnLloroSi.isSelected() ? 'S' : 'N');
             anEditar.setAneColaboracion(rbnColSi.isSelected() ? 'S' : 'N');
             anEditar.setAneEstadoGeneral(!txaEstadoGralNinio.getText().isEmpty() ? txaEstadoGralNinio.getText() : null);
-            
+
             // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 

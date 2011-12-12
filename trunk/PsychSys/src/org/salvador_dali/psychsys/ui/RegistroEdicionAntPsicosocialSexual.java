@@ -48,6 +48,30 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
         initComponents();
     }
 
+    public AntPsicosocialSexual getAps() {
+        return aps;
+    }
+
+    public void setAps(AntPsicosocialSexual aps) {
+        this.aps = aps;
+    }
+
+    public AntPsicosocialSexual getApsEditar() {
+        return apsEditar;
+    }
+
+    public void setApsEditar(AntPsicosocialSexual apsEditar) {
+        this.apsEditar = apsEditar;
+    }
+
+    public RegistroEdicionModo getModo() {
+        return modo;
+    }
+
+    public void setModo(RegistroEdicionModo modo) {
+        this.modo = modo;
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -78,6 +102,9 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
         lblSuenio = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txaSuenio = new javax.swing.JTextArea();
+        lblHabitosAlimenticios = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txaHabitosAlimenticios = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Antecedentes Psicosocial-Sexual");
@@ -125,23 +152,32 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblEsfinterAnal.setText("Esfinter Anal");
 
+        spnEsfinterAnal.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
         spnEsfinterAnal.setToolTipText("Edad que el niño(a) dejo de hacerse pupu");
 
         lblEsfinterVesical.setText("Esfinter Vesical");
 
+        spnEsfinterVesical.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
         spnEsfinterVesical.setToolTipText("Edad que el niño(a) dejo de hacerse pipi");
 
         lblMenarquia.setText("Menarquia");
 
+        spnMenarquia.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
         spnMenarquia.setToolTipText("Edad que el niño(a) dejo de hacerse pipi");
 
         lblEyaculacion.setText("Eyaculacion");
 
+        spnEyaculacion.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
         spnEyaculacion.setToolTipText("Edad que el niño(a) dejo de hacerse pipi");
 
         lblCuriosidadSexualActual.setText("Curiosidad Sexual Actual");
@@ -149,6 +185,7 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
         txaCuriosidadSexualActual.setColumns(20);
         txaCuriosidadSexualActual.setLineWrap(true);
         txaCuriosidadSexualActual.setRows(5);
+        txaCuriosidadSexualActual.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txaCuriosidadSexualActual);
 
         lblSuenio.setText("Sueño");
@@ -156,7 +193,16 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
         txaSuenio.setColumns(20);
         txaSuenio.setLineWrap(true);
         txaSuenio.setRows(5);
+        txaSuenio.setWrapStyleWord(true);
         jScrollPane2.setViewportView(txaSuenio);
+
+        lblHabitosAlimenticios.setText("Habitos Alimenticios");
+
+        txaHabitosAlimenticios.setColumns(20);
+        txaHabitosAlimenticios.setLineWrap(true);
+        txaHabitosAlimenticios.setRows(5);
+        txaHabitosAlimenticios.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(txaHabitosAlimenticios);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,29 +211,35 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblEsfinterAnal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnEsfinterAnal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblMenarquia)
-                                .addGap(15, 15, 15)
-                                .addComponent(spnMenarquia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEsfinterVesical)
-                            .addComponent(lblEyaculacion))
+                            .addComponent(lblEsfinterAnal)
+                            .addComponent(lblEsfinterVesical))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnEsfinterVesical, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnEyaculacion, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblCuriosidadSexualActual)
-                    .addComponent(lblSuenio)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
-                .addContainerGap())
+                            .addComponent(spnEsfinterAnal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnEsfinterVesical, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEyaculacion)
+                            .addComponent(lblMenarquia))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spnEyaculacion, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnMenarquia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(107, 107, 107))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCuriosidadSexualActual)
+                            .addComponent(lblSuenio)
+                            .addComponent(lblHabitosAlimenticios)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,14 +248,18 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEsfinterAnal)
                     .addComponent(spnEsfinterAnal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEsfinterVesical)
-                    .addComponent(spnEsfinterVesical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblMenarquia)
+                    .addComponent(spnMenarquia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMenarquia)
-                    .addComponent(spnMenarquia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEsfinterVesical)
+                    .addComponent(spnEsfinterVesical, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEyaculacion)
                     .addComponent(spnEyaculacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(lblHabitosAlimenticios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblCuriosidadSexualActual)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,7 +268,7 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
                 .addComponent(lblSuenio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -256,14 +312,32 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
-        String trabajoCompletoMensaje = "Antecedentes psicomotriz lenguaje registrado exitosamente.";
         pc.start();
+        String trabajoCompletoMensaje = "Antecedentes psicosocial sexual registrado exitosamente.";
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
+
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
+            aps = new AntPsicosocialSexual();
+            aps.setApsEsfinterAnal(Integer.parseInt(spnEsfinterAnal.getValue().toString()));
+            aps.setApsEsfinterVecical(Integer.parseInt(spnEsfinterVesical.getValue().toString()));
+            aps.setApsMenarquia(Integer.parseInt(spnMenarquia.getValue().toString()));
+            aps.setApsEyaculacion(Integer.parseInt(spnEyaculacion.getValue().toString()));
+            aps.setApsHabitosAlimenticios(!txaHabitosAlimenticios.getText().isEmpty() ? txaHabitosAlimenticios.getText() : null);
+            aps.setApsCuriosidadSexualActual(!txaCuriosidadSexualActual.getText().isEmpty() ? txaCuriosidadSexualActual.getText() : null);
+            aps.setApsSuenio(!txaSuenio.getText().isEmpty() ? txaSuenio.getText() : null);
+
             // se registra cuando le dan aceptar en ventana de historia clinica
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            apsEditar.setApsEsfinterAnal(Integer.parseInt(spnEsfinterAnal.getValue().toString()));
+            apsEditar.setApsEsfinterVecical(Integer.parseInt(spnEsfinterVesical.getValue().toString()));
+            apsEditar.setApsMenarquia(Integer.parseInt(spnMenarquia.getValue().toString()));
+            apsEditar.setApsEyaculacion(Integer.parseInt(spnEyaculacion.getValue().toString()));
+            apsEditar.setApsHabitosAlimenticios(!txaHabitosAlimenticios.getText().isEmpty() ? txaHabitosAlimenticios.getText() : null);
+            apsEditar.setApsCuriosidadSexualActual(!txaCuriosidadSexualActual.getText().isEmpty() ? txaCuriosidadSexualActual.getText() : null);
+            apsEditar.setApsSuenio(!txaSuenio.getText().isEmpty() ? txaSuenio.getText() : null);
+
             // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 
@@ -273,6 +347,11 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
         new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         pc.stop();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,10 +402,12 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCuriosidadSexualActual;
     private javax.swing.JLabel lblEsfinterAnal;
     private javax.swing.JLabel lblEsfinterVesical;
     private javax.swing.JLabel lblEyaculacion;
+    private javax.swing.JLabel lblHabitosAlimenticios;
     private javax.swing.JLabel lblMenarquia;
     private javax.swing.JLabel lblSuenio;
     private javax.swing.JSpinner spnEsfinterAnal;
@@ -337,6 +418,7 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
     private javax.swing.JTextArea txaCuriosidadSexualActual;
+    private javax.swing.JTextArea txaHabitosAlimenticios;
     private javax.swing.JTextArea txaSuenio;
     // End of variables declaration//GEN-END:variables
 }
