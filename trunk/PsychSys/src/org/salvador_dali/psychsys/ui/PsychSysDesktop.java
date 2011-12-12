@@ -34,7 +34,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -92,7 +91,6 @@ import test.svg.transcoded.mail_message_new;
 import test.svg.transcoded.network_wireless;
 import test.svg.transcoded.printer;
 import test.svg.transcoded.system_log_out;
-import test.svg.transcoded.text_html;
 import test.svg.transcoded.x_office_document;
 
 /**
@@ -310,7 +308,8 @@ public class PsychSysDesktop extends JRibbonFrame {
         jrbEstudiantesBand.setResizePolicies(getRibbonBandResizePolicy(jrbEstudiantesBand));
 
         // on referimientos band
-        JCommandButton jcbVerReferimientos, jcbRegistrarReferimiento, jcbEditarReferimiento, jcbEliminarReferimiento, jcbObservacionReferimiento;
+        JCommandButton jcbVerReferimientos, jcbRegistrarReferimiento, jcbEditarReferimiento,
+                jcbEliminarReferimiento, jcbObservacionReferimiento, jcbCambiarEstadoReferimiento;
 
         jcbVerReferimientos = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/referimientos.png"),
                 "jcbVerReferimientos", new RichTooltip("Ver", "Click aqui para ver los referimientos"), buttonActHandler);
@@ -334,7 +333,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 return new JCommandPopupMenu() {
 
                     {
-                        JCommandMenuButton verObservacionRefButton, nuevoObservacionRefButton, editarObservacionRefButton, eliminarObservacionRefButton;
+                        JCommandMenuButton verObservacionRefButton, editarObservacionRefButton, eliminarObservacionRefButton;
 
                         // ver
                         verObservacionRefButton = new JCommandMenuButton("Ver", new EmptyResizableIcon(16));
@@ -379,20 +378,25 @@ public class PsychSysDesktop extends JRibbonFrame {
         });
         jcbObservacionReferimiento.setPopupRichTooltip(new RichTooltip("Observacion Referimiento", "Click aqui para mas opciones"));
 
+        jcbCambiarEstadoReferimiento = createJCommandButton("Cambiar Estado", getResizableIconFromResource("/resources/images/delete.png"),
+                "jcbCambiarEstadoReferimiento", new RichTooltip("Cambiar Estado", "Click aqui para cambiar el estado del referimiento"), buttonActHandler);
+
         // creando la banda
         JRibbonBand jrbReferimientosBand = new JRibbonBand("Referimientos", getResizableIconFromResource("/resources/images/referimientos.png"));
         jrbReferimientosBand.addCommandButton(jcbVerReferimientos, RibbonElementPriority.TOP);
         jrbReferimientosBand.addCommandButton(jcbRegistrarReferimiento, RibbonElementPriority.MEDIUM);
         jrbReferimientosBand.addCommandButton(jcbEditarReferimiento, RibbonElementPriority.MEDIUM);
         jrbReferimientosBand.addCommandButton(jcbEliminarReferimiento, RibbonElementPriority.MEDIUM);
+        jrbReferimientosBand.startGroup();
         jrbReferimientosBand.addCommandButton(jcbObservacionReferimiento, RibbonElementPriority.MEDIUM);
+        jrbReferimientosBand.addCommandButton(jcbCambiarEstadoReferimiento, RibbonElementPriority.MEDIUM);
 
         //jrbReferimientosBand.setResizePolicies(this.getRibbonBandResizePolicy(jrbReferimientosBand));
         jrbReferimientosBand.setResizePolicies((List) Arrays.asList(new Object[]{
                     /*new CoreRibbonResizePolicies.None(jrbReferimientosBand.getControlPanel()),*/
                     new CoreRibbonResizePolicies.Mirror(jrbReferimientosBand.getControlPanel()),
-                    new CoreRibbonResizePolicies.Mid2Low(jrbReferimientosBand.getControlPanel()),
                     new CoreRibbonResizePolicies.High2Mid(jrbReferimientosBand.getControlPanel()),
+                    new CoreRibbonResizePolicies.Mid2Low(jrbReferimientosBand.getControlPanel()),
                     new IconRibbonBandResizePolicy(jrbReferimientosBand.getControlPanel())}));
 
         // on pruebas psicologicas band
@@ -956,7 +960,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         applicationMenu.addMenuEntry(amEntryImportExport);
         applicationMenu.addMenuSeparator();
         applicationMenu.addMenuEntry(amEntryClose);
-        
+
         // the footer
         RibbonApplicationMenuEntryFooter amFooterProps = new RibbonApplicationMenuEntryFooter(new document_properties(), "Opciones",
                 new ActionListener() {
@@ -1049,7 +1053,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             }
         }
         for (RibbonApplicationMenuEntryFooter amf : getRibbon().getApplicationMenu().getFooterEntries()) {
-            if (!amf.getText().equalsIgnoreCase("salir")){
+            if (!amf.getText().equalsIgnoreCase("salir")) {
                 amf.setEnabled(false);
             }
         }
@@ -1415,6 +1419,19 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarPruebaPsicologica")) {
                 registrarEditarPruebasPsicologicas(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbEditarPruebaPsicologica")) {
+            } else if (buttonName.equalsIgnoreCase("jcbEliminarPruebaPsicologica")) {
+            } else if (buttonName.equalsIgnoreCase("jcbVerCasos")) {
+                throwNoImplMsj();
+            } else if (buttonName.equalsIgnoreCase("jcbRegistrarCaso")) {
+                registrarEditarCaso(RegistroEdicionModo.REGISTRO, null);
+            } else if (buttonName.equalsIgnoreCase("jcbEditarCaso")) {
+            } else if (buttonName.equalsIgnoreCase("jcbEliminarCaso")) {
+            } else if (buttonName.equalsIgnoreCase("jcbVerHics")) {
+                throwNoImplMsj();
+            } else if (buttonName.equalsIgnoreCase("jcbRegistrarHic")) {
+                registrarEditarHistoriaClinica(RegistroEdicionModo.REGISTRO, null);
+            } else if (buttonName.equalsIgnoreCase("jcbEditarHic")) {
+            } else if (buttonName.equalsIgnoreCase("jcbEliminarHic")) {
             }
         }
     }
