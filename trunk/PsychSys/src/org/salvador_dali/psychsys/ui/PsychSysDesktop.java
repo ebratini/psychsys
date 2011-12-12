@@ -113,7 +113,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     private JPanel pnlStatusBar;
     private JLabel statusMessageLabel = new JLabel("Ready");
     private JLabel taskSelectedLabel = new JLabel();
-    private JLabel usuariologueado = new JLabel("Usuario no logueado");
+    private JLabel usuarioLogueado = new JLabel("Usuario no logueado");
     private JLabel timeDate = new JLabel("Time/Date");
 
     public PsychSysDesktop() {
@@ -160,13 +160,13 @@ public class PsychSysDesktop extends JRibbonFrame {
         pnlStatusBar.setPreferredSize(new Dimension(400, 25));
         pnlStatusBar.add(statusMessageLabel, BorderLayout.WEST);
 
-        usuariologueado.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
+        usuarioLogueado.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
         taskSelectedLabel.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
         timeDate.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 
         JPanel pnl = new JPanel(new BorderLayout(2, 0));
         pnl.add(taskSelectedLabel, BorderLayout.WEST);
-        pnl.add(usuariologueado, BorderLayout.CENTER);
+        pnl.add(usuarioLogueado, BorderLayout.CENTER);
         pnl.add(timeDate, BorderLayout.EAST);
 
         pnlStatusBar.add(pnl, BorderLayout.EAST);
@@ -547,7 +547,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     private RibbonTask getToolsAndSettingsTask() {
         // Roles & Permisos Band
         JCommandButton jcbManRolesPermisos = createJCommandButton("Administrar", getResizableIconFromResource("/resources/images/corregir.png"),
-                "jcbManRolesPermisos", new RichTooltip("Administrar", "Click aqui para manejar los roles y permisos del sistema"), buttonActHandler);;
+                "jcbManRolesPermisos", new RichTooltip("Administrar", "Click aqui para manejar los roles y permisos del sistema"), buttonActHandler);
         JRibbonBand jrbRolesPermisos = new JRibbonBand("Roles & Permisos", getResizableIconFromResource("/resources/images/listados.png"));
         jrbRolesPermisos.addCommandButton(jcbManRolesPermisos, RibbonElementPriority.TOP);
         jrbRolesPermisos.setResizePolicies((List) Arrays.asList(new Object[]{
@@ -956,28 +956,8 @@ public class PsychSysDesktop extends JRibbonFrame {
         applicationMenu.addMenuEntry(amEntryImportExport);
         applicationMenu.addMenuSeparator();
         applicationMenu.addMenuEntry(amEntryClose);
-
-        /*applicationMenu.setDefaultCallback(new RibbonApplicationMenuEntryPrimary.PrimaryRolloverCallback() {
         
-        @Override
-        public void menuEntryActivated(JPanel targetPanel) {
-        targetPanel.removeAll();
-        JCommandButtonPanel openHistoryPanel = new JCommandButtonPanel(CommandButtonDisplayState.MEDIUM);
-        String groupName = "Documentos Recientes";
-        openHistoryPanel.addButtonGroup(groupName);
-        
-        for (int i = 0; i < 5; i++) {
-        JCommandButton historyButton = new JCommandButton(String.format("Recent Doc %d", i), new EmptyResizableIcon(5));
-        historyButton.setHorizontalAlignment(SwingUtilities.LEFT);
-        //historyButton.setEnabled(false);
-        openHistoryPanel.addButtonToLastGroup(historyButton);
-        }
-        openHistoryPanel.setMaxButtonColumns(1);
-        targetPanel.setLayout(new BorderLayout());
-        targetPanel.add(openHistoryPanel, BorderLayout.CENTER);
-        }
-        });*/
-
+        // the footer
         RibbonApplicationMenuEntryFooter amFooterProps = new RibbonApplicationMenuEntryFooter(new document_properties(), "Opciones",
                 new ActionListener() {
 
@@ -1151,12 +1131,12 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void doLogin(JCommandButton logInOutButton) {
-        Login login = new Login(PsychSysDesktop.this, true);
-        login.setLocationRelativeTo(PsychSysDesktop.this);
+        Login login = new Login(this, true);
+        login.setLocationRelativeTo(this);
         login.setVisible(true);
         usuario = login.getUsuario();
         if (usuario != null) {
-            usuariologueado.setText(String.format(" %s ", usuario.getUsrLogin()));
+            usuarioLogueado.setText(String.format(" %s ", usuario.getUsrLogin()));
             JViewport startVP = (JViewport) ((JScrollPane) pnlBody.getComponent(0)).getComponent(0);
             JLabel lblBienvMsj = ((WelcomePage) startVP.getComponent(0)).getLblBienvenidaMensaje();
             lblBienvMsj.setText("Bienvenid@, " + login.getTxtNombreUsuario().getText());
@@ -1170,13 +1150,13 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void doLogout(JCommandButton logInOutButton) {
         usuario = null;
-        usuariologueado.setText("Usuario no logueado");
+        usuarioLogueado.setText("Usuario no logueado");
         logInOutButton.setName("jcbLogIn");
         logInOutButton.setIcon(getResizableIconFromResource("/resources/images/login.png"));
         logInOutButton.setText("Log In");
         setJRibbonComponentsEnabled(false);
         // TODO: flush log to db and may be close the managers
-        //Syscafil.sl.flushToDataBase();
+        //PsychSys.sl.flushToDataBase();
     }
 
     private void cerrarTabs() {
