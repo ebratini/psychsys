@@ -31,6 +31,7 @@ package org.salvador_dali.psychsys.ui;
 
 import java.awt.Frame;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 
@@ -46,6 +47,7 @@ public class CambiarEstadoRefermiento extends javax.swing.JDialog {
     public CambiarEstadoRefermiento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getRootPane().setDefaultButton(btnOk);
     }
 
     public CambiarEstadoRefermiento(Referimiento referimiento, JpaReferimientoDao jpaRefDao, Frame owner, boolean modal) {
@@ -93,6 +95,11 @@ public class CambiarEstadoRefermiento extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         pnlEstadoReferimiento.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado Referimiento"));
 
@@ -158,12 +165,39 @@ public class CambiarEstadoRefermiento extends javax.swing.JDialog {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
+        try {
+            if (referimiento != null) {
+                if (referimiento.getRefEstadoReferimiento() == cmbEstadoReferimiento.getSelectedItem().toString().charAt(0)) {
+                    this.dispose();
+                    return;
+                }
+                referimiento.setRefEstadoReferimiento(cmbEstadoReferimiento.getSelectedItem().toString().charAt(0));
+                jpaRefDao.update(referimiento);
+                
+                JOptionPane.showMessageDialog(this, "El estado de referimiento ha sido editado exitosamente", "Referimiento", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            } else {
+                throw  new Exception("El referimiento no esta establecido");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cambiar estado del referimiento.\n" + e.getMessage(), "Referimiento", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (referimiento != null) {
+            char chrEstado = referimiento.getRefEstadoReferimiento();
+            String estado = (chrEstado == 'A' ? "Abierto" : (chrEstado == 'C' ? "Cerrado" : "Pendiente"));
+            cmbEstadoReferimiento.setSelectedItem(estado);
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

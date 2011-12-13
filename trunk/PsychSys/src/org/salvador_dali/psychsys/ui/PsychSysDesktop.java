@@ -1427,7 +1427,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbObservacionReferimiento")) {
                 registrarEditarObservacionReferimiento(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbCambiarEstadoReferimiento")) {
-                cambiarEstadoReferimiento(null);
+                cambiarEstadoReferimiento((Referimiento) jpaRefDao.findById(1));
             } else if (buttonName.equalsIgnoreCase("jcbVerPruebasPsicologicas")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarPruebaPsicologica")) {
