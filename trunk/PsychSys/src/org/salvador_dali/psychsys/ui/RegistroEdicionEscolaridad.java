@@ -29,8 +29,8 @@
  */
 package org.salvador_dali.psychsys.ui;
 
-import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.model.entities.Escolaridad;
 
 /**
@@ -367,7 +367,7 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
         // TODO add your handling code here:
         ProgressCircle pc = new ProgressCircle(statusAnimationLabel);
         pc.start();
-        String trabajoCompletoMensaje = "Antecedentes psicomotriz lenguaje registrado exitosamente.";
+        String trabajoCompletoMensaje = "Informacion de escolaridad registrado exitosamente.";
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
@@ -395,11 +395,9 @@ public class RegistroEdicionEscolaridad extends javax.swing.JDialog {
             // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 
-        statusMessageLabel.setText(trabajoCompletoMensaje);
-        statusMessageLabel.setForeground(Color.GREEN);
-        statusMessageLabel.setVisible(true);
-        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         pc.stop();
+        JOptionPane.showMessageDialog(this, trabajoCompletoMensaje, "Escolaridad", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

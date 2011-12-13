@@ -29,10 +29,10 @@
  */
 package org.salvador_dali.psychsys.ui;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.model.entities.AntPersMadre;
 
 /**
@@ -490,11 +490,9 @@ private void rbnSexPrefMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN
             // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 
-        statusMessageLabel.setText(trabajoCompletoMensaje);
-        statusMessageLabel.setForeground(Color.GREEN);
-        statusMessageLabel.setVisible(true);
-        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         pc.stop();
+        JOptionPane.showMessageDialog(this, trabajoCompletoMensaje, "Antecedentes Personales Madre", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**

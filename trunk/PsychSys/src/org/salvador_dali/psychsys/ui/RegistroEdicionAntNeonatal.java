@@ -29,8 +29,8 @@
  */
 package org.salvador_dali.psychsys.ui;
 
-import java.awt.Color;
 import java.math.BigDecimal;
+import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.model.entities.AntNeonatal;
 
 /**
@@ -348,11 +348,9 @@ public class RegistroEdicionAntNeonatal extends javax.swing.JDialog {
             // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 
-        statusMessageLabel.setText(trabajoCompletoMensaje);
-        statusMessageLabel.setForeground(Color.GREEN);
-        statusMessageLabel.setVisible(true);
-        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         pc.stop();
+        JOptionPane.showMessageDialog(this, trabajoCompletoMensaje, "Antecedentes Neonatal", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**

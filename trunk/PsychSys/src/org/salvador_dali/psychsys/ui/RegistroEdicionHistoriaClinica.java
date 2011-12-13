@@ -34,6 +34,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.business.DateFieldValidator;
@@ -46,6 +47,7 @@ import org.salvador_dali.psychsys.business.FormFieldValidator;
 import org.salvador_dali.psychsys.business.JpaEstudianteDao;
 import org.salvador_dali.psychsys.business.JpaHistoriaClinicaDao;
 import org.salvador_dali.psychsys.business.JpaUsuarioDao;
+import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.AntNeonatal;
 import org.salvador_dali.psychsys.model.entities.AntPersMadre;
 import org.salvador_dali.psychsys.model.entities.AntPsicomotrizLenguaje;
@@ -260,11 +262,11 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -300,7 +302,7 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlInformacionHistoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                    .addComponent(pnlInformacionHistoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
                     .addComponent(pnlAntecedentesEscolaridad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAceptar)
@@ -364,9 +366,6 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                     throw new Exception("El estudiante ya tiene historia clinica");
                 }
 
-                estudiante = (Estudiante) new JpaEstudianteDao().findById(1);
-                usuario = (Usuario) new JpaUsuarioDao().findById(1);
-
                 HistoriaClinica hic = new HistoriaClinica(null, DateUtils.parseDate(ftfFecha.getText()), usuario.getUsrLogin(), new Date(), 'A');
                 hic.setEstudiante(estudiante);
 
@@ -374,29 +373,39 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
 
                 // manejar los antecedentes
                 if (antPersMadre != null || antNeonatal != null || antRecienNacido != null || antPL != null || antPS != null || escolaridad != null) {
-                    ArrayList<HistoriaClinica> hics = (ArrayList<HistoriaClinica>) jpaHicDao.getHistoriasClinicasByFechaCreacion(DateUtils.parseDate(ftfFecha.getText()));
+                    List<HistoriaClinica> hics = (List<HistoriaClinica>) jpaHicDao.getHistoriasClinicasByFechaCreacion(DateUtils.parseDate(ftfFecha.getText()));
                     int last = hics.size() - 1;
 
                     HistoriaClinica hicConfirmada = hics.get(last);
 
                     if (antPersMadre != null) {
                         antPersMadre.setHistoriaClinica(hicConfirmada);
+                        antPersMadre.setHicId(hicConfirmada.getHicId());
                         jpaHicDao.persist(antPersMadre);
                     }
                     if (antNeonatal != null) {
                         antNeonatal.setHistoriaClinica(hicConfirmada);
+                        antNeonatal.setHicId(hicConfirmada.getHicId());
                         jpaHicDao.persist(antNeonatal);
                     }
                     if (antRecienNacido != null) {
                         antRecienNacido.setHistoriaClinica(hicConfirmada);
+                        antRecienNacido.setHicId(hicConfirmada.getHicId());
                         jpaHicDao.persist(antRecienNacido);
                     }
                     if (antPL != null) {
                         antPL.setHistoriaClinica(hicConfirmada);
+                        antPL.setHicId(hicConfirmada.getHicId());
                         jpaHicDao.persist(antPL);
                     }
                     if (antPS != null) {
                         antPS.setHistoriaClinica(hicConfirmada);
+                        antPS.setHicId(hicConfirmada.getHicId());
+                        jpaHicDao.persist(antPS);
+                    }
+                    if (escolaridad != null) {
+                        escolaridad.setHistoriaClinica(hicConfirmada);
+                        escolaridad.setHicId(hicConfirmada.getHicId());
                         jpaHicDao.persist(antPS);
                     }
                 }
@@ -418,8 +427,10 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                 jpaHicDao.update(hicAEditar);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de historia clinica<br /><br />%s</p></html>",
+            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de historia clinica<br /><br />%s</html>",
                     e.getMessage()), "Historia Clinica Infantil", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            
             return;
         }
 
@@ -460,35 +471,37 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                 RegistroEdicionAntPersMadre apm = new RegistroEdicionAntPersMadre(this, true);
                 apm.setLocationRelativeTo(this);
                 apm.setVisible(true);
-                
-                if (apm.getAntPersMadre() != null) {
-                    enityEditor.agregarNuevo(apm.getAntPersMadre());
-                }
+                antPersMadre = apm.getAntPersMadre();
                 break;
             case 1:
                 RegistroEdicionAntNeonatal an = new RegistroEdicionAntNeonatal(this, true);
                 an.setLocationRelativeTo(this);
                 an.setVisible(true);
+                antNeonatal = an.getAntNeonatal();
                 break;
             case 2:
                 RegistroEdicionAntRecienNacido arn = new RegistroEdicionAntRecienNacido(this, true);
                 arn.setLocationRelativeTo(this);
                 arn.setVisible(true);
+                antRecienNacido = arn.getArn();
                 break;
             case 3:
                 RegistroEdicionAntPsicomotrizLenguaje apl = new RegistroEdicionAntPsicomotrizLenguaje(this, true);
                 apl.setLocationRelativeTo(this);
                 apl.setVisible(true);
+                antPL = apl.getApl();
                 break;
             case 4:
                 RegistroEdicionAntPsicosocialSexual aps = new RegistroEdicionAntPsicosocialSexual(this, true);
                 aps.setLocationRelativeTo(this);
                 aps.setVisible(true);
+                antPS = aps.getAps();
                 break;
             case 5:
                 RegistroEdicionEscolaridad esc = new RegistroEdicionEscolaridad(this, true);
                 esc.setLocationRelativeTo(this);
                 esc.setVisible(true);
+                escolaridad = esc.getEsc();
                 break;
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
