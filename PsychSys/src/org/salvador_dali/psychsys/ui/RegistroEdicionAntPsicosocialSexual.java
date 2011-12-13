@@ -29,7 +29,7 @@
  */
 package org.salvador_dali.psychsys.ui;
 
-import java.awt.Color;
+import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.model.entities.AntPsicosocialSexual;
 
 /**
@@ -341,11 +341,9 @@ public class RegistroEdicionAntPsicosocialSexual extends javax.swing.JDialog {
             // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 
-        statusMessageLabel.setText(trabajoCompletoMensaje);
-        statusMessageLabel.setForeground(Color.GREEN);
-        statusMessageLabel.setVisible(true);
-        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         pc.stop();
+        JOptionPane.showMessageDialog(this, trabajoCompletoMensaje, "Antecedentes Psicosocial Sexual", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

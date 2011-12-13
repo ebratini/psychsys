@@ -29,7 +29,7 @@
  */
 package org.salvador_dali.psychsys.ui;
 
-import java.awt.Color;
+import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.model.entities.AntPsicomotrizLenguaje;
 
 /**
@@ -298,11 +298,9 @@ public class RegistroEdicionAntPsicomotrizLenguaje extends javax.swing.JDialog {
             // se actualiza cuando le dan aceptar en ventana de historia clinica
         }
 
-        statusMessageLabel.setText(trabajoCompletoMensaje);
-        statusMessageLabel.setForeground(Color.GREEN);
-        statusMessageLabel.setVisible(true);
-        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         pc.stop();
+        JOptionPane.showMessageDialog(this, trabajoCompletoMensaje, "Antecedentes Psicomotriz Lenguaje", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**

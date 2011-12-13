@@ -23,6 +23,7 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.event.MouseEvent;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -31,6 +32,7 @@ import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -40,8 +42,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
@@ -144,10 +148,53 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void initBodyContent() {
+        final JPopupMenu tabPopupMenu = new JPopupMenu() {
+            {
+                add(new JMenuItem("Cerrar Tab") {
+                    {
+                        addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                if (pnlBody.getSelectedIndex() != 0) {
+                                    pnlBody.remove(pnlBody.getSelectedIndex());
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        };
         pnlBody = new JTabbedPane() {
 
             {
                 addTab("Start", new JScrollPane(new WelcomePage()));
+                addMouseListener(new MouseAdapter() {
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        if (e.isPopupTrigger()) {
+                            if (pnlBody.getSelectedIndex() == 0) {
+                                tabPopupMenu.getComponent(0).setEnabled(false);
+                            } else {
+                                tabPopupMenu.getComponent(0).setEnabled(true);
+                            }
+                            tabPopupMenu.show(e.getComponent(), e.getX(), e.getY());
+                        }
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        if (e.isPopupTrigger()) {
+                            if (pnlBody.getSelectedIndex() == 0) {
+                                tabPopupMenu.getComponent(0).setEnabled(false);
+                            } else {
+                                tabPopupMenu.getComponent(0).setEnabled(true);
+                            }
+                            tabPopupMenu.show(e.getComponent(), e.getX(), e.getY());
+                        }
+                    }
+                });
             }
         };
         add(pnlBody);
@@ -1158,6 +1205,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void doLogout(JCommandButton logInOutButton) {
         usuario = null;
+        cerrarTabs();
         usuarioLogueado.setText("Usuario no logueado");
         logInOutButton.setName("jcbLogIn");
         logInOutButton.setIcon(getResizableIconFromResource("/resources/images/login.png"));
@@ -1196,7 +1244,8 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void verTutores() {
-        pnlBody.addTab("Tutores", new JScrollPane(new Panel()));
+        // crear/enviar entity searcher (TutorEntityDetailedSearcher)
+        pnlBody.addTab("Tutores ", new JScrollPane(new VistaGeneralEntidades()));
     }
 
     private void registrarEditarTutor(RegistroEdicionModo modo, Tutor tutor) {
@@ -1358,6 +1407,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void registrarEditarHistoriaClinica(RegistroEdicionModo modo, HistoriaClinica hic) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             final RegistroEdicionHistoriaClinica rehic = new RegistroEdicionHistoriaClinica(modo);
+            rehic.setUsuario(usuario);
             rehic.setLocationRelativeTo(this);
             java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -1427,7 +1477,11 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbObservacionReferimiento")) {
                 registrarEditarObservacionReferimiento(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbCambiarEstadoReferimiento")) {
-                cambiarEstadoReferimiento((Referimiento) jpaRefDao.findById(1));
+                cambiarEstadoReferimiento(null);
+            } else if (buttonName.equalsIgnoreCase("jcbCorregirPruebaPsicologica")) {
+                CorreccionPruebaPsicologica cpps = new CorreccionPruebaPsicologica();
+                cpps.setLocationRelativeTo(PsychSysDesktop.this);
+                cpps.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbVerPruebasPsicologicas")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarPruebaPsicologica")) {

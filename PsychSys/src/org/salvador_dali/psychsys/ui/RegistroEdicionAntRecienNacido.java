@@ -29,7 +29,7 @@
  */
 package org.salvador_dali.psychsys.ui;
 
-import java.awt.Color;
+import javax.swing.JOptionPane;
 import org.salvador_dali.psychsys.model.entities.AntRecienNacido;
 
 /**
@@ -284,11 +284,9 @@ public class RegistroEdicionAntRecienNacido extends javax.swing.JDialog {
             arnEditar.setArnProblemasEspeciales(!txaProblemasEspeciales.getText().isEmpty() ? txaProblemasEspeciales.getText() : null);
         }
 
-        statusMessageLabel.setText(trabajoCompletoMensaje);
-        statusMessageLabel.setForeground(Color.GREEN);
-        statusMessageLabel.setVisible(true);
-        new Thread(new LabelToolTipShower(statusMessageLabel, 3500)).start();
         pc.stop();
+        JOptionPane.showMessageDialog(this, trabajoCompletoMensaje, "Antecedentes Recien Nacido", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
