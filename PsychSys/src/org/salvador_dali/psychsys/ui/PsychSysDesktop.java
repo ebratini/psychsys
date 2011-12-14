@@ -35,6 +35,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -77,6 +78,7 @@ import org.pushingpixels.flamingo.api.ribbon.resize.CoreRibbonResizePolicies;
 import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 import org.pushingpixels.flamingo.api.ribbon.resize.RibbonBandResizePolicy;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
+import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
@@ -1242,9 +1244,22 @@ public class PsychSysDesktop extends JRibbonFrame {
         return logged;
     }
 
+    private List<String> getTabCaptions() {
+        List<String> caps = new ArrayList<String>();
+        for (int i = 0; i < pnlBody.getComponentCount(); i++) {
+            caps.add(pnlBody.getTitleAt(i));
+        }
+        return caps;
+    }
+    
     private void verTutores() {
         // crear/enviar entity searcher (TutorEntityDetailedSearcher)
-        pnlBody.addTab("Tutores ", new JScrollPane(new VistaGeneralEntidades()));
+        if (!getTabCaptions().contains("Vista: Tutores")) {
+            VistaGeneralEntidades vgTutores = new VistaGeneralEntidades(new EntitySearcher.TutorBasicEntitySearcher()); 
+            pnlBody.addTab("Vista: Tutores", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.TutorBasicEntitySearcher())));
+        } else {
+            getToolkit().beep();
+        }
     }
 
     private void registrarEditarTutor(RegistroEdicionModo modo, Tutor tutor) {
@@ -1277,6 +1292,12 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void verEstudiantes() {
+        // crear/enviar entity searcher
+        if (!getTabCaptions().contains("Vista: Estudiantes")) {
+            pnlBody.addTab("Vista: Estudiantes", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.EstudianteBasicEntitySearcher())));
+        } else {
+            getToolkit().beep();
+        }
     }
 
     private void registrarEditarEstudiante(RegistroEdicionModo modo, Estudiante est) {
@@ -1295,9 +1316,16 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void eliminarEstudiante(Estudiante est) {
+        
     }
 
     private void verReferimientos() {
+        // crear/enviar entity searcher
+        if (!getTabCaptions().contains("Vista: Referimientos")) {
+            pnlBody.addTab("Vista: Referimientos", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.ReferimientoBasicEntitySearcher())));
+        } else {
+            getToolkit().beep();
+        }
     }
 
     private void registrarEditarReferimiento(RegistroEdicionModo modo, Referimiento ref) {
@@ -1351,6 +1379,12 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void verPruebasPsicologicas() {
+        // crear/enviar entity searcher
+        if (!getTabCaptions().contains("Vista: Pruebas Psicologicas")) {
+            pnlBody.addTab("Vista: Pruebas Psicologicas", new JScrollPane(new VistaGeneralEntidades()));
+        } else {
+            getToolkit().beep();
+        }
     }
 
     private void registrarEditarPruebasPsicologicas(RegistroEdicionModo modo, PruebaPsicologica pps) {
@@ -1380,6 +1414,12 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void verCasos() {
+        // crear/enviar entity searcher
+        if (!getTabCaptions().contains("Vista: Casos")) {
+            pnlBody.addTab("Vista: Casos", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.CasoBasicEntitySearcher())));
+        } else {
+            getToolkit().beep();
+        }
     }
 
     private void registrarEditarCaso(RegistroEdicionModo modo, Caso caso) {
@@ -1400,7 +1440,13 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void eliminarCaso(Caso caso) {
     }
 
-    private void verHistoriaClinica() {
+    private void verHistoriasClinicas() {
+        // crear/enviar entity searcher
+        if (!getTabCaptions().contains("Vista: Historias Clinicas")) {
+            pnlBody.addTab("Vista: Historias Clinicas", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.HistoriaClinicaEntitySearcher())));
+        } else {
+            getToolkit().beep();
+        }
     }
 
     private void registrarEditarHistoriaClinica(RegistroEdicionModo modo, HistoriaClinica hic) {
@@ -1458,7 +1504,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbEliminarTutor")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbVerEstudiantes")) {
-                throwNoImplMsj();
+                verEstudiantes();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarEstudiante")) {
                 registrarEditarEstudiante(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbEditarEstudiante")) {
@@ -1466,7 +1512,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbEliminarEstudiante")) {
                 throwNoImplMsj();
             } else if (buttonName.equalsIgnoreCase("jcbVerReferimientos")) {
-                throwNoImplMsj();
+                verReferimientos();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarReferimiento")) {
                 registrarEditarReferimiento(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbEditarReferimiento")) {
@@ -1482,19 +1528,19 @@ public class PsychSysDesktop extends JRibbonFrame {
                 cpps.setLocationRelativeTo(PsychSysDesktop.this);
                 cpps.setVisible(true);
             } else if (buttonName.equalsIgnoreCase("jcbVerPruebasPsicologicas")) {
-                throwNoImplMsj();
+                verPruebasPsicologicas();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarPruebaPsicologica")) {
                 registrarEditarPruebasPsicologicas(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbEditarPruebaPsicologica")) {
             } else if (buttonName.equalsIgnoreCase("jcbEliminarPruebaPsicologica")) {
             } else if (buttonName.equalsIgnoreCase("jcbVerCasos")) {
-                throwNoImplMsj();
+                verCasos();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarCaso")) {
                 registrarEditarCaso(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbEditarCaso")) {
             } else if (buttonName.equalsIgnoreCase("jcbEliminarCaso")) {
             } else if (buttonName.equalsIgnoreCase("jcbVerHics")) {
-                throwNoImplMsj();
+                verHistoriasClinicas();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarHic")) {
                 registrarEditarHistoriaClinica(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbEditarHic")) {

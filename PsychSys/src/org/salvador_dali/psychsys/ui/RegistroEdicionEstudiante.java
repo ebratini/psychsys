@@ -929,7 +929,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         // TODO add your handling code here:
         BusquedaRapida brt = new BusquedaRapida(this, true);
         brt.setTitle("Buscar Tutor");
-        brt.setEntitySearcher(new EntitySearcher.TutorEntitySearcher());
+        brt.setEntitySearcher(new EntitySearcher.TutorBasicEntitySearcher());
         brt.getLblEntidades().setText("Tutores");
         brt.setLocationRelativeTo(this);
         brt.setVisible(true);
