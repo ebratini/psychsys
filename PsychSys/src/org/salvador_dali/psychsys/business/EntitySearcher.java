@@ -23,6 +23,7 @@
  */
 package org.salvador_dali.psychsys.business;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
@@ -131,9 +132,13 @@ public abstract class EntitySearcher {
         }
     }
 
+    public abstract List<Serializable> doSearch();
+    public abstract TableModel getModelFromSearch();
     public abstract TableModel doSearch(String fieldToSearch, String value);
 
     // Clases
+    
+    // Basic Searchers
     public static class TutorBasicEntitySearcher extends EntitySearcher {
 
         {
@@ -217,6 +222,16 @@ public abstract class EntitySearcher {
             }
 
             return dtm;
+        }
+
+        @Override
+        public List<Serializable> doSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public TableModel getModelFromSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
         }
     }
 
@@ -304,6 +319,16 @@ public abstract class EntitySearcher {
             }
 
             return dtm;
+        }
+
+        @Override
+        public List<Serializable> doSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public TableModel getModelFromSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
         }
     }
 
@@ -411,6 +436,16 @@ public abstract class EntitySearcher {
 
             return dtm;
         }
+
+        @Override
+        public List<Serializable> doSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public TableModel getModelFromSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
     }
 
     public static class CasoBasicEntitySearcher extends EntitySearcher {
@@ -498,6 +533,16 @@ public abstract class EntitySearcher {
 
             return dtm;
         }
+
+        @Override
+        public List<Serializable> doSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public TableModel getModelFromSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
     }
 
     public static class HistoriaClinicaEntitySearcher extends EntitySearcher {
@@ -579,6 +624,16 @@ public abstract class EntitySearcher {
             }
 
             return dtm;
+        }
+
+        @Override
+        public List<Serializable> doSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public TableModel getModelFromSearch() {
+            throw new UnsupportedOperationException("Not supported yet.");
         }
     }
 }
