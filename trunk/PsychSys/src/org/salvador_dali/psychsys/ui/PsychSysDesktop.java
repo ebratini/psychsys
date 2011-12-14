@@ -59,6 +59,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
 import org.pushingpixels.flamingo.api.common.CommandButtonDisplayState;
 import org.pushingpixels.flamingo.api.common.JCommandButton;
 import org.pushingpixels.flamingo.api.common.JCommandButton.CommandButtonKind;
@@ -86,6 +87,7 @@ import org.pushingpixels.flamingo.api.ribbon.resize.RibbonBandResizePolicy;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
+import org.salvador_dali.psychsys.business.JpaTutorDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
@@ -126,6 +128,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     private JLabel usuarioLogueado = new JLabel("Usuario no logueado");
     private JLabel timeDate = new JLabel("Time/Date");
     // jpas
+    private JpaTutorDao jpaTutDao = new JpaTutorDao();
     private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
 
     public PsychSysDesktop() {
@@ -1310,7 +1313,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 
                 @Override
                 public void keyPressed(KeyEvent e) {
-                    if (e.getKeyChar() == 'a' && e.isControlDown()) {
+                    if (e.isControlDown() && e.getKeyChar() == 'a') {
                         getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
                         getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
                     }
@@ -1318,13 +1321,12 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                 @Override
                 public void keyReleased(KeyEvent e) {
-                    if (e.getKeyChar() == 'a' && e.isControlDown()) {
+                    if (e.isControlDown() && e.getKeyChar() == 'a') {
                         getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
                         getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
                     }
                 }
             });
-            
             
             JScrollPane sclTutores = new JScrollPane(vgTutores);
             pnlBody.addTab("Vista: Tutores", sclTutores);
@@ -1360,7 +1362,46 @@ public class PsychSysDesktop extends JRibbonFrame {
         }
     }
 
-    private void eliminarTutor(Tutor tutor) {
+    private void eliminarTutoresSeleccionados() {
+        try {
+            JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+            JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+                
+            Tutor tutRemover = new Tutor();
+            EliminacionRegistroDialog.OPCION_ELIMINACION opEliminacion = null;
+            EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION opAccion = null;
+            int[] rowsDeleting = tblEntidades.getSelectedRows();
+            int selectedRow = -1;
+            DefaultTableModel dtm = (DefaultTableModel) tblEntidades.getModel();
+
+            if (rowsDeleting.length == 1) {
+                tutRemover = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+                String mensaje = String.format("Id: %s\n%DNI: %s\nNombre: %s", tutRemover.getTutId(), tutRemover.getTutDni(), tutRemover.toString());
+                EliminacionRegistroDialog erd = new EliminacionRegistroDialog(PsychSysDesktop.this, true, mensaje);
+                erd.setLocationRelativeTo(PsychSysDesktop.this);
+                erd.setVisible(true);
+
+                opEliminacion = erd.getOpEliminacion();
+                opAccion = erd.getOpAccion();
+
+            } else if (rowsDeleting.length > 1) {
+            }
+
+            if (opEliminacion.equals(EliminacionRegistroDialog.OPCION_ELIMINACION.SI)) {
+                for (int i = 0; i < rowsDeleting.length; i++) {
+                    selectedRow = tblEntidades.getSelectedRow();
+                    tutRemover.setTutId(Integer.parseInt(tblEntidades.getValueAt(i, 0).toString()));
+                    if (opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.PERMENTE)) {
+                        jpaTutDao.remove(tutRemover);
+                    } else if (opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.CAMBIAR_STATUS)) {
+                        tutRemover.setTutStatus('I');
+                        jpaTutDao.update(tutRemover);
+                    }
+                    dtm.removeRow(selectedRow);
+                }
+            }
+        } catch (Exception exc) {
+        }
     }
 
     private void verEstudiantes() {
@@ -1577,12 +1618,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbEliminarTutor")) {
                 JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
                 JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
-                if (tblEntidades.getSelectedRows().length == 1) {
-                    
-                } else if (tblEntidades.getSelectedRows().length == 1) {
-                    
-                }
-                eliminarTutor(null);
+                eliminarTutoresSeleccionados();
                 tblEntidades.requestFocus();
             } else if (buttonName.equalsIgnoreCase("jcbVerEstudiantes")) {
                 verEstudiantes();

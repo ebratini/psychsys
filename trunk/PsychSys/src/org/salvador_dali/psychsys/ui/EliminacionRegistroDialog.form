@@ -28,7 +28,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblPsychSysLogo" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblIconoMensaje" min="-2" max="-2" attributes="0"/>
                   <Component id="lblEscMensaje" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -54,7 +54,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblPsychSysLogo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblIconoMensaje" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblMensajeEliminacion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -94,10 +94,10 @@
         <Property name="text" type="java.lang.String" value="Solo cambiar status"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblPsychSysLogo">
+    <Component class="javax.swing.JLabel" name="lblIconoMensaje">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/resources/images/borrar estudiantes 65x65.png"/>
+          <Image iconType="3" name="/resources/images/delete_65x65.png"/>
         </Property>
       </Properties>
     </Component>
@@ -142,6 +142,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="No"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblEscMensaje">
       <Properties>

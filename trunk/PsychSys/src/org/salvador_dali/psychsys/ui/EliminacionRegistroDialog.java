@@ -29,6 +29,7 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -41,10 +42,34 @@ import javax.swing.JTextArea;
  */
 public class EliminacionRegistroDialog extends javax.swing.JDialog {
 
+    public enum OPCION_ELIMINACION {
+
+        SI,
+        NO
+    }
+    public enum OPCION_ACCION_ELIMINACION {
+        PERMENTE,
+        CAMBIAR_STATUS
+    }
+    
+    private OPCION_ELIMINACION opEliminacion;
+    private OPCION_ACCION_ELIMINACION opAccion;
+
     /** Creates new form EliminacionRegistroDialog */
     public EliminacionRegistroDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        lblProgressBar.setVisible(false);
+    }
+
+    public EliminacionRegistroDialog(java.awt.Frame parent, boolean modal, String mensaje) {
+        this(parent, modal);
+        txaEntidadEliminar.setText(mensaje);
+    }
+
+    public EliminacionRegistroDialog(java.awt.Frame parent, boolean modal, String mensaje, ImageIcon iconoMensaje) {
+        this(parent, modal, mensaje);
+        lblIconoMensaje.setIcon(iconoMensaje);
     }
 
     /** This method is called from within the constructor to
@@ -58,7 +83,7 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
 
         lblMensajeEliminacion = new javax.swing.JLabel();
         chkCambiarStatus = new javax.swing.JCheckBox();
-        lblPsychSysLogo = new javax.swing.JLabel();
+        lblIconoMensaje = new javax.swing.JLabel();
         btnSi = new javax.swing.JButton();
         spnEntidadEliminar = new javax.swing.JScrollPane();
         txaEntidadEliminar = new javax.swing.JTextArea();
@@ -76,7 +101,7 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
         chkCambiarStatus.setSelected(true);
         chkCambiarStatus.setText("Solo cambiar status");
 
-        lblPsychSysLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/borrar estudiantes 65x65.png"))); // NOI18N
+        lblIconoMensaje.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/delete_65x65.png"))); // NOI18N
 
         btnSi.setText("Si");
         btnSi.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +122,11 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
         lblProgressBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/circle progress bar 20x20.png"))); // NOI18N
 
         btnNo.setText("No");
+        btnNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoActionPerformed(evt);
+            }
+        });
 
         lblEscMensaje.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/information 20x20.png"))); // NOI18N
         lblEscMensaje.setText("<html>ESC para<br> cancelar</html>");
@@ -108,7 +138,7 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPsychSysLogo)
+                    .addComponent(lblIconoMensaje)
                     .addComponent(lblEscMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +159,7 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPsychSysLogo)
+                    .addComponent(lblIconoMensaje)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMensajeEliminacion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -152,9 +182,22 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_btnSiActionPerformed
+    private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
+        // TODO add your handling code here:
+        this.opEliminacion = OPCION_ELIMINACION.NO;
+        this.dispose();
+    }//GEN-LAST:event_btnNoActionPerformed
+
+    private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiActionPerformed
+        // TODO add your handling code here:
+        this.opEliminacion = OPCION_ELIMINACION.SI;
+        if (!chkCambiarStatus.isSelected()) {
+            this.opAccion = OPCION_ACCION_ELIMINACION.PERMENTE;
+        } else {
+            this.opAccion = OPCION_ACCION_ELIMINACION.CAMBIAR_STATUS;
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnSiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,12 +283,12 @@ private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
         this.lblProgressBar = lblProgressBar;
     }
 
-    public JLabel getLblPsychSysLogo() {
-        return lblPsychSysLogo;
+    public JLabel getLblIconoMensaje() {
+        return lblIconoMensaje;
     }
 
-    public void setLblPsychSysLogo(JLabel lblPsychSysLogo) {
-        this.lblPsychSysLogo = lblPsychSysLogo;
+    public void setLblIconoMensaje(JLabel lblIconoMensaje) {
+        this.lblIconoMensaje = lblIconoMensaje;
     }
 
     public JScrollPane getSpnEntidadEliminar() {
@@ -263,14 +306,23 @@ private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     public void setTxaEntidadEliminar(JTextArea txaEntidadEliminar) {
         this.txaEntidadEliminar = txaEntidadEliminar;
     }
+
+    public OPCION_ELIMINACION getOpEliminacion() {
+        return opEliminacion;
+    }
+
+    public OPCION_ACCION_ELIMINACION getOpAccion() {
+        return opAccion;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNo;
     private javax.swing.JButton btnSi;
     private javax.swing.JCheckBox chkCambiarStatus;
     private javax.swing.JLabel lblEscMensaje;
+    private javax.swing.JLabel lblIconoMensaje;
     private javax.swing.JLabel lblMensajeEliminacion;
     private javax.swing.JLabel lblProgressBar;
-    private javax.swing.JLabel lblPsychSysLogo;
     private javax.swing.JScrollPane spnEntidadEliminar;
     private javax.swing.JTextArea txaEntidadEliminar;
     // End of variables declaration//GEN-END:variables
