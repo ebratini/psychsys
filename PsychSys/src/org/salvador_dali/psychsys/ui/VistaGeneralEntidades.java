@@ -194,6 +194,7 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
             cmbCampoBuscar.setModel(entitySearcher.getDefComboBoxModel());
             tblEntidades.setColumnModel(entitySearcher.getDefTableColumnModel());
             tblEntidades.setModel(entitySearcher.getDefTableModel());
+            tblEntidades.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         } else {
             String[] colNames = new String[]{"Id", "Col 2", "Col 3"};
             cmbCampoBuscar.setModel(new DefaultComboBoxModel(colNames));
@@ -216,6 +217,7 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
                 }
             };
 
+            tblEntidades.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
             tblEntidades.setModel(dtm);
         }
     }
@@ -230,7 +232,7 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
         TableModel tm = getEntitySearcher().doSearch(cmbCampoBuscar.getSelectedItem().toString(), txtBusqueda.getText());
         if (tm != null) {
             tblEntidades.setModel(tm);
-            tblEntidades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            tblEntidades.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         } else {
             lblResultadoBusqueda.setText("No hubo resultados");
             lblResultadoBusqueda.setForeground(Color.red);

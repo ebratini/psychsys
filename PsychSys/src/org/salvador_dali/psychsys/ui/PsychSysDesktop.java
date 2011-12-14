@@ -24,6 +24,7 @@
 package org.salvador_dali.psychsys.ui;
 
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 import java.awt.BorderLayout;
@@ -32,7 +33,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -53,6 +55,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JViewport;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
@@ -1123,7 +1126,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         // enable app menu
         for (List<RibbonApplicationMenuEntryPrimary> lamp : getRibbon().getApplicationMenu().getPrimaryEntries()) {
             for (RibbonApplicationMenuEntryPrimary amp : lamp) {
-                if (!Arrays.asList(new String[]{"guardar", "guardar como", "imprimir", "enviar"}).contains(amp.getText().toLowerCase())) {
+                if (!Arrays.asList("guardar", "guardar como", "imprimir", "enviar").contains(amp.getText().toLowerCase())) {
                     amp.setEnabled(true);
                 }
             }
@@ -1151,7 +1154,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     for (Component comp : jbcp.getComponents()) {
                         if (comp instanceof JCommandButton) {
                             String btnText = ((JCommandButton) comp).getText();
-                            if (Arrays.asList(new String[]{"editar", "eliminar", "cambiar estado", "pegar", "copiar", "cortar"}).contains(btnText.toLowerCase())) {
+                            if (Arrays.asList("editar", "eliminar", "cambiar estado", "pegar", "copiar", "cortar").contains(btnText.toLowerCase())) {
                                 continue;
                             }
                             /*if (btnText.equalsIgnoreCase("ver")) {
@@ -1204,6 +1207,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void doLogin(JCommandButton logInOutButton) {
         Login login = new Login(this, true);
+        //login.getRootPane().getInputMap().put(KeyStroke.getKeyStroke("ESC"), "System.exit(0)");
         login.setLocationRelativeTo(this);
         login.setVisible(true);
         usuario = login.getUsuario();
@@ -1273,27 +1277,58 @@ public class PsychSysDesktop extends JRibbonFrame {
         if (!getTabCaptions().contains("Vista: Tutores")) {
             VistaGeneralEntidades vgTutores = new VistaGeneralEntidades(new EntitySearcher.TutorBasicEntitySearcher());
             
-            // TODO: Revisar implementacion
             final JTable tbl = vgTutores.getTblEntidades();
-            tbl.addFocusListener(new FocusListener() {
+            tbl.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+            
+            tbl.addFocusListener(new FocusAdapter() {
 
                 @Override
-                public void focusGained(FocusEvent e) {
+                public void focusLost(FocusEvent e) {
+                    if (e.getOppositeComponent() != null) {
+                        if (!Arrays.asList("jcbEditarTutor", "jcbEliminarTutor").contains(e.getOppositeComponent().getName())) {
+                            getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
+                            getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(false);
+                            tbl.clearSelection();
+                        }
+                    }
+                }
+            });
+            tbl.addMouseListener(new MouseAdapter() {
+                
+                @Override
+                public void mousePressed(MouseEvent e) {
                     if (tbl.getSelectedRowCount() == 1) {
                         getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(true);
                         getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
                     } else if (tbl.getSelectedRowCount() > 1) {
                         getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
+                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
+                    }
+                }
+            });
+            tbl.addKeyListener(new KeyAdapter() {
+                
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyChar() == 'a' && e.isControlDown()) {
+                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
+                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
                     }
                 }
 
                 @Override
-                public void focusLost(FocusEvent e) {
-                    getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
-                    getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(false);
+                public void keyReleased(KeyEvent e) {
+                    if (e.getKeyChar() == 'a' && e.isControlDown()) {
+                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
+                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
+                    }
                 }
             });
-            pnlBody.addTab("Vista: Tutores", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.TutorBasicEntitySearcher())));
+            
+            
+            JScrollPane sclTutores = new JScrollPane(vgTutores);
+            pnlBody.addTab("Vista: Tutores", sclTutores);
+            pnlBody.setSelectedComponent(sclTutores);
         } else {
             getToolkit().beep();
         }
@@ -1540,7 +1575,15 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbEditarTutor")) {
                 registrarEditarTutor(RegistroEdicionModo.EDICION, null);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarTutor")) {
-                throwNoImplMsj();
+                JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+                JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+                if (tblEntidades.getSelectedRows().length == 1) {
+                    
+                } else if (tblEntidades.getSelectedRows().length == 1) {
+                    
+                }
+                eliminarTutor(null);
+                tblEntidades.requestFocus();
             } else if (buttonName.equalsIgnoreCase("jcbVerEstudiantes")) {
                 verEstudiantes();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarEstudiante")) {
