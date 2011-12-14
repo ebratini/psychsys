@@ -30,7 +30,8 @@
 package org.salvador_dali.psychsys.ui;
 
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.event.KeyEvent;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableColumnModel;
@@ -47,15 +48,19 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
 
     private Object entitySelectedId;
     private EntitySearcher entitySearcher;
-    private JLabel statusMessageLabel;
 
     /** Creates new form VistaGeneralEntidades */
     public VistaGeneralEntidades() {
         initComponents();
+        lblResultadoBusqueda.setVisible(false);
+        setComboAndTblModel();
     }
 
     public VistaGeneralEntidades(EntitySearcher entitySearcher) {
         this.entitySearcher = entitySearcher;
+        initComponents();
+        lblResultadoBusqueda.setVisible(false);
+        setComboAndTblModel();
     }
 
     public EntitySearcher getEntitySearcher() {
@@ -88,20 +93,21 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
         cmbCampoBuscar = new javax.swing.JComboBox();
         txtBusqueda = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        lblResultadoBusqueda = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEntidades = new javax.swing.JTable();
 
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-        });
-
         pnlOpBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones de Busqueda"));
 
-        lblCampo.setText("Campo");
+        lblCampo.setText("Campo Buscar");
 
         cmbCampoBuscar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyPressed(evt);
+            }
+        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,23 +116,33 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
             }
         });
 
+        lblResultadoBusqueda.setText("Resultado Busqueda");
+
         javax.swing.GroupLayout pnlOpBusquedaLayout = new javax.swing.GroupLayout(pnlOpBusqueda);
         pnlOpBusqueda.setLayout(pnlOpBusquedaLayout);
         pnlOpBusquedaLayout.setHorizontalGroup(
             pnlOpBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOpBusquedaLayout.createSequentialGroup()
-                .addComponent(cmbCampoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlOpBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbCampoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCampo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBuscar))
-            .addComponent(lblCampo)
+                .addGroup(pnlOpBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlOpBusquedaLayout.createSequentialGroup()
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscar))
+                    .addGroup(pnlOpBusquedaLayout.createSequentialGroup()
+                        .addComponent(lblResultadoBusqueda)
+                        .addContainerGap())))
         );
         pnlOpBusquedaLayout.setVerticalGroup(
             pnlOpBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOpBusquedaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblCampo)
+                .addGroup(pnlOpBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCampo)
+                    .addComponent(lblResultadoBusqueda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlOpBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbCampoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,8 +168,8 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
             .addComponent(pnlOpBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,6 +180,37 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setComboAndTblModel() {
+        if (entitySearcher != null) {
+            cmbCampoBuscar.setModel(entitySearcher.getDefComboBoxModel());
+            tblEntidades.setColumnModel(entitySearcher.getDefTableColumnModel());
+            tblEntidades.setModel(entitySearcher.getDefTableModel());
+        } else {
+            String[] colNames = new String[] {"Id", "Col 2", "Col 3"};
+            cmbCampoBuscar.setModel(new DefaultComboBoxModel(colNames));
+            tblEntidades.setColumnModel(new DefaultTableColumnModel() {
+
+                @Override
+                public void moveColumn(int columnIndex, int newIndex) {
+                    if (columnIndex == 0 || newIndex == 0) {
+                        return;
+                    }
+                    super.moveColumn(columnIndex, newIndex);
+                }
+            });
+
+            DefaultTableModel dtm = new DefaultTableModel(new Object[][]{{}}, colNames) {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int mColIndex) {
+                    return false;
+                }
+            };
+
+            tblEntidades.setModel(dtm);
+        }
+    }
+    
     private void doSearch() {
         if (cmbCampoBuscar.getSelectedItem().toString().equalsIgnoreCase("id") && !txtBusqueda.getText().equals("*")) {
             if (!new NumberFieldValidator().validate(txtBusqueda.getText())) {
@@ -176,9 +223,9 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
             tblEntidades.setModel(tm);
             tblEntidades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         } else {
-            statusMessageLabel.setText("No hubo resultados");
-            statusMessageLabel.setForeground(Color.red);
-            new Thread(new LabelToolTipShower(statusMessageLabel, 3000)).start();
+            lblResultadoBusqueda.setText("No hubo resultados");
+            lblResultadoBusqueda.setForeground(Color.red);
+            new Thread(new LabelToolTipShower(lblResultadoBusqueda, 3000)).start();
             tblEntidades.setModel(getEntitySearcher().getDefTableModel());
             return;
         }
@@ -193,42 +240,19 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
         doSearch();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+    private void txtBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyPressed
         // TODO add your handling code here:
-        if (entitySearcher != null) {
-            cmbCampoBuscar.setModel(entitySearcher.getDefComboBoxModel());
-            tblEntidades.setColumnModel(entitySearcher.getDefTableColumnModel());
-            tblEntidades.setModel(entitySearcher.getDefTableModel());
-        } else {
-            tblEntidades.setColumnModel(new DefaultTableColumnModel() {
-
-                @Override
-                public void moveColumn(int columnIndex, int newIndex) {
-                    if (columnIndex == 0 || newIndex == 0) {
-                        return;
-                    }
-                    super.moveColumn(columnIndex, newIndex);
-                }
-            });
-
-            DefaultTableModel dtm = new DefaultTableModel(new Object[][]{{}},
-                    new Object[]{"Id", "Col 2", "Col 3"}) {
-
-                @Override
-                public boolean isCellEditable(int rowIndex, int mColIndex) {
-                    return false;
-                }                
-            };
-
-            tblEntidades.setModel(dtm);
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnBuscar.doClick();
         }
-    }//GEN-LAST:event_formComponentShown
+    }//GEN-LAST:event_txtBusquedaKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox cmbCampoBuscar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCampo;
+    private javax.swing.JLabel lblResultadoBusqueda;
     private javax.swing.JPanel pnlOpBusqueda;
     private javax.swing.JTable tblEntidades;
     private javax.swing.JTextField txtBusqueda;

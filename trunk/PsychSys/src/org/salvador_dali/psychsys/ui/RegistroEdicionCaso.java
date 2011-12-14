@@ -632,7 +632,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         // TODO add your handling code here:
         BusquedaRapida brr = new BusquedaRapida(this, true);
         brr.setTitle("Buscar Referimiento");
-        brr.setEntitySearcher(new EntitySearcher.ReferimientoEntitySearcher());
+        brr.setEntitySearcher(new EntitySearcher.ReferimientoBasicEntitySearcher());
         brr.getLblEntidades().setText("Referimientos");
         brr.setLocationRelativeTo(this);
         brr.setVisible(true);

@@ -612,7 +612,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         String title = (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso") ? "Buscar Caso" : "Buscar Estudiante");
         String strEntidades = (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso") ? "Casos" : "Estudiantes");
         EntitySearcher entitySearcher = (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso")
-                ? new EntitySearcher.CasoEntitySearcher() : new EntitySearcher.EstudianteEntitySearcher());
+                ? new EntitySearcher.CasoBasicEntitySearcher() : new EntitySearcher.EstudianteBasicEntitySearcher());
         
         br.setTitle(title);
         br.setEntitySearcher(entitySearcher);

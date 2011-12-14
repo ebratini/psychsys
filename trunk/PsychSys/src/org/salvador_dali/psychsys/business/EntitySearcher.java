@@ -134,7 +134,7 @@ public abstract class EntitySearcher {
     public abstract TableModel doSearch(String fieldToSearch, String value);
 
     // Clases
-    public static class TutorEntitySearcher extends EntitySearcher {
+    public static class TutorBasicEntitySearcher extends EntitySearcher {
 
         {
             setJpDao(new JpaTutorDao());
@@ -150,10 +150,10 @@ public abstract class EntitySearcher {
             });
         }
 
-        public TutorEntitySearcher() {
+        public TutorBasicEntitySearcher() {
         }
 
-        public TutorEntitySearcher(JpaDao jpDao, Object[] fieldsToSearch, ComboBoxModel defComboBoxModel, TableModel defTableModel, TableColumnModel defTableColumnModel) {
+        public TutorBasicEntitySearcher(JpaDao jpDao, Object[] fieldsToSearch, ComboBoxModel defComboBoxModel, TableModel defTableModel, TableColumnModel defTableColumnModel) {
             super(jpDao, fieldsToSearch, defComboBoxModel, defTableModel, defTableColumnModel);
         }
 
@@ -220,7 +220,7 @@ public abstract class EntitySearcher {
         }
     }
 
-    public static class EstudianteEntitySearcher extends EntitySearcher {
+    public static class EstudianteBasicEntitySearcher extends EntitySearcher {
 
         {
             setJpDao(new JpaEstudianteDao());
@@ -236,10 +236,10 @@ public abstract class EntitySearcher {
             });
         }
 
-        public EstudianteEntitySearcher() {
+        public EstudianteBasicEntitySearcher() {
         }
 
-        public EstudianteEntitySearcher(JpaDao jpDao, Object[] fieldsToSearch, ComboBoxModel defComboBoxModel, TableModel defTableModel, TableColumnModel defTableColumnModel) {
+        public EstudianteBasicEntitySearcher(JpaDao jpDao, Object[] fieldsToSearch, ComboBoxModel defComboBoxModel, TableModel defTableModel, TableColumnModel defTableColumnModel) {
             super(jpDao, fieldsToSearch, defComboBoxModel, defTableModel, defTableColumnModel);
         }
 
@@ -307,7 +307,7 @@ public abstract class EntitySearcher {
         }
     }
 
-    public static class ReferimientoEntitySearcher extends EntitySearcher {
+    public static class ReferimientoBasicEntitySearcher extends EntitySearcher {
 
         {
             setJpDao(new JpaReferimientoDao());
@@ -413,7 +413,7 @@ public abstract class EntitySearcher {
         }
     }
 
-    public static class CasoEntitySearcher extends EntitySearcher {
+    public static class CasoBasicEntitySearcher extends EntitySearcher {
 
         {
             setJpDao(new JpaCasoDao());
