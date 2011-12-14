@@ -33,6 +33,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
@@ -77,6 +78,14 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
 
     public void setEntitySelectedId(Object entitySelectedId) {
         this.entitySelectedId = entitySelectedId;
+    }
+
+    public JTable getTblEntidades() {
+        return tblEntidades;
+    }
+
+    public void setTblEntidades(JTable tblEntidades) {
+        this.tblEntidades = tblEntidades;
     }
 
     /** This method is called from within the constructor to
@@ -186,7 +195,7 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
             tblEntidades.setColumnModel(entitySearcher.getDefTableColumnModel());
             tblEntidades.setModel(entitySearcher.getDefTableModel());
         } else {
-            String[] colNames = new String[] {"Id", "Col 2", "Col 3"};
+            String[] colNames = new String[]{"Id", "Col 2", "Col 3"};
             cmbCampoBuscar.setModel(new DefaultComboBoxModel(colNames));
             tblEntidades.setColumnModel(new DefaultTableColumnModel() {
 
@@ -210,14 +219,14 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
             tblEntidades.setModel(dtm);
         }
     }
-    
+
     private void doSearch() {
         if (cmbCampoBuscar.getSelectedItem().toString().equalsIgnoreCase("id") && !txtBusqueda.getText().equals("*")) {
             if (!new NumberFieldValidator().validate(txtBusqueda.getText())) {
                 JOptionPane.showMessageDialog(this, "Este campo solo acepta numeros", "Busqueda", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        }        
+        }
         TableModel tm = getEntitySearcher().doSearch(cmbCampoBuscar.getSelectedItem().toString(), txtBusqueda.getText());
         if (tm != null) {
             tblEntidades.setModel(tm);
@@ -230,7 +239,7 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
             return;
         }
     }
-    
+
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         if (txtBusqueda.getText().isEmpty()) {
@@ -246,7 +255,6 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
             btnBuscar.doClick();
         }
     }//GEN-LAST:event_txtBusquedaKeyPressed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JComboBox cmbCampoBuscar;

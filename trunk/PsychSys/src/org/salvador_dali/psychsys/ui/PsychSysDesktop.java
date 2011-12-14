@@ -23,6 +23,7 @@
  */
 package org.salvador_dali.psychsys.ui;
 
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 import java.awt.BorderLayout;
@@ -31,6 +32,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -49,6 +51,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -119,7 +122,6 @@ public class PsychSysDesktop extends JRibbonFrame {
     private JLabel taskSelectedLabel = new JLabel();
     private JLabel usuarioLogueado = new JLabel("Usuario no logueado");
     private JLabel timeDate = new JLabel("Time/Date");
-    
     // jpas
     private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
 
@@ -150,8 +152,10 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void initBodyContent() {
         final JPopupMenu tabPopupMenu = new JPopupMenu() {
+
             {
                 add(new JMenuItem("Cerrar Tab") {
+
                     {
                         addActionListener(new ActionListener() {
 
@@ -397,6 +401,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                             }
                         });
                         verObservacionRefButton.setActionKeyTip("Ver Observacion Referimiento");
+                        verObservacionRefButton.setEnabled(false);
 
                         // editar
                         editarObservacionRefButton = new JCommandMenuButton("Editar", new EmptyResizableIcon(16));
@@ -419,9 +424,9 @@ public class PsychSysDesktop extends JRibbonFrame {
                             }
                         });
                         eliminarObservacionRefButton.setActionKeyTip("Eliminar Observacion Referimiento");
+                        eliminarObservacionRefButton.setEnabled(false);
 
                         this.addMenuButton(verObservacionRefButton);
-                        //this.addMenuButton(nuevoObservacionRefButton);
                         this.addMenuButton(editarObservacionRefButton);
                         this.addMenuButton(eliminarObservacionRefButton);
                     }
@@ -1126,10 +1131,12 @@ public class PsychSysDesktop extends JRibbonFrame {
         for (RibbonApplicationMenuEntryFooter amf : getRibbon().getApplicationMenu().getFooterEntries()) {
             amf.setEnabled(true);
         }
+
+        // enable bands and/or bands' jcommand buttons
     }
 
     private void setJRibbonComponentsEnabled(boolean state) {
-        if (state == true) {
+        if (state) {
             enableJRibbonComponents();
             JRibbon ribbon = getRibbon();
             for (int i = 0; i < ribbon.getTaskCount(); i++) {
@@ -1140,7 +1147,16 @@ public class PsychSysDesktop extends JRibbonFrame {
                         continue;
                     }
                     JBandControlPanel jbcp = banda.getControlPanel();
+                    jbcp.setEnabled(state);
                     for (Component comp : jbcp.getComponents()) {
+                        if (comp instanceof JCommandButton) {
+                            String btnText = ((JCommandButton) comp).getText();
+                            if (Arrays.asList(new String[]{"editar", "eliminar", "cambiar estado", "pegar", "copiar", "cortar"}).contains(btnText.toLowerCase())) {
+                                continue;
+                            }
+                            /*if (btnText.equalsIgnoreCase("ver")) {
+                            }*/
+                        }
                         comp.setEnabled(state);
                     }
                 }
@@ -1251,11 +1267,32 @@ public class PsychSysDesktop extends JRibbonFrame {
         }
         return caps;
     }
-    
+
     private void verTutores() {
         // crear/enviar entity searcher (TutorEntityDetailedSearcher)
         if (!getTabCaptions().contains("Vista: Tutores")) {
-            VistaGeneralEntidades vgTutores = new VistaGeneralEntidades(new EntitySearcher.TutorBasicEntitySearcher()); 
+            VistaGeneralEntidades vgTutores = new VistaGeneralEntidades(new EntitySearcher.TutorBasicEntitySearcher());
+            
+            // TODO: Revisar implementacion
+            final JTable tbl = vgTutores.getTblEntidades();
+            tbl.addFocusListener(new FocusListener() {
+
+                @Override
+                public void focusGained(FocusEvent e) {
+                    if (tbl.getSelectedRowCount() == 1) {
+                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(true);
+                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
+                    } else if (tbl.getSelectedRowCount() > 1) {
+                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
+                    }
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
+                    getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(false);
+                }
+            });
             pnlBody.addTab("Vista: Tutores", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.TutorBasicEntitySearcher())));
         } else {
             getToolkit().beep();
@@ -1316,7 +1353,6 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void eliminarEstudiante(Estudiante est) {
-        
     }
 
     private void verReferimientos() {
@@ -1352,8 +1388,11 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void registrarEditarObservacionReferimiento(RegistroEdicionModo modo, Referimiento ref) {
-        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-            final RegistroEdicionObservacionReferimiento reor = new RegistroEdicionObservacionReferimiento(RegistroEdicionModo.REGISTRO, usuario);
+        if (modo != null) {
+            final RegistroEdicionObservacionReferimiento reor = new RegistroEdicionObservacionReferimiento(modo, usuario);
+            if (!modo.equals(RegistroEdicionModo.REGISTRO)) {
+                // setear el txtReremiento desde aqui
+            }
             reor.setLocationRelativeTo(this);
             java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -1362,7 +1401,6 @@ public class PsychSysDesktop extends JRibbonFrame {
                     reor.setVisible(true);
                 }
             });
-        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
         }
     }
 
@@ -1371,7 +1409,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void eliminarObservacionReferimiento() {
     }
-    
+
     private void cambiarEstadoReferimiento(Referimiento ref) {
         CambiarEstadoRefermiento cer = new CambiarEstadoRefermiento(ref, jpaRefDao, this, true);
         cer.setLocationRelativeTo(this);
