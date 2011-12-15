@@ -213,14 +213,14 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
                     .addComponent(lblPrimerNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPrimerApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                    .addComponent(txtPrimerApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                     .addComponent(cmbTipoDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
                         .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblDniValMarker))
-                    .addComponent(txtPrimerNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                    .addComponent(txtSegundoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                    .addComponent(txtPrimerNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(txtSegundoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlTutInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTutInfoPersonalLayout.createSequentialGroup()
@@ -348,7 +348,7 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
                         .addGroup(pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDirValMarker)
                             .addComponent(lblEmailValMarker))))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         pnlTutInfoContactoLayout.setVerticalGroup(
             pnlTutInfoContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,6 +525,21 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
         statusMessageLabel.setVisible(false);
         statusAnimationLabel.setVisible(false);
         LimpiadorComponentes.limpiarValidationMarkers(this);
+        
+        if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            txtDni.setText(tutorAEditar.getTutDni());
+            cmbTipoDni.setSelectedItem(tutorAEditar.getTutTipoDni());
+            txtPrimerNombre.setText(tutorAEditar.getTutPrimerNombre());
+            txtSegundoNombre.setText(tutorAEditar.getTutSegundoNombre() != null ? tutorAEditar.getTutSegundoNombre() : "");
+            txtPrimerApellido.setText(tutorAEditar.getTutPrimerApellido());
+            txtSegundoApellido.setText(tutorAEditar.getTutSegundoApellido() != null ? tutorAEditar.getTutSegundoApellido() : "");
+            txtNacionalidad.setText(tutorAEditar.getTutNacionalidad());
+            cmbGenero.setSelectedIndex(tutorAEditar.getTutGenero() == 'M' ? 0 : 1);
+            cmbEstadoCivil.setSelectedItem(tutorAEditar.getTutEstadoCivil());
+            ftfTelefono.setText(tutorAEditar.getTutTelefono() != null ? tutorAEditar.getTutTelefono() : "");
+            txtEmail.setText(tutorAEditar.getTutEmail() != null ? tutorAEditar.getTutEmail() : "");
+            txaDireccion.setText(tutorAEditar.getTutDireccion());
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**

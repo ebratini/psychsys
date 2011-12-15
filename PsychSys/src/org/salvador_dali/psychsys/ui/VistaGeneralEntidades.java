@@ -32,8 +32,10 @@ package org.salvador_dali.psychsys.ui;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
@@ -86,6 +88,14 @@ public class VistaGeneralEntidades extends javax.swing.JPanel {
 
     public void setTblEntidades(JTable tblEntidades) {
         this.tblEntidades = tblEntidades;
+    }
+
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public JTextField getTxtBusqueda() {
+        return txtBusqueda;
     }
 
     /** This method is called from within the constructor to
