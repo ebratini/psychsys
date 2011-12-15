@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HistoriaClinica" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="est_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[
+
+select
+	hc.*
+	,est.*
+	,est.est_primer_apellido + ' ' + est.est_segundo_apellido apellidos
+	,est.est_primer_nombre + ' ' + est.est_segundo_nombre nombres
+	,pp.*
+	,nn.*
+	,rn.*
+	,ps.*
+	,pm.*
+	,pl.*
+from
+	Historia_Clinica hc
+	INNER JOIN Estudiantes est
+		ON hc.est_id = est.est_id
+	LEFT OUTER JOIN Pruebas_Psicologicas pp
+		ON pp.est_id = hc.est_id
+	LEFT OUTER JOIN Ant_Neonatal nn
+		ON nn.hic_id = hc.hic_id
+	LEFT OUTER JOIN Ant_Recien_Nacido rn
+		ON rn.hic_id = hc.hic_id
+	LEFT OUTER JOIN Ant_Psicosocial_Sexual ps
+		ON ps.hic_id = hc.hic_id
+	LEFT OUTER JOIN Ant_Pers_Madre pm
+		ON PM.hic_id = hc.hic_id
+	LEFT OUTER JOIN Ant_Psicomotriz_Lenguaje pl
+		ON pl.hic_id = hc.hic_id
+WHERE hc.est_id = $P{est_id} ]]>
+	</queryString>
+	<field name="hic_id" class="java.lang.Integer"/>
+	<field name="est_id" class="java.lang.Integer"/>
+	<field name="hic_fecha_creacion" class="java.lang.String"/>
+	<field name="hic_update_by" class="java.lang.String"/>
+	<field name="hic_update_date" class="java.lang.String"/>
+	<field name="hic_status" class="java.lang.String"/>
+	<field name="est_dni" class="java.lang.String"/>
+	<field name="est_tipo_dni" class="java.lang.String"/>
+	<field name="est_primer_apellido" class="java.lang.String"/>
+	<field name="est_segundo_apellido" class="java.lang.String"/>
+	<field name="est_primer_nombre" class="java.lang.String"/>
+	<field name="est_segundo_nombre" class="java.lang.String"/>
+	<field name="est_apodo" class="java.lang.String"/>
+	<field name="est_telefono" class="java.lang.String"/>
+	<field name="est_direccion" class="java.lang.String"/>
+	<field name="est_nacionalidad" class="java.lang.String"/>
+	<field name="est_genero" class="java.lang.String"/>
+	<field name="est_fecha_nacimiento" class="java.lang.String"/>
+	<field name="est_lugar_nacimiento" class="java.lang.String"/>
+	<field name="est_talla" class="java.math.BigDecimal"/>
+	<field name="est_peso" class="java.math.BigDecimal"/>
+	<field name="est_nivel_escolar" class="java.lang.String"/>
+	<field name="est_grado_escolar" class="java.lang.Integer"/>
+	<field name="est_escuela_procedencia" class="java.lang.String"/>
+	<field name="est_cant_hermanos" class="java.lang.Integer"/>
+	<field name="est_orden_hermanos" class="java.lang.Integer"/>
+	<field name="est_status" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="pps_id" class="java.lang.Integer"/>
+	<field name="cso_id" class="java.lang.Integer"/>
+	<field name="pps_fecha_aplicacion" class="java.lang.String"/>
+	<field name="pps_nombre_prueba" class="java.lang.String"/>
+	<field name="pps_resultados" class="java.sql.Clob"/>
+	<field name="pps_interpretacion" class="java.sql.Clob"/>
+	<field name="pps_correcion_automatica" class="java.lang.String"/>
+	<field name="ane_tipo_parto" class="java.lang.String"/>
+	<field name="ane_peso" class="java.math.BigDecimal"/>
+	<field name="ane_lloro" class="java.lang.String"/>
+	<field name="ane_asistencia_medica" class="java.lang.String"/>
+	<field name="ane_colaboracion" class="java.lang.String"/>
+	<field name="ane_estado_general" class="java.sql.Clob"/>
+	<field name="arn_lactancia_materna" class="java.lang.String"/>
+	<field name="arn_tiempo_lactancia" class="java.lang.Integer"/>
+	<field name="arn_problemas_especiales" class="java.sql.Clob"/>
+	<field name="aps_esfinter_anal" class="java.lang.Integer"/>
+	<field name="aps_esfinter_vecical" class="java.lang.Integer"/>
+	<field name="aps_habitos_alimenticios" class="java.sql.Clob"/>
+	<field name="aps_menarquia" class="java.lang.Integer"/>
+	<field name="aps_eyaculacion" class="java.lang.Integer"/>
+	<field name="aps_curiosidad_sexual_actual" class="java.sql.Clob"/>
+	<field name="aps_suenio" class="java.sql.Clob"/>
+	<field name="apm_embarazo" class="java.lang.String"/>
+	<field name="apm_duracion_embarazo" class="java.lang.Integer"/>
+	<field name="apm_amenaza_aborto" class="java.lang.String"/>
+	<field name="apm_intento_aborto" class="java.lang.String"/>
+	<field name="apm_habitos_toxicos" class="java.lang.String"/>
+	<field name="apm_enfermedades_embarazo" class="java.lang.String"/>
+	<field name="apm_embarazo_deseado" class="java.lang.String"/>
+	<field name="apm_sexo_preferido" class="java.lang.String"/>
+	<field name="apm_alteraciones_psiquicas" class="java.lang.String"/>
+	<field name="apl_edad_inicio_marcha" class="java.lang.Integer"/>
+	<field name="apl_motricidad_actual" class="java.sql.Clob"/>
+	<field name="apl_primeras_palabras" class="java.sql.Clob"/>
+	<field name="apl_vocabulario_actual" class="java.sql.Clob"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="171" y="4" width="223" height="37"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Escuela Básica Salvador Dalí]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="83" width="198" height="23"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(Departamento de Orientación)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="474" y="22" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="439" y="21" width="35" height="20"/>
+				<textElement/>
+				<text><![CDATA[Pag.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="25" width="263" height="23"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fundada el 12 de Septiembre del año 1983]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="474" y="2" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="438" y="2" width="36" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="213" y="60" width="143" height="23"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Historia Clínica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="1" width="126" height="20"/>
+				<textElement/>
+				<text><![CDATA[HistoriaClinica.jrxml]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="394" y="138" width="152" height="52"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="405" y="149" width="57" height="20"/>
+				<textElement/>
+				<text><![CDATA[No. Historia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="170" width="57" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="3" y="210" width="543" height="139"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="13" y="245" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Apellidos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="245" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nombres:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="265" width="81" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha de Nac.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="265" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Edad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="265" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Sexo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="438" y="265" width="36" height="20"/>
+				<textElement/>
+				<text><![CDATA[Grado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="285" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Procedencia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="305" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Residencia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="94" y="285" width="330" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{est_lugar_nacimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="305" width="330" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{est_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="83" y="245" width="161" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="338" y="245" width="169" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="210" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos Generales:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="233" width="524" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="99" y="265" width="74" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{est_fecha_nacimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="265" width="27" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{est_genero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="265" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{est_grado_escolar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="471" y="149" width="45" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{hic_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="471" y="169" width="65" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{hic_fecha_creacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="802" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="2" y="11" width="543" height="772"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="12" y="11" width="132" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Antecedentes Personales]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="31" width="524" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="11" y="42" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[EMBARAZO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="62" width="54" height="20"/>
+				<textElement/>
+				<text><![CDATA[Duración:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="102" y="62" width="104" height="20"/>
+				<textElement/>
+				<text><![CDATA[Embarazo Si o No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="62" width="127" height="20"/>
+				<textElement/>
+				<text><![CDATA[Amenaza Aborto Si o No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="82" width="129" height="20"/>
+				<textElement/>
+				<text><![CDATA[Intento de Aborto Si o No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="102" width="243" height="20"/>
+				<textElement/>
+				<text><![CDATA[Enfermedades de la madre dureante el embarazo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="202" width="106" height="20"/>
+				<textElement/>
+				<text><![CDATA[HABITOS TOXICOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="288" width="148" height="20"/>
+				<textElement/>
+				<text><![CDATA[Embarazo no deseado Si o No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="308" width="81" height="20"/>
+				<textElement/>
+				<text><![CDATA[Sexo Preferido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="328" width="116" height="20"/>
+				<textElement/>
+				<text><![CDATA[Alteraciones Psíquicas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="361" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[NEO NATAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="381" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Tipo de Parto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="381" width="130" height="20"/>
+				<textElement/>
+				<text><![CDATA[Asistencia Médica Si o No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="401" width="81" height="20"/>
+				<textElement/>
+				<text><![CDATA[Peso al Nacer:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="421" width="132" height="20"/>
+				<textElement/>
+				<text><![CDATA[Estado General del Niño:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="454" width="90" height="20"/>
+				<textElement/>
+				<text><![CDATA[RECIEN NACIDO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="474" width="139" height="20"/>
+				<textElement/>
+				<text><![CDATA[Lactancia Materna Si o No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="494" width="116" height="20"/>
+				<textElement/>
+				<text><![CDATA[Problemas Especiales:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="474" width="83" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cuánto Tiempo?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="401" width="80" height="20"/>
+				<textElement/>
+				<text><![CDATA[Lloró Si o No?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="402" width="110" height="20"/>
+				<textElement/>
+				<text><![CDATA[Colaboración Si o No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="573" width="243" height="20"/>
+				<textElement/>
+				<text><![CDATA[MADURACION PSICO-MOTRIZ Y DEL LENGUAJE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="593" width="80" height="20"/>
+				<textElement/>
+				<text><![CDATA[Inicio Marcha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="69" y="62" width="24" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apm_duracion_embarazo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="62" width="39" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apm_amenaza_aborto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="62" width="38" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apm_embarazo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="145" y="82" width="38" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apm_intento_aborto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="122" width="523" height="66"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apm_enfermedades_embarazo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="289" width="42" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apm_embarazo_deseado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="106" y="308" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apm_sexo_preferido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="328" width="389" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apm_alteraciones_psiquicas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="16" y="222" width="523" height="55"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apm_habitos_toxicos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="382" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ane_tipo_parto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="421" width="386" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[""+$F{ane_estado_general}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="236" y="401" width="35" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ane_lloro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="403" width="39" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ane_colaboracion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="381" width="46" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ane_asistencia_medica}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="401" width="49" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ane_peso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="474" width="27" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{arn_lactancia_materna}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="474" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{arn_tiempo_lactancia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="14" y="514" width="523" height="47"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[""+$F{arn_problemas_especiales}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="615" width="116" height="20"/>
+				<textElement/>
+				<text><![CDATA[Primeras Palabras:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="593" width="116" height="20"/>
+				<textElement/>
+				<text><![CDATA[Motricidad Actual:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="656" width="116" height="20"/>
+				<textElement/>
+				<text><![CDATA[Vocabulario Actual:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="257" y="615" width="280" height="41"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[""+$F{apl_motricidad_actual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="17" y="635" width="231" height="44"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[""+$F{apl_primeras_palabras}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="679" width="280" height="43"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[""+$F{apl_vocabulario_actual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="593" width="49" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{apl_edad_inicio_marcha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

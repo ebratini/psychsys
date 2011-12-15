@@ -338,6 +338,9 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
 
         if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             btnBuscar.setEnabled(false);
+            txtEstudiante.setText(hicAEditar.getEstudiante().toString());
+            antPersMadre = hicAEditar.getAntPersMadre();
+            antNeonatal = hicAEditar.getAntNeonatal();
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -512,6 +515,7 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
             case 0:
                 RegistroEdicionAntPersMadre apm = new RegistroEdicionAntPersMadre(this, true);
                 apm.setModo(RegistroEdicionModo.EDICION);
+                apm.setApmEditar(antPersMadre);
                 apm.setTitle(apm.getTitle().replace("Registrar", "Editar"));
                 apm.setLocationRelativeTo(this);
                 apm.setVisible(true);

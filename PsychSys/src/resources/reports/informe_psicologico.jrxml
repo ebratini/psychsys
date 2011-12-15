@@ -10,14 +10,13 @@
 		<defaultValueExpression><![CDATA["C:\\Users\\Cesar Castillo\\Documents\\App Repo\\Proyecto Psicologico\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select *
-from vCasos
+		<![CDATA[select * from vCasos
 where cso_id = $P{cso_id}]]>
 	</queryString>
 	<field name="cso_id" class="java.lang.Integer"/>
 	<field name="ref_id" class="java.lang.Integer"/>
 	<field name="cso_fecha" class="java.sql.Date"/>
-	<field name="cso_anio_escolar" class="java.sql.Date"/>
+	<field name="cso_anio_escolar" class="java.lang.String"/>
 	<field name="cso_analisis_resultados_pruebas" class="java.lang.String"/>
 	<field name="cso_juicio_clinico" class="java.lang.String"/>
 	<field name="cso_diagnostico" class="java.lang.String"/>

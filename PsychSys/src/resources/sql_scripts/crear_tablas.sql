@@ -225,7 +225,7 @@ CREATE TABLE Casos
 	cso_id INT NOT NULL IDENTITY,
 	ref_id INT NOT NULL,
 	cso_fecha DATE NOT NULL,
-	cso_anio_escolar DATE NOT NULL,
+	cso_anio_escolar VARCHAR(9) NOT NULL,
 	cso_analisis_resultados_pruebas TEXT NULL,
 	cso_juicio_clinico TEXT NOT NULL,
 	cso_diagnostico TEXT NULL,

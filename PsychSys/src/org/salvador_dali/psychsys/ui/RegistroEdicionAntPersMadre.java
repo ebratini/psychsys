@@ -67,6 +67,14 @@ public class RegistroEdicionAntPersMadre extends javax.swing.JDialog {
         this.modo = modo;
     }
 
+    public AntPersMadre getApmEditar() {
+        return apmEditar;
+    }
+
+    public void setApmEditar(AntPersMadre apmEditar) {
+        this.apmEditar = apmEditar;
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
