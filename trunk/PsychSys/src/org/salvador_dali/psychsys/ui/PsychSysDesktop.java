@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -90,7 +91,6 @@ import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.business.JpaTutorDao;
 import org.salvador_dali.psychsys.business.ReportingService;
-import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
@@ -1608,6 +1608,60 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void eliminarHistoriaClinica(HistoriaClinica hic) {
     }
+    
+    private void verReporte(final String reportSourcedFilePath, final String tabTitle, final Map map) {
+        new Thread() {
+
+            @Override
+            public void run() {
+                String reportFile = getClass().getResource(reportSourcedFilePath).getPath();
+                JScrollPane sclListadoTutores = new JScrollPane(reportingService.runReport(reportFile.replaceAll("%20", " "), map));
+                pnlBody.addTab(tabTitle, sclListadoTutores);
+                pnlBody.setSelectedComponent(sclListadoTutores);
+            }
+        }.start();
+    }
+    
+    // Para Reportes
+    private void verListadoTutores() {
+        verReporte("/resources/reports/listado_tutores.jasper", "Listado: Tutores", new HashMap());
+    }
+    
+    private void verListadoEstudiantes() {
+        verReporte("/resources/reports/listado_estudiantes.jasper", "Listado: Estudiantes", new HashMap());
+    }
+    
+    private void verListadoReferimientos() {
+        verReporte("/resources/reports/listado_Referimientos.jasper", "Listado: Referimientos", new HashMap());
+    }
+    
+    private void verListadoCasos() {
+        verReporte("/resources/reports/listado_Casos.jasper", "Listado: Casos", new HashMap());
+    }
+    
+    private void runInformePsicologicoReport() {
+        String param = JOptionPane.showInputDialog(this, "Id Caso", "Reportes: Informe Psicologico", JOptionPane.QUESTION_MESSAGE);
+        if (param != null) {
+            final int cso_id = Integer.parseInt(param);
+            verReporte("/resources/reports/informe_psicologico.jasper", "Reporte: Informe Psicologico", new HashMap<String, Integer>() {
+                {
+                    put("cso_id", cso_id);
+                }
+            });
+        }
+    }
+    
+    private void runHicInfantilInforme() {
+        String param = JOptionPane.showInputDialog(this, "Id Estudiante", "Reportes: Historia Clinica", JOptionPane.QUESTION_MESSAGE);
+        if (param != null) {
+            final int est_id = Integer.parseInt(param);
+            verReporte("/resources/reports/historia_clinica.jasper", "Reporte: Informe Psicologico", new HashMap<String, Integer>() {
+                {
+                    put("cso_id", est_id);
+                }
+            });
+        }
+    }
 
     private void throwNoImplMsj() {
         JOptionPane.showMessageDialog(this, "No Implementado Todavia");
@@ -1687,10 +1741,17 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbEditarHic")) {
             } else if (buttonName.equalsIgnoreCase("jcbEliminarHic")) {
             } else if (buttonName.equalsIgnoreCase("jcbListadoTutores")) {
-                String reportFile = getClass().getResource("/resources/reports/listado_tutores.jasper").getPath();
-                JScrollPane sclListadoTutores = new JScrollPane(reportingService.runReport(reportFile, new HashMap()));
-                pnlBody.addTab("Listado: Tutores", sclListadoTutores);
-                pnlBody.setSelectedComponent(sclListadoTutores);
+                verListadoTutores();
+            } else if (buttonName.equalsIgnoreCase("jcbListadoEstudiantes")) {
+                verListadoEstudiantes();
+            } else if (buttonName.equalsIgnoreCase("jcbListadoReferimientos")) {
+                verListadoReferimientos();
+            } else if (buttonName.equalsIgnoreCase("jcbListadoCasos")) {
+                verListadoCasos();
+            } else if (buttonName.equalsIgnoreCase("jcbInformePsicologico")) {
+                runInformePsicologicoReport();
+            } else if (buttonName.equalsIgnoreCase("jcbHicInfantil")) {
+                runHicInfantilInforme();
             }
         }
     }
