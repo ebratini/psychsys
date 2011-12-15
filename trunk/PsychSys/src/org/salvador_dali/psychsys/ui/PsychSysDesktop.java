@@ -41,6 +41,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
@@ -132,7 +133,6 @@ public class PsychSysDesktop extends JRibbonFrame {
     // jpas
     private JpaTutorDao jpaTutDao = new JpaTutorDao();
     private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
-    
     // reporting services
     private ReportingService reportingService = new ReportingService("com.microsoft.sqlserver.jdbc.SQLServerDriver",
             "jdbc:sqlserver://localhost:1433;databaseName=PsychSysDB", "sa", "Mssql88**");
@@ -1285,10 +1285,10 @@ public class PsychSysDesktop extends JRibbonFrame {
         // crear/enviar entity searcher (TutorEntityDetailedSearcher)
         if (!getTabCaptions().contains("Vista: Tutores")) {
             VistaGeneralEntidades vgTutores = new VistaGeneralEntidades(new EntitySearcher.TutorBasicEntitySearcher());
-            
+
             final JTable tbl = vgTutores.getTblEntidades();
             tbl.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-            
+
             tbl.addFocusListener(new FocusAdapter() {
 
                 @Override
@@ -1303,7 +1303,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 }
             });
             tbl.addMouseListener(new MouseAdapter() {
-                
+
                 @Override
                 public void mousePressed(MouseEvent e) {
                     if (tbl.getSelectedRowCount() == 1) {
@@ -1316,7 +1316,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 }
             });
             tbl.addKeyListener(new KeyAdapter() {
-                
+
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (e.isControlDown() && e.getKeyChar() == 'a') {
@@ -1333,7 +1333,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     }
                 }
             });
-            
+
             vgTutores.getTxtBusqueda().setText("*");
             vgTutores.getBtnBuscar().doClick();
             vgTutores.getTxtBusqueda().setText("");
@@ -1360,7 +1360,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
             JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
             Tutor tut = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
-            
+
             final RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
             ret.setTitle("Editar Tutor");
             ret.setTutorAEditar(tut);
@@ -1380,7 +1380,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         try {
             JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
             JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
-                
+
             Tutor tutRemover = new Tutor();
             EliminacionRegistroDialog.OPCION_ELIMINACION opEliminacion = null;
             EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION opAccion = null;
@@ -1687,8 +1687,8 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbEditarHic")) {
             } else if (buttonName.equalsIgnoreCase("jcbEliminarHic")) {
             } else if (buttonName.equalsIgnoreCase("jcbListadoTutores")) {
-                String reportFile = getClass().getResource("/resources/reports/listado_tutores.jasper").toString();
-                JScrollPane sclListadoTutores = new JScrollPane(reportingService.runReport(reportFile, null));
+                String reportFile = getClass().getResource("/resources/reports/listado_tutores.jasper").getPath();
+                JScrollPane sclListadoTutores = new JScrollPane(reportingService.runReport(reportFile, new HashMap()));
                 pnlBody.addTab("Listado: Tutores", sclListadoTutores);
                 pnlBody.setSelectedComponent(sclListadoTutores);
             }
