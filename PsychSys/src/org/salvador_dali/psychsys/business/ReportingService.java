@@ -76,9 +76,9 @@ public class ReportingService {
     }
 
     public JPanel runReport(String reportFile, Map parameters) {
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream(reportFile);
+        //InputStream is = this.getClass().getClassLoader().getResourceAsStream(reportFile);
         try {
-            JasperPrint jp = JasperFillManager.fillReport(is, parameters, conn);
+            JasperPrint jp = JasperFillManager.fillReport(reportFile, parameters, conn);
             JRViewer jvReport = new JRViewer(jp);
             return jvReport;
         } catch (JRException ex) {
