@@ -358,6 +358,10 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             btnBuscar.setEnabled(false);
+            txtEstudiante.setText(refAEditar.getEstudiante().toString());
+            txtReferidor.setText(refAEditar.getRefNombreReferidor());
+            txaMotivoReferimiento.setText(refAEditar.getRefMotivo());
+            txaAccionesRefeidor.setText(refAEditar.getRefAccionesReferidor() != null ? refAEditar.getRefAccionesReferidor() : "");
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -401,7 +405,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                 refAEditar.setRefAnioEscolar(ftfAnioEscolar.getText());
                 refAEditar.setRefNombreReferidor(txtReferidor.getText());
                 refAEditar.setRefMotivo(txaMotivoReferimiento.getText());
-                refAEditar.setRefAccionesReferidor(txaAccionesRefeidor.getText());
+                refAEditar.setRefAccionesReferidor((!txaAccionesRefeidor.getText().isEmpty() ? txaAccionesRefeidor.getText() : null));
 
                 jpaRefDao.update(refAEditar);
             }

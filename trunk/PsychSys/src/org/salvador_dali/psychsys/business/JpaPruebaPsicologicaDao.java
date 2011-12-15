@@ -25,11 +25,13 @@ package org.salvador_dali.psychsys.business;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.PruebaPsicologicaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
 
 /**
  *
@@ -37,6 +39,18 @@ import org.salvador_dali.psychsys.model.entities.Estudiante;
  */
 public class JpaPruebaPsicologicaDao extends JpaDao implements PruebaPsicologicaDao {
 
+    public JpaPruebaPsicologicaDao() {
+        super(PruebaPsicologica.class);
+    }
+
+    public JpaPruebaPsicologicaDao(Class entityClass) {
+        super(PruebaPsicologica.class);
+    }
+
+    public JpaPruebaPsicologicaDao(Class entityClass, Map properties) {
+        super(PruebaPsicologica.class, properties);
+    }
+    
     @Override
     public List getPruebasPsicologicasByEstudiante(Estudiante estudiante) {
         Query q = entityManager.createQuery("SELECT pps FROM PruebaPsicologica pps WHERE pps.estudiante = :ppsEstudiante");

@@ -482,9 +482,6 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         JCommandButton jcbVerPruebasPsicologicas, jcbRegistrarPruebaPsicologica, jcbEditarPruebaPsicologica, jcbEliminarPruebaPsicologica, jcbCorregirPruebaPsicologica;
 
-        jcbCorregirPruebaPsicologica = createJCommandButton("Corregir", getResizableIconFromResource("/resources/images/corregir.png"),
-                "jcbCorregirPruebaPsicologica", new RichTooltip("Corregir", "Click aqui para corregir prueba(s) psicologica"), buttonActHandler);
-
         jcbVerPruebasPsicologicas = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/pruebas_psicologicas.png"),
                 "jcbVerPruebasPsicologicas", new RichTooltip("Ver", "Click aqui para ver las pruebas psicologicas"), buttonActHandler);
 
@@ -496,16 +493,21 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         jcbEliminarPruebaPsicologica = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
                 "jcbEliminarPruebaPsicologica", new RichTooltip("Eliminar", "Click aqui para eliminar prueba(s) psicologica"), buttonActHandler);
+        
+        jcbCorregirPruebaPsicologica = createJCommandButton("Corregir", getResizableIconFromResource("/resources/images/corregir.png"),
+                "jcbCorregirPruebaPsicologica", new RichTooltip("Corregir", "Click aqui para corregir prueba(s) psicologica"), buttonActHandler);
+
 
         // creando la banda
         JRibbonBand jrbPruebasPsicologicasBand = new JRibbonBand("Pruebas Psicologicas", getResizableIconFromResource("/resources/images/pruebas_psicologicas.png"));
-
-        jrbPruebasPsicologicasBand.addCommandButton(jcbCorregirPruebaPsicologica, RibbonElementPriority.TOP);
-        jrbPruebasPsicologicasBand.startGroup();
+        
         jrbPruebasPsicologicasBand.addCommandButton(jcbVerPruebasPsicologicas, RibbonElementPriority.TOP);
         jrbPruebasPsicologicasBand.addCommandButton(jcbRegistrarPruebaPsicologica, RibbonElementPriority.MEDIUM);
         jrbPruebasPsicologicasBand.addCommandButton(jcbEditarPruebaPsicologica, RibbonElementPriority.MEDIUM);
         jrbPruebasPsicologicasBand.addCommandButton(jcbEliminarPruebaPsicologica, RibbonElementPriority.MEDIUM);
+        jrbPruebasPsicologicasBand.startGroup();
+        jrbPruebasPsicologicasBand.addCommandButton(jcbCorregirPruebaPsicologica, RibbonElementPriority.TOP);
+        
 
         jrbPruebasPsicologicasBand.setResizePolicies((List) Arrays.asList(new Object[]{
                     new CoreRibbonResizePolicies.Mirror(jrbPruebasPsicologicasBand.getControlPanel()),
@@ -629,7 +631,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private RibbonTask getToolsAndSettingsTask() {
         // Roles & Permisos Band
-        JCommandButton jcbManRolesPermisos = createJCommandButton("Administrar", getResizableIconFromResource("/resources/images/corregir.png"),
+        JCommandButton jcbManRolesPermisos = createJCommandButton("Administrar", getResizableIconFromResource("/resources/images/roles_permisos_configuracion.png"),
                 "jcbManRolesPermisos", new RichTooltip("Administrar", "Click aqui para manejar los roles y permisos del sistema"), buttonActHandler);
         JRibbonBand jrbRolesPermisos = new JRibbonBand("Roles & Permisos", getResizableIconFromResource("/resources/images/listados.png"));
         jrbRolesPermisos.addCommandButton(jcbManRolesPermisos, RibbonElementPriority.TOP);
@@ -640,7 +642,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         // Usuarios band
         JCommandButton jcbVerUsuarios, jcbRegistrarUsuario, jcbEditarUsuario, jcbEliminarUsuario;
 
-        jcbVerUsuarios = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/corregir.png"),
+        jcbVerUsuarios = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/user_configuration.png"),
                 "jcbVerUsuarios", new RichTooltip("Ver", "Click aqui para ver usuarios"), buttonActHandler);
 
         jcbRegistrarUsuario = createJCommandButton("Nuevo", getResizableIconFromResource("/resources/images/add.png"),
@@ -667,7 +669,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         JCommandButton jcbLaf;
 
-        jcbLaf = createJCommandButton("Configurar", getResizableIconFromResource("/resources/images/corregir.png"), "jcbLaf", null, buttonActHandler);
+        jcbLaf = createJCommandButton("Configurar", getResizableIconFromResource("/resources/images/configurar.png"), "jcbLaf", null, buttonActHandler);
         jcbLaf.setCommandButtonKind(CommandButtonKind.POPUP_ONLY);
         jcbLaf.setPopupCallback(new PopupPanelCallback() {
 
@@ -1292,7 +1294,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void verTutores() {
-        verEntities("Listado: Tutores", new EntitySearcher.TutorBasicEntitySearcher(), new String[]{"jcbEditarTutor", "jcbEliminarTutor"}, 0);
+        verEntities("Tutores", new EntitySearcher.TutorBasicEntitySearcher(), new String[]{"jcbEditarTutor", "jcbEliminarTutor"}, 0);
     }
 
     private void registrarEditarTutor(RegistroEdicionModo modo) {
@@ -1334,6 +1336,18 @@ public class PsychSysDesktop extends JRibbonFrame {
         } else if (entity instanceof Estudiante) {
             Estudiante est = (Estudiante) entity;
             mensaje = String.format("Id: %d\nNombre: %s\nCurso: %s", est.getEstId().intValue(), est.toString(), est.getEstGradoEscolar() + " " + est.getEstNivelEscolar());
+        } else if (entity instanceof Referimiento) {
+            Referimiento ref = (Referimiento) entity;
+            mensaje = String.format("Id: %d\nReferidor: %s\nEstudiante: %s", ref.getRefId().intValue(), ref.getRefNombreReferidor(), ref.getEstudiante().toString());
+        } else if (entity instanceof PruebaPsicologica) {
+            PruebaPsicologica pp = (PruebaPsicologica) entity;
+            mensaje = String.format("Id: %d\nNombre Prueba: %s\nEstudiante: %s", pp.getPpsId().intValue(), pp.getPpsNombrePrueba(), pp.getEstudiante().toString());
+        } else if (entity instanceof Caso) {
+            Caso caso = (Caso) entity;
+            mensaje = String.format("Id: %d\nFecha Caso: %s\nReferimiento: %s", caso.getCsoId().intValue(), caso.getCsoFecha().toString(), caso.getReferimiento().toString());
+        } else if (entity instanceof HistoriaClinica) {
+            HistoriaClinica hic = (HistoriaClinica) entity;
+            mensaje = String.format("Id: %d\nFecha Creacion: %s\nEstudiante: %s", hic.getHicId().intValue(), hic.getHicFechaCreacion().toString(), hic.getEstudiante().toString());
         }
         return mensaje;
     }
@@ -1345,6 +1359,9 @@ public class PsychSysDesktop extends JRibbonFrame {
         } else if (entity instanceof Estudiante) {
             Estudiante est = (Estudiante) entity;
             est.setEstStatus('I');
+        } else if (entity instanceof HistoriaClinica) {
+            HistoriaClinica hic = (HistoriaClinica) entity;
+            hic.setHicStatus('I');
         }
     }
 
@@ -1411,7 +1428,6 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void verEntities(String tabTitle, EntitySearcher entitySearcher, final String[] focusLostBtns, final int bandaIndex) {
         if (!getTabCaptions().contains(tabTitle)) {
-            //pnlBody.addTab("Vista: Estudiantes", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.EstudianteBasicEntitySearcher())));
             VistaGeneralEntidades vgEntities = new VistaGeneralEntidades(entitySearcher);
 
             final JTable tbl = vgEntities.getTblEntidades();
@@ -1475,7 +1491,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void verEstudiantes() {
         // crear/enviar entity searcher
-        verEntities("Listado: Estudiantes", new EntitySearcher.EstudianteBasicEntitySearcher(), new String[]{"jcbEditarEstudiante", "jcbEliminarEstudiante"}, 1);
+        verEntities("Vista: Estudiantes", new EntitySearcher.EstudianteBasicEntitySearcher(), new String[]{"jcbEditarEstudiante", "jcbEliminarEstudiante"}, 1);
     }
 
     private void registrarEditarEstudiante(RegistroEdicionModo modo) {
@@ -1515,7 +1531,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void verReferimientos() {
         // crear/enviar entity searcher
-        verEntities("Listado: Referimientos", new EntitySearcher.ReferimientoBasicEntitySearcher(), new String[]{"jcbEditarReferimiento", "jcbEliminarReferimiento"}, 2);
+        verEntities("Vista: Referimientos", new EntitySearcher.ReferimientoBasicEntitySearcher(), new String[]{"jcbEditarReferimiento", "jcbEliminarReferimiento"}, 2);
     }
 
     private void registrarEditarReferimiento(RegistroEdicionModo modo) {
@@ -1584,11 +1600,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void verPruebasPsicologicas() {
         // crear/enviar entity searcher
-        if (!getTabCaptions().contains("Vista: Pruebas Psicologicas")) {
-            pnlBody.addTab("Vista: Pruebas Psicologicas", new JScrollPane(new VistaGeneralEntidades()));
-        } else {
-            getToolkit().beep();
-        }
+        verEntities("Vista: Pruebas Psicologicas", new EntitySearcher.PruebaPsicologicaBasicEntitySearcher(), new String[] {"jcbEditarPruebaPsicologica", "jcbEliminarPruebaPsicologica"}, 3);
     }
 
     private void registrarEditarPruebasPsicologicas(RegistroEdicionModo modo) {
@@ -1628,7 +1640,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void verCasos() {
         // crear/enviar entity searcher
-        verEntities("Listado: Casos", new EntitySearcher.CasoBasicEntitySearcher(), new String[]{"jcbEditarCaso", "jcbEliminarCaso"}, 4);
+        verEntities("Vista: Casos", new EntitySearcher.CasoBasicEntitySearcher(), new String[]{"jcbEditarCaso", "jcbEliminarCaso"}, 4);
     }
 
     private void registrarEditarCaso(RegistroEdicionModo modo) {
@@ -1668,7 +1680,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void verHistoriasClinicas() {
         // crear/enviar entity searcher
-        verEntities("Listado: Historias Clinicas", new EntitySearcher.CasoBasicEntitySearcher(), new String[]{"jcbEditarHic", "jcbEliminarHic"}, 5);
+        verEntities("Vista: Historias Clinicas", new EntitySearcher.HistoriaClinicaEntitySearcher(), new String[]{"jcbEditarHic", "jcbEliminarHic"}, 5);
     }
 
     private void registrarEditarHistoriaClinica(RegistroEdicionModo modo) {
@@ -1745,27 +1757,21 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void runInformePsicologicoReport() {
         String param = JOptionPane.showInputDialog(this, "Id Caso", "Reportes: Informe Psicologico", JOptionPane.QUESTION_MESSAGE);
+        HashMap<String, Integer> par = new HashMap<String, Integer>();
         if (param != null) {
             final int cso_id = Integer.parseInt(param);
-            verReporte("/resources/reports/informe_psicologico.jasper", "Reporte: Informe Psicologico", new HashMap<String, Integer>() {
-
-                {
-                    put("cso_id", cso_id);
-                }
-            });
+            par.put("cso_id", cso_id);
+            verReporte("/resources/reports/informe_psicologico.jasper", "Reporte: Informe Psicologico", par);
         }
     }
 
     private void runHicInfantilInforme() {
         String param = JOptionPane.showInputDialog(this, "Id Estudiante", "Reportes: Historia Clinica", JOptionPane.QUESTION_MESSAGE);
+        HashMap<String, Integer> par = new HashMap<String, Integer>();
         if (param != null) {
             final int est_id = Integer.parseInt(param);
-            verReporte("/resources/reports/historia_clinica.jasper", "Reporte: Informe Psicologico", new HashMap<String, Integer>() {
-
-                {
-                    put("cso_id", est_id);
-                }
-            });
+            par.put("est_id", est_id);
+            verReporte("/resources/reports/historia_clinica.jasper", "Reporte: Historia Clinica", par);
         }
     }
 

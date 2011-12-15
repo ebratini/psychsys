@@ -29,4 +29,5 @@ FROM         dbo.Referimientos ref INNER JOIN
                       dbo.Casos cso ON ref.ref_id = cso.ref_id LEFT OUTER JOIN
                       dbo.Pruebas_Psicologicas pps ON cso.cso_id = pps.cso_id INNER JOIN
                       dbo.Estudiantes est ON est.est_id = pps.est_id;
+					 
 GO
