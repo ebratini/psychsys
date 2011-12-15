@@ -39,6 +39,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -88,9 +89,14 @@ import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 import org.pushingpixels.flamingo.api.ribbon.resize.RibbonBandResizePolicy;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
 import org.salvador_dali.psychsys.business.EntitySearcher;
+import org.salvador_dali.psychsys.business.JpaCasoDao;
+import org.salvador_dali.psychsys.business.JpaEstudianteDao;
+import org.salvador_dali.psychsys.business.JpaHistoriaClinicaDao;
+import org.salvador_dali.psychsys.business.JpaPruebaPsicologicaDao;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.business.JpaTutorDao;
 import org.salvador_dali.psychsys.business.ReportingService;
+import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
@@ -132,7 +138,11 @@ public class PsychSysDesktop extends JRibbonFrame {
     private JLabel timeDate = new JLabel("Time/Date");
     // jpas
     private JpaTutorDao jpaTutDao = new JpaTutorDao();
+    private JpaEstudianteDao jpaEstDao = new JpaEstudianteDao();
     private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
+    private JpaPruebaPsicologicaDao jpaPPSDao = new JpaPruebaPsicologicaDao();
+    private JpaCasoDao jpaCasoDao = new JpaCasoDao();
+    private JpaHistoriaClinicaDao jpaHicDao = new JpaHistoriaClinicaDao();
     // reporting services
     private ReportingService reportingService = new ReportingService("com.microsoft.sqlserver.jdbc.SQLServerDriver",
             "jdbc:sqlserver://localhost:1433;databaseName=PsychSysDB", "sa", "Mssql88**");
@@ -1282,67 +1292,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void verTutores() {
-        // crear/enviar entity searcher (TutorEntityDetailedSearcher)
-        if (!getTabCaptions().contains("Vista: Tutores")) {
-            VistaGeneralEntidades vgTutores = new VistaGeneralEntidades(new EntitySearcher.TutorBasicEntitySearcher());
-
-            final JTable tbl = vgTutores.getTblEntidades();
-            tbl.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-            tbl.addFocusListener(new FocusAdapter() {
-
-                @Override
-                public void focusLost(FocusEvent e) {
-                    if (e.getOppositeComponent() != null) {
-                        if (!Arrays.asList("jcbEditarTutor", "jcbEliminarTutor").contains(e.getOppositeComponent().getName())) {
-                            getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
-                            getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(false);
-                            tbl.clearSelection();
-                        }
-                    }
-                }
-            });
-            tbl.addMouseListener(new MouseAdapter() {
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    if (tbl.getSelectedRowCount() == 1) {
-                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(true);
-                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
-                    } else if (tbl.getSelectedRowCount() > 1) {
-                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
-                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
-                    }
-                }
-            });
-            tbl.addKeyListener(new KeyAdapter() {
-
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if (e.isControlDown() && e.getKeyChar() == 'a') {
-                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
-                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
-                    }
-                }
-
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    if (e.isControlDown() && e.getKeyChar() == 'a') {
-                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(3).setEnabled(true);
-                        getRibbon().getTask(1).getBand(0).getControlPanel().getComponent(2).setEnabled(false);
-                    }
-                }
-            });
-
-            vgTutores.getTxtBusqueda().setText("*");
-            vgTutores.getBtnBuscar().doClick();
-            vgTutores.getTxtBusqueda().setText("");
-            JScrollPane sclTutores = new JScrollPane(vgTutores);
-            pnlBody.addTab("Vista: Tutores", sclTutores);
-            pnlBody.setSelectedComponent(sclTutores);
-        } else {
-            getToolkit().beep();
-        }
+        verEntities("Listado: Tutores", new EntitySearcher.TutorBasicEntitySearcher(), new String[]{"jcbEditarTutor", "jcbEliminarTutor"}, 0);
     }
 
     private void registrarEditarTutor(RegistroEdicionModo modo) {
@@ -1376,12 +1326,34 @@ public class PsychSysDesktop extends JRibbonFrame {
         }
     }
 
-    private void eliminarTutoresSeleccionados() {
+    private String getMensajeEliminacionFromEntity(Serializable entity) {
+        String mensaje = "";
+        if (entity instanceof Tutor) {
+            Tutor tut = (Tutor) entity;
+            mensaje = String.format("Id: %d\nDNI: %s\nNombre: %s", tut.getTutId().intValue(), tut.getTutDni(), tut.toString());
+        } else if (entity instanceof Estudiante) {
+            Estudiante est = (Estudiante) entity;
+            mensaje = String.format("Id: %d\nNombre: %s\nCurso: %s", est.getEstId().intValue(), est.toString(), est.getEstGradoEscolar() + " " + est.getEstNivelEscolar());
+        }
+        return mensaje;
+    }
+
+    private void inactivaEntidad(Serializable entity) {
+        if (entity instanceof Tutor) {
+            Tutor tut = (Tutor) entity;
+            tut.setTutStatus('I');
+        } else if (entity instanceof Estudiante) {
+            Estudiante est = (Estudiante) entity;
+            est.setEstStatus('I');
+        }
+    }
+
+    private void eliminarEntitiesSeleccionados(JpaDao jpaDao, String dlgElTitle, String strEntities) {
         try {
             JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
             JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
 
-            Tutor tutRemover = new Tutor();
+            Serializable entity;
             EliminacionRegistroDialog.OPCION_ELIMINACION opEliminacion = null;
             EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION opAccion = null;
             int[] rowsDeleting = tblEntidades.getSelectedRows();
@@ -1389,9 +1361,10 @@ public class PsychSysDesktop extends JRibbonFrame {
             DefaultTableModel dtm = (DefaultTableModel) tblEntidades.getModel();
 
             if (rowsDeleting.length == 1) {
-                Tutor tut = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
-                String mensaje = String.format("Id: %d\nDNI: %s\nNombre: %s", tut.getTutId().intValue(), tut.getTutDni(), tut.toString());
-                EliminacionRegistroDialog erd = new EliminacionRegistroDialog(PsychSysDesktop.this, true, mensaje, "Eliminar Registro [Tutores]");
+                Serializable ent = jpaDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+                String mensaje = getMensajeEliminacionFromEntity(ent);
+                //String mensaje = String.format("Id: %d\nDNI: %s\nNombre: %s", ent.getTutId().intValue(), ent.getTutDni(), ent.toString());
+                EliminacionRegistroDialog erd = new EliminacionRegistroDialog(PsychSysDesktop.this, true, mensaje, dlgElTitle);
                 erd.setLocationRelativeTo(PsychSysDesktop.this);
                 erd.setVisible(true);
 
@@ -1400,7 +1373,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
             } else if (rowsDeleting.length > 1) {
                 EliminacionVariosRegistrosDialog evrd = new EliminacionVariosRegistrosDialog(PsychSysDesktop.this, true);
-                evrd.setTitle(evrd.getTitle().replace("Estudiantes", "Tutores"));
+                evrd.setTitle(evrd.getTitle().replace("Estudiantes", strEntities));
                 evrd.getLblMensajeEliminacion().setText(evrd.getLblMensajeEliminacion().getText().replace("2", String.valueOf(rowsDeleting.length)));
                 evrd.setLocationRelativeTo(PsychSysDesktop.this);
                 evrd.setVisible(true);
@@ -1413,12 +1386,13 @@ public class PsychSysDesktop extends JRibbonFrame {
                 for (int i = 0; i < rowsDeleting.length; i++) {
                     selectedRow = tblEntidades.getSelectedRow();
                     int id = Integer.parseInt(tblEntidades.getValueAt(selectedRow, 0).toString());
-                    tutRemover = jpaTutDao.findById(id);
+                    entity = jpaDao.findById(id);
                     if (opAccion != null && opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.PERMENTE)) {
-                        jpaTutDao.remove(tutRemover);
+                        jpaDao.remove(entity);
                     } else if (opAccion != null && opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.CAMBIAR_STATUS)) {
-                        tutRemover.setTutStatus('I');
-                        jpaTutDao.update(tutRemover);
+                        //entity.setTutStatus('I');
+                        inactivaEntidad(entity);
+                        jpaDao.update(entity);
                     }
                     dtm.removeRow(selectedRow);
                 }
@@ -1431,16 +1405,80 @@ public class PsychSysDesktop extends JRibbonFrame {
         }
     }
 
-    private void verEstudiantes() {
-        // crear/enviar entity searcher
-        if (!getTabCaptions().contains("Vista: Estudiantes")) {
-            pnlBody.addTab("Vista: Estudiantes", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.EstudianteBasicEntitySearcher())));
+    private void eliminarTutoresSeleccionados() {
+        eliminarEntitiesSeleccionados(jpaTutDao, "Eliminar Registro [Tutores]", "Tutores");
+    }
+
+    private void verEntities(String tabTitle, EntitySearcher entitySearcher, final String[] focusLostBtns, final int bandaIndex) {
+        if (!getTabCaptions().contains(tabTitle)) {
+            //pnlBody.addTab("Vista: Estudiantes", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.EstudianteBasicEntitySearcher())));
+            VistaGeneralEntidades vgEntities = new VistaGeneralEntidades(entitySearcher);
+
+            final JTable tbl = vgEntities.getTblEntidades();
+            tbl.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+            tbl.addFocusListener(new FocusAdapter() {
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    if (e.getOppositeComponent() != null) {
+                        if (!Arrays.asList(focusLostBtns).contains(e.getOppositeComponent().getName())) {
+                            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(false);
+                            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(false);
+                            tbl.clearSelection();
+                        }
+                    }
+                }
+            });
+            tbl.addMouseListener(new MouseAdapter() {
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (tbl.getSelectedRowCount() == 1) {
+                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(true);
+                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
+                    } else if (tbl.getSelectedRowCount() > 1) {
+                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
+                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(false);
+                    }
+                }
+            });
+            tbl.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.isControlDown() && e.getKeyChar() == 'a') {
+                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
+                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(false);
+                    }
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    if (e.isControlDown() && e.getKeyChar() == 'a') {
+                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
+                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(false);
+                    }
+                }
+            });
+
+            vgEntities.getTxtBusqueda().setText("*");
+            vgEntities.getBtnBuscar().doClick();
+            vgEntities.getTxtBusqueda().setText("");
+            JScrollPane sclEntities = new JScrollPane(vgEntities);
+            pnlBody.addTab(tabTitle, sclEntities);
+            pnlBody.setSelectedComponent(sclEntities);
         } else {
             getToolkit().beep();
         }
     }
 
-    private void registrarEditarEstudiante(RegistroEdicionModo modo, Estudiante est) {
+    private void verEstudiantes() {
+        // crear/enviar entity searcher
+        verEntities("Listado: Estudiantes", new EntitySearcher.EstudianteBasicEntitySearcher(), new String[]{"jcbEditarEstudiante", "jcbEliminarEstudiante"}, 1);
+    }
+
+    private void registrarEditarEstudiante(RegistroEdicionModo modo) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             final RegistroEdicionEstudiante ree = new RegistroEdicionEstudiante(RegistroEdicionModo.REGISTRO);
             ree.setLocationRelativeTo(this);
@@ -1452,22 +1490,35 @@ public class PsychSysDesktop extends JRibbonFrame {
                 }
             });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+            JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+            Estudiante est = jpaEstDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+
+            final RegistroEdicionEstudiante ree = new RegistroEdicionEstudiante(modo);
+            ree.setTitle("Editar Estudiante");
+            ree.setEstAEditar(est);
+            ree.setLocationRelativeTo(this);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    ree.setVisible(true);
+                }
+            });
+            tblEntidades.requestFocus();
         }
     }
 
-    private void eliminarEstudiante(Estudiante est) {
+    private void eliminarEstudiantesSeleccionados() {
+        eliminarEntitiesSeleccionados(jpaEstDao, "Eliminar Registro [Estudiantes]", "Estudiantes");
     }
 
     private void verReferimientos() {
         // crear/enviar entity searcher
-        if (!getTabCaptions().contains("Vista: Referimientos")) {
-            pnlBody.addTab("Vista: Referimientos", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.ReferimientoBasicEntitySearcher())));
-        } else {
-            getToolkit().beep();
-        }
+        verEntities("Listado: Referimientos", new EntitySearcher.ReferimientoBasicEntitySearcher(), new String[]{"jcbEditarReferimiento", "jcbEliminarReferimiento"}, 2);
     }
 
-    private void registrarEditarReferimiento(RegistroEdicionModo modo, Referimiento ref) {
+    private void registrarEditarReferimiento(RegistroEdicionModo modo) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             final RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.REGISTRO, usuario);
             rer.setLocationRelativeTo(this);
@@ -1479,15 +1530,27 @@ public class PsychSysDesktop extends JRibbonFrame {
                 }
             });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
-            RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(RegistroEdicionModo.EDICION, usuario);
+            JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+            JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+            Referimiento ref = jpaRefDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+
+            final RegistroEdicionReferimiento rer = new RegistroEdicionReferimiento(modo);
             rer.setTitle("Editar Referimiento");
-            //rer.setRefAEditar(referimiento);
+            rer.setRefAEditar(ref);
             rer.setLocationRelativeTo(this);
-            rer.setVisible(true);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    rer.setVisible(true);
+                }
+            });
+            tblEntidades.requestFocus();
         }
     }
 
-    private void eliminarReferimiento(Referimiento ref) {
+    private void eliminarReferimientosSeleccionados() {
+        eliminarEntitiesSeleccionados(jpaRefDao, "Eliminar Registro [Referimientos]", "Referimientos");
     }
 
     private void registrarEditarObservacionReferimiento(RegistroEdicionModo modo, Referimiento ref) {
@@ -1528,7 +1591,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         }
     }
 
-    private void registrarEditarPruebasPsicologicas(RegistroEdicionModo modo, PruebaPsicologica pps) {
+    private void registrarEditarPruebasPsicologicas(RegistroEdicionModo modo) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             final RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.REGISTRO);
             repp.setLocationRelativeTo(this);
@@ -1540,9 +1603,13 @@ public class PsychSysDesktop extends JRibbonFrame {
                 }
             });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
-            final RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(RegistroEdicionModo.EDICION);
+            JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+            JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+            PruebaPsicologica pps = jpaPPSDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+
+            final RegistroEdicionPruebaPsicologica repp = new RegistroEdicionPruebaPsicologica(modo);
             repp.setTitle("Editar Prueba Psicologica");
-            //repp.setPpsAEditar(pps);
+            repp.setPpsAEditar(pps);
             repp.setLocationRelativeTo(this);
             java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -1551,19 +1618,20 @@ public class PsychSysDesktop extends JRibbonFrame {
                     repp.setVisible(true);
                 }
             });
+            tblEntidades.requestFocus();
         }
+    }
+
+    private void eliminarPPSSeleccionadas() {
+        eliminarEntitiesSeleccionados(jpaPPSDao, "Eliminar Registro [Pruebas Psicologicas]", "Pruebas Psicologicas");
     }
 
     private void verCasos() {
         // crear/enviar entity searcher
-        if (!getTabCaptions().contains("Vista: Casos")) {
-            pnlBody.addTab("Vista: Casos", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.CasoBasicEntitySearcher())));
-        } else {
-            getToolkit().beep();
-        }
+        verEntities("Listado: Casos", new EntitySearcher.CasoBasicEntitySearcher(), new String[]{"jcbEditarCaso", "jcbEliminarCaso"}, 4);
     }
 
-    private void registrarEditarCaso(RegistroEdicionModo modo, Caso caso) {
+    private void registrarEditarCaso(RegistroEdicionModo modo) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             final RegistroEdicionCaso rec = new RegistroEdicionCaso(modo);
             rec.setLocationRelativeTo(this);
@@ -1575,22 +1643,35 @@ public class PsychSysDesktop extends JRibbonFrame {
                 }
             });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+            JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+            Caso caso = jpaCasoDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+
+            final RegistroEdicionCaso rec = new RegistroEdicionCaso(modo);
+            rec.setTitle("Editar Caso");
+            rec.setCasoAEditar(caso);
+            rec.setLocationRelativeTo(this);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    rec.setVisible(true);
+                }
+            });
+            tblEntidades.requestFocus();
         }
     }
 
-    private void eliminarCaso(Caso caso) {
+    private void eliminarCasosSeleccionados() {
+        eliminarEntitiesSeleccionados(jpaCasoDao, "Eliminar Registro [Casos]", "Casos");
     }
 
     private void verHistoriasClinicas() {
         // crear/enviar entity searcher
-        if (!getTabCaptions().contains("Vista: Historias Clinicas")) {
-            pnlBody.addTab("Vista: Historias Clinicas", new JScrollPane(new VistaGeneralEntidades(new EntitySearcher.HistoriaClinicaEntitySearcher())));
-        } else {
-            getToolkit().beep();
-        }
+        verEntities("Listado: Historias Clinicas", new EntitySearcher.CasoBasicEntitySearcher(), new String[]{"jcbEditarHic", "jcbEliminarHic"}, 5);
     }
 
-    private void registrarEditarHistoriaClinica(RegistroEdicionModo modo, HistoriaClinica hic) {
+    private void registrarEditarHistoriaClinica(RegistroEdicionModo modo) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             final RegistroEdicionHistoriaClinica rehic = new RegistroEdicionHistoriaClinica(modo);
             rehic.setUsuario(usuario);
@@ -1603,12 +1684,29 @@ public class PsychSysDesktop extends JRibbonFrame {
                 }
             });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+            JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+            HistoriaClinica hic = jpaHicDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+
+            final RegistroEdicionHistoriaClinica rehic = new RegistroEdicionHistoriaClinica(modo);
+            rehic.setTitle("Editar Historia Clinica");
+            rehic.setHicAEditar(hic);
+            rehic.setLocationRelativeTo(this);
+            java.awt.EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    rehic.setVisible(true);
+                }
+            });
+            tblEntidades.requestFocus();
         }
     }
 
-    private void eliminarHistoriaClinica(HistoriaClinica hic) {
+    private void eliminarHicsSeleccionadas() {
+        eliminarEntitiesSeleccionados(jpaHicDao, "Eliminar Registro [Historias Clinicas]", "Historias Clinicas");
     }
-    
+
     private void verReporte(final String reportSourcedFilePath, final String tabTitle, final Map map) {
         try {
             new Thread() {
@@ -1627,41 +1725,43 @@ public class PsychSysDesktop extends JRibbonFrame {
             exc.printStackTrace();
         }
     }
-    
+
     // Para Reportes
     private void verListadoTutores() {
         verReporte("/resources/reports/listado_tutores.jasper", "Listado: Tutores", new HashMap());
     }
-    
+
     private void verListadoEstudiantes() {
         verReporte("/resources/reports/listado_estudiantes.jasper", "Listado: Estudiantes", new HashMap());
     }
-    
+
     private void verListadoReferimientos() {
         verReporte("/resources/reports/listado_Referimientos.jasper", "Listado: Referimientos", new HashMap());
     }
-    
+
     private void verListadoCasos() {
         verReporte("/resources/reports/listado_Casos.jasper", "Listado: Casos", new HashMap());
     }
-    
+
     private void runInformePsicologicoReport() {
         String param = JOptionPane.showInputDialog(this, "Id Caso", "Reportes: Informe Psicologico", JOptionPane.QUESTION_MESSAGE);
         if (param != null) {
             final int cso_id = Integer.parseInt(param);
             verReporte("/resources/reports/informe_psicologico.jasper", "Reporte: Informe Psicologico", new HashMap<String, Integer>() {
+
                 {
                     put("cso_id", cso_id);
                 }
             });
         }
     }
-    
+
     private void runHicInfantilInforme() {
         String param = JOptionPane.showInputDialog(this, "Id Estudiante", "Reportes: Historia Clinica", JOptionPane.QUESTION_MESSAGE);
         if (param != null) {
             final int est_id = Integer.parseInt(param);
             verReporte("/resources/reports/historia_clinica.jasper", "Reporte: Informe Psicologico", new HashMap<String, Integer>() {
+
                 {
                     put("cso_id", est_id);
                 }
@@ -1707,19 +1807,19 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbVerEstudiantes")) {
                 verEstudiantes();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarEstudiante")) {
-                registrarEditarEstudiante(RegistroEdicionModo.REGISTRO, null);
+                registrarEditarEstudiante(RegistroEdicionModo.REGISTRO);
             } else if (buttonName.equalsIgnoreCase("jcbEditarEstudiante")) {
-                registrarEditarEstudiante(RegistroEdicionModo.EDICION, null);
+                registrarEditarEstudiante(RegistroEdicionModo.EDICION);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarEstudiante")) {
-                throwNoImplMsj();
+                eliminarEstudiantesSeleccionados();
             } else if (buttonName.equalsIgnoreCase("jcbVerReferimientos")) {
                 verReferimientos();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarReferimiento")) {
-                registrarEditarReferimiento(RegistroEdicionModo.REGISTRO, null);
+                registrarEditarReferimiento(RegistroEdicionModo.REGISTRO);
             } else if (buttonName.equalsIgnoreCase("jcbEditarReferimiento")) {
-                registrarEditarReferimiento(RegistroEdicionModo.EDICION, null);
+                registrarEditarReferimiento(RegistroEdicionModo.EDICION);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarReferimiento")) {
-                throwNoImplMsj();
+                eliminarReferimientosSeleccionados();
             } else if (buttonName.equalsIgnoreCase("jcbObservacionReferimiento")) {
                 registrarEditarObservacionReferimiento(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbCambiarEstadoReferimiento")) {
@@ -1731,21 +1831,27 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbVerPruebasPsicologicas")) {
                 verPruebasPsicologicas();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarPruebaPsicologica")) {
-                registrarEditarPruebasPsicologicas(RegistroEdicionModo.REGISTRO, null);
+                registrarEditarPruebasPsicologicas(RegistroEdicionModo.REGISTRO);
             } else if (buttonName.equalsIgnoreCase("jcbEditarPruebaPsicologica")) {
+                registrarEditarPruebasPsicologicas(RegistroEdicionModo.EDICION);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarPruebaPsicologica")) {
+                eliminarPPSSeleccionadas();
             } else if (buttonName.equalsIgnoreCase("jcbVerCasos")) {
                 verCasos();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarCaso")) {
-                registrarEditarCaso(RegistroEdicionModo.REGISTRO, null);
+                registrarEditarCaso(RegistroEdicionModo.REGISTRO);
             } else if (buttonName.equalsIgnoreCase("jcbEditarCaso")) {
+                registrarEditarCaso(RegistroEdicionModo.EDICION);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarCaso")) {
+                eliminarCasosSeleccionados();
             } else if (buttonName.equalsIgnoreCase("jcbVerHics")) {
                 verHistoriasClinicas();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarHic")) {
-                registrarEditarHistoriaClinica(RegistroEdicionModo.REGISTRO, null);
+                registrarEditarHistoriaClinica(RegistroEdicionModo.REGISTRO);
             } else if (buttonName.equalsIgnoreCase("jcbEditarHic")) {
+                registrarEditarHistoriaClinica(RegistroEdicionModo.EDICION);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarHic")) {
+                eliminarHicsSeleccionadas();
             } else if (buttonName.equalsIgnoreCase("jcbListadoTutores")) {
                 verListadoTutores();
             } else if (buttonName.equalsIgnoreCase("jcbListadoEstudiantes")) {
@@ -1782,7 +1888,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    registrarEditarEstudiante(RegistroEdicionModo.REGISTRO, null);
+                    registrarEditarEstudiante(RegistroEdicionModo.REGISTRO);
                 }
             });
             estudianteButton.setActionKeyTip("Estudiante");
@@ -1793,7 +1899,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    registrarEditarReferimiento(RegistroEdicionModo.REGISTRO, null);
+                    registrarEditarReferimiento(RegistroEdicionModo.REGISTRO);
                 }
             });
             refButton.setActionKeyTip("Referimiento");
@@ -1806,7 +1912,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    registrarEditarPruebasPsicologicas(RegistroEdicionModo.REGISTRO, null);
+                    registrarEditarPruebasPsicologicas(RegistroEdicionModo.REGISTRO);
                 }
             });
             ppsButton.setActionKeyTip("Prueba Psicologica");
@@ -1817,7 +1923,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    registrarEditarCaso(RegistroEdicionModo.REGISTRO, null);
+                    registrarEditarCaso(RegistroEdicionModo.REGISTRO);
                 }
             });
             casoButton.setActionKeyTip("Caso");
@@ -1828,7 +1934,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    registrarEditarHistoriaClinica(RegistroEdicionModo.REGISTRO, null);
+                    registrarEditarHistoriaClinica(RegistroEdicionModo.REGISTRO);
                 }
             });
             hicButton.setActionKeyTip("Historia Clinica");
