@@ -30,10 +30,8 @@
 package org.salvador_dali.psychsys.ui;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
@@ -62,13 +60,14 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
         lblProgressBar.setVisible(false);
     }
 
-    public EliminacionRegistroDialog(java.awt.Frame parent, boolean modal, String mensaje) {
+    public EliminacionRegistroDialog(java.awt.Frame parent, boolean modal, String mensajeCajaEntidad, String title) {
         this(parent, modal);
-        txaEntidadEliminar.setText(mensaje);
+        txaEntidadEliminar.setText(mensajeCajaEntidad);
+        setTitle(title);
     }
 
-    public EliminacionRegistroDialog(java.awt.Frame parent, boolean modal, String mensaje, ImageIcon iconoMensaje) {
-        this(parent, modal, mensaje);
+    public EliminacionRegistroDialog(java.awt.Frame parent, boolean modal, String mensaje, String title, ImageIcon iconoMensaje) {
+        this(parent, modal, mensaje, title);
         lblIconoMensaje.setIcon(iconoMensaje);
     }
 
@@ -146,10 +145,10 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
                         .addComponent(chkCambiarStatus)
                         .addGap(25, 25, 25)
                         .addComponent(lblProgressBar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(btnSi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnNo))
+                        .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(spnEntidadEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
                     .addComponent(lblMensajeEliminacion))
                 .addContainerGap())
@@ -191,10 +190,10 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
     private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiActionPerformed
         // TODO add your handling code here:
         this.opEliminacion = OPCION_ELIMINACION.SI;
-        if (!chkCambiarStatus.isSelected()) {
-            this.opAccion = OPCION_ACCION_ELIMINACION.PERMENTE;
-        } else {
+        if (chkCambiarStatus.isSelected()) {
             this.opAccion = OPCION_ACCION_ELIMINACION.CAMBIAR_STATUS;
+        } else {
+            this.opAccion = OPCION_ACCION_ELIMINACION.PERMENTE;
         }
         this.dispose();
     }//GEN-LAST:event_btnSiActionPerformed
@@ -243,22 +242,6 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
         });
     }
 
-    public JButton getBtnNo() {
-        return btnNo;
-    }
-
-    public void setBtnNo(JButton btnNo) {
-        this.btnNo = btnNo;
-    }
-
-    public JButton getBtnSi() {
-        return btnSi;
-    }
-
-    public void setBtnSi(JButton btnSi) {
-        this.btnSi = btnSi;
-    }
-
     public JCheckBox getChkCambiarStatus() {
         return chkCambiarStatus;
     }
@@ -275,28 +258,12 @@ public class EliminacionRegistroDialog extends javax.swing.JDialog {
         this.lblMensajeEliminacion = lblMensajeEliminacion;
     }
 
-    public JLabel getLblProgressBar() {
-        return lblProgressBar;
-    }
-
-    public void setLblProgressBar(JLabel lblProgressBar) {
-        this.lblProgressBar = lblProgressBar;
-    }
-
     public JLabel getLblIconoMensaje() {
         return lblIconoMensaje;
     }
 
     public void setLblIconoMensaje(JLabel lblIconoMensaje) {
         this.lblIconoMensaje = lblIconoMensaje;
-    }
-
-    public JScrollPane getSpnEntidadEliminar() {
-        return spnEntidadEliminar;
-    }
-
-    public void setSpnEntidadEliminar(JScrollPane spnEntidadEliminar) {
-        this.spnEntidadEliminar = spnEntidadEliminar;
     }
 
     public JTextArea getTxaEntidadEliminar() {

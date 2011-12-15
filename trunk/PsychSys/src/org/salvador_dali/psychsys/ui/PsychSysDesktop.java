@@ -88,6 +88,8 @@ import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.JpaReferimientoDao;
 import org.salvador_dali.psychsys.business.JpaTutorDao;
+import org.salvador_dali.psychsys.business.ReportingService;
+import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
@@ -130,6 +132,10 @@ public class PsychSysDesktop extends JRibbonFrame {
     // jpas
     private JpaTutorDao jpaTutDao = new JpaTutorDao();
     private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
+    
+    // reporting services
+    private ReportingService reportingService = new ReportingService("com.microsoft.sqlserver.jdbc.SQLServerDriver",
+            "jdbc:sqlserver://localhost:1433;databaseName=PsychSysDB", "sa", "Mssql88**");
 
     public PsychSysDesktop() {
         super("PsychSys");
@@ -1328,6 +1334,9 @@ public class PsychSysDesktop extends JRibbonFrame {
                 }
             });
             
+            vgTutores.getTxtBusqueda().setText("*");
+            vgTutores.getBtnBuscar().doClick();
+            vgTutores.getTxtBusqueda().setText("");
             JScrollPane sclTutores = new JScrollPane(vgTutores);
             pnlBody.addTab("Vista: Tutores", sclTutores);
             pnlBody.setSelectedComponent(sclTutores);
@@ -1336,7 +1345,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         }
     }
 
-    private void registrarEditarTutor(RegistroEdicionModo modo, Tutor tutor) {
+    private void registrarEditarTutor(RegistroEdicionModo modo) {
         if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
             final RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
             ret.setLocationRelativeTo(this);
@@ -1348,9 +1357,13 @@ public class PsychSysDesktop extends JRibbonFrame {
                 }
             });
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+            JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+            Tutor tut = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+            
             final RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
             ret.setTitle("Editar Tutor");
-            ret.setTutorAEditar(tutor);
+            ret.setTutorAEditar(tut);
             ret.setLocationRelativeTo(this);
             java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -1359,6 +1372,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     ret.setVisible(true);
                 }
             });
+            tblEntidades.requestFocus();
         }
     }
 
@@ -1375,9 +1389,9 @@ public class PsychSysDesktop extends JRibbonFrame {
             DefaultTableModel dtm = (DefaultTableModel) tblEntidades.getModel();
 
             if (rowsDeleting.length == 1) {
-                tutRemover = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
-                String mensaje = String.format("Id: %s\n%DNI: %s\nNombre: %s", tutRemover.getTutId(), tutRemover.getTutDni(), tutRemover.toString());
-                EliminacionRegistroDialog erd = new EliminacionRegistroDialog(PsychSysDesktop.this, true, mensaje);
+                Tutor tut = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+                String mensaje = String.format("Id: %d\nDNI: %s\nNombre: %s", tut.getTutId().intValue(), tut.getTutDni(), tut.toString());
+                EliminacionRegistroDialog erd = new EliminacionRegistroDialog(PsychSysDesktop.this, true, mensaje, "Eliminar Registro [Tutores]");
                 erd.setLocationRelativeTo(PsychSysDesktop.this);
                 erd.setVisible(true);
 
@@ -1385,22 +1399,35 @@ public class PsychSysDesktop extends JRibbonFrame {
                 opAccion = erd.getOpAccion();
 
             } else if (rowsDeleting.length > 1) {
+                EliminacionVariosRegistrosDialog evrd = new EliminacionVariosRegistrosDialog(PsychSysDesktop.this, true);
+                evrd.setTitle(evrd.getTitle().replace("Estudiantes", "Tutores"));
+                evrd.getLblMensajeEliminacion().setText(evrd.getLblMensajeEliminacion().getText().replace("2", String.valueOf(rowsDeleting.length)));
+                evrd.setLocationRelativeTo(PsychSysDesktop.this);
+                evrd.setVisible(true);
+
+                opEliminacion = evrd.getOpEliminacion();
+                opAccion = evrd.getOpAccion();
             }
 
-            if (opEliminacion.equals(EliminacionRegistroDialog.OPCION_ELIMINACION.SI)) {
+            if (opEliminacion != null && opEliminacion.equals(EliminacionRegistroDialog.OPCION_ELIMINACION.SI)) {
                 for (int i = 0; i < rowsDeleting.length; i++) {
                     selectedRow = tblEntidades.getSelectedRow();
-                    tutRemover.setTutId(Integer.parseInt(tblEntidades.getValueAt(i, 0).toString()));
-                    if (opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.PERMENTE)) {
+                    int id = Integer.parseInt(tblEntidades.getValueAt(selectedRow, 0).toString());
+                    tutRemover = jpaTutDao.findById(id);
+                    if (opAccion != null && opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.PERMENTE)) {
                         jpaTutDao.remove(tutRemover);
-                    } else if (opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.CAMBIAR_STATUS)) {
+                    } else if (opAccion != null && opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.CAMBIAR_STATUS)) {
                         tutRemover.setTutStatus('I');
                         jpaTutDao.update(tutRemover);
                     }
                     dtm.removeRow(selectedRow);
                 }
             }
+            tblEntidades.requestFocus();
         } catch (Exception exc) {
+            JOptionPane.showMessageDialog(this, "Error en proceso de eliminacion\\n" + exc.getMessage(),
+                    "Eliminar Tutor(es) Seleccionado(s)", JOptionPane.ERROR_MESSAGE);
+            exc.printStackTrace();
         }
     }
 
@@ -1612,14 +1639,11 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbVerTutores")) {
                 verTutores();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarTutor")) {
-                registrarEditarTutor(RegistroEdicionModo.REGISTRO, null);
+                registrarEditarTutor(RegistroEdicionModo.REGISTRO);
             } else if (buttonName.equalsIgnoreCase("jcbEditarTutor")) {
-                registrarEditarTutor(RegistroEdicionModo.EDICION, null);
+                registrarEditarTutor(RegistroEdicionModo.EDICION);
             } else if (buttonName.equalsIgnoreCase("jcbEliminarTutor")) {
-                JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
-                JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
                 eliminarTutoresSeleccionados();
-                tblEntidades.requestFocus();
             } else if (buttonName.equalsIgnoreCase("jcbVerEstudiantes")) {
                 verEstudiantes();
             } else if (buttonName.equalsIgnoreCase("jcbRegistrarEstudiante")) {
@@ -1662,6 +1686,11 @@ public class PsychSysDesktop extends JRibbonFrame {
                 registrarEditarHistoriaClinica(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbEditarHic")) {
             } else if (buttonName.equalsIgnoreCase("jcbEliminarHic")) {
+            } else if (buttonName.equalsIgnoreCase("jcbListadoTutores")) {
+                String reportFile = getClass().getResource("/resources/reports/listado_tutores.jasper").toString();
+                JScrollPane sclListadoTutores = new JScrollPane(reportingService.runReport(reportFile, null));
+                pnlBody.addTab("Listado: Tutores", sclListadoTutores);
+                pnlBody.setSelectedComponent(sclListadoTutores);
             }
         }
     }
@@ -1675,7 +1704,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    registrarEditarTutor(RegistroEdicionModo.REGISTRO, null);
+                    registrarEditarTutor(RegistroEdicionModo.REGISTRO);
                 }
             });
             tutorButton.setActionKeyTip("Tutor");
