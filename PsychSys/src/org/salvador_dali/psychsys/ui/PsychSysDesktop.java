@@ -1425,7 +1425,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             }
             tblEntidades.requestFocus();
         } catch (Exception exc) {
-            JOptionPane.showMessageDialog(this, "Error en proceso de eliminacion\\n" + exc.getMessage(),
+            JOptionPane.showMessageDialog(this, "Error en proceso de eliminacion\n" + exc.getMessage(),
                     "Eliminar Tutor(es) Seleccionado(s)", JOptionPane.ERROR_MESSAGE);
             exc.printStackTrace();
         }
@@ -1610,16 +1610,22 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
     
     private void verReporte(final String reportSourcedFilePath, final String tabTitle, final Map map) {
-        new Thread() {
+        try {
+            new Thread() {
 
-            @Override
-            public void run() {
-                String reportFile = getClass().getResource(reportSourcedFilePath).getPath();
-                JScrollPane sclListadoTutores = new JScrollPane(reportingService.runReport(reportFile.replaceAll("%20", " "), map));
-                pnlBody.addTab(tabTitle, sclListadoTutores);
-                pnlBody.setSelectedComponent(sclListadoTutores);
-            }
-        }.start();
+                @Override
+                public void run() {
+                    String reportFile = getClass().getResource(reportSourcedFilePath).getPath();
+                    JScrollPane sclListadoTutores = new JScrollPane(reportingService.runReport(reportFile.replaceAll("%20", " "), map));
+                    pnlBody.addTab(tabTitle, sclListadoTutores);
+                    pnlBody.setSelectedComponent(sclListadoTutores);
+                }
+            }.start();
+        } catch (Exception exc) {
+            JOptionPane.showMessageDialog(this, "Error generando reporte\n" + exc.getMessage(),
+                    "Generacion Reportes", JOptionPane.ERROR_MESSAGE);
+            exc.printStackTrace();
+        }
     }
     
     // Para Reportes
