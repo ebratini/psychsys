@@ -47,6 +47,7 @@ import org.salvador_dali.psychsys.business.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.FieldValidator;
 import org.salvador_dali.psychsys.business.FormFieldValidator;
+import org.salvador_dali.psychsys.business.JpaCasoDao;
 import org.salvador_dali.psychsys.business.JpaEstudianteDao;
 import org.salvador_dali.psychsys.business.JpaPruebaPsicologicaDao;
 import org.salvador_dali.psychsys.business.JpaUbicacionPruebaDao;
@@ -623,7 +624,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         Object objId = br.getEntitySelectedId();
         if (objId != null) {
             if (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso")) {
-                casoPPS = jpaPPSDao.findById(objId);
+                casoPPS = new JpaCasoDao().findById(objId);
                 txtCasoEstudianteReferencia.setText(casoPPS.toString());
                 estudiantePPS = casoPPS.getReferimiento().getEstudiante();
             } else {

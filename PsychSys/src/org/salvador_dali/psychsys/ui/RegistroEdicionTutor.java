@@ -479,7 +479,7 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
         // crear o editar el objeto tutor
         TutorDao tutDao = new JpaTutorDao();
 
-        if (tutDao.getTutorByDNI(txtDni.getText()) != null) {
+        if (tutDao.getTutorByDNI(txtDni.getText()) != null && modo != RegistroEdicionModo.EDICION) {
             lblDniValMarker.setVisible(true);
             statusMessageLabel.setText("Ya existe un tutor con DNI digitado.");
             statusMessageLabel.setForeground(Color.red);
