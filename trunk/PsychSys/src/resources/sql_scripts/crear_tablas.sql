@@ -162,7 +162,7 @@ CREATE TABLE Usuarios
 	usr_id INT NOT NULL IDENTITY,
 	rol_id INT NOT NULL,
 	usr_login VARCHAR(60) NOT NULL,
-	usr_password VARCHAR(60) NOT NULL,
+	usr_password TEXT NOT NULL,
 	usr_fecha_creacion DATE NOT NULL,
 	usr_verificado CHAR(1) NOT NULL,
 	usr_update_by VARCHAR(60) NOT NULL,
@@ -172,7 +172,6 @@ CREATE TABLE Usuarios
 	-- Restricciones CHECK
 	CHECK (usr_verificado IN ('S', 'N')),
 	CHECK (usr_status IN ('A', 'I')),
-	CHECK (LEN(usr_password ) >= 7),
 	
 	-- Restriccion PK
 	CONSTRAINT PK_Usuarios PRIMARY KEY(usr_id),
@@ -197,7 +196,7 @@ CREATE TABLE Referimientos
 	est_id INT NOT NULL,
 	usr_id INT NOT NULL,
 	ref_fecha DATE NOT NULL,
-	ref_anio_escolar CHAR(10) NOT NULL,	
+	ref_anio_escolar CHAR(9) NOT NULL,	
 	ref_nombre_referidor VARCHAR(60) NOT NULL,
 	ref_motivo TEXT NOT NULL,
 	ref_acciones_referidor TEXT NULL,
@@ -225,7 +224,7 @@ CREATE TABLE Casos
 	cso_id INT NOT NULL IDENTITY,
 	ref_id INT NOT NULL,
 	cso_fecha DATE NOT NULL,
-	cso_anio_escolar VARCHAR(9) NOT NULL,
+	cso_anio_escolar CHAR(9) NOT NULL,
 	cso_analisis_resultados_pruebas TEXT NULL,
 	cso_juicio_clinico TEXT NOT NULL,
 	cso_diagnostico TEXT NULL,

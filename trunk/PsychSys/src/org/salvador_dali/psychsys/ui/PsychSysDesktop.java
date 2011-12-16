@@ -287,9 +287,11 @@ public class PsychSysDesktop extends JRibbonFrame {
         JCommandButton jcbLogInOut, jcbSalir;
         jcbLogInOut = createJCommandButton("Log In", getResizableIconFromResource("/resources/images/login.png"), "jcbLogIn",
                 new RichTooltip("Login/Logout", "Click aqui para abrir/cerrar sesion de usuario"), buttonActHandler);
+        jcbLogInOut.setActionKeyTip("L");
 
         jcbSalir = createJCommandButton("Salir", getResizableIconFromResource("/resources/images/salir.png"), "jcbSalir",
                 new RichTooltip("Salir", "Click aqui para salir de la aplicacion"), buttonActHandler);
+        jcbSalir.setActionKeyTip("S");
 
         // creando la banda "Acceso"
         JRibbonBand jrbAccesoBand = new JRibbonBand("Acceso", getResizableIconFromResource("/resources/images/login.png"));
@@ -311,6 +313,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             }
         });
         jcbPegar.setActionRichTooltip(new RichTooltip("Pegar", "Click aqui para pegar"));
+        jcbPegar.setActionKeyTip("V");
 
         jcbCortar = new JCommandButton("Cortar", getResizableIconFromResource("/resources/images/scissors.png"));
         jcbCortar.addActionListener(new ActionListener() {
@@ -321,6 +324,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             }
         });
         jcbCortar.setActionRichTooltip(new RichTooltip("Cortar", "Click aqui para cortar"));
+        jcbCortar.setActionKeyTip("X");
 
         jcbCopiar = new JCommandButton("Copiar", getResizableIconFromResource("/resources/images/copy.png"));
         jcbCopiar.addActionListener(new ActionListener() {
@@ -331,6 +335,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             }
         });
         jcbCopiar.setActionRichTooltip(new RichTooltip("Copiar", "Click aqui para copiar"));
+        jcbCopiar.setActionKeyTip("C");
 
         JRibbonBand jrbClipboard = new JRibbonBand("Clipboard", new EmptyResizableIcon(16));
 
@@ -345,6 +350,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                 new IconRibbonBandResizePolicy(jrbClipboard.getControlPanel())));
 
         RibbonTask rtHomeTask = new RibbonTask("Home", jrbAccesoBand, jrbClipboard);
+        rtHomeTask.setKeyTip("H");
 
         return rtHomeTask;
     }
