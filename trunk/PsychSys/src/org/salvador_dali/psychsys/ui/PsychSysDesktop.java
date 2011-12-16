@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
@@ -222,6 +223,17 @@ public class PsychSysDesktop extends JRibbonFrame {
                         }
                     }
                 });
+                /*addFocusListener(new FocusAdapter() {
+
+                    @Override
+                    public void focusGained(FocusEvent e) {
+                        if(pnlBody.getTitleAt(pnlBody.getSelectedIndex()).toLowerCase().contains("listado")) {
+                            getRibbon().getApplicationMenu().getPrimaryEntries().get(0).get(2).setEnabled(true);
+                        } else {
+                            getRibbon().getApplicationMenu().getPrimaryEntries().get(0).get(2).setEnabled(false);
+                        }
+                    }
+                });*/
             }
         };
         add(pnlBody);
@@ -1294,7 +1306,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void verTutores() {
-        verEntities("Tutores", new EntitySearcher.TutorBasicEntitySearcher(), new String[]{"jcbEditarTutor", "jcbEliminarTutor"}, 0);
+        verEntities("Vista: Tutores", new EntitySearcher.TutorBasicEntitySearcher(), new String[]{"jcbEditarTutor", "jcbEliminarTutor"}, 0);
     }
 
     private void registrarEditarTutor(RegistroEdicionModo modo) {
@@ -1311,7 +1323,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
             JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
-            Tutor tut = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+            Tutor tut = new JpaTutorDao().findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
 
             final RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
             ret.setTitle("Editar Tutor");
@@ -1344,10 +1356,10 @@ public class PsychSysDesktop extends JRibbonFrame {
             mensaje = String.format("Id: %d\nNombre Prueba: %s\nEstudiante: %s", pp.getPpsId().intValue(), pp.getPpsNombrePrueba(), pp.getEstudiante().toString());
         } else if (entity instanceof Caso) {
             Caso caso = (Caso) entity;
-            mensaje = String.format("Id: %d\nFecha Caso: %s\nReferimiento: %s", caso.getCsoId().intValue(), caso.getCsoFecha().toString(), caso.getReferimiento().toString());
+            mensaje = String.format("Id: %d\nFecha Caso: %s\nReferimiento: %s", caso.getCsoId().intValue(), String.format("%1$td-%1$tm-%1$tY", caso.getCsoFecha()), caso.getReferimiento().toString());
         } else if (entity instanceof HistoriaClinica) {
             HistoriaClinica hic = (HistoriaClinica) entity;
-            mensaje = String.format("Id: %d\nFecha Creacion: %s\nEstudiante: %s", hic.getHicId().intValue(), hic.getHicFechaCreacion().toString(), hic.getEstudiante().toString());
+            mensaje = String.format("Id: %d\nFecha Creacion: %s\nEstudiante: %s", hic.getHicId().intValue(), String.format("%1$td-%1$tm-%1$tY", hic.getHicFechaCreacion()), hic.getEstudiante().toString());
         }
         return mensaje;
     }
@@ -1453,9 +1465,15 @@ public class PsychSysDesktop extends JRibbonFrame {
                     if (tbl.getSelectedRowCount() == 1) {
                         getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(true);
                         getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
+                        if (bandaIndex == 2) {
+                            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(6).setEnabled(true);
+                        }
                     } else if (tbl.getSelectedRowCount() > 1) {
                         getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
                         getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(false);
+                        if (bandaIndex == 2) {
+                            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(6).setEnabled(false);
+                        }
                     }
                 }
             });
@@ -1531,7 +1549,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void verReferimientos() {
         // crear/enviar entity searcher
-        verEntities("Vista: Referimientos", new EntitySearcher.ReferimientoBasicEntitySearcher(), new String[]{"jcbEditarReferimiento", "jcbEliminarReferimiento"}, 2);
+        verEntities("Vista: Referimientos", new EntitySearcher.ReferimientoBasicEntitySearcher(), new String[]{"jcbEditarReferimiento", "jcbEliminarReferimiento", "jcbCambiarEstadoReferimiento"}, 2);
     }
 
     private void registrarEditarReferimiento(RegistroEdicionModo modo) {
@@ -1592,7 +1610,11 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void eliminarObservacionReferimiento() {
     }
 
-    private void cambiarEstadoReferimiento(Referimiento ref) {
+    private void cambiarEstadoReferimientoSeleccionado() {
+        JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+        JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+        
+        Referimiento ref = jpaRefDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
         CambiarEstadoRefermiento cer = new CambiarEstadoRefermiento(ref, jpaRefDao, this, true);
         cer.setLocationRelativeTo(this);
         cer.setVisible(true);
@@ -1729,6 +1751,14 @@ public class PsychSysDesktop extends JRibbonFrame {
                     JScrollPane sclListadoTutores = new JScrollPane(reportingService.runReport(reportFile.replaceAll("%20", " "), map));
                     pnlBody.addTab(tabTitle, sclListadoTutores);
                     pnlBody.setSelectedComponent(sclListadoTutores);
+                    
+                    for (List<RibbonApplicationMenuEntryPrimary> lamp : getRibbon().getApplicationMenu().getPrimaryEntries()) {
+                        for (RibbonApplicationMenuEntryPrimary amp : lamp) {
+                            if (Arrays.asList("guardar", "guardar como", "imprimir", "enviar").contains(amp.getText().toLowerCase())) {
+                                amp.setEnabled(true);
+                            }
+                        }
+                    }
                 }
             }.start();
         } catch (Exception exc) {
@@ -1829,7 +1859,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             } else if (buttonName.equalsIgnoreCase("jcbObservacionReferimiento")) {
                 registrarEditarObservacionReferimiento(RegistroEdicionModo.REGISTRO, null);
             } else if (buttonName.equalsIgnoreCase("jcbCambiarEstadoReferimiento")) {
-                cambiarEstadoReferimiento(null);
+                cambiarEstadoReferimientoSeleccionado();
             } else if (buttonName.equalsIgnoreCase("jcbCorregirPruebaPsicologica")) {
                 CorreccionPruebaPsicologica cpps = new CorreccionPruebaPsicologica();
                 cpps.setLocationRelativeTo(PsychSysDesktop.this);

@@ -12,14 +12,13 @@
      vCasos."cso_estado_caso" AS vCasos_cso_estado_caso,
      vCasos."apellidos" AS vCasos_apellidos,
      vCasos."nombres" AS vCasos_nombres
-     vCasos."nombres" +  " " +  vCasos."apellidos" AS Nombre
 FROM
      "vCasos" vCasos]]>
 	</queryString>
 	<field name="vCasos_cso_id" class="java.lang.Integer"/>
 	<field name="vCasos_ref_id" class="java.lang.Integer"/>
-	<field name="vCasos_cso_fecha" class="java.sql.Date"/>
-	<field name="vCasos_cso_anio_escolar" class="java.sql.Date"/>
+	<field name="vCasos_cso_fecha" class="java.lang.String"/>
+	<field name="vCasos_cso_anio_escolar" class="java.lang.String"/>
 	<field name="vCasos_cso_estado_caso" class="java.lang.String"/>
 	<field name="vCasos_apellidos" class="java.lang.String"/>
 	<field name="vCasos_nombres" class="java.lang.String"/>
