@@ -23,7 +23,6 @@
  */
 package org.salvador_dali.psychsys.business;
 
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -76,7 +75,6 @@ public class ReportingService {
     }
 
     public JPanel runReport(String reportFile, Map parameters) {
-        //InputStream is = this.getClass().getClassLoader().getResourceAsStream(reportFile);
         try {
             JasperPrint jp = JasperFillManager.fillReport(reportFile, parameters, conn);
             JRViewer jvReport = new JRViewer(jp);
