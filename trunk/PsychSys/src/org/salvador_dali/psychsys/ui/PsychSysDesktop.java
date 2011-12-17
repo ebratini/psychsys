@@ -833,7 +833,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         });
         taskbarNuevoButton.setActionRichTooltip(new RichTooltip("Nuevo", "Click aqui para registrar nueva entidad"));
         taskbarNuevoButton.setPopupRichTooltip(new RichTooltip("Nuevo", "Click aqui para mas opciones"));
-        taskbarNuevoButton.setActionKeyTip("Nuevo Taskbar");
+        taskbarNuevoButton.setActionKeyTip("NEF");
 
         this.getRibbon().addTaskbarComponent(taskbarPasteButton);
         this.getRibbon().addTaskbarComponent(taskbarCortarButton);
@@ -1070,6 +1070,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     }
                 });
         amFooterProps.setEnabled(false);
+        amFooterProps.setActionKeyTip("O");
 
         RibbonApplicationMenuEntryFooter amFooterExit = new RibbonApplicationMenuEntryFooter(new system_log_out(), "Salir",
                 new ActionListener() {
@@ -1079,6 +1080,8 @@ public class PsychSysDesktop extends JRibbonFrame {
                         doExit();
                     }
                 });
+        amFooterExit.setActionKeyTip("E");
+        
         applicationMenu.addFooterEntry(amFooterProps);
         applicationMenu.addFooterEntry(amFooterExit);
 
