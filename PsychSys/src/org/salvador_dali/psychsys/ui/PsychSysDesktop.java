@@ -1462,6 +1462,9 @@ public class PsychSysDesktop extends JRibbonFrame {
                         if (!Arrays.asList(focusLostBtns).contains(e.getOppositeComponent().getName())) {
                             getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(false);
                             getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(false);
+                            if (bandaIndex == 2) {
+                                getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(6).setEnabled(false);
+                            }
                             tbl.clearSelection();
                         }
                     }
@@ -1475,6 +1478,18 @@ public class PsychSysDesktop extends JRibbonFrame {
                         getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(true);
                         getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
                         if (bandaIndex == 2) {
+                            Referimiento ref = new JpaReferimientoDao().findById(Integer.parseInt(tbl.getValueAt(tbl.getSelectedRow(), 0).toString()));
+                            //JPopupMenu popMnu = ((JCommandButton) getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(5)).
+                            //Component[] mnuItems = ((JCommandButton) getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(5)).getComponents();
+                            /*if (ref.getRefObservacionesOrientador()!= null) {
+                                for (Component comp : popMnu.getComponents()) {
+                                    comp.setEnabled(true);
+                                }
+                            } else {
+                                /*for (Component comp : mnuItems) {
+                                    comp.setEnabled(true);
+                                }
+                            }*/
                             getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(6).setEnabled(true);
                         }
                     } else if (tbl.getSelectedRowCount() > 1) {
@@ -1558,7 +1573,8 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     private void verReferimientos() {
         // crear/enviar entity searcher
-        verEntities("Vista: Referimientos", new EntitySearcher.ReferimientoBasicEntitySearcher(), new String[]{"jcbEditarReferimiento", "jcbEliminarReferimiento", "jcbCambiarEstadoReferimiento"}, 2);
+        verEntities("Vista: Referimientos", new EntitySearcher.ReferimientoBasicEntitySearcher(), new String[]{"jcbEditarReferimiento", "jcbEliminarReferimiento",
+            "jcbObservacionReferimiento", "jcbCambiarEstadoReferimiento"}, 2);
     }
 
     private void registrarEditarReferimiento(RegistroEdicionModo modo) {
