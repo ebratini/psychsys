@@ -33,6 +33,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.HashMap;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.text.JTextComponent;
 import org.salvador_dali.psychsys.business.EmailFieldValidator;
 import org.salvador_dali.psychsys.business.EmptyFieldValidator;
@@ -475,11 +476,12 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
 
         // si todo esta bien
         statusMessageLabel.setVisible(false);
+        String accion = null;
 
         // crear o editar el objeto tutor
         TutorDao tutDao = new JpaTutorDao();
 
-        if (tutDao.getTutorByDNI(txtDni.getText()) != null && modo != RegistroEdicionModo.EDICION) {
+        if (tutDao.getTutorByDNI(txtDni.getText()) != null && (modo != null && modo != RegistroEdicionModo.EDICION)) {
             lblDniValMarker.setVisible(true);
             statusMessageLabel.setText("Ya existe un tutor con DNI digitado.");
             statusMessageLabel.setForeground(Color.red);
@@ -487,28 +489,48 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
             return;
         }
 
-        Tutor tutor = new Tutor(null, txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
-                txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
-                cmbEstadoCivil.getSelectedItem().toString(), 'A');
-
-        tutor.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
-        tutor.setTutTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
-        tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
-
         // crear el objeto tutorDao e invocar el metodo persist del mismo     
-        if (this.modo != null && this.modo.equals(RegistroEdicionModo.REGISTRO)) {
-            tutDao.persist(tutor);
-        } else {
-            if (tutorAEditar != null) {
-                tutor.setTutId(tutorAEditar.getTutId());
-                tutDao.update(tutor);
-                trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+        try {
+            if (this.modo != null && this.modo.equals(RegistroEdicionModo.REGISTRO)) {
+                accion = "crear";
 
-            } else {
-                statusMessageLabel.setText("Error al editar tutor, favor cierre y vuelva a intentarlo.");
-                statusMessageLabel.setForeground(Color.red);
-                return;
+                Tutor tutor = new Tutor(null, txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+                        txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
+                        cmbEstadoCivil.getSelectedItem().toString(), 'A');
+
+                tutor.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
+                tutor.setTutTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
+                tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
+                tutDao.persist(tutor);
+            } else if (this.modo != null && this.modo.equals(RegistroEdicionModo.EDICION)) {
+                accion = "editar";
+
+                if (tutorAEditar != null) {
+                    tutorAEditar.setTutDni(txtDni.getText());
+                    tutorAEditar.setTutTipoDni(cmbTipoDni.getSelectedItem().toString());
+                    tutorAEditar.setTutPrimerApellido(txtPrimerApellido.getText());
+                    tutorAEditar.setTutSegundoApellido(txtSegundoApellido.getText());
+                    tutorAEditar.setTutPrimerNombre(txtPrimerNombre.getText());
+                    tutorAEditar.setTutDireccion(txaDireccion.getText());
+                    tutorAEditar.setTutNacionalidad(txtNacionalidad.getText());
+                    tutorAEditar.setTutGenero(cmbGenero.getSelectedItem().toString().charAt(0));
+                    tutorAEditar.setTutEstadoCivil(cmbEstadoCivil.getSelectedItem().toString());
+                    tutorAEditar.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
+                    tutorAEditar.setTutTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
+                    tutorAEditar.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
+
+                    tutDao.update(tutorAEditar);
+                    trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+                } else {
+                    statusMessageLabel.setText("Error al editar tutor, favor cierre y vuelva a intentarlo.");
+                    statusMessageLabel.setForeground(Color.red);
+                    return;
+                }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de tutor<br /><br />%s</p></html>",
+                    e.getMessage()), "Tutor", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         statusMessageLabel.setText(trabajoCompletoMensaje);
@@ -525,7 +547,7 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
         statusMessageLabel.setVisible(false);
         statusAnimationLabel.setVisible(false);
         LimpiadorComponentes.limpiarValidationMarkers(this);
-        
+
         if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             txtDni.setText(tutorAEditar.getTutDni());
             cmbTipoDni.setSelectedItem(tutorAEditar.getTutTipoDni());

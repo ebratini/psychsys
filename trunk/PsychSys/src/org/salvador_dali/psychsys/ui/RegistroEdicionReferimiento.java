@@ -382,10 +382,12 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         // si todo esta bien
         statusMessageLabel.setVisible(false);
         String accion = null;
+        
         try {
             if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
                 // creando el objeto referimiento
                 accion = "crear";
+                
                 Referimiento referimiento = new Referimiento(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txtReferidor.getText(),
                         txaMotivoReferimiento.getText(), 'A');
                 referimiento.setEstudiante(estudianteReferemiento);
@@ -400,11 +402,11 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
                 accion = "editar";
                 trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
                 
-                refAEditar.setEstudiante(estudianteReferemiento);
                 refAEditar.setRefFecha(DateUtils.parseDate(ftfFecha.getText()));
                 refAEditar.setRefAnioEscolar(ftfAnioEscolar.getText());
                 refAEditar.setRefNombreReferidor(txtReferidor.getText());
                 refAEditar.setRefMotivo(txaMotivoReferimiento.getText());
+                refAEditar.setRefAccionesReferidor((!txaAccionesRefeidor.getText().isEmpty() ? txaAccionesRefeidor.getText() : null));
                 refAEditar.setRefAccionesReferidor((!txaAccionesRefeidor.getText().isEmpty() ? txaAccionesRefeidor.getText() : null));
 
                 jpaRefDao.update(refAEditar);
@@ -412,6 +414,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, String.format("<html><p>Error al " + accion + " registro de referimiento<br /><br />%s</p></html>",
                     e.getMessage()), "Referimiento", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
             return;
         }
 
