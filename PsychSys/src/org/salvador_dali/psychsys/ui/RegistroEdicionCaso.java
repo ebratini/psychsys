@@ -127,8 +127,8 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         txaDiagnostico = new javax.swing.JTextArea();
         pnlDefinitivo = new javax.swing.JPanel();
-        rbnSi = new javax.swing.JRadioButton();
-        rbnNo = new javax.swing.JRadioButton();
+        rbnDiagDefSi = new javax.swing.JRadioButton();
+        rbnDiagDefNo = new javax.swing.JRadioButton();
         pnlTratamiento = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         txaTratamiento = new javax.swing.JTextArea();
@@ -266,14 +266,14 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlAnalisisResPruebas.setLayout(pnlAnalisisResPruebasLayout);
         pnlAnalisisResPruebasLayout.setHorizontalGroup(
             pnlAnalisisResPruebasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlAnalisisResPruebasLayout.setVerticalGroup(
             pnlAnalisisResPruebasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        pnlAnalisisResPruebas.setBounds(0, 0, 394, 247);
+        pnlAnalisisResPruebas.setBounds(0, 0, 390, 250);
         lpnDetallesCaso.add(pnlAnalisisResPruebas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         pnlJuicioClinico.setBorder(javax.swing.BorderFactory.createTitledBorder("Juicio Clinico"));
@@ -287,11 +287,11 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlJuicioClinico.setLayout(pnlJuicioClinicoLayout);
         pnlJuicioClinicoLayout.setHorizontalGroup(
             pnlJuicioClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlJuicioClinicoLayout.setVerticalGroup(
             pnlJuicioClinicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pnlJuicioClinico.setBounds(0, 0, 390, 250);
@@ -306,12 +306,12 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
 
         pnlDefinitivo.setBorder(javax.swing.BorderFactory.createTitledBorder("Definitivo"));
 
-        bgpDefinitivo.add(rbnSi);
-        rbnSi.setText("Si");
+        bgpDefinitivo.add(rbnDiagDefSi);
+        rbnDiagDefSi.setText("Si");
 
-        bgpDefinitivo.add(rbnNo);
-        rbnNo.setSelected(true);
-        rbnNo.setText("No");
+        bgpDefinitivo.add(rbnDiagDefNo);
+        rbnDiagDefNo.setSelected(true);
+        rbnDiagDefNo.setText("No");
 
         javax.swing.GroupLayout pnlDefinitivoLayout = new javax.swing.GroupLayout(pnlDefinitivo);
         pnlDefinitivo.setLayout(pnlDefinitivoLayout);
@@ -319,29 +319,29 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
             pnlDefinitivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDefinitivoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rbnSi)
+                .addComponent(rbnDiagDefSi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbnNo)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addComponent(rbnDiagDefNo)
+                .addContainerGap(286, Short.MAX_VALUE))
         );
         pnlDefinitivoLayout.setVerticalGroup(
             pnlDefinitivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDefinitivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(rbnSi)
-                .addComponent(rbnNo))
+                .addComponent(rbnDiagDefSi)
+                .addComponent(rbnDiagDefNo))
         );
 
         javax.swing.GroupLayout pnlDiagnosticoLayout = new javax.swing.GroupLayout(pnlDiagnostico);
         pnlDiagnostico.setLayout(pnlDiagnosticoLayout);
         pnlDiagnosticoLayout.setHorizontalGroup(
             pnlDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlDefinitivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+            .addComponent(pnlDefinitivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlDiagnosticoLayout.setVerticalGroup(
             pnlDiagnosticoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDiagnosticoLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlDefinitivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -361,11 +361,11 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlTratamiento.setLayout(pnlTratamientoLayout);
         pnlTratamientoLayout.setHorizontalGroup(
             pnlTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlTratamientoLayout.setVerticalGroup(
             pnlTratamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pnlTratamiento.setBounds(0, 0, 390, 250);
@@ -382,11 +382,11 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlResumenEvolucion.setLayout(pnlResumenEvolucionLayout);
         pnlResumenEvolucionLayout.setHorizontalGroup(
             pnlResumenEvolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlResumenEvolucionLayout.setVerticalGroup(
             pnlResumenEvolucionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pnlResumenEvolucion.setBounds(0, 0, 390, 250);
@@ -403,11 +403,11 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         pnlRecomendaciones.setLayout(pnlRecomendacionesLayout);
         pnlRecomendacionesLayout.setHorizontalGroup(
             pnlRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlRecomendacionesLayout.setVerticalGroup(
             pnlRecomendacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pnlRecomendaciones.setBounds(0, 0, 390, 250);
@@ -505,7 +505,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -577,7 +577,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
                 // creando el objeto referimiento
                 accion = "crear";
                 Caso caso = new Caso(null, DateUtils.parseDate(ftfFecha.getText()), ftfAnioEscolar.getText(), txaJuicioClinico.getText(),
-                        (rbnSi.isSelected() ? 'S' : 'N'), cmbEstadoCaso.getSelectedItem().toString().charAt(0));
+                        (rbnDiagDefSi.isSelected() ? 'S' : 'N'), cmbEstadoCaso.getSelectedItem().toString().charAt(0));
                 caso.setReferimiento(referimientoCaso);
                 caso.setCsoAnalisisResultadosPruebas((!txaAnalisisResPruebas.getText().isEmpty() ? txaAnalisisResPruebas.getText() : null));
                 caso.setCsoDiagnostico((!txaDiagnostico.getText().isEmpty() ? txaDiagnostico.getText() : null));
@@ -596,7 +596,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
                 casoAEditar.setCsoFecha(DateUtils.parseDate(ftfFecha.getText()));
                 casoAEditar.setCsoAnioEscolar(ftfAnioEscolar.getText());
                 casoAEditar.setCsoJuicioClinico(txaJuicioClinico.getText());
-                casoAEditar.setCsoDiagnosticoDefinitivo((rbnSi.isSelected() ? 'S' : 'N'));
+                casoAEditar.setCsoDiagnosticoDefinitivo((rbnDiagDefSi.isSelected() ? 'S' : 'N'));
                 casoAEditar.setCsoEstadoCaso(cmbEstadoCaso.getSelectedItem().toString().charAt(0));
                 
                 casoAEditar.setReferimiento(referimientoCaso);
@@ -655,6 +655,19 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         
         if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             btnBuscar.setEnabled(false);
+            txtReferimiento.setText(casoAEditar.getReferimiento().toString());
+            txaAnalisisResPruebas.setText(casoAEditar.getCsoAnalisisResultadosPruebas() != null ? casoAEditar.getCsoAnalisisResultadosPruebas() : "");
+            txaJuicioClinico.setText(casoAEditar.getCsoJuicioClinico());
+            txaDiagnostico.setText(casoAEditar.getCsoDiagnostico() != null ? casoAEditar.getCsoDiagnostico() : "");
+            if (casoAEditar.getCsoDiagnosticoDefinitivo() == 'S') {
+                rbnDiagDefSi.setSelected(true);
+            } else {
+                rbnDiagDefNo.setSelected(true);
+            }
+            txaTratamiento.setText(casoAEditar.getCsoTratamiento() != null ? casoAEditar.getCsoTratamiento() : "");
+            txaResumenEvolucion.setText(casoAEditar.getCsoResumenEvolucion() != null ? casoAEditar.getCsoResumenEvolucion() : "");
+            txaRecomendaciones.setText(casoAEditar.getCsoRecomendaciones() != null ? casoAEditar.getCsoRecomendaciones() : "");
+            cmbEstadoCaso.setSelectedIndex(casoAEditar.getCsoEstadoCaso() == 'A' ? 0 : (casoAEditar.getCsoEstadoCaso() == 'C' ? 1 : 2));
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -752,8 +765,8 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
     private javax.swing.JPanel pnlRecomendaciones;
     private javax.swing.JPanel pnlResumenEvolucion;
     private javax.swing.JPanel pnlTratamiento;
-    private javax.swing.JRadioButton rbnNo;
-    private javax.swing.JRadioButton rbnSi;
+    private javax.swing.JRadioButton rbnDiagDefNo;
+    private javax.swing.JRadioButton rbnDiagDefSi;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;

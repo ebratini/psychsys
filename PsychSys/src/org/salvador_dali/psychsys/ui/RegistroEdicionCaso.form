@@ -45,7 +45,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -409,12 +409,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" pref="378" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" min="-2" pref="378" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane2" alignment="0" pref="223" max="32767" attributes="0"/>
+                              <Component id="jScrollPane2" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -454,12 +454,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane3" alignment="0" pref="374" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" alignment="0" min="-2" pref="378" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane3" alignment="0" pref="226" max="32767" attributes="0"/>
+                              <Component id="jScrollPane3" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -499,14 +499,14 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="pnlDefinitivo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jScrollPane4" alignment="0" pref="374" max="32767" attributes="0"/>
+                              <Component id="pnlDefinitivo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane4" alignment="0" min="-2" pref="378" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jScrollPane4" pref="162" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane4" min="-2" pref="156" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="pnlDefinitivo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -545,24 +545,24 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="rbnSi" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rbnDiagDefSi" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="rbnNo" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="278" max="32767" attributes="0"/>
+                                      <Component id="rbnDiagDefNo" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="286" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="rbnSi" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rbnNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rbnDiagDefSi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rbnDiagDefNo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JRadioButton" name="rbnSi">
+                            <Component class="javax.swing.JRadioButton" name="rbnDiagDefSi">
                               <Properties>
                                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                                   <ComponentRef name="bgpDefinitivo"/>
@@ -570,7 +570,7 @@
                                 <Property name="text" type="java.lang.String" value="Si"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JRadioButton" name="rbnNo">
+                            <Component class="javax.swing.JRadioButton" name="rbnDiagDefNo">
                               <Properties>
                                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                                   <ComponentRef name="bgpDefinitivo"/>
@@ -600,12 +600,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane5" alignment="0" pref="374" max="32767" attributes="0"/>
+                              <Component id="jScrollPane5" alignment="0" min="-2" pref="378" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane5" alignment="0" pref="226" max="32767" attributes="0"/>
+                              <Component id="jScrollPane5" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -645,12 +645,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane6" alignment="0" pref="374" max="32767" attributes="0"/>
+                              <Component id="jScrollPane6" alignment="0" min="-2" pref="378" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane6" alignment="0" pref="226" max="32767" attributes="0"/>
+                              <Component id="jScrollPane6" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -690,12 +690,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane7" alignment="0" pref="374" max="32767" attributes="0"/>
+                              <Component id="jScrollPane7" alignment="0" min="-2" pref="378" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane7" alignment="0" pref="226" max="32767" attributes="0"/>
+                              <Component id="jScrollPane7" alignment="0" min="-2" pref="223" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
