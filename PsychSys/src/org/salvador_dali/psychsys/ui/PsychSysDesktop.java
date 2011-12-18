@@ -44,7 +44,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
@@ -409,15 +408,19 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         jcbVerReferimientos = createJCommandButton("Ver", getResizableIconFromResource("/resources/images/referimientos.png"),
                 "jcbVerReferimientos", new RichTooltip("Ver", "Click aqui para ver los referimientos"), buttonActHandler);
+        jcbVerReferimientos.setActionKeyTip("VR");
 
         jcbRegistrarReferimiento = createJCommandButton("Nuevo", getResizableIconFromResource("/resources/images/add.png"),
                 "jcbRegistrarReferimiento", new RichTooltip("Nuevo", "Click aqui para registrar referimiento"), buttonActHandler);
+        jcbRegistrarReferimiento.setActionKeyTip("NR");
 
         jcbEditarReferimiento = createJCommandButton("Editar", getResizableIconFromResource("/resources/images/editar.png"),
                 "jcbEditarReferimiento", new RichTooltip("Editar", "Click aqui para editar referimiento"), buttonActHandler);
+        jcbEditarReferimiento.setActionKeyTip("ER");
 
         jcbEliminarReferimiento = createJCommandButton("Eliminar", getResizableIconFromResource("/resources/images/delete.png"),
                 "jcbEliminarReferimiento", new RichTooltip("Eliminar", "Click aqui para eliminar referimiento(s)"), buttonActHandler);
+        jcbEliminarReferimiento.setActionKeyTip("XR");
 
         jcbObservacionReferimiento = createJCommandButton("Observacion", getResizableIconFromResource("/resources/images/referimientos.png"),
                 "jcbObservacionReferimiento", new RichTooltip("Observacion Referimiento", "Click aqui para crear observacion de referimiento"), buttonActHandler);
@@ -474,6 +477,8 @@ public class PsychSysDesktop extends JRibbonFrame {
             }
         });
         jcbObservacionReferimiento.setPopupRichTooltip(new RichTooltip("Observacion Referimiento", "Click aqui para mas opciones"));
+        jcbObservacionReferimiento.setActionKeyTip("OR");
+        //jcbObservacionReferimiento.setPopupKeyTip("F");
 
         jcbCambiarEstadoReferimiento = createJCommandButton("Cambiar Estado", getResizableIconFromResource("/resources/images/delete.png"),
                 "jcbCambiarEstadoReferimiento", new RichTooltip("Cambiar Estado", "Click aqui para cambiar el estado del referimiento"), buttonActHandler);
@@ -593,6 +598,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         // creando el la task
         RibbonTask rtMantenimientoTask = new RibbonTask("Mantenimiento", jrbTutoresBand, jrbEstudiantesBand,
                 jrbReferimientosBand, jrbPruebasPsicologicasBand, jrbCasosBand, jrbHistoriaClinicaBand);
+        rtMantenimientoTask.setKeyTip("M");
 
         return rtMantenimientoTask;
     }
@@ -833,7 +839,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         });
         taskbarNuevoButton.setActionRichTooltip(new RichTooltip("Nuevo", "Click aqui para registrar nueva entidad"));
         taskbarNuevoButton.setPopupRichTooltip(new RichTooltip("Nuevo", "Click aqui para mas opciones"));
-        taskbarNuevoButton.setActionKeyTip("NEF");
+        taskbarNuevoButton.setPopupKeyTip("NE");
 
         this.getRibbon().addTaskbarComponent(taskbarPasteButton);
         this.getRibbon().addTaskbarComponent(taskbarCortarButton);
@@ -1332,7 +1338,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
             JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
             JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
-            Tutor tut = new JpaTutorDao().findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+            Tutor tut = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
 
             final RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
             ret.setTitle("Editar Tutor");
@@ -1446,6 +1452,34 @@ public class PsychSysDesktop extends JRibbonFrame {
     private void eliminarTutoresSeleccionados() {
         eliminarEntitiesSeleccionados(jpaTutDao, "Eliminar Registro [Tutores]", "Tutores");
     }
+    
+    private void enableDisableBandButtons(JTable table, int bandaIndex) {
+        if (table.getSelectedRowCount() == 1) {
+            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(true);
+            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
+            if (bandaIndex == 2) {
+                Referimiento ref = new JpaReferimientoDao().findById(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
+                //JPopupMenu popMnu = ((JCommandButton) getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(5)).
+                //Component[] mnuItems = ((JCommandButton) getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(5)).getComponents();
+                            /*if (ref.getRefObservacionesOrientador()!= null) {
+                for (Component comp : popMnu.getComponents()) {
+                comp.setEnabled(true);
+                }
+                } else {
+                /*for (Component comp : mnuItems) {
+                comp.setEnabled(true);
+                }
+                }*/
+                getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(6).setEnabled(true);
+            }
+        } else if (table.getSelectedRowCount() > 1) {
+            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
+            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(false);
+            if (bandaIndex == 2) {
+                getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(6).setEnabled(false);
+            }
+        }
+    }
 
     private void verEntities(String tabTitle, EntitySearcher entitySearcher, final String[] focusLostBtns, final int bandaIndex) {
         if (!getTabCaptions().contains(tabTitle)) {
@@ -1474,31 +1508,12 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    if (tbl.getSelectedRowCount() == 1) {
-                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(true);
-                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
-                        if (bandaIndex == 2) {
-                            Referimiento ref = new JpaReferimientoDao().findById(Integer.parseInt(tbl.getValueAt(tbl.getSelectedRow(), 0).toString()));
-                            //JPopupMenu popMnu = ((JCommandButton) getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(5)).
-                            //Component[] mnuItems = ((JCommandButton) getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(5)).getComponents();
-                            /*if (ref.getRefObservacionesOrientador()!= null) {
-                                for (Component comp : popMnu.getComponents()) {
-                                    comp.setEnabled(true);
-                                }
-                            } else {
-                                /*for (Component comp : mnuItems) {
-                                    comp.setEnabled(true);
-                                }
-                            }*/
-                            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(6).setEnabled(true);
-                        }
-                    } else if (tbl.getSelectedRowCount() > 1) {
-                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
-                        getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(false);
-                        if (bandaIndex == 2) {
-                            getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(6).setEnabled(false);
-                        }
-                    }
+                    enableDisableBandButtons(tbl, bandaIndex);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    enableDisableBandButtons(tbl, bandaIndex);
                 }
             });
             tbl.addKeyListener(new KeyAdapter() {
@@ -1941,7 +1956,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     registrarEditarTutor(RegistroEdicionModo.REGISTRO);
                 }
             });
-            tutorButton.setActionKeyTip("Tutor");
+            tutorButton.setActionKeyTip("T");
             this.addMenuButton(tutorButton);
 
             JCommandMenuButton estudianteButton = new JCommandMenuButton("Estudiante", new EmptyResizableIcon(16));
@@ -1952,7 +1967,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     registrarEditarEstudiante(RegistroEdicionModo.REGISTRO);
                 }
             });
-            estudianteButton.setActionKeyTip("Estudiante");
+            estudianteButton.setActionKeyTip("E");
             this.addMenuButton(estudianteButton);
 
             JCommandMenuButton refButton = new JCommandMenuButton("Referimiento", new EmptyResizableIcon(16));
@@ -1963,7 +1978,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     registrarEditarReferimiento(RegistroEdicionModo.REGISTRO);
                 }
             });
-            refButton.setActionKeyTip("Referimiento");
+            refButton.setActionKeyTip("R");
             this.addMenuButton(refButton);
 
             this.addMenuSeparator();
@@ -1976,7 +1991,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     registrarEditarPruebasPsicologicas(RegistroEdicionModo.REGISTRO);
                 }
             });
-            ppsButton.setActionKeyTip("Prueba Psicologica");
+            ppsButton.setActionKeyTip("P");
             this.addMenuButton(ppsButton);
 
             JCommandMenuButton casoButton = new JCommandMenuButton("Caso", new EmptyResizableIcon(16));
@@ -1987,7 +2002,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     registrarEditarCaso(RegistroEdicionModo.REGISTRO);
                 }
             });
-            casoButton.setActionKeyTip("Caso");
+            casoButton.setActionKeyTip("C");
             this.addMenuButton(casoButton);
 
             JCommandMenuButton hicButton = new JCommandMenuButton("Historia Clinica", new EmptyResizableIcon(16));
@@ -1998,7 +2013,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     registrarEditarHistoriaClinica(RegistroEdicionModo.REGISTRO);
                 }
             });
-            hicButton.setActionKeyTip("Historia Clinica");
+            hicButton.setActionKeyTip("H");
             this.addMenuButton(hicButton);
         }
     }

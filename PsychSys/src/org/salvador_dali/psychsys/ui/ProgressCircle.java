@@ -23,12 +23,11 @@
  */
 package org.salvador_dali.psychsys.ui;
 
-import com.bric.plaf.AquaSpinningProgressBarUI;
-import com.bric.plaf.BasicSpinningProgressBarUI;
 import java.util.Timer;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import org.salvador_dali.psychsys.business.BehaviorNotImplementedException;
 
 /**
  *
@@ -63,37 +62,10 @@ public class ProgressCircle {
     }
     
     public void start() {
-        /*progressBar.setUI(new AquaSpinningProgressBarUI());
-        progressBar.putClientProperty("period", new Long(BasicSpinningProgressBarUI.DEFAULT_PERIOD.longValue()*4));
-        
-        //progressCircleLabel.add(progressBar);
-        progressComp.add(progressBar);
-        progressTimer.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                progressComp.repaint();
-            }
-        }, 20);
-        timer = new javax.swing.Timer(2, new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                progressComp.repaint();
-            }
-        });
-        timer.start();
-        //progressCircleLabel.setVisible(true);
-        progressComp.setVisible(true);
-        //AquaSpinningProgressBarUI aqpb = new AquaSpinningProgressBarUI();
-        //aspb.installUI(progressCircleLabel);*/
+        //throw new BehaviorNotImplementedException();
     }
     
     public void stop() {
-        /*//progressTimer.cancel();
-        timer.stop();
-        //progressCircleLabel.setVisible(false);
-        progressComp.setVisible(false);
-        //aspb.uninstallUI(progressCircleLabel);*/
+        //throw new BehaviorNotImplementedException();
     }
 }

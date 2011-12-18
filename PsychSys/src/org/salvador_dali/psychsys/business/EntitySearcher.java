@@ -213,7 +213,7 @@ public abstract class EntitySearcher {
 
             DefaultTableModel dtm = null;
             if (data != null) {
-                dtm = new DefaultTableModel(data, new Object[]{getFieldsToSearch()[0], getFieldsToSearch()[1], "Nombre Tutor"}) {
+                dtm = new DefaultTableModel(data, getTableCols()) {
 
                     @Override
                     public boolean isCellEditable(int row, int column) {
@@ -310,7 +310,7 @@ public abstract class EntitySearcher {
             DefaultTableModel dtm = null;
 
             if (data != null) {
-                dtm = new DefaultTableModel(data, new Object[]{getFieldsToSearch()[0], getFieldsToSearch()[1], "Nombre Tutor"}) {
+                dtm = new DefaultTableModel(data, getTableCols()) {
 
                     @Override
                     public boolean isCellEditable(int row, int column) {
