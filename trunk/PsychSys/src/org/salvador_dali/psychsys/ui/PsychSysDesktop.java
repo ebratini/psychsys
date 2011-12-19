@@ -1321,6 +1321,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void verTutores() {
+        
         verEntities("Vista: Tutores", new EntitySearcher.TutorBasicEntitySearcher(), new String[]{"jcbEditarTutor", "jcbEliminarTutor"}, 0);
     }
 
@@ -1810,18 +1811,34 @@ public class PsychSysDesktop extends JRibbonFrame {
 
     // Para Reportes
     private void verListadoTutores() {
+        if (getTabCaptions().contains("Listado: Tutores")) {
+            getToolkit().beep();
+            return;
+        }
         verReporte("/resources/reports/listado_tutores.jasper", "Listado: Tutores", new HashMap());
     }
 
     private void verListadoEstudiantes() {
+        if (getTabCaptions().contains("Listado: Estudiantes")) {
+            getToolkit().beep();
+            return;
+        }
         verReporte("/resources/reports/listado_estudiantes.jasper", "Listado: Estudiantes", new HashMap());
     }
 
     private void verListadoReferimientos() {
+        if (getTabCaptions().contains("Listado: Referimientos")) {
+            getToolkit().beep();
+            return;
+        }
         verReporte("/resources/reports/listado_Referimientos.jasper", "Listado: Referimientos", new HashMap());
     }
 
     private void verListadoCasos() {
+        if (getTabCaptions().contains("Listado: Casos")) {
+            getToolkit().beep();
+            return;
+        }
         verReporte("/resources/reports/listado_Casos.jasper", "Listado: Casos", new HashMap());
     }
 

@@ -404,7 +404,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                                 .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                                 .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, Short.MAX_VALUE))))
                     .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         pnlInfoPersonalLayout.setVerticalGroup(
             pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,7 +583,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         pnlTutores.setLayout(pnlTutoresLayout);
         pnlTutoresLayout.setHorizontalGroup(
             pnlTutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
         );
         pnlTutoresLayout.setVerticalGroup(
             pnlTutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -746,6 +746,29 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
 
             DefaultTableModel dtm = new DefaultTableModel(data, new Object[]{"Nombre Tutor", "Relacion Familiar"});
             tblTutores.setModel(dtm);
+            
+            //
+            txtDni.setText(estAEditar.getEstDni() != null ? estAEditar.getEstDni() : "");
+            cmbTipoDni.setSelectedItem(estAEditar.getEstTipoDni() != null ? estAEditar.getEstTipoDni() : "NA");
+            txtPrimerNombre.setText(estAEditar.getEstPrimerNombre());
+            txtSegundoNombre.setText(estAEditar.getEstSegundoNombre() != null ? estAEditar.getEstSegundoNombre() : "");
+            txtPrimerApellido.setText(estAEditar.getEstPrimerApellido());
+            txtSegundoApellido.setText(estAEditar.getEstSegundoApellido() != null ? estAEditar.getEstSegundoApellido() : "");
+            txtApodo.setText(estAEditar.getEstApodo() != null ? estAEditar.getEstApodo() : "");
+            txtNacionalidad.setText(estAEditar.getEstNacionalidad());
+            cmbGenero.setSelectedIndex(estAEditar.getEstGenero() == 'M' ? 0 : 1);
+            ftfFechaNacimiento.setText(String.format("%1$td%1$tm%1$tY", estAEditar.getEstFechaNacimiento()));
+            txtLugarNacimiento.setText(estAEditar.getEstLugarNacimiento());
+            spnHermanos.setValue(estAEditar.getEstCantHermanos());
+            spnLugarEntreHermanos.setValue(estAEditar.getEstOrdenHermanos());
+            ftfTalla.setText(estAEditar.getEstTalla() != null ? estAEditar.getEstTalla().toString() : "");
+            ftfPeso.setText(estAEditar.getEstPeso() != null ? estAEditar.getEstPeso().toString() : "");
+            cmbGradoEscolar.setSelectedItem(estAEditar.getEstGradoEscolar());
+            cmbNivelEscolar.setSelectedItem(estAEditar.getEstNivelEscolar());
+            txtEscuelaProcedencia.setText(estAEditar.getEstEscuelaProcedencia() != null ? estAEditar.getEstEscuelaProcedencia() : "");
+            ftfTelefono.setText(estAEditar.getEstTelefono() != null ? estAEditar.getEstTelefono() : "");
+            txaDireccion.setText(estAEditar.getEstDireccion());
+            
         }
     }//GEN-LAST:event_formWindowOpened
 
