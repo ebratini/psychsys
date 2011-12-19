@@ -397,12 +397,19 @@ public abstract class EntitySearcher {
                     }
                 } else if (fieldToSearch.equalsIgnoreCase("estudiante")) {
                     String[] arrNombreEstudiante = value.trim().split(" ");
-                    List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
-
+                    
                     List<Referimiento> referimientos = new ArrayList<Referimiento>();
-                    for (Estudiante est : estudiantes) {
-                        referimientos.addAll((List<Referimiento>) jpaRefDao.getReferimientosByEstudiante(est));
+                    if (arrNombreEstudiante.length == 2) {
+                        List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
+
+                        for (Estudiante est : estudiantes) {
+                            List<Referimiento> refList = (List<Referimiento>) jpaRefDao.getReferimientosByEstudiante(est);
+                            if (refList != null) {
+                                referimientos.addAll(refList);
+                            }
+                        }
                     }
+                    
                     if (referimientos != null && referimientos.size() > 0) {
                         data = new Object[referimientos.size()][];
                         for (Referimiento ref : referimientos) {
@@ -618,9 +625,20 @@ public abstract class EntitySearcher {
                     }
                 } else if (fieldToSearch.equalsIgnoreCase("estudiante")) {
                     String[] chrEstudiante = value.split(" ");
-                    Estudiante est = (Estudiante) new JpaEstudianteDao().getEstudiantesByNombreCompleto(chrEstudiante[0], chrEstudiante[1]);
-
-                    List<PruebaPsicologica> pruebas = (List<PruebaPsicologica>) jpaPPSDao.getPruebasPsicologicasByEstudiante(est);
+                    
+                    List<PruebaPsicologica> pruebas = new ArrayList<PruebaPsicologica>();
+                    if (chrEstudiante.length == 2) {
+                        List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(chrEstudiante[0], chrEstudiante[1]);
+                        
+                        for (Estudiante est : estudiantes) {
+                            List<PruebaPsicologica> ppList = (List<PruebaPsicologica>) jpaPPSDao.getPruebasPsicologicasByEstudiante(est);
+                            if (ppList != null) {
+                                pruebas.addAll(ppList);
+                            }
+                        }
+                    }
+                    
+                    //List<PruebaPsicologica> pruebas = (List<PruebaPsicologica>) jpaPPSDao.getPruebasPsicologicasByEstudiante(ests);
                     if (pruebas != null && pruebas.size() > 0) {
                         data = new Object[pruebas.size()][];
                         for (PruebaPsicologica pp : pruebas) {
@@ -710,12 +728,19 @@ public abstract class EntitySearcher {
                     }
                 } else if (fieldToSearch.equalsIgnoreCase("estudiante")) {
                     String[] arrNombreEstudiante = value.trim().split(" ");
-                    List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
-
+                    
                     List<HistoriaClinica> hics = new ArrayList<HistoriaClinica>();
-                    for (Estudiante est : estudiantes) {
-                        hics.add(jpaHicDao.getHistoriaClinicaByEstudiante(est));
+                    if (arrNombreEstudiante.length == 2) {
+                        List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
+                        
+                        for (Estudiante est : estudiantes) {
+                            HistoriaClinica hic = jpaHicDao.getHistoriaClinicaByEstudiante(est);
+                            if (hic != null) {
+                                hics.add(hic);
+                            }
+                        }
                     }
+                    
                     if (hics != null && hics.size() > 0) {
                         data = new Object[hics.size()][];
                         for (HistoriaClinica hic : hics) {
