@@ -34,25 +34,33 @@ import sun.misc.BASE64Encoder;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public final class PasswordService {
+public final class SecurityService {
 
-    private static PasswordService passwordServiceInstance;
-
-    private PasswordService() {
+    private static SecurityService passwordServiceInstance;
+    public enum EncriptionMethod {
+        SHA
     }
 
-    public synchronized String encrypt(String plaintext) {
+    private SecurityService() {
+    }
+
+    public synchronized String encrypt(String plaintext, EncriptionMethod encMethod) {
         MessageDigest md = null;
         
+        String strEncMethod = null;
+        if (encMethod.equals(EncriptionMethod.SHA)) {
+            strEncMethod = "SHA";
+        }
+        
         try {
-            md = MessageDigest.getInstance("SHA");
+            md = MessageDigest.getInstance(strEncMethod);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(PasswordService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SecurityService.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             md.update(plaintext.getBytes("UTF-8"));
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(PasswordService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SecurityService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         byte raw[] = md.digest();
@@ -60,9 +68,9 @@ public final class PasswordService {
         return hash;
     }
 
-    public static synchronized PasswordService getInstance() {
+    public static synchronized SecurityService getInstance() {
         if (passwordServiceInstance == null) {
-            passwordServiceInstance = new PasswordService();
+            passwordServiceInstance = new SecurityService();
         }
         return passwordServiceInstance;
     }

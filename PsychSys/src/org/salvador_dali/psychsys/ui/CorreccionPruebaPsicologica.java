@@ -40,7 +40,9 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
     /** Creates new form CorreccionPruebaPsicologica */
     public CorreccionPruebaPsicologica() {
         initComponents();
+        //trePruebas.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Pruebas")));
     }
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -57,8 +59,8 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
         btnCorregir = new javax.swing.JButton();
         btnQuitar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        spnPruebasTree = new javax.swing.JScrollPane();
+        trePruebas = new javax.swing.JTree();
         tpnCorreccionPrueba = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -79,17 +81,37 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Prueba(s)"));
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnCorregir.setText("Corregir");
         btnCorregir.setEnabled(false);
 
         btnQuitar.setText("Quitar");
         btnQuitar.setEnabled(false);
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setEnabled(false);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
-        jScrollPane1.setViewportView(jTree1);
+        trePruebas.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                trePruebasValueChanged(evt);
+            }
+        });
+        spnPruebasTree.setViewportView(trePruebas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -105,12 +127,12 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLimpiar)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+            .addComponent(spnPruebasTree, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addComponent(spnPruebasTree, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
@@ -275,6 +297,45 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        //((DefaultTreeModel) trePruebas.getModel()).removeNodeFromParent((DefaultMutableTreeNode) trePruebas.getModel().getRoot());
+        btnQuitar.setEnabled(false);
+        btnLimpiar.setEnabled(false);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void trePruebasValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_trePruebasValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_trePruebasValueChanged
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        // TODO add your handling code here:
+        // quitar
+        /*DefaultTreeModel dtm = (DefaultTreeModel) trePruebas.getModel();
+        int count = trePruebas.getSelectionCount();
+        for (int i = 0; i < count; i++) {
+            //if (!new DefaultMutableTreeNode(dtm.get))
+        }
+        
+        if (trePruebas.getModel().getChildCount(trePruebas.getModel().getRoot()) == 0) {
+            btnQuitar.setEnabled(false);
+            btnLimpiar.setEnabled(false);
+        }*/
+    }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        // agregar prueba
+        
+        if (!btnQuitar.isEnabled()) {
+            btnQuitar.setEnabled(true);
+        }
+
+        if (!btnLimpiar.isEnabled()) {
+            btnLimpiar.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -320,13 +381,13 @@ public class CorreccionPruebaPsicologica extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTree jTree1;
     private javax.swing.JPanel pnlInterpretacion;
     private javax.swing.JPanel pnlResultadosDirectos;
+    private javax.swing.JScrollPane spnPruebasTree;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
     private javax.swing.JTabbedPane tpnCorreccionPrueba;
+    private javax.swing.JTree trePruebas;
     // End of variables declaration//GEN-END:variables
 }
