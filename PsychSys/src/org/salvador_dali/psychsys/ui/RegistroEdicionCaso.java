@@ -260,6 +260,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         txaAnalisisResPruebas.setColumns(20);
         txaAnalisisResPruebas.setLineWrap(true);
         txaAnalisisResPruebas.setRows(5);
+        txaAnalisisResPruebas.setWrapStyleWord(true);
         jScrollPane2.setViewportView(txaAnalisisResPruebas);
 
         javax.swing.GroupLayout pnlAnalisisResPruebasLayout = new javax.swing.GroupLayout(pnlAnalisisResPruebas);
@@ -281,6 +282,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         txaJuicioClinico.setColumns(20);
         txaJuicioClinico.setLineWrap(true);
         txaJuicioClinico.setRows(5);
+        txaJuicioClinico.setWrapStyleWord(true);
         jScrollPane3.setViewportView(txaJuicioClinico);
 
         javax.swing.GroupLayout pnlJuicioClinicoLayout = new javax.swing.GroupLayout(pnlJuicioClinico);
@@ -302,6 +304,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         txaDiagnostico.setColumns(20);
         txaDiagnostico.setLineWrap(true);
         txaDiagnostico.setRows(5);
+        txaDiagnostico.setWrapStyleWord(true);
         jScrollPane4.setViewportView(txaDiagnostico);
 
         pnlDefinitivo.setBorder(javax.swing.BorderFactory.createTitledBorder("Definitivo"));
@@ -355,6 +358,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         txaTratamiento.setColumns(20);
         txaTratamiento.setLineWrap(true);
         txaTratamiento.setRows(5);
+        txaTratamiento.setWrapStyleWord(true);
         jScrollPane5.setViewportView(txaTratamiento);
 
         javax.swing.GroupLayout pnlTratamientoLayout = new javax.swing.GroupLayout(pnlTratamiento);
@@ -376,6 +380,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         txaResumenEvolucion.setColumns(20);
         txaResumenEvolucion.setLineWrap(true);
         txaResumenEvolucion.setRows(5);
+        txaResumenEvolucion.setWrapStyleWord(true);
         jScrollPane6.setViewportView(txaResumenEvolucion);
 
         javax.swing.GroupLayout pnlResumenEvolucionLayout = new javax.swing.GroupLayout(pnlResumenEvolucion);
@@ -397,6 +402,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         txaRecomendaciones.setColumns(20);
         txaRecomendaciones.setLineWrap(true);
         txaRecomendaciones.setRows(5);
+        txaRecomendaciones.setWrapStyleWord(true);
         jScrollPane7.setViewportView(txaRecomendaciones);
 
         javax.swing.GroupLayout pnlRecomendacionesLayout = new javax.swing.GroupLayout(pnlRecomendaciones);
@@ -598,8 +604,6 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
                 casoAEditar.setCsoJuicioClinico(txaJuicioClinico.getText());
                 casoAEditar.setCsoDiagnosticoDefinitivo((rbnDiagDefSi.isSelected() ? 'S' : 'N'));
                 casoAEditar.setCsoEstadoCaso(cmbEstadoCaso.getSelectedItem().toString().charAt(0));
-                
-                casoAEditar.setReferimiento(referimientoCaso);
                 casoAEditar.setCsoAnalisisResultadosPruebas((!txaAnalisisResPruebas.getText().isEmpty() ? txaAnalisisResPruebas.getText() : null));
                 casoAEditar.setCsoDiagnostico((!txaDiagnostico.getText().isEmpty() ? txaDiagnostico.getText() : null));
                 casoAEditar.setCsoTratamiento((!txaTratamiento.getText().isEmpty() ? txaTratamiento.getText() : null));
@@ -669,6 +673,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
             txaRecomendaciones.setText(casoAEditar.getCsoRecomendaciones() != null ? casoAEditar.getCsoRecomendaciones() : "");
             cmbEstadoCaso.setSelectedIndex(casoAEditar.getCsoEstadoCaso() == 'A' ? 0 : (casoAEditar.getCsoEstadoCaso() == 'C' ? 1 : 2));
         }
+        lpnDetallesCaso.moveToFront(pnlAnalisisResPruebas);
     }//GEN-LAST:event_formWindowOpened
 
     /**

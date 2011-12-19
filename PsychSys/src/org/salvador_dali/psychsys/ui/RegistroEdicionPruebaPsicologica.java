@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -179,7 +180,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(spnPreviewPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+            .addComponent(spnPreviewPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -563,8 +564,6 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                 trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrada", "editada");
                 
                 ppsAEditar.setPpsFechaAplicacion(DateUtils.parseDate(ftfFechaAplicacionPPS.getText()));
-                ppsAEditar.setCaso(casoPPS);
-                ppsAEditar.setEstudiante(estudiantePPS);
                 ppsAEditar.setPpsNombrePrueba(!cmbNombrePrueba.getSelectedItem().toString().equalsIgnoreCase("otro") ? cmbNombrePrueba.getSelectedItem().toString()
                         : txtOtroNombrePrueba.getText());
                 ppsAEditar.setPpsResultados(!txaResultados.getText().isEmpty() ? txaResultados.getText() : null);
@@ -603,7 +602,42 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         ftfFechaAplicacionPPS.setText(year.toString() + (year + 1));
         
         if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
+            if (ppsAEditar == null) {
+                JOptionPane.showMessageDialog(this, "la prueba a editar no esta establecida", "Editar Prueba Psicologica", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             btnBuscar.setEnabled(false);
+            txtCasoEstudianteReferencia.setText(ppsAEditar.getCaso() != null ? ppsAEditar.getCaso().toString() : "NA");
+            cmbNombrePrueba.setSelectedItem(ppsAEditar.getPpsNombrePrueba());
+            List<String> items = new ArrayList<String>() {
+
+                {
+                    for (int i = 0; i < cmbNombrePrueba.getModel().getSize(); i++) {
+                        add(cmbNombrePrueba.getItemAt(i).toString());
+                    }
+                }
+            };
+
+            if (items.contains(ppsAEditar.getPpsNombrePrueba())) {
+                cmbNombrePrueba.setSelectedItem(ppsAEditar.getPpsNombrePrueba());
+            } else {
+                cmbNombrePrueba.setSelectedItem("Otro");
+                txtOtroNombrePrueba.setText(ppsAEditar.getPpsNombrePrueba());
+                txtOtroNombrePrueba.setEnabled(true);
+            }
+            txaResultados.setText(ppsAEditar.getPpsResultados() != null ? ppsAEditar.getPpsResultados() : "");
+            txaInterpretacionPrueba.setText(ppsAEditar.getPpsInterpretacion() != null ? ppsAEditar.getPpsInterpretacion() : "");
+            chkCorreccionAutomatica.setSelected(ppsAEditar.getPpsCorrecionAutomatica() == 'S' ? true : false);
+
+            if (ppsAEditar.getPpsCorrecionAutomatica() == 'S') {
+                // get ubicaciones pruebas
+                List<UbicacionPrueba> ubicacionesPrueba = new JpaUbicacionPruebaDao().getUbicacionesPruebasByPruebaPsicologica(ppsAEditar);
+                DefaultListModel dlm = (DefaultListModel) lstUbicacionPruebas.getModel();
+                for (UbicacionPrueba up : ubicacionesPrueba) {
+                    dlm.addElement(up.getUbpUrl());
+                }
+            }
+
         }
     }//GEN-LAST:event_formWindowOpened
     
