@@ -231,7 +231,7 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
         pnlAntecedentesEscolaridadLayout.setHorizontalGroup(
             pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAntecedentesEscolaridadLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAntecedentesEscolaridadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -409,7 +409,7 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
                     if (escolaridad != null) {
                         escolaridad.setHistoriaClinica(hicConfirmada);
                         escolaridad.setHicId(hicConfirmada.getHicId());
-                        jpaHicDao.persist(antPS);
+                        jpaHicDao.persist(escolaridad);
                     }
                 }
             } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {

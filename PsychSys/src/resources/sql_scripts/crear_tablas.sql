@@ -96,10 +96,6 @@ CREATE TABLE Estudiantes
 );
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX I_Est_DNI
-ON Estudiantes(est_dni)
-GO
-
 CREATE NONCLUSTERED INDEX I_Est_Primer_Apellido
 ON Estudiantes(est_primer_apellido)
 GO
