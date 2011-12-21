@@ -41,7 +41,7 @@ FROM Tutores]]>
 					<textElement textAlignment="Right">
 						<font fontName="SansSerif" size="24" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Listado de Turores]]></text>
+					<text><![CDATA[Listado de Tutores]]></text>
 				</staticText>
 			</frame>
 		</band>
