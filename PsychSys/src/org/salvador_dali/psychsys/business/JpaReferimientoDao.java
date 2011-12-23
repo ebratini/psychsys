@@ -48,44 +48,49 @@ public class JpaReferimientoDao extends JpaDao implements ReferimientoDao {
     }
 
     @Override
+    public void crearReferimiento(Referimiento referimiento) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
     public List getReferimientosByFecha(Date fecha) {
         Query q = entityManager.createNamedQuery("Referimiento.findByRefFecha");
         q.setParameter("refFecha", fecha);
-        return q.getResultList();
+        return (List<Referimiento>) q.getResultList();
     }
 
     @Override
     public List getReferimientosByAnioEscolar(String anioEscolar) {
         Query q = entityManager.createNamedQuery("Referimiento.findByRefAnioEscolar");
         q.setParameter("refAnioEscolar", anioEscolar);
-        return q.getResultList();
+        return (List<Referimiento>) q.getResultList();
     }
 
     @Override
     public List getReferimientosByEstudiante(Estudiante estudiante) {
         Query q = entityManager.createQuery("SELECT r FROM Referimiento r WHERE r.estudiante = :refEstudiante");
         q.setParameter("refEstudiante", estudiante);
-        return q.getResultList();
+        return (List<Referimiento>) q.getResultList();
     }
 
     @Override
     public List getReferimientosByReferidor(String referidor) {
         Query q = entityManager.createNamedQuery("Referimiento.findByRefNombreReferidor");
         q.setParameter("refNombreReferidor", referidor);
-        return q.getResultList();
+        return (List<Referimiento>) q.getResultList();
     }
     
     @Override
     public List getReferimientosByUsuario(Usuario usuario) {
         Query q = entityManager.createQuery("SELECT r FROM Referimiento r WHERE r.usuario = :refUsuario");
         q.setParameter("refUsuario", usuario);
-        return q.getResultList();
+        return (List<Referimiento>) q.getResultList();
     }
 
     @Override
     public List getReferimientosByEstadoReferimiento(char status) {
         Query q = entityManager.createNamedQuery("Referimiento.findByRefEstadoReferimiento");
         q.setParameter("refEstadoReferimiento", status);
-        return q.getResultList();
+        return (List<Referimiento>) q.getResultList();
     }
 }

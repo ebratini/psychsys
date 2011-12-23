@@ -23,6 +23,7 @@
  */
 package org.salvador_dali.psychsys.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
@@ -34,9 +35,13 @@ import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
  */
 public interface HistoriaClinicaDao extends Dao {
 
+    public void crearHistoriaClinica(HistoriaClinica historiaClinica);
+    
+    public void crearHistoriaClinica(HistoriaClinica historiaClinica, List<Serializable> antecedentes);
+    
     public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante);
     
-    public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
+    public List<HistoriaClinica> getHistoriasClinicasByFechaCreacion(Date fechaCreacion);
 
-    public List getHistoriasClinicasByStatus(char status);
+    public List<HistoriaClinica> getHistoriasClinicasByStatus(char status);
 }

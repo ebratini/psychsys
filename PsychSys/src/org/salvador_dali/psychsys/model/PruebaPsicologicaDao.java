@@ -27,6 +27,8 @@ import java.util.Date;
 import java.util.List;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
+import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;
 
 /**
  *
@@ -34,13 +36,17 @@ import org.salvador_dali.psychsys.model.entities.Estudiante;
  */
 public interface PruebaPsicologicaDao extends Dao {
 
-    public List getPruebasPsicologicasByEstudiante(Estudiante estudiante);
+    public void crearPruebaPsicologica(PruebaPsicologica pruebaPsicologica);
+    
+    public void crearPruebaPsicologica(PruebaPsicologica pruebaPsicologica, List<UbicacionPrueba> ubicacionesPrueba);
+    
+    public List<PruebaPsicologica> getPruebasPsicologicasByEstudiante(Estudiante estudiante);
 
-    public List getPruebasPsicologicasByCaso(Caso caso);
+    public List<PruebaPsicologica> getPruebasPsicologicasByCaso(Caso caso);
 
-    public List getPruebasPsicologicasByFechaAplicacion(Date fechaAplicacion);
+    public List<PruebaPsicologica> getPruebasPsicologicasByFechaAplicacion(Date fechaAplicacion);
 
-    public List getPruebasPsicologicasByNombrePrueba(String nombrePrueba);
+    public List<PruebaPsicologica> getPruebasPsicologicasByNombrePrueba(String nombrePrueba);
 
-    public List getPruebasPsicologicasByCorreccionAutomatica(char correcionAutomatica);
+    public List<PruebaPsicologica> getPruebasPsicologicasByCorreccionAutomatica(char correcionAutomatica);
 }

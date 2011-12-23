@@ -26,6 +26,7 @@ package org.salvador_dali.psychsys.model;
 import java.util.Date;
 import java.util.List;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.Referimiento;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
@@ -34,15 +35,17 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  */
 public interface ReferimientoDao extends Dao {
 
-    public List getReferimientosByFecha(Date fecha);
-
-    public List getReferimientosByAnioEscolar(String anioEscolar);
-
-    public List getReferimientosByEstudiante(Estudiante estudiante);
-
-    public List getReferimientosByReferidor(String referidor);
+    public void crearReferimiento(Referimiento referimiento);
     
-    public List getReferimientosByUsuario(Usuario usuario);
+    public List<Referimiento> getReferimientosByFecha(Date fecha);
+
+    public List<Referimiento> getReferimientosByAnioEscolar(String anioEscolar);
+
+    public List<Referimiento> getReferimientosByEstudiante(Estudiante estudiante);
+
+    public List<Referimiento> getReferimientosByReferidor(String referidor);
     
-    public List getReferimientosByEstadoReferimiento(char status);
+    public List<Referimiento> getReferimientosByUsuario(Usuario usuario);
+    
+    public List<Referimiento> getReferimientosByEstadoReferimiento(char status);
 }

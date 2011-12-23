@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.business;
 
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.JpaDao;
@@ -44,6 +45,19 @@ public class JpaTutorDao extends JpaDao implements TutorDao {
     public JpaTutorDao(Map props) {
         super(Tutor.class, props);
     }
+    
+    @Override
+    public void crearTutor(Tutor tutor) {
+        EntityTransaction et = entityManager.getTransaction();
+        try {
+            et.begin();
+            persist(tutor);
+            et.commit();
+        } catch (Exception exc) {
+            et.rollback();
+            throw new RuntimeException(exc);
+        }
+    }
 
     @Override
     public Tutor getTutorByDNI(String dni) {
@@ -60,20 +74,20 @@ public class JpaTutorDao extends JpaDao implements TutorDao {
     public List getTutoresByPrimerApellido(String primerApellido) {
         Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerApellido");
         q.setParameter("tutPrimerApellido", primerApellido);
-        return q.getResultList();
+        return (List<Tutor>) q.getResultList();
     }
 
     @Override
     public List getTutoresByPrimerNombre(String primerNombre) {
         Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerNombre");
         q.setParameter("tutPrimerNombre", primerNombre);
-        return q.getResultList();
+        return (List<Tutor>) q.getResultList();
     }
 
     @Override
     public List getTutoresByStatus(char status) {
         Query q = entityManager.createNamedQuery("Tutor.findByTutStatus");
         q.setParameter("tutStatus", status);
-        return q.getResultList();
+        return (List<Tutor>) q.getResultList();
     }
 }
