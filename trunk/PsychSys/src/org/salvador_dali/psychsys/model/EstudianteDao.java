@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.model;
 
 import java.util.List;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.Tutor;
 
 /**
  *
@@ -32,13 +33,15 @@ import org.salvador_dali.psychsys.model.entities.Estudiante;
  */
 public interface EstudianteDao extends Dao {
 
+    public void crearEstudiante(Estudiante estudiante, List<Tutor> tutores);
+    
     public Estudiante getEstudianteByDNI(String dni);
 
-    public List getEstudiantesByPrimerApellido(String primerApellido);
+    public List<Estudiante> getEstudiantesByPrimerApellido(String primerApellido);
 
-    public List getEstudiantesByPrimerNombre(String primerNombre);
+    public List<Estudiante> getEstudiantesByPrimerNombre(String primerNombre);
     
-    public List getEstudiantesByNombreCompleto(String primerNombre, String primerApellido); // primer nombre + primer apellido
+    public List<Estudiante> getEstudiantesByNombreCompleto(String primerNombre, String primerApellido); // primer nombre + primer apellido
 
-    public List getEstudiantesByStatus(char status);
+    public List<Estudiante> getEstudiantesByStatus(char status);
 }

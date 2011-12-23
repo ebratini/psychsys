@@ -32,6 +32,7 @@ import org.salvador_dali.psychsys.model.PruebaPsicologicaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
+import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;
 
 /**
  *
@@ -52,37 +53,47 @@ public class JpaPruebaPsicologicaDao extends JpaDao implements PruebaPsicologica
     }
     
     @Override
+    public void crearPruebaPsicologica(PruebaPsicologica pruebaPsicologica) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public void crearPruebaPsicologica(PruebaPsicologica pruebaPsicologica, List<UbicacionPrueba> ubicacionesPrueba) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
     public List getPruebasPsicologicasByEstudiante(Estudiante estudiante) {
         Query q = entityManager.createQuery("SELECT pps FROM PruebaPsicologica pps WHERE pps.estudiante = :ppsEstudiante");
         q.setParameter("ppsEstudiante", estudiante);
-        return q.getResultList();
+        return (List<PruebaPsicologica>) q.getResultList();
     }
 
     @Override
     public List getPruebasPsicologicasByCaso(Caso caso) {
         Query q = entityManager.createQuery("SELECT pps FROM PruebaPsicologica pps WHERE pps.caso = :ppsCaso");
         q.setParameter("ppsCaso", caso);
-        return q.getResultList();
+        return (List<PruebaPsicologica>) q.getResultList();
     }
 
     @Override
     public List getPruebasPsicologicasByFechaAplicacion(Date fechaAplicacion) {
         Query q = entityManager.createNamedQuery("PruebaPsicologica.findByPpsFechaAplicacion");
         q.setParameter("ppsFechaAplicacion", fechaAplicacion);
-        return q.getResultList();
+        return (List<PruebaPsicologica>) q.getResultList();
     }
 
     @Override
     public List getPruebasPsicologicasByNombrePrueba(String nombrePrueba) {
         Query q = entityManager.createNamedQuery("PruebaPsicologica.findByPpsNombrePrueba");
         q.setParameter("ppsNombrePrueba", nombrePrueba);
-        return q.getResultList();
+        return (List<PruebaPsicologica>) q.getResultList();
     }
 
     @Override
     public List getPruebasPsicologicasByCorreccionAutomatica(char correcionAutomatica) {
         Query q = entityManager.createNamedQuery("PruebaPsicologica.findByPpsCorrecionAutomatica");
         q.setParameter("ppsCorrecionAutomatica", correcionAutomatica);
-        return q.getResultList();
+        return (List<PruebaPsicologica>) q.getResultList();
     }
 }

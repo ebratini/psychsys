@@ -30,6 +30,7 @@ import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.EstudianteDao;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
+import org.salvador_dali.psychsys.model.entities.Tutor;
 
 /**
  *
@@ -46,6 +47,11 @@ public class JpaEstudianteDao extends JpaDao implements EstudianteDao {
     }
 
     @Override
+    public void crearEstudiante(Estudiante estudiante, List<Tutor> tutores) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
     public Estudiante getEstudianteByDNI(String dni) {
         try {
             Query q = entityManager.createNamedQuery("Estudiante.findByEstDni");
@@ -60,21 +66,21 @@ public class JpaEstudianteDao extends JpaDao implements EstudianteDao {
     public List getEstudiantesByPrimerApellido(String primerApellido) {
         Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerApellido");
         q.setParameter("estPrimerApellido", primerApellido.toLowerCase());
-        return q.getResultList();
+        return (List<Estudiante>) q.getResultList();
     }
 
     @Override
     public List getEstudiantesByPrimerNombre(String primerNombre) {
         Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerNombre");
         q.setParameter("estPrimerNombre", primerNombre.toLowerCase());
-        return q.getResultList();
+        return (List<Estudiante>) q.getResultList();
     }
 
     @Override
     public List getEstudiantesByStatus(char status) {
         Query q = entityManager.createNamedQuery("Estudiante.findByEstStatus");
         q.setParameter("estStatus", status);
-        return q.getResultList();
+        return (List<Estudiante>) q.getResultList();
     }
 
     @Override
@@ -85,6 +91,6 @@ public class JpaEstudianteDao extends JpaDao implements EstudianteDao {
         Query q = entityManager.createQuery(strQuery);
         q.setParameter("primerNombre", primerNombre.toLowerCase());
         q.setParameter("primerApellido", primerApellido.toLowerCase());
-        return q.getResultList();
+        return (List<Estudiante>) q.getResultList();
     }
 }

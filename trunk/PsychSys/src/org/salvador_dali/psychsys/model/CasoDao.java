@@ -34,11 +34,13 @@ import org.salvador_dali.psychsys.model.entities.Referimiento;
  */
 public interface CasoDao extends Dao {
 
-    public List getCasosByFecha(Date fecha);
+    public void crearCaso(Caso caso);
+    
+    public List<Caso> getCasosByFecha(Date fecha);
 
-    public List getCasosByAnioEscolar(String anioEscolar);
+    public List<Caso> getCasosByAnioEscolar(String anioEscolar);
 
     public Caso getCasoByReferimiento(Referimiento referimiento);
 
-    public List getCasosByEstado(char estadoCaso);
+    public List<Caso> getCasosByEstado(char estadoCaso);
 }

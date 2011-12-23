@@ -46,19 +46,24 @@ public class JpaCasoDao extends JpaDao implements CasoDao {
     public JpaCasoDao(Map props) {
         super(Caso.class, props);
     }
+    
+    @Override
+    public void crearCaso(Caso caso) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     @Override
     public List getCasosByFecha(Date fecha) {
         Query q = entityManager.createNamedQuery("Caso.findByCsoFecha");
         q.setParameter("csoFecha", fecha);
-        return q.getResultList();
+        return (List<Caso>) q.getResultList();
     }
 
     @Override
     public List getCasosByAnioEscolar(String anioEscolar) {
         Query q = entityManager.createNamedQuery("Caso.findByCsoAnioEscolar");
         q.setParameter("csoAnioEscolar", anioEscolar);
-        return q.getResultList();
+        return (List<Caso>) q.getResultList();
     }
 
     @Override
@@ -76,7 +81,6 @@ public class JpaCasoDao extends JpaDao implements CasoDao {
     public List getCasosByEstado(char estadoCaso) {
         Query q = entityManager.createNamedQuery("Caso.findByCsoEstadoCaso");
         q.setParameter("csoEstadoCaso", estadoCaso);
-        return q.getResultList();
+        return (List<Caso>) q.getResultList();
     }
-    
 }

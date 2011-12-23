@@ -32,11 +32,13 @@ import org.salvador_dali.psychsys.model.entities.Tutor;
  */
 public interface TutorDao extends Dao {
 
+    public void crearTutor(Tutor tutor);
+    
     public Tutor getTutorByDNI(String dni);
 
-    public List getTutoresByPrimerApellido(String primerApellido);
+    public List<Tutor> getTutoresByPrimerApellido(String primerApellido);
     
-    public List getTutoresByPrimerNombre(String primerNombre);
+    public List<Tutor> getTutoresByPrimerNombre(String primerNombre);
     
-    public List getTutoresByStatus(char status);
+    public List<Tutor> getTutoresByStatus(char status);
 }

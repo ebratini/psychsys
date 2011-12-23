@@ -23,6 +23,7 @@
  */
 package org.salvador_dali.psychsys.business;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,16 @@ public class JpaHistoriaClinicaDao extends JpaDao implements HistoriaClinicaDao 
     public JpaHistoriaClinicaDao(Class entityClass, Map properties) {
         super(HistoriaClinica.class, properties);
     }
+    
+    @Override
+    public void crearHistoriaClinica(HistoriaClinica historiaClinica) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public void crearHistoriaClinica(HistoriaClinica historiaClinica, List<Serializable> antecedentes) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     @Override
     public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante) {
@@ -62,13 +73,13 @@ public class JpaHistoriaClinicaDao extends JpaDao implements HistoriaClinicaDao 
     public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion) {
         Query q = entityManager.createNamedQuery("HistoriaClinica.findByHicFechaCreacion");
         q.setParameter("hicFechaCreacion", fechaCreacion);
-        return q.getResultList();
+        return (List<HistoriaClinica>) q.getResultList();
     }
 
     @Override
     public List getHistoriasClinicasByStatus(char status) {
         Query q = entityManager.createNamedQuery("HistoriaClinica.findByHicStatus");
         q.setParameter("hicStatus", status);
-        return q.getResultList();
+        return (List<HistoriaClinica>) q.getResultList();
     }
 }
