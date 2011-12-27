@@ -162,10 +162,10 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     public static void main(String[] args) {
-        PsychSysDesktop sd = new PsychSysDesktop();
-        sd.setLocationByPlatform(true);
-        sd.setLocationRelativeTo(null);
-        sd.setVisible(true);
+        PsychSysDesktop psd = new PsychSysDesktop();
+        psd.setLocationByPlatform(true);
+        psd.setLocationRelativeTo(null);
+        psd.setVisible(true);
     }
 
     private ResizableIcon getResizableIconFromResource(String resource) {
@@ -480,7 +480,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         jcbObservacionReferimiento.setActionKeyTip("OR");
         //jcbObservacionReferimiento.setPopupKeyTip("F");
 
-        jcbCambiarEstadoReferimiento = createJCommandButton("Cambiar Estado", getResizableIconFromResource("/resources/images/delete.png"),
+        jcbCambiarEstadoReferimiento = createJCommandButton("Cambiar Estado", getResizableIconFromResource("/resources/images/301px-Orange_Icon_Edit.png"),
                 "jcbCambiarEstadoReferimiento", new RichTooltip("Cambiar Estado", "Click aqui para cambiar el estado del referimiento"), buttonActHandler);
 
         // creando la banda
@@ -610,15 +610,19 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         jcbListadoTutores = createJCommandButton("Tutores", getResizableIconFromResource("/resources/images/tutores.png"),
                 "jcbListadoTutores", new RichTooltip("Listado Tutores", "Click aqui para ver reporte listado de tutores"), buttonActHandler);
+        jcbListadoTutores.setActionKeyTip("T");
 
         jcbListadoEstudiantes = createJCommandButton("Estudiantes", getResizableIconFromResource("/resources/images/estudiantes.png"),
                 "jcbListadoEstudiantes", new RichTooltip("Listado Estudiantes", "Click aqui para ver reporte listado de estudiantes"), buttonActHandler);
+        jcbListadoEstudiantes.setActionKeyTip("E");
 
         jcbListadoReferimientos = createJCommandButton("Referimientos", getResizableIconFromResource("/resources/images/referimientos.png"),
                 "jcbListadoReferimientos", new RichTooltip("Listado Referimientos", "Click aqui para ver reporte listado de referimientos"), buttonActHandler);
+        jcbListadoReferimientos.setActionKeyTip("R");
 
         jcbListadoCasos = createJCommandButton("Casos", getResizableIconFromResource("/resources/images/casos.png"),
                 "jcbListadoCasos", new RichTooltip("Listado Casos", "Click aqui para ver reporte listado de casos"), buttonActHandler);
+        jcbListadoCasos.setActionKeyTip("C");
 
         JRibbonBand jrbListadosBand = new JRibbonBand("Listados", getResizableIconFromResource("/resources/images/listados.png"));
         jrbListadosBand.addCommandButton(jcbListadoTutores, RibbonElementPriority.TOP);
@@ -634,9 +638,11 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         jcbInformePsicologico = createJCommandButton("Informe Psicologico", getResizableIconFromResource("/resources/images/casos.png"),
                 "jcbInformePsicologico", new RichTooltip("Informe Psicologico", "Click aqui para ver reporte de informe psicologico"), buttonActHandler);
+        jcbInformePsicologico.setActionKeyTip("I");
 
         jcbHicInfantil = createJCommandButton("Historia Clinica", getResizableIconFromResource("/resources/images/historia_clinica.png"),
                 "jcbHicInfantil", new RichTooltip("Reporte Historia Clinica Infantil", "Click aqui para ver reporte de historia clinica infantil"), buttonActHandler);
+        jcbHicInfantil.setActionKeyTip("H");
 
         JRibbonBand jrbInfEspeciales = new JRibbonBand("Informes Especiales", getResizableIconFromResource("/resources/images/listados.png"));
         jrbInfEspeciales.addCommandButton(jcbInformePsicologico, RibbonElementPriority.TOP);
@@ -649,6 +655,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
         // creando el la task
         RibbonTask rtReportesTask = new RibbonTask("Reportes", jrbListadosBand, jrbInfEspeciales);
+        rtReportesTask.setKeyTip("R");
 
         return rtReportesTask;
     }
@@ -716,7 +723,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                                 });
                             }
                         });
-                        windowsLaf.setActionKeyTip("Windows LAF");
+                        windowsLaf.setActionKeyTip("W");
                         this.addMenuButton(windowsLaf);
 
                         JCommandMenuButton nimbusLaf = new JCommandMenuButton("Nimbus", new EmptyResizableIcon(16));
@@ -733,7 +740,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                                 });
                             }
                         });
-                        nimbusLaf.setActionKeyTip("Nimbus LAF");
+                        nimbusLaf.setActionKeyTip("N");
                         this.addMenuButton(nimbusLaf);
 
                         JCommandMenuButton metalLaf = new JCommandMenuButton("Metal", new EmptyResizableIcon(16));
@@ -750,7 +757,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                                 });
                             }
                         });
-                        metalLaf.setActionKeyTip("Metal LAF");
+                        metalLaf.setActionKeyTip("M");
                         this.addMenuButton(metalLaf);
                     }
                 };
@@ -758,6 +765,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         });
         jcbLaf.setPopupOrientationKind(JCommandButton.CommandButtonPopupOrientationKind.SIDEWARD);
         jcbLaf.setPopupRichTooltip(new RichTooltip("Configurar", "Click aqui para seleccionar look and feel del sistema"));
+        jcbLaf.setPopupKeyTip("L");
 
         JRibbonBand jrbLookAndFeel = new JRibbonBand("Look & Feel", getResizableIconFromResource("/resources/images/listados.png"));
         jrbLookAndFeel.addCommandButton(jcbLaf, RibbonElementPriority.TOP);
@@ -767,6 +775,7 @@ public class PsychSysDesktop extends JRibbonFrame {
                     new IconRibbonBandResizePolicy(jrbLookAndFeel.getControlPanel())}));
 
         RibbonTask rtToolsAndSettings = new RibbonTask("Tools & Settings", jrbRolesPermisos, jrbUsuarios, jrbLookAndFeel);
+        rtToolsAndSettings.setKeyTip("T");
 
         return rtToolsAndSettings;
     }
