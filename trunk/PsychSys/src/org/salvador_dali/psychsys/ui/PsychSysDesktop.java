@@ -1252,7 +1252,7 @@ public class PsychSysDesktop extends JRibbonFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/resources/images/psych logo.png")));
         setApplicationIcon(getResizableIconFromResource("/resources/images/psych logo2 65x65.png"));
-        setPreferredSize(new Dimension(1100, 600));
+        setPreferredSize(new Dimension(1200, 650));
         setLocationByPlatform(true);
         initJRibbon();
         initBodyContent();
