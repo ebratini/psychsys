@@ -81,7 +81,7 @@ VALUES ('db_ownerr','Realiza las actividades de configuración y mantenimiento.',
 ----------------------------- 5. Usuarios -------------------------------
 
 INSERT INTO Usuarios (Rol_Id,Usr_Login,Usr_Password,usr_fecha_creacion,usr_verificado,usr_update_by,Usr_Status)
-VALUES (1,'usr01','usr20111','04-12-2009','S','Ariel Novas','A')
+VALUES (1,'Edwin Bratini','eb88..1', GETDATE(), 'S', 'Development Team','A')
 
 INSERT INTO Usuarios (Rol_Id,Usr_Login,Usr_Password,usr_fecha_creacion,usr_verificado,usr_update_by,Usr_Status)
 VALUES (2,'usr02','usr20112','04-12-2010','S','Edwin Bratini','A')

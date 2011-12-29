@@ -31,8 +31,8 @@ INSERT INTO [PsychSysDB].[dbo].[Usuarios]
            ,[usr_status])
      VALUES
            (1
-           ,'Edwin Bratini'
-           ,'eb88..1'
+           ,'admin'
+           ,'admin'
            ,GETDATE()
            ,'S'
            ,'Development Team'
