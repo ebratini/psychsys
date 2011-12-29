@@ -145,7 +145,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     private JpaHistoriaClinicaDao jpaHicDao = new JpaHistoriaClinicaDao();
     // reporting services
     private ReportingService reportingService = new ReportingService("com.microsoft.sqlserver.jdbc.SQLServerDriver",
-            "jdbc:sqlserver://localhost:1433;databaseName=PsychSysDB", "sa", "Mssql88**");
+            "jdbc:sqlserver://localhost:1433;databaseName=PsychSysDB", "PsychSysLgn", "psychp@ss00");
 
     public PsychSysDesktop() {
         super("PsychSys");
