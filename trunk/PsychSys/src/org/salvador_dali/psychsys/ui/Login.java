@@ -157,6 +157,7 @@ public class Login extends javax.swing.JDialog {
         }
 
         if (esUsuarioValido(txtNombreUsuario.getText())) {
+            //this.usuario = jpaUsrDao.getUsuarioByLogin(txtNombreUsuario.getText());
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Usuario / Contraseña Invalido", "Validacion de Usuario", JOptionPane.ERROR_MESSAGE);
@@ -237,22 +238,21 @@ public class Login extends javax.swing.JDialog {
     }
     
     private boolean esUsuarioValido(String nombreUsuario) {
-        this.usuario = jpaUsrDao.getUsuarioByLogin(nombreUsuario);
         boolean usuarioValido = false;
+        Usuario user = jpaUsrDao.getUsuarioByLogin(nombreUsuario);
         
         char[] usrPass = null;
         char[] passToComp = null;
-        if (this.usuario != null) {
-            usrPass = this.usuario.getUsrPassword().toCharArray();
+        if (user != null) {
+            usrPass = user.getUsrPassword().toCharArray();
             passToComp = psfContrasenia.getPassword();
 
             if (Arrays.equals(usrPass, passToComp)) {
                 usuarioValido = true;
+                this.usuario = user;
             } else {
                 usuarioValido = false;
             }
-        } else {
-            usuarioValido = false;
         }
         
         clearArray(usrPass);

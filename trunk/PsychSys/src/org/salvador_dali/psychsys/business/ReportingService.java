@@ -78,6 +78,9 @@ public class ReportingService {
         try {
             JasperPrint jp = JasperFillManager.fillReport(reportFile, parameters, conn);
             JRViewer jvReport = new JRViewer(jp);
+            if (jp.getPages().size() < 1) {
+                return null;
+            }
             return jvReport;
         } catch (JRException ex) {
             ex.printStackTrace();

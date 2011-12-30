@@ -58,6 +58,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JViewport;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -714,13 +715,8 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                java.awt.EventQueue.invokeLater(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.WINDOWS);
-                                    }
-                                });
+                                LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.WINDOWS);
+                                SwingUtilities.updateComponentTreeUI(PsychSysDesktop.this);
                             }
                         });
                         windowsLaf.setActionKeyTip("W");
@@ -731,13 +727,8 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                java.awt.EventQueue.invokeLater(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.NIMBUS);
-                                    }
-                                });
+                                LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.NIMBUS);
+                                SwingUtilities.updateComponentTreeUI(PsychSysDesktop.this);
                             }
                         });
                         nimbusLaf.setActionKeyTip("N");
@@ -748,13 +739,8 @@ public class PsychSysDesktop extends JRibbonFrame {
 
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                java.awt.EventQueue.invokeLater(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.METAL);
-                                    }
-                                });
+                                LookAndFeelSelector.setLookAndFeel(LookAndFeelSelector.LAF.METAL);
+                                SwingUtilities.updateComponentTreeUI(PsychSysDesktop.this);
                             }
                         });
                         metalLaf.setActionKeyTip("M");
@@ -1798,7 +1784,11 @@ public class PsychSysDesktop extends JRibbonFrame {
                 @Override
                 public void run() {
                     String reportFile = getClass().getResource(reportSourcedFilePath).getPath();
-                    JScrollPane sclListadoTutores = new JScrollPane(reportingService.runReport(reportFile.replaceAll("%20", " "), map));
+                    JPanel pnlReporte = reportingService.runReport(reportFile.replaceAll("%20", " "), map);
+                    if (pnlReporte == null) {
+                        return;
+                    }
+                    JScrollPane sclListadoTutores = new JScrollPane(pnlReporte);
                     pnlBody.addTab(tabTitle, sclListadoTutores);
                     pnlBody.setSelectedComponent(sclListadoTutores);
                     
