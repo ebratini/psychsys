@@ -39,7 +39,7 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.salvador_dali.psychsys.business.EntitySearcher;
-import org.salvador_dali.psychsys.business.NumberFieldValidator;
+import org.salvador_dali.psychsys.business.validators.NumberFieldValidator;
 
 /**
  *

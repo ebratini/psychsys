@@ -1,8 +1,8 @@
 rem ...................
-rem	File Name: install_db.bat
-rem	Desc.: Script bat para instalar base de datos
-rem	By: Edwin Bratini
-rem	Date: 29-12-2011
+rem File Name: install_db.bat
+rem Desc.: Script bat para instalar base de datos
+rem By: Edwin Bratini
+rem Date: 29-12-2011
 rem ..................
 
 sqlcmd -i crear_bd.sql

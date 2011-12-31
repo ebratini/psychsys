@@ -22,25 +22,23 @@
  *  THE SOFTWARE.
  */
 
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.validators;
+
+import org.salvador_dali.psychsys.business.validators.FieldValidator;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class EmptyFieldValidator extends FieldValidator {
+public class WebFieldValidator extends FieldValidator {
 
     @Override
     public boolean validate(String textToValidate) {
-        if (textToValidate.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return true;
     }
-
+    
     @Override
     public String getValidationMessage() {
-        return "El campo no puede estar vacio.";
+        return "Web no valido.";
     }
 }

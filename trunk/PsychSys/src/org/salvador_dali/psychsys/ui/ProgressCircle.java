@@ -27,7 +27,7 @@ import java.util.Timer;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
-import org.salvador_dali.psychsys.business.BehaviorNotImplementedException;
+import org.salvador_dali.psychsys.business.exceptions.BehaviorNotImplementedException;
 
 /**
  *

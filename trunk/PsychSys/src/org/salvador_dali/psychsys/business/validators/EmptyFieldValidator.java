@@ -1,7 +1,7 @@
 /*
  *  The MIT License
  * 
- *  Copyright 2011 Edwin Bratini <edwin.bratini@gmail.com>.
+ *  Copyright 2011 Edwin Bratini.
  * 
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -21,45 +21,26 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
 
-import java.util.regex.Pattern;
+package org.salvador_dali.psychsys.business.validators;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class NumberFieldValidator extends FieldValidator {
-
-    private String pattern = "\\d+";
-    // "(\\d{1,})\\.?(\\d{1,})"
-
-    public NumberFieldValidator() {
-    }
-
-    public NumberFieldValidator(String pattern) {
-        this.pattern = pattern;
-    }
-
-    public String getPattern() {
-        return pattern;
-    }
-
-    public void setPattern(String pattern) {
-        this.pattern = pattern;
-    }
+public class EmptyFieldValidator extends FieldValidator {
 
     @Override
     public boolean validate(String textToValidate) {
-        boolean valid = false;
-        if (Pattern.matches(pattern, textToValidate)) {
-            valid = true;
+        if (textToValidate.isEmpty()) {
+            return false;
+        } else {
+            return true;
         }
-        return valid;
     }
-    
+
     @Override
     public String getValidationMessage() {
-        return "Numero no valido.";
+        return "El campo no puede estar vacio.";
     }
 }

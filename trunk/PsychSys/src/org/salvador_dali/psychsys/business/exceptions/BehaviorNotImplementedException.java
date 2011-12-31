@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.exceptions;
 
 /**
  *
