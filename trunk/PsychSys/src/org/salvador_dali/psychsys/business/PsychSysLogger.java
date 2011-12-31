@@ -30,7 +30,7 @@ public class PsychSysLogger extends AppLogger {
 
     public PsychSysLogger() {
         createAppFileDir();
-        setBaseAppURL(XMLFileManager.getElemento(PsychSys.scm.getSyscafilConfFilePath(), "PsychSys").getAttribute("BaseAppURL").getValue());
+        setBaseAppURL(XMLFileManager.getElemento(PsychSys.pscm.getPsychSysConfFilePath(), "PsychSys").getAttribute("BaseAppURL").getValue());
         setToFilePath(String.format("%1$s%2$sapp_files%2$sbitlogger.psychsys", getBaseAppURL(), System.getProperty("path.separator").toString()));
         setToFile(new File(getToFilePath()));
     }

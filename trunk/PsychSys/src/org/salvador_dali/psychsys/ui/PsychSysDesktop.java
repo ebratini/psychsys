@@ -145,6 +145,7 @@ public class PsychSysDesktop extends JRibbonFrame {
     private CasoJpaDao jpaCasoDao = new CasoJpaDao();
     private HistoriaClinicaJpaDao jpaHicDao = new HistoriaClinicaJpaDao();
     // reporting services
+    // TODO: get the db conf connection from app conf file (serialized object)
     private ReportingService reportingService = new ReportingService("com.microsoft.sqlserver.jdbc.SQLServerDriver",
             "jdbc:sqlserver://localhost:1433;databaseName=PsychSysDB", "PsychSysLgn", "psychp@ss00");
 
@@ -154,9 +155,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
             @Override
             public void windowClosing(WindowEvent e) {
-                //super.windowClosing(e);
                 doExit();
-                //((JCommandButton) getRibbon().getTask(0).getBand(0).getControlPanel().getComponent(1)).doActionClick();
             }
         });
         initComponents();

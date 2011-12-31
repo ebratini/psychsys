@@ -34,8 +34,8 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  */
 public class PsychSys {
 
-    public static PsychSysConfManager scm = new PsychSysConfManager();
-    public static PsychSysLogger sl = new PsychSysLogger();
+    public static PsychSysConfManager pscm = new PsychSysConfManager();
+    public static PsychSysLogger psl = new PsychSysLogger();
 
     public static void main(String[] args) {
         // TODO code application logic here
