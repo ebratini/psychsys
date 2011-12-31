@@ -21,45 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.JpaDao;
-import org.salvador_dali.psychsys.model.TutorEstudianteDao;
-import org.salvador_dali.psychsys.model.entities.Estudiante;
-import org.salvador_dali.psychsys.model.entities.Tutor;
-import org.salvador_dali.psychsys.model.entities.TutorEstudiante;
+import org.salvador_dali.psychsys.model.RolDao;
+import org.salvador_dali.psychsys.model.entities.Rol;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaTutorEstudianteDao extends JpaDao implements TutorEstudianteDao {
+public class RolJpaDao extends JpaDao implements RolDao {
 
+    public RolJpaDao() {
+        super(Rol.class);
+    }
+
+    public RolJpaDao(Class entityClass, Map properties) {
+        super(entityClass, properties);
+    }
+    
     @Override
-    public List getTutorEstudianteByTutId(int tutId) {
-        Query q = entityManager.createNamedQuery("TutorEstudiante.findByTutId");
-        q.setParameter("tutId", tutId);
-        return q.getResultList();
+    public Rol getRolByNombre(String nombre) {
+        Query q = entityManager.createNamedQuery("Rol.findByRolNombre");
+        q.setParameter("rolNombre", nombre);
+        return (Rol) q.getSingleResult();
     }
 
     @Override
-    public List getTutorEstudianteByEstId(int estId) {
-        Query q = entityManager.createNamedQuery("TutorEstudiante.findByEstId");
-        q.setParameter("estId", estId);
+    public List getRolesByStatus(char status) {
+        Query q = entityManager.createNamedQuery("Rol.findByRolStatus");
+        q.setParameter("rolStatus", status);
         return q.getResultList();
-    }
-
-    @Override
-    public TutorEstudiante getTutorEstudiante(Tutor tutor, Estudiante estudiante) {
-        String strQuery = "SELECT te FROM TutorEstudiante te WHERE te.tutor := tesTutor";
-        strQuery += " AND te.estudiante := tesEstudiante";
-        
-        Query q = entityManager.createQuery(strQuery);
-        q.setParameter("primerNombre", tutor);
-        q.setParameter("primerApellido", estudiante);
-        
-        return (TutorEstudiante) q.getSingleResult();
     }
 }

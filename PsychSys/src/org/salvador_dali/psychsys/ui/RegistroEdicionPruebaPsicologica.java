@@ -48,10 +48,10 @@ import org.salvador_dali.psychsys.business.validators.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.validators.FieldValidator;
 import org.salvador_dali.psychsys.business.validators.FormFieldValidator;
-import org.salvador_dali.psychsys.business.JpaCasoDao;
-import org.salvador_dali.psychsys.business.JpaEstudianteDao;
-import org.salvador_dali.psychsys.business.JpaPruebaPsicologicaDao;
-import org.salvador_dali.psychsys.business.JpaUbicacionPruebaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.CasoJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.EstudianteJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.PruebaPsicologicaJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.UbicacionPruebaJpaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
@@ -64,7 +64,7 @@ import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;
 public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
     
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
-    private JpaPruebaPsicologicaDao jpaPPSDao = new JpaPruebaPsicologicaDao();
+    private PruebaPsicologicaJpaDao jpaPPSDao = new PruebaPsicologicaJpaDao();
     private Caso casoPPS;
     private Estudiante estudiantePPS;
     private PruebaPsicologica ppsAEditar;
@@ -550,7 +550,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
                         ubicacionesPrueba.add(ubp);
                     }
                     
-                    JpaUbicacionPruebaDao jpaUbpDao = new JpaUbicacionPruebaDao();
+                    UbicacionPruebaJpaDao jpaUbpDao = new UbicacionPruebaJpaDao();
                     for (UbicacionPrueba up : ubicacionesPrueba) {
                         jpaUbpDao.persist(up);
                     }
@@ -631,7 +631,7 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
 
             if (ppsAEditar.getPpsCorrecionAutomatica() == 'S') {
                 // get ubicaciones pruebas
-                List<UbicacionPrueba> ubicacionesPrueba = new JpaUbicacionPruebaDao().getUbicacionesPruebasByPruebaPsicologica(ppsAEditar);
+                List<UbicacionPrueba> ubicacionesPrueba = new UbicacionPruebaJpaDao().getUbicacionesPruebasByPruebaPsicologica(ppsAEditar);
                 DefaultListModel dlm = (DefaultListModel) lstUbicacionPruebas.getModel();
                 for (UbicacionPrueba up : ubicacionesPrueba) {
                     dlm.addElement(up.getUbpUrl());
@@ -658,11 +658,11 @@ public class RegistroEdicionPruebaPsicologica extends javax.swing.JFrame {
         Object objId = br.getEntitySelectedId();
         if (objId != null) {
             if (cmbCasoEstReferencia.getSelectedItem().toString().equalsIgnoreCase("caso")) {
-                casoPPS = new JpaCasoDao().findById(objId);
+                casoPPS = new CasoJpaDao().findById(objId);
                 txtCasoEstudianteReferencia.setText(casoPPS.toString());
                 estudiantePPS = casoPPS.getReferimiento().getEstudiante();
             } else {
-                estudiantePPS = new JpaEstudianteDao().findById(objId);
+                estudiantePPS = new EstudianteJpaDao().findById(objId);
                 txtCasoEstudianteReferencia.setText(estudiantePPS.toString());
             }
         }

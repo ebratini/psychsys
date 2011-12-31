@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.Date;
 import java.util.List;
@@ -38,17 +38,17 @@ import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaPruebaPsicologicaDao extends JpaDao implements PruebaPsicologicaDao {
+public class PruebaPsicologicaJpaDao extends JpaDao implements PruebaPsicologicaDao {
 
-    public JpaPruebaPsicologicaDao() {
+    public PruebaPsicologicaJpaDao() {
         super(PruebaPsicologica.class);
     }
 
-    public JpaPruebaPsicologicaDao(Class entityClass) {
+    public PruebaPsicologicaJpaDao(Class entityClass) {
         super(PruebaPsicologica.class);
     }
 
-    public JpaPruebaPsicologicaDao(Class entityClass, Map properties) {
+    public PruebaPsicologicaJpaDao(Class entityClass, Map properties) {
         super(PruebaPsicologica.class, properties);
     }
     

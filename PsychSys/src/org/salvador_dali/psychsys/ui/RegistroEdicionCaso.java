@@ -41,8 +41,8 @@ import org.salvador_dali.psychsys.business.validators.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.validators.FieldValidator;
 import org.salvador_dali.psychsys.business.validators.FormFieldValidator;
-import org.salvador_dali.psychsys.business.JpaCasoDao;
-import org.salvador_dali.psychsys.business.JpaReferimientoDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.CasoJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.ReferimientoJpaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 
@@ -53,7 +53,7 @@ import org.salvador_dali.psychsys.model.entities.Referimiento;
 public class RegistroEdicionCaso extends javax.swing.JFrame {
     
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
-    private JpaCasoDao jpaCasoDao = new JpaCasoDao();
+    private CasoJpaDao jpaCasoDao = new CasoJpaDao();
     private Referimiento referimientoCaso;
     private Caso casoAEditar;
 
@@ -643,7 +643,7 @@ public class RegistroEdicionCaso extends javax.swing.JFrame {
         
         Object refId = brr.getEntitySelectedId();
         if (refId != null) {
-            referimientoCaso = new JpaReferimientoDao().findById(refId);
+            referimientoCaso = new ReferimientoJpaDao().findById(refId);
             txtReferimiento.setText(referimientoCaso.toString());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

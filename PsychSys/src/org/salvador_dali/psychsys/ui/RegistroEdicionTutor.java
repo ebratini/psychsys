@@ -39,7 +39,7 @@ import org.salvador_dali.psychsys.business.validators.EmailFieldValidator;
 import org.salvador_dali.psychsys.business.validators.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.validators.FieldValidator;
 import org.salvador_dali.psychsys.business.validators.FormFieldValidator;
-import org.salvador_dali.psychsys.business.JpaTutorDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.TutorJpaDao;
 import org.salvador_dali.psychsys.business.validators.PhoneFieldValidator;
 import org.salvador_dali.psychsys.model.TutorDao;
 import org.salvador_dali.psychsys.model.entities.Tutor;
@@ -479,7 +479,7 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
         String accion = null;
 
         // crear o editar el objeto tutor
-        TutorDao tutDao = new JpaTutorDao();
+        TutorDao tutDao = new TutorJpaDao();
 
         if (tutDao.getTutorByDNI(txtDni.getText()) != null && (modo != null && modo != RegistroEdicionModo.EDICION)) {
             lblDniValMarker.setVisible(true);

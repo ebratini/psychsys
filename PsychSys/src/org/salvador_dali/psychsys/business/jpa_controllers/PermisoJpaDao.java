@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
 import javax.persistence.Query;
@@ -33,7 +33,7 @@ import org.salvador_dali.psychsys.model.entities.Permiso;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaPermisoDao extends JpaDao implements PermisoDao {
+public class PermisoJpaDao extends JpaDao implements PermisoDao {
 
     @Override
     public Permiso getPermisoByNombre(String nombre) {

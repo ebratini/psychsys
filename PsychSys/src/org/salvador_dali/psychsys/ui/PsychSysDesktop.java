@@ -90,12 +90,12 @@ import org.pushingpixels.flamingo.api.ribbon.resize.IconRibbonBandResizePolicy;
 import org.pushingpixels.flamingo.api.ribbon.resize.RibbonBandResizePolicy;
 import org.pushingpixels.flamingo.internal.ui.ribbon.JBandControlPanel;
 import org.salvador_dali.psychsys.business.EntitySearcher;
-import org.salvador_dali.psychsys.business.JpaCasoDao;
-import org.salvador_dali.psychsys.business.JpaEstudianteDao;
-import org.salvador_dali.psychsys.business.JpaHistoriaClinicaDao;
-import org.salvador_dali.psychsys.business.JpaPruebaPsicologicaDao;
-import org.salvador_dali.psychsys.business.JpaReferimientoDao;
-import org.salvador_dali.psychsys.business.JpaTutorDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.CasoJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.EstudianteJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.HistoriaClinicaJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.PruebaPsicologicaJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.ReferimientoJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.TutorJpaDao;
 import org.salvador_dali.psychsys.business.ReportingService;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
@@ -138,12 +138,12 @@ public class PsychSysDesktop extends JRibbonFrame {
     private JLabel usuarioLogueado = new JLabel("Usuario no logueado");
     private JLabel timeDate = new JLabel("Time/Date");
     // jpas
-    private JpaTutorDao jpaTutDao = new JpaTutorDao();
-    private JpaEstudianteDao jpaEstDao = new JpaEstudianteDao();
-    private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
-    private JpaPruebaPsicologicaDao jpaPPSDao = new JpaPruebaPsicologicaDao();
-    private JpaCasoDao jpaCasoDao = new JpaCasoDao();
-    private JpaHistoriaClinicaDao jpaHicDao = new JpaHistoriaClinicaDao();
+    private TutorJpaDao jpaTutDao = new TutorJpaDao();
+    private EstudianteJpaDao jpaEstDao = new EstudianteJpaDao();
+    private ReferimientoJpaDao jpaRefDao = new ReferimientoJpaDao();
+    private PruebaPsicologicaJpaDao jpaPPSDao = new PruebaPsicologicaJpaDao();
+    private CasoJpaDao jpaCasoDao = new CasoJpaDao();
+    private HistoriaClinicaJpaDao jpaHicDao = new HistoriaClinicaJpaDao();
     // reporting services
     private ReportingService reportingService = new ReportingService("com.microsoft.sqlserver.jdbc.SQLServerDriver",
             "jdbc:sqlserver://localhost:1433;databaseName=PsychSysDB", "PsychSysLgn", "psychp@ss00");
@@ -1454,7 +1454,7 @@ public class PsychSysDesktop extends JRibbonFrame {
             getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(2).setEnabled(true);
             getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(3).setEnabled(true);
             if (bandaIndex == 2) {
-                Referimiento ref = new JpaReferimientoDao().findById(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
+                Referimiento ref = new ReferimientoJpaDao().findById(Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString()));
                 //JPopupMenu popMnu = ((JCommandButton) getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(5)).
                 //Component[] mnuItems = ((JCommandButton) getRibbon().getTask(1).getBand(bandaIndex).getControlPanel().getComponent(5)).getComponents();
                             /*if (ref.getRefObservacionesOrientador()!= null) {

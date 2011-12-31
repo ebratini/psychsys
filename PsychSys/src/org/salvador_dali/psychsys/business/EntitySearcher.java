@@ -23,6 +23,12 @@
  */
 package org.salvador_dali.psychsys.business;
 
+import org.salvador_dali.psychsys.business.jpa_controllers.TutorJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.EstudianteJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.ReferimientoJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.PruebaPsicologicaJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.HistoriaClinicaJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.CasoJpaDao;
 import org.salvador_dali.psychsys.business.validators.NumberFieldValidator;
 import org.salvador_dali.psychsys.business.validators.DateFieldValidator;
 import java.io.Serializable;
@@ -145,7 +151,7 @@ public abstract class EntitySearcher {
     public static class TutorBasicEntitySearcher extends EntitySearcher {
 
         {
-            setJpDao(new JpaTutorDao());
+            setJpDao(new TutorJpaDao());
             setFieldsToSearch(new Object[]{"Id", "DNI", "Primer Nombre", "Primer Apellido"});
             setTableCols(new Object[]{"Id", "DNI", "Nombre Tutor"});
             setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
@@ -167,7 +173,7 @@ public abstract class EntitySearcher {
 
         @Override
         public TableModel doSearch(String fieldToSearch, String value) {
-            JpaTutorDao jpaTutDao = (JpaTutorDao) getJpDao();
+            TutorJpaDao jpaTutDao = (TutorJpaDao) getJpDao();
             Object[][] data = null;
             int i = 0;
             if (value.equals("*")) {
@@ -241,7 +247,7 @@ public abstract class EntitySearcher {
     public static class EstudianteBasicEntitySearcher extends EntitySearcher {
 
         {
-            setJpDao(new JpaEstudianteDao());
+            setJpDao(new EstudianteJpaDao());
             setFieldsToSearch(new Object[]{"Id", "DNI", "Primer Nombre", "Primer Apellido"});
             setTableCols(new Object[]{"Id", "DNI", "Nombre Estudiante"});
             setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
@@ -263,7 +269,7 @@ public abstract class EntitySearcher {
 
         @Override
         public TableModel doSearch(String fieldToSearch, String value) {
-            JpaEstudianteDao jpaEstDao = (JpaEstudianteDao) getJpDao();
+            EstudianteJpaDao jpaEstDao = (EstudianteJpaDao) getJpDao();
             Object[][] data = null;
             int i = 0;
             if (value.equals("*")) {
@@ -338,7 +344,7 @@ public abstract class EntitySearcher {
     public static class ReferimientoBasicEntitySearcher extends EntitySearcher {
 
         {
-            setJpDao(new JpaReferimientoDao());
+            setJpDao(new ReferimientoJpaDao());
             setFieldsToSearch(new Object[]{"Id", "Fecha Referimiento", "Año Escolar", "Estudiante", "Referidor"}); // estudiante = 1er nombre + 1er apellido
             setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
             setTableCols(getFieldsToSearch());
@@ -353,7 +359,7 @@ public abstract class EntitySearcher {
 
         @Override
         public TableModel doSearch(String fieldToSearch, String value) {
-            JpaReferimientoDao jpaRefDao = (JpaReferimientoDao) getJpDao();
+            ReferimientoJpaDao jpaRefDao = (ReferimientoJpaDao) getJpDao();
             Object[][] data = null;
             int i = 0;
             if (value.equals("*")) {
@@ -402,7 +408,7 @@ public abstract class EntitySearcher {
                     
                     List<Referimiento> referimientos = new ArrayList<Referimiento>();
                     if (arrNombreEstudiante.length == 2) {
-                        List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
+                        List<Estudiante> estudiantes = (List<Estudiante>) new EstudianteJpaDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
 
                         for (Estudiante est : estudiantes) {
                             List<Referimiento> refList = (List<Referimiento>) jpaRefDao.getReferimientosByEstudiante(est);
@@ -461,7 +467,7 @@ public abstract class EntitySearcher {
     public static class CasoBasicEntitySearcher extends EntitySearcher {
 
         {
-            setJpDao(new JpaCasoDao());
+            setJpDao(new CasoJpaDao());
             setFieldsToSearch(new Object[]{"Id", "Fecha Caso", "Año Escolar", "Referimiento"}); // estudiante = 1er nombre + 1er apellido
             setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
             setTableCols(getFieldsToSearch());
@@ -476,7 +482,7 @@ public abstract class EntitySearcher {
 
         @Override
         public TableModel doSearch(String fieldToSearch, String value) {
-            JpaCasoDao jpaCasoDao = (JpaCasoDao) getJpDao();
+            CasoJpaDao jpaCasoDao = (CasoJpaDao) getJpDao();
             Object[][] data = null;
             int i = 0;
             if (value.equals("*")) {
@@ -521,7 +527,7 @@ public abstract class EntitySearcher {
                     }
                 } else if (fieldToSearch.equalsIgnoreCase("referimiento")) {
                     String refId = value.split(" ")[0];
-                    Referimiento ref = (Referimiento) new JpaReferimientoDao().findById(refId);
+                    Referimiento ref = (Referimiento) new ReferimientoJpaDao().findById(refId);
 
                     Caso caso = jpaCasoDao.getCasoByReferimiento(ref);
                     if (caso != null) {
@@ -559,7 +565,7 @@ public abstract class EntitySearcher {
     public static class PruebaPsicologicaBasicEntitySearcher extends EntitySearcher {
 
         {
-            setJpDao(new JpaPruebaPsicologicaDao());
+            setJpDao(new PruebaPsicologicaJpaDao());
             setFieldsToSearch(new Object[]{"Id", "Fecha Aplicacion", "Nombre Prueba", "Caso", "Estudiante"}); // estudiante = 1er nombre + 1er apellido
             setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
             setTableCols(getFieldsToSearch());
@@ -574,7 +580,7 @@ public abstract class EntitySearcher {
 
         @Override
         public TableModel doSearch(String fieldToSearch, String value) {
-            JpaPruebaPsicologicaDao jpaPPSDao = (JpaPruebaPsicologicaDao) getJpDao();
+            PruebaPsicologicaJpaDao jpaPPSDao = (PruebaPsicologicaJpaDao) getJpDao();
             Object[][] data = null;
             int i = 0;
             if (value.equals("*")) {
@@ -615,7 +621,7 @@ public abstract class EntitySearcher {
                         }
                     }
                 } else if (fieldToSearch.equalsIgnoreCase("caso")) {
-                    Caso caso = (Caso) new JpaCasoDao().findById(Integer.parseInt(value));
+                    Caso caso = (Caso) new CasoJpaDao().findById(Integer.parseInt(value));
 
                     List<PruebaPsicologica> pruebas = (List<PruebaPsicologica>) jpaPPSDao.getPruebasPsicologicasByCaso(caso);
                     if (pruebas != null && pruebas.size() > 0) {
@@ -630,7 +636,7 @@ public abstract class EntitySearcher {
                     
                     List<PruebaPsicologica> pruebas = new ArrayList<PruebaPsicologica>();
                     if (chrEstudiante.length == 2) {
-                        List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(chrEstudiante[0], chrEstudiante[1]);
+                        List<Estudiante> estudiantes = (List<Estudiante>) new EstudianteJpaDao().getEstudiantesByNombreCompleto(chrEstudiante[0], chrEstudiante[1]);
                         
                         for (Estudiante est : estudiantes) {
                             List<PruebaPsicologica> ppList = (List<PruebaPsicologica>) jpaPPSDao.getPruebasPsicologicasByEstudiante(est);
@@ -682,7 +688,7 @@ public abstract class EntitySearcher {
     public static class HistoriaClinicaEntitySearcher extends EntitySearcher {
 
         {
-            setJpDao(new JpaHistoriaClinicaDao());
+            setJpDao(new HistoriaClinicaJpaDao());
             setFieldsToSearch(new Object[]{"Id", "Fecha Creacion", "Estudiante"}); // estudiante = 1er nombre + 1er apellido
             setDefComboBoxModel(new DefaultComboBoxModel(getFieldsToSearch()));
             setTableCols(getFieldsToSearch());
@@ -697,7 +703,7 @@ public abstract class EntitySearcher {
 
         @Override
         public TableModel doSearch(String fieldToSearch, String value) {
-            JpaHistoriaClinicaDao jpaHicDao = (JpaHistoriaClinicaDao) getJpDao();
+            HistoriaClinicaJpaDao jpaHicDao = (HistoriaClinicaJpaDao) getJpDao();
             Object[][] data = null;
             int i = 0;
             if (value.equals("*")) {
@@ -733,7 +739,7 @@ public abstract class EntitySearcher {
                     
                     List<HistoriaClinica> hics = new ArrayList<HistoriaClinica>();
                     if (arrNombreEstudiante.length == 2) {
-                        List<Estudiante> estudiantes = (List<Estudiante>) new JpaEstudianteDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
+                        List<Estudiante> estudiantes = (List<Estudiante>) new EstudianteJpaDao().getEstudiantesByNombreCompleto(arrNombreEstudiante[0], arrNombreEstudiante[1]);
                         
                         for (Estudiante est : estudiantes) {
                             HistoriaClinica hic = jpaHicDao.getHistoriaClinicaByEstudiante(est);

@@ -4,6 +4,7 @@
  */
 package org.salvador_dali.psychsys.business;
 
+import org.salvador_dali.psychsys.business.jpa_controllers.UsuarioJpaDao;
 import org.salvador_dali.psychsys.business.jpa_controllers.BitacoraJpaDao;
 import org.salvador_dali.psychsys.model.FileManager;
 import org.salvador_dali.psychsys.model.XMLFileManager;
@@ -25,7 +26,7 @@ import psychsys.PsychSys;
 public class PsychSysLogger extends AppLogger {
 
     private BitacoraJpaDao jpaBitDao = new BitacoraJpaDao();
-    private JpaUsuarioDao jpUsrDao = new JpaUsuarioDao();
+    private UsuarioJpaDao jpUsrDao = new UsuarioJpaDao();
 
     public PsychSysLogger() {
         createAppFileDir();

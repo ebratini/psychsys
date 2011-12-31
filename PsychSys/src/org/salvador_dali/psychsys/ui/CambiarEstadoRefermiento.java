@@ -32,7 +32,7 @@ package org.salvador_dali.psychsys.ui;
 import java.awt.Frame;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import org.salvador_dali.psychsys.business.JpaReferimientoDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.ReferimientoJpaDao;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 
 /**
@@ -41,7 +41,7 @@ import org.salvador_dali.psychsys.model.entities.Referimiento;
  */
 public class CambiarEstadoRefermiento extends javax.swing.JDialog {
     private Referimiento referimiento;
-    private JpaReferimientoDao jpaRefDao;
+    private ReferimientoJpaDao jpaRefDao;
 
     /** Creates new form CambiarEstadoRefermiento */
     public CambiarEstadoRefermiento(java.awt.Frame parent, boolean modal) {
@@ -50,7 +50,7 @@ public class CambiarEstadoRefermiento extends javax.swing.JDialog {
         getRootPane().setDefaultButton(btnOk);
     }
 
-    public CambiarEstadoRefermiento(Referimiento referimiento, JpaReferimientoDao jpaRefDao, Frame owner, boolean modal) {
+    public CambiarEstadoRefermiento(Referimiento referimiento, ReferimientoJpaDao jpaRefDao, Frame owner, boolean modal) {
         this(owner, modal);
         this.referimiento = referimiento;
         this.jpaRefDao = jpaRefDao;
@@ -64,11 +64,11 @@ public class CambiarEstadoRefermiento extends javax.swing.JDialog {
         this.cmbEstadoReferimiento = cmbEstadoReferimiento;
     }
 
-    public JpaReferimientoDao getJpaRefDao() {
+    public ReferimientoJpaDao getJpaRefDao() {
         return jpaRefDao;
     }
 
-    public void setJpaRefDao(JpaReferimientoDao jpaRefDao) {
+    public void setJpaRefDao(ReferimientoJpaDao jpaRefDao) {
         this.jpaRefDao = jpaRefDao;
     }
 

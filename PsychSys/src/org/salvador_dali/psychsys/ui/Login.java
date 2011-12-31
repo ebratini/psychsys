@@ -33,7 +33,7 @@ import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import org.salvador_dali.psychsys.business.JpaUsuarioDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.UsuarioJpaDao;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
@@ -42,7 +42,7 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  */
 public class Login extends javax.swing.JDialog {
 
-    private JpaUsuarioDao jpaUsrDao = new JpaUsuarioDao();
+    private UsuarioJpaDao jpaUsrDao = new UsuarioJpaDao();
     private Usuario usuario;
 
     /** Creates new form Login */

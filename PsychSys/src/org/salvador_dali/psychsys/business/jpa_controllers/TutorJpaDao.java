@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
 import java.util.Map;
@@ -36,13 +36,13 @@ import org.salvador_dali.psychsys.model.entities.Tutor;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaTutorDao extends JpaDao implements TutorDao {
+public class TutorJpaDao extends JpaDao implements TutorDao {
 
-    public JpaTutorDao() {
+    public TutorJpaDao() {
         super(Tutor.class);
     }
 
-    public JpaTutorDao(Map props) {
+    public TutorJpaDao(Map props) {
         super(Tutor.class, props);
     }
     
