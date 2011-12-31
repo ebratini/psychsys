@@ -39,7 +39,7 @@ import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
-import org.salvador_dali.psychsys.business.BehaviorNotImplementedException;
+import org.salvador_dali.psychsys.business.exceptions.BehaviorNotImplementedException;
 
 /**
  *

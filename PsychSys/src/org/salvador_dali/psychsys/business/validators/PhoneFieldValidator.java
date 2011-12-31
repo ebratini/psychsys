@@ -21,21 +21,26 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.validators;
+
+import org.salvador_dali.psychsys.business.validators.DatePhoneFieldValidator;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class EmailFieldValidator extends FieldValidator {
+public class PhoneFieldValidator extends DatePhoneFieldValidator {
 
-    @Override
-    public boolean validate(String textToValidate) {
-        return true;
+    public PhoneFieldValidator() {
+        this("\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d");
+    }
+
+    public PhoneFieldValidator(String patternToMatch) {
+        super(patternToMatch);
     }
 
     @Override
     public String getValidationMessage() {
-        return "Email no valido";
+        return "Telefono no valido.";
     }
 }

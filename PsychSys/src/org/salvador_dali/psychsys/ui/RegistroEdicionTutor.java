@@ -35,12 +35,12 @@ import java.util.HashMap;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.text.JTextComponent;
-import org.salvador_dali.psychsys.business.EmailFieldValidator;
-import org.salvador_dali.psychsys.business.EmptyFieldValidator;
-import org.salvador_dali.psychsys.business.FieldValidator;
-import org.salvador_dali.psychsys.business.FormFieldValidator;
+import org.salvador_dali.psychsys.business.validators.EmailFieldValidator;
+import org.salvador_dali.psychsys.business.validators.EmptyFieldValidator;
+import org.salvador_dali.psychsys.business.validators.FieldValidator;
+import org.salvador_dali.psychsys.business.validators.FormFieldValidator;
 import org.salvador_dali.psychsys.business.JpaTutorDao;
-import org.salvador_dali.psychsys.business.PhoneFieldValidator;
+import org.salvador_dali.psychsys.business.validators.PhoneFieldValidator;
 import org.salvador_dali.psychsys.model.TutorDao;
 import org.salvador_dali.psychsys.model.entities.Tutor;
 

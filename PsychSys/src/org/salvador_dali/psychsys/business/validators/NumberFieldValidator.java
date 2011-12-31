@@ -1,7 +1,7 @@
 /*
  *  The MIT License
  * 
- *  Copyright 2011 Edwin Bratini.
+ *  Copyright 2011 Edwin Bratini <edwin.bratini@gmail.com>.
  * 
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -21,24 +21,46 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.validators;
+
+import org.salvador_dali.psychsys.business.validators.FieldValidator;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class PhoneFieldValidator extends DatePhoneFieldValidator {
+public class NumberFieldValidator extends FieldValidator {
 
-    public PhoneFieldValidator() {
-        this("\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d");
+    private String pattern = "\\d+";
+    // "(\\d{1,})\\.?(\\d{1,})"
+
+    public NumberFieldValidator() {
     }
 
-    public PhoneFieldValidator(String patternToMatch) {
-        super(patternToMatch);
+    public NumberFieldValidator(String pattern) {
+        this.pattern = pattern;
+    }
+
+    public String getPattern() {
+        return pattern;
+    }
+
+    public void setPattern(String pattern) {
+        this.pattern = pattern;
     }
 
     @Override
+    public boolean validate(String textToValidate) {
+        boolean valid = false;
+        if (Pattern.matches(pattern, textToValidate)) {
+            valid = true;
+        }
+        return valid;
+    }
+    
+    @Override
     public String getValidationMessage() {
-        return "Telefono no valido.";
+        return "Numero no valido.";
     }
 }

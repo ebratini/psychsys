@@ -21,22 +21,39 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  */
+package org.salvador_dali.psychsys.business.validators;
 
-package org.salvador_dali.psychsys.business;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class WebFieldValidator extends FieldValidator {
+public abstract class DatePhoneFieldValidator extends FieldValidator {
+
+    private String patternToMatch;
+
+    public DatePhoneFieldValidator() {
+    }
+
+    public DatePhoneFieldValidator(String patternToMatch) {
+        this.patternToMatch = patternToMatch;
+    }
+
+    public String getPatternToMatch() {
+        return patternToMatch;
+    }
+
+    public void setPatternToMatch(String patternToMatch) {
+        this.patternToMatch = patternToMatch;
+    }
 
     @Override
     public boolean validate(String textToValidate) {
-        return true;
-    }
-    
-    @Override
-    public String getValidationMessage() {
-        return "Web no valido.";
+        if (Pattern.matches(patternToMatch, textToValidate)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
