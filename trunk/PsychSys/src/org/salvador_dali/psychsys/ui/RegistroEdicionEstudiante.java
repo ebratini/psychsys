@@ -46,9 +46,9 @@ import org.salvador_dali.psychsys.business.validators.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.validators.FieldValidator;
 import org.salvador_dali.psychsys.business.validators.FormFieldValidator;
-import org.salvador_dali.psychsys.business.JpaEstudianteDao;
-import org.salvador_dali.psychsys.business.JpaTutorDao;
-import org.salvador_dali.psychsys.business.JpaTutorEstudianteDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.EstudianteJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.TutorJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.TutorEstudianteJpaDao;
 import org.salvador_dali.psychsys.business.validators.PhoneFieldValidator;
 import org.salvador_dali.psychsys.model.EstudianteDao;
 import org.salvador_dali.psychsys.model.TutorEstudianteDao;
@@ -732,7 +732,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "El estudiante a editar no esta establecido", "Editar Estudiante", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            List<TutorEstudiante> tutEsts = (List<TutorEstudiante>) new JpaTutorEstudianteDao().getTutorEstudianteByEstId(estAEditar.getEstId());
+            List<TutorEstudiante> tutEsts = (List<TutorEstudiante>) new TutorEstudianteJpaDao().getTutorEstudianteByEstId(estAEditar.getEstId());
 
             // llenando el map y mostrando en jtable
             Object[][] data = new Object[tutEsts.size()][];
@@ -796,7 +796,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         // si todo esta bien
         statusMessageLabel.setVisible(false);
 
-        EstudianteDao estDao = new JpaEstudianteDao();
+        EstudianteDao estDao = new EstudianteJpaDao();
         if (estDao.getEstudianteByDNI(txtDni.getText()) != null) {
             lblDniValMarker.setVisible(true);
             statusMessageLabel.setText("Ya existe un estudiante con DNI digitado.");
@@ -863,7 +863,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                 estudiante.getTutorEstudianteCollection().add(tutEst);
 
                 try {
-                    new JpaTutorEstudianteDao().persist(tutEst);
+                    new TutorEstudianteJpaDao().persist(tutEst);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, String.format("<html><p>Error al crear registro de estudiante<br />%s</p></html>",
                             e.getMessage()), "Registrar Estudiante", JOptionPane.ERROR_MESSAGE);
@@ -959,14 +959,14 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
 
         Object tutId = brt.getEntitySelectedId();
         if (tutId != null) {
-            Tutor tut = new JpaTutorDao().findById(tutId);
+            Tutor tut = new TutorJpaDao().findById(tutId);
             if ((modo.equals(RegistroEdicionModo.REGISTRO) && tutores.containsValue(tut))
                     || (modo.equals(RegistroEdicionModo.EDICION) && tutoresEstudiantes.containsValue(new TutorEstudiante(tut.getTutId(), estAEditar.getEstId())))) {
                 JOptionPane.showMessageDialog(this, "Este tutor ya aparece listado", "Agregar Tutor", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             String relFamiliar = JOptionPane.showInputDialog(this, "Relacion Familiar", "Relacion Familiar Tutor-Estudiante", JOptionPane.QUESTION_MESSAGE);
-            //Tutor tut = new JpaTutorDao().findById(tutId);
+            //Tutor tut = new TutorJpaDao().findById(tutId);
             DefaultTableModel dtm = (DefaultTableModel) tblTutores.getModel();
             dtm.addRow(new Object[]{tut.toString(), relFamiliar});
             //if (modo.equals(RegistroEdicionModo.REGISTRO)) {
@@ -1125,14 +1125,14 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
     }
 
     private void removerTutor(int tutRow) {
-        TutorEstudianteDao tutEstDao = new JpaTutorEstudianteDao();
+        TutorEstudianteDao tutEstDao = new TutorEstudianteJpaDao();
         TutorEstudiante tutEst = tutEstDao.getTutorEstudiante(tutores.get(tutRow), estAEditar);
         tutEstDao.remove(tutEst);
     }
 
     private void agregarTutor() {
         Tutor tutAgregar = tutores.get(tutores.size() - 1);
-        new JpaTutorEstudianteDao().persist(new TutorEstudiante(new TutorEstudiantePK(tutAgregar.getTutId(), estAEditar.getEstId())));
+        new TutorEstudianteJpaDao().persist(new TutorEstudiante(new TutorEstudiantePK(tutAgregar.getTutId(), estAEditar.getEstId())));
     }
 
     private void removerTutores() {

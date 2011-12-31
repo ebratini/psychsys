@@ -44,9 +44,9 @@ import org.salvador_dali.psychsys.business.EntityEditor;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.validators.FieldValidator;
 import org.salvador_dali.psychsys.business.validators.FormFieldValidator;
-import org.salvador_dali.psychsys.business.JpaEstudianteDao;
-import org.salvador_dali.psychsys.business.JpaHistoriaClinicaDao;
-import org.salvador_dali.psychsys.business.JpaUsuarioDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.EstudianteJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.HistoriaClinicaJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.UsuarioJpaDao;
 import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.AntNeonatal;
 import org.salvador_dali.psychsys.model.entities.AntPersMadre;
@@ -65,7 +65,7 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
 public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
-    private JpaHistoriaClinicaDao jpaHicDao = new JpaHistoriaClinicaDao();
+    private HistoriaClinicaJpaDao jpaHicDao = new HistoriaClinicaJpaDao();
     private EntityEditor enityEditor = new EntityEditor(jpaHicDao);
     private Usuario usuario;
     private Estudiante estudiante;
@@ -462,7 +462,7 @@ public class RegistroEdicionHistoriaClinica extends javax.swing.JFrame {
 
         Object estId = bre.getEntitySelectedId();
         if (estId != null) {
-            estudiante = new JpaEstudianteDao().findById(estId);
+            estudiante = new EstudianteJpaDao().findById(estId);
             txtEstudiante.setText(estudiante.toString());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

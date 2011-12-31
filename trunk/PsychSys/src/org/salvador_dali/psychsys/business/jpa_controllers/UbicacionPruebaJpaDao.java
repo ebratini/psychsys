@@ -21,40 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.JpaDao;
-import org.salvador_dali.psychsys.model.RolDao;
-import org.salvador_dali.psychsys.model.entities.Rol;
+import org.salvador_dali.psychsys.model.UbicacionPruebaDao;
+import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
+import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaRolDao extends JpaDao implements RolDao {
+public class UbicacionPruebaJpaDao extends JpaDao implements UbicacionPruebaDao {
 
-    public JpaRolDao() {
-        super(Rol.class);
+    public UbicacionPruebaJpaDao() {
+        super(UbicacionPrueba.class);
     }
 
-    public JpaRolDao(Class entityClass, Map properties) {
+    public UbicacionPruebaJpaDao(Class entityClass, Map properties) {
         super(entityClass, properties);
     }
-    
-    @Override
-    public Rol getRolByNombre(String nombre) {
-        Query q = entityManager.createNamedQuery("Rol.findByRolNombre");
-        q.setParameter("rolNombre", nombre);
-        return (Rol) q.getSingleResult();
-    }
 
     @Override
-    public List getRolesByStatus(char status) {
-        Query q = entityManager.createNamedQuery("Rol.findByRolStatus");
-        q.setParameter("rolStatus", status);
+    public List getUbicacionesPruebasByPruebaPsicologica(PruebaPsicologica pruebaPsicologica) {
+        Query q = entityManager.createQuery("SELECT ubp FROM UbicacionPrueba ubp WHERE ubp.pruebaPsicologica = :ubpPruebaPsicologica");
+        q.setParameter("ubpPruebaPsicologica", pruebaPsicologica);
         return q.getResultList();
     }
 }

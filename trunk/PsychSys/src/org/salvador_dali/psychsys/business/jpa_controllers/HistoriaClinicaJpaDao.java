@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -38,13 +38,13 @@ import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaHistoriaClinicaDao extends JpaDao implements HistoriaClinicaDao {
+public class HistoriaClinicaJpaDao extends JpaDao implements HistoriaClinicaDao {
 
-    public JpaHistoriaClinicaDao() {
+    public HistoriaClinicaJpaDao() {
         super(HistoriaClinica.class);
     }
     
-    public JpaHistoriaClinicaDao(Class entityClass, Map properties) {
+    public HistoriaClinicaJpaDao(Class entityClass, Map properties) {
         super(HistoriaClinica.class, properties);
     }
     

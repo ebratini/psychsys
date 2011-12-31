@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.Date;
 import java.util.List;
@@ -37,13 +37,13 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaReferimientoDao extends JpaDao implements ReferimientoDao {
+public class ReferimientoJpaDao extends JpaDao implements ReferimientoDao {
 
-    public JpaReferimientoDao() {
+    public ReferimientoJpaDao() {
         super(Referimiento.class);
     }
 
-    public JpaReferimientoDao(Map props) {
+    public ReferimientoJpaDao(Map props) {
         super(Referimiento.class, props);
     }
 

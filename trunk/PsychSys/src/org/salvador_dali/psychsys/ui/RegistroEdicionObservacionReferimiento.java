@@ -38,7 +38,7 @@ import org.salvador_dali.psychsys.business.validators.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.validators.FieldValidator;
 import org.salvador_dali.psychsys.business.validators.FormFieldValidator;
-import org.salvador_dali.psychsys.business.JpaReferimientoDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.ReferimientoJpaDao;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 
@@ -51,7 +51,7 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
     private RegistroEdicionModo modo = RegistroEdicionModo.REGISTRO;
     private Usuario usuario;
     private Referimiento referimiento, refAEditar;
-    private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
+    private ReferimientoJpaDao jpaRefDao = new ReferimientoJpaDao();
 
     /** Creates new form RegistroEdicionObservacionReferimiento */
     public RegistroEdicionObservacionReferimiento() {
@@ -345,7 +345,7 @@ public class RegistroEdicionObservacionReferimiento extends javax.swing.JFrame {
 
         Object refId = brr.getEntitySelectedId();
         if (refId != null) {
-            referimiento = new JpaReferimientoDao().findById(refId);
+            referimiento = new ReferimientoJpaDao().findById(refId);
             txtReferimiento.setText(referimiento.toString());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

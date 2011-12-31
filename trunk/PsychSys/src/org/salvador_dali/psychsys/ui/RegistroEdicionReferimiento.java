@@ -41,8 +41,8 @@ import org.salvador_dali.psychsys.business.validators.EmptyFieldValidator;
 import org.salvador_dali.psychsys.business.EntitySearcher;
 import org.salvador_dali.psychsys.business.validators.FieldValidator;
 import org.salvador_dali.psychsys.business.validators.FormFieldValidator;
-import org.salvador_dali.psychsys.business.JpaEstudianteDao;
-import org.salvador_dali.psychsys.business.JpaReferimientoDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.EstudianteJpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.ReferimientoJpaDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.Referimiento;
 import org.salvador_dali.psychsys.model.entities.Usuario;
@@ -54,7 +54,7 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
 public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
     private RegistroEdicionModo modo;
-    private JpaReferimientoDao jpaRefDao = new JpaReferimientoDao();
+    private ReferimientoJpaDao jpaRefDao = new ReferimientoJpaDao();
     private Estudiante estudianteReferemiento;
     private Usuario usuario;
     private Referimiento refAEditar;
@@ -438,7 +438,7 @@ public class RegistroEdicionReferimiento extends javax.swing.JFrame {
 
         Object estId = bre.getEntitySelectedId();
         if (estId != null) {
-            estudianteReferemiento = new JpaEstudianteDao().findById(estId);
+            estudianteReferemiento = new EstudianteJpaDao().findById(estId);
             txtEstudiante.setText(estudianteReferemiento.toString());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.business;
+package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.Date;
 import java.util.List;
@@ -37,13 +37,13 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
-public class JpaUsuarioDao extends JpaDao implements UsuarioDao {
+public class UsuarioJpaDao extends JpaDao implements UsuarioDao {
 
-    public JpaUsuarioDao() {
+    public UsuarioJpaDao() {
         super(Usuario.class);
     }
 
-    public JpaUsuarioDao(Class entityClass, Map properties) {
+    public UsuarioJpaDao(Class entityClass, Map properties) {
         super(Usuario.class, properties);
     }
     
