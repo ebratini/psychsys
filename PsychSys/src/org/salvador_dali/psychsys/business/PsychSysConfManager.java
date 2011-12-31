@@ -10,13 +10,13 @@ package org.salvador_dali.psychsys.business;
  */
 public class PsychSysConfManager {
 
-    private String syscafilConfFilePath = "META-INF\\psychsys_conf.xml";
+    private String psychSysConfFilePath = "META-INF\\psychsys_conf.xml";
 
-    public String getSyscafilConfFilePath() {
-        return syscafilConfFilePath;
+    public String getPsychSysConfFilePath() {
+        return psychSysConfFilePath;
     }
 
-    public void setSyscafilConfFilePath(String syscafilConfFilePath) {
-        this.syscafilConfFilePath = syscafilConfFilePath;
+    public void setPsychSysConfFilePath(String psychSysConfFilePath) {
+        this.psychSysConfFilePath = psychSysConfFilePath;
     }
 }
