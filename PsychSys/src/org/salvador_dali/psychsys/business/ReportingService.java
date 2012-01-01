@@ -45,7 +45,7 @@ public class ReportingService {
     private String pass;
     private Connection conn;
 
-    private ReportingService() {
+    public ReportingService() {
     }
 
     public ReportingService(Connection conn) {

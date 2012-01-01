@@ -58,7 +58,6 @@ import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JViewport;
-import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -815,7 +814,7 @@ public class PsychSysDesktop extends JRibbonFrame {
 
 
         // nuevo button
-        taskbarNuevoButton = new JCommandButton("", getResizableIconFromResource("/resources/images/new_15x15.png"));
+        taskbarNuevoButton = new JCommandButton("", getResizableIconFromResource("/resources/images/new_entity.png"));
         taskbarNuevoButton.setCommandButtonKind(CommandButtonKind.POPUP_ONLY);
         taskbarNuevoButton.addActionListener(new ActionListener() {
 

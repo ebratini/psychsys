@@ -36,7 +36,7 @@ import sun.misc.BASE64Encoder;
  */
 public final class SecurityService {
 
-    private static SecurityService passwordServiceInstance;
+    private static SecurityService securityserviceInstance;
     public enum EncriptionMethod {
         SHA
     }
@@ -69,9 +69,9 @@ public final class SecurityService {
     }
 
     public static synchronized SecurityService getInstance() {
-        if (passwordServiceInstance == null) {
-            passwordServiceInstance = new SecurityService();
+        if (securityserviceInstance == null) {
+            securityserviceInstance = new SecurityService();
         }
-        return passwordServiceInstance;
+        return securityserviceInstance;
     }
 }
