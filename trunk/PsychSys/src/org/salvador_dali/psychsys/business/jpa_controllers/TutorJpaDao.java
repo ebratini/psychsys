@@ -28,7 +28,6 @@ import java.util.Map;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.TutorDao;
 import org.salvador_dali.psychsys.model.entities.Tutor;
 

@@ -27,7 +27,6 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.BitacoraDao;
-import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**

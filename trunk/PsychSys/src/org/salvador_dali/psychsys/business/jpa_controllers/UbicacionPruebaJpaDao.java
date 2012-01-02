@@ -26,7 +26,6 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
-import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.UbicacionPruebaDao;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
 import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;

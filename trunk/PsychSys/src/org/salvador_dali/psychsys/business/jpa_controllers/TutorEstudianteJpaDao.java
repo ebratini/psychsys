@@ -25,7 +25,6 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
 import javax.persistence.Query;
-import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.TutorEstudianteDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.Tutor;

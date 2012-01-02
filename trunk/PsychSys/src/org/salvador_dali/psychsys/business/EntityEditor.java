@@ -25,7 +25,7 @@ package org.salvador_dali.psychsys.business;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import org.salvador_dali.psychsys.model.JpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.JpaDao;
 
 /**
  *
