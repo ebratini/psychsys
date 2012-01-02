@@ -488,43 +488,48 @@ public class RegistroEdicionTutor extends javax.swing.JFrame {
             statusMessageLabel.setVisible(true);
             return;
         }
-
-        // crear el objeto tutorDao e invocar el metodo persist del mismo     
+        
         try {
-            if (this.modo != null && this.modo.equals(RegistroEdicionModo.REGISTRO)) {
-                accion = "crear";
+            // crear el objeto tutorDao e invocar el metodo persist del mismo     
+            if (this.modo != null) {
+                switch (this.modo) {
+                    case EDICION:
+                        accion = "editar";
 
-                Tutor tutor = new Tutor(null, txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
-                        txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
-                        cmbEstadoCivil.getSelectedItem().toString(), 'A');
+                        if (tutorAEditar != null) {
+                            tutorAEditar.setTutDni(txtDni.getText());
+                            tutorAEditar.setTutTipoDni(cmbTipoDni.getSelectedItem().toString());
+                            tutorAEditar.setTutPrimerApellido(txtPrimerApellido.getText());
+                            tutorAEditar.setTutSegundoApellido(txtSegundoApellido.getText());
+                            tutorAEditar.setTutPrimerNombre(txtPrimerNombre.getText());
+                            tutorAEditar.setTutDireccion(txaDireccion.getText());
+                            tutorAEditar.setTutNacionalidad(txtNacionalidad.getText());
+                            tutorAEditar.setTutGenero(cmbGenero.getSelectedItem().toString().charAt(0));
+                            tutorAEditar.setTutEstadoCivil(cmbEstadoCivil.getSelectedItem().toString());
+                            tutorAEditar.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
+                            tutorAEditar.setTutTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
+                            tutorAEditar.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
 
-                tutor.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
-                tutor.setTutTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
-                tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
-                tutDao.persist(tutor);
-            } else if (this.modo != null && this.modo.equals(RegistroEdicionModo.EDICION)) {
-                accion = "editar";
+                            tutDao.update(tutorAEditar);
+                            trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
+                        } else {
+                            statusMessageLabel.setText("Error al editar tutor, favor cierre y vuelva a intentarlo.");
+                            statusMessageLabel.setForeground(Color.red);
+                            return;
+                        }
+                        break;
+                    case REGISTRO:
+                        accion = "crear";
 
-                if (tutorAEditar != null) {
-                    tutorAEditar.setTutDni(txtDni.getText());
-                    tutorAEditar.setTutTipoDni(cmbTipoDni.getSelectedItem().toString());
-                    tutorAEditar.setTutPrimerApellido(txtPrimerApellido.getText());
-                    tutorAEditar.setTutSegundoApellido(txtSegundoApellido.getText());
-                    tutorAEditar.setTutPrimerNombre(txtPrimerNombre.getText());
-                    tutorAEditar.setTutDireccion(txaDireccion.getText());
-                    tutorAEditar.setTutNacionalidad(txtNacionalidad.getText());
-                    tutorAEditar.setTutGenero(cmbGenero.getSelectedItem().toString().charAt(0));
-                    tutorAEditar.setTutEstadoCivil(cmbEstadoCivil.getSelectedItem().toString());
-                    tutorAEditar.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
-                    tutorAEditar.setTutTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
-                    tutorAEditar.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
+                        Tutor tutor = new Tutor(null, txtDni.getText(), cmbTipoDni.getSelectedItem().toString(), txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+                                txtPrimerNombre.getText(), txaDireccion.getText(), txtNacionalidad.getText(), cmbGenero.getSelectedItem().toString().charAt(0),
+                                cmbEstadoCivil.getSelectedItem().toString(), 'A');
 
-                    tutDao.update(tutorAEditar);
-                    trabajoCompletoMensaje = trabajoCompletoMensaje.replace("registrado", "editado");
-                } else {
-                    statusMessageLabel.setText("Error al editar tutor, favor cierre y vuelva a intentarlo.");
-                    statusMessageLabel.setForeground(Color.red);
-                    return;
+                        tutor.setTutSegundoNombre((!txtSegundoNombre.getText().isEmpty() ? txtSegundoNombre.getText() : null));
+                        tutor.setTutTelefono((!ftfTelefono.getText().trim().equalsIgnoreCase("(   )    -") ? extractTel(ftfTelefono.getText()) : null));
+                        tutor.setTutEmail((!txtEmail.getText().isEmpty() ? txtEmail.getText() : null));
+                        tutDao.persist(tutor);
+                        break;
                 }
             }
         } catch (Exception e) {

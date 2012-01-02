@@ -30,7 +30,6 @@ import java.util.Map;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.HistoriaClinicaDao;
-import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
 

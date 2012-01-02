@@ -41,23 +41,63 @@ public class ReportingService {
 
     private String dbDriver;
     private String urlHost;
-    private String user;
-    private String pass;
-    private Connection conn;
+    private String dbUser;
+    private String password;
+    private Connection dbConnection;
 
     public ReportingService() {
     }
 
     public ReportingService(Connection conn) {
-        this.conn = conn;
+        this.dbConnection = conn;
     }
 
     public ReportingService(String dbDriver, String urlHost, String user, String pass) {
         this.dbDriver = dbDriver;
         this.urlHost = urlHost;
-        this.user = user;
-        this.pass = pass;
+        this.dbUser = user;
+        this.password = pass;
         initConn();
+    }
+
+    public Connection getDbConnection() {
+        return dbConnection;
+    }
+
+    public void setDbConnection(Connection dbConnection) {
+        this.dbConnection = dbConnection;
+    }
+
+    public String getDbDriver() {
+        return dbDriver;
+    }
+
+    public void setDbDriver(String dbDriver) {
+        this.dbDriver = dbDriver;
+    }
+
+    public String getDbUser() {
+        return dbUser;
+    }
+
+    public void setDbUser(String dbUser) {
+        this.dbUser = dbUser;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUrlHost() {
+        return urlHost;
+    }
+
+    public void setUrlHost(String urlHost) {
+        this.urlHost = urlHost;
     }
     
     private void initConn() {
@@ -68,7 +108,7 @@ public class ReportingService {
         }
 
         try {
-            conn = DriverManager.getConnection(urlHost, user, pass);
+            dbConnection = DriverManager.getConnection(urlHost, dbUser, password);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -76,7 +116,7 @@ public class ReportingService {
 
     public JPanel runReport(String reportFile, Map parameters) {
         try {
-            JasperPrint jp = JasperFillManager.fillReport(reportFile, parameters, conn);
+            JasperPrint jp = JasperFillManager.fillReport(reportFile, parameters, dbConnection);
             JRViewer jvReport = new JRViewer(jp);
             if (jp.getPages().size() < 1) {
                 return null;

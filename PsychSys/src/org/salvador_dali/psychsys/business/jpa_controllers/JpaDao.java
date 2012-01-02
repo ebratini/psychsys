@@ -21,9 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.salvador_dali.psychsys.model;
+package org.salvador_dali.psychsys.business.jpa_controllers;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -31,6 +30,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import org.salvador_dali.psychsys.model.Dao;
 
 /**
  *
@@ -56,6 +58,10 @@ public abstract class JpaDao implements Dao {
     
     public JpaDao(Class entityClass) {
         this.entityClass = entityClass;
+    }
+    
+    public EntityManager getEntityManager() {
+        return emf.createEntityManager();
     }
     
     @Override
@@ -96,7 +102,47 @@ public abstract class JpaDao implements Dao {
     }
     
     public void close() {
-        emf.close();
-        entityManager.close();
+        if (emf != null) {
+            emf.close();
+        }
+        
+        if (entityManager != null) {
+            entityManager.close();
+        }
+    }
+    
+    public List findEntities() {
+        return findEntities(true, -1, -1);
+    }
+
+    public List findEntities(int maxResults, int firstResult) {
+        return findEntities(false, maxResults, firstResult);
+    }
+
+    private List findEntities(boolean all, int maxResults, int firstResult) {
+        try {
+            CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(entityClass));
+            Query q = entityManager.createQuery(cq);
+            if (!all) {
+                q.setMaxResults(maxResults);
+                q.setFirstResult(firstResult);
+            }
+            return q.getResultList();
+        } finally {
+            entityManager.close();
+        }
+    }
+    
+    public int getEntityCount() {
+        try {
+            CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
+            Root rt = cq.from(entityClass);
+            cq.select(entityManager.getCriteriaBuilder().count(rt));
+            Query q = entityManager.createQuery(cq);
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            entityManager.close();
+        }
     }
 }

@@ -40,7 +40,7 @@ import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
-import org.salvador_dali.psychsys.model.JpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.HistoriaClinica;

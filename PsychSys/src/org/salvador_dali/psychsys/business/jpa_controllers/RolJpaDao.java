@@ -26,7 +26,6 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
-import org.salvador_dali.psychsys.model.JpaDao;
 import org.salvador_dali.psychsys.model.RolDao;
 import org.salvador_dali.psychsys.model.entities.Rol;
 

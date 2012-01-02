@@ -47,7 +47,7 @@ import org.salvador_dali.psychsys.business.validators.FormFieldValidator;
 import org.salvador_dali.psychsys.business.jpa_controllers.EstudianteJpaDao;
 import org.salvador_dali.psychsys.business.jpa_controllers.HistoriaClinicaJpaDao;
 import org.salvador_dali.psychsys.business.jpa_controllers.UsuarioJpaDao;
-import org.salvador_dali.psychsys.model.JpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.JpaDao;
 import org.salvador_dali.psychsys.model.entities.AntNeonatal;
 import org.salvador_dali.psychsys.model.entities.AntPersMadre;
 import org.salvador_dali.psychsys.model.entities.AntPsicomotrizLenguaje;

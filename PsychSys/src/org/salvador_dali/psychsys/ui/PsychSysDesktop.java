@@ -96,7 +96,7 @@ import org.salvador_dali.psychsys.business.jpa_controllers.PruebaPsicologicaJpaD
 import org.salvador_dali.psychsys.business.jpa_controllers.ReferimientoJpaDao;
 import org.salvador_dali.psychsys.business.jpa_controllers.TutorJpaDao;
 import org.salvador_dali.psychsys.business.ReportingService;
-import org.salvador_dali.psychsys.model.JpaDao;
+import org.salvador_dali.psychsys.business.jpa_controllers.JpaDao;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
@@ -1319,33 +1319,39 @@ public class PsychSysDesktop extends JRibbonFrame {
     }
 
     private void registrarEditarTutor(RegistroEdicionModo modo) {
-        if (modo != null && modo.equals(RegistroEdicionModo.REGISTRO)) {
-            final RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
-            ret.setLocationRelativeTo(this);
-            java.awt.EventQueue.invokeLater(new Runnable() {
+        if (modo != null) {
+            final RegistroEdicionTutor ret;
+            switch (modo) {
+                case EDICION:
+                    JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
+                    JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
+                    Tutor tut = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
 
-                @Override
-                public void run() {
-                    ret.setVisible(true);
-                }
-            });
-        } else if (modo != null && modo.equals(RegistroEdicionModo.EDICION)) {
-            JViewport vp = (JViewport) ((JScrollPane) pnlBody.getComponent(pnlBody.getSelectedIndex())).getComponent(0);
-            JTable tblEntidades = ((VistaGeneralEntidades) vp.getComponent(0)).getTblEntidades();
-            Tutor tut = jpaTutDao.findById(Integer.parseInt(tblEntidades.getValueAt(tblEntidades.getSelectedRow(), 0).toString()));
+                    ret = new RegistroEdicionTutor(modo);
+                    ret.setTitle("Editar Tutor");
+                    ret.setTutorAEditar(tut);
+                    ret.setLocationRelativeTo(this);
+                    java.awt.EventQueue.invokeLater(new Runnable() {
 
-            final RegistroEdicionTutor ret = new RegistroEdicionTutor(modo);
-            ret.setTitle("Editar Tutor");
-            ret.setTutorAEditar(tut);
-            ret.setLocationRelativeTo(this);
-            java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            ret.setVisible(true);
+                        }
+                    });
+                    tblEntidades.requestFocus();
+                    break;
+                case REGISTRO:
+                    ret = new RegistroEdicionTutor(modo);
+                    ret.setLocationRelativeTo(this);
+                    java.awt.EventQueue.invokeLater(new Runnable() {
 
-                @Override
-                public void run() {
-                    ret.setVisible(true);
-                }
-            });
-            tblEntidades.requestFocus();
+                        @Override
+                        public void run() {
+                            ret.setVisible(true);
+                        }
+                    });
+                    break;
+            }
         }
     }
 
@@ -1428,7 +1434,6 @@ public class PsychSysDesktop extends JRibbonFrame {
                     if (opAccion != null && opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.PERMENTE)) {
                         jpaDao.remove(entity);
                     } else if (opAccion != null && opAccion.equals(EliminacionRegistroDialog.OPCION_ACCION_ELIMINACION.CAMBIAR_STATUS)) {
-                        //entity.setTutStatus('I');
                         inactivaEntidad(entity);
                         jpaDao.update(entity);
                     }
