@@ -53,11 +53,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Bitacora.findByBitFecha", query = "SELECT b FROM Bitacora b WHERE b.bitFecha = :bitFecha"),
     @NamedQuery(name = "Bitacora.findByBitFuente", query = "SELECT b FROM Bitacora b WHERE b.bitFuente = :bitFuente"),
     @NamedQuery(name = "Bitacora.findByBitCategoria", query = "SELECT b FROM Bitacora b WHERE b.bitCategoria = :bitCategoria"),
-    @NamedQuery(name = "Bitacora.findByBitDescripcion", query = "SELECT b FROM Bitacora b WHERE b.bitDescripcion = :bitDescripcion")})
+    @NamedQuery(name = "Bitacora.findByBitDescripcion", query = "SELECT b FROM Bitacora b WHERE b.bitDescripcion = :bitDescripcion"),
+    @NamedQuery(name = "Bitacora.findByUsuario", query = "SELECT bit FROM Bitacora ubp WHERE bit.usuario = :bitUsuario")})
 public class Bitacora implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "bit_id")
     private Integer bitId;
@@ -165,5 +167,4 @@ public class Bitacora implements Serializable {
     public String toString() {
         return "org.salvador_dali.psychsys.model.entities.Bitacora[ bitId=" + bitId + " ]";
     }
-    
 }

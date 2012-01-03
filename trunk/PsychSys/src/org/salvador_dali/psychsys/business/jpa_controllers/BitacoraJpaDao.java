@@ -37,7 +37,7 @@ public class BitacoraJpaDao extends JpaDao implements BitacoraDao {
 
     @Override
     public List getBitacorasByUsuario(Usuario usuario) {
-        Query q = entityManager.createQuery("SELECT bit FROM Bitacora ubp WHERE bit.usuario = :bitUsuario");
+        Query q = entityManager.createNamedQuery("Bitacora.findByUsuario");
         q.setParameter("bitUsuario", usuario);
         return q.getResultList();
     }
