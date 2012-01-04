@@ -24,6 +24,7 @@
 package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.PermisoDao;
 import org.salvador_dali.psychsys.model.entities.Permiso;
@@ -36,15 +37,25 @@ public class PermisoJpaDao extends JpaDao implements PermisoDao {
 
     @Override
     public Permiso getPermisoByNombre(String nombre) {
-        Query q = entityManager.createNamedQuery("Permiso.findByPerNombre");
-        q.setParameter("perNombre", nombre);
-        return (Permiso) q.getSingleResult();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Permiso.findByPerNombre");
+            q.setParameter("perNombre", nombre);
+            return (Permiso) q.getSingleResult();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getPermisosByStatus(char status) {
-        Query q = entityManager.createNamedQuery("Permiso.findByPerStatus");
-        q.setParameter("perStatus", status);
-        return q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Permiso.findByPerStatus");
+            q.setParameter("perStatus", status);
+            return q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

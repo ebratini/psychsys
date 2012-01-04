@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.UbicacionPruebaDao;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
@@ -46,8 +47,13 @@ public class UbicacionPruebaJpaDao extends JpaDao implements UbicacionPruebaDao 
 
     @Override
     public List getUbicacionesPruebasByPruebaPsicologica(PruebaPsicologica pruebaPsicologica) {
-        Query q = entityManager.createQuery("SELECT ubp FROM UbicacionPrueba ubp WHERE ubp.pruebaPsicologica = :ubpPruebaPsicologica");
-        q.setParameter("ubpPruebaPsicologica", pruebaPsicologica);
-        return q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createQuery("SELECT ubp FROM UbicacionPrueba ubp WHERE ubp.pruebaPsicologica = :ubpPruebaPsicologica");
+            q.setParameter("ubpPruebaPsicologica", pruebaPsicologica);
+            return q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

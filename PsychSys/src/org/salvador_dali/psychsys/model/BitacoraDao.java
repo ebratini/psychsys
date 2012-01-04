@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.model;
 
 import java.util.Date;
 import java.util.List;
+import org.salvador_dali.psychsys.model.entities.Bitacora;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
@@ -33,11 +34,11 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  */
 public interface BitacoraDao extends Dao {
 
-    public List getBitacorasByUsuario(Usuario usuario);
+    public List<Bitacora> getBitacorasByUsuario(Usuario usuario);
 
-    public List getBitacorasByFecha(Date fecha);
+    public List<Bitacora> getBitacorasByFecha(Date fecha);
 
-    public List getBitacorasByFuente(String fuente);
+    public List<Bitacora> getBitacorasByFuente(String fuente);
 
-    public List getBitacorasByCategoria(String categoria);
+    public List<Bitacora> getBitacorasByCategoria(String categoria);
 }

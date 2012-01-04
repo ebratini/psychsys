@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.EstudianteDao;
@@ -52,44 +53,66 @@ public class EstudianteJpaDao extends JpaDao implements EstudianteDao {
     
     @Override
     public Estudiante getEstudianteByDNI(String dni) {
+        EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Estudiante.findByEstDni");
             q.setParameter("estDni", dni);
             return (Estudiante) q.getSingleResult();
         } catch (NoResultException nre) {
             return null;
+        } finally {
+            entityManager.close();
         }
     }
 
     @Override
     public List getEstudiantesByPrimerApellido(String primerApellido) {
-        Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerApellido");
-        q.setParameter("estPrimerApellido", primerApellido.toLowerCase());
-        return (List<Estudiante>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerApellido");
+            q.setParameter("estPrimerApellido", primerApellido.toLowerCase());
+            return (List<Estudiante>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getEstudiantesByPrimerNombre(String primerNombre) {
-        Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerNombre");
-        q.setParameter("estPrimerNombre", primerNombre.toLowerCase());
-        return (List<Estudiante>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerNombre");
+            q.setParameter("estPrimerNombre", primerNombre.toLowerCase());
+            return (List<Estudiante>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getEstudiantesByStatus(char status) {
-        Query q = entityManager.createNamedQuery("Estudiante.findByEstStatus");
-        q.setParameter("estStatus", status);
-        return (List<Estudiante>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Estudiante.findByEstStatus");
+            q.setParameter("estStatus", status);
+            return (List<Estudiante>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getEstudiantesByNombreCompleto(String primerNombre, String primerApellido) {
-        String strQuery = "SELECT e FROM Estudiante e WHERE lower(e.estPrimerNombre) = lower(:primerNombre)";
-        strQuery += " AND lower(e.estPrimerApellido) = lower(:primerApellido)";
-        
-        Query q = entityManager.createQuery(strQuery);
-        q.setParameter("primerNombre", primerNombre.toLowerCase());
-        q.setParameter("primerApellido", primerApellido.toLowerCase());
-        return (List<Estudiante>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            String strQuery = "SELECT e FROM Estudiante e WHERE e.estPrimerNombre = :primerNombre";
+            strQuery += " AND e.estPrimerApellido = :primerApellido";
+            Query q = entityManager.createQuery(strQuery);
+            q.setParameter("primerNombre", primerNombre.toLowerCase());
+            q.setParameter("primerApellido", primerApellido.toLowerCase());
+            return (List<Estudiante>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

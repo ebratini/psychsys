@@ -25,8 +25,10 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.BitacoraDao;
+import org.salvador_dali.psychsys.model.entities.Bitacora;
 import org.salvador_dali.psychsys.model.entities.Usuario;
 
 /**
@@ -36,30 +38,50 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
 public class BitacoraJpaDao extends JpaDao implements BitacoraDao {
 
     @Override
-    public List getBitacorasByUsuario(Usuario usuario) {
-        Query q = entityManager.createNamedQuery("Bitacora.findByUsuario");
-        q.setParameter("bitUsuario", usuario);
-        return q.getResultList();
+    public List<Bitacora> getBitacorasByUsuario(Usuario usuario) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Bitacora.findByUsuario");
+            q.setParameter("bitUsuario", usuario);
+            return (List<Bitacora>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
-    public List getBitacorasByFecha(Date fecha) {
-        Query q = entityManager.createNamedQuery("Bitacora.findByBitFecha");
-        q.setParameter("bitFecha", fecha);
-        return q.getResultList();
+    public List<Bitacora> getBitacorasByFecha(Date fecha) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Bitacora.findByBitFecha");
+            q.setParameter("bitFecha", fecha);
+            return (List<Bitacora>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
-    public List getBitacorasByFuente(String fuente) {
-        Query q = entityManager.createNamedQuery("Bitacora.findByBitFuente");
-        q.setParameter("bitFuente", fuente);
-        return q.getResultList();
+    public List<Bitacora> getBitacorasByFuente(String fuente) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Bitacora.findByBitFuente");
+            q.setParameter("bitFuente", fuente);
+            return (List<Bitacora>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
-    public List getBitacorasByCategoria(String categoria) {
-        Query q = entityManager.createNamedQuery("Bitacora.findByBitCategoria");
-        q.setParameter("bitCategoria", categoria);
-        return q.getResultList();
+    public List<Bitacora> getBitacorasByCategoria(String categoria) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Bitacora.findByBitCategoria");
+            q.setParameter("bitCategoria", categoria);
+            return (List<Bitacora>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

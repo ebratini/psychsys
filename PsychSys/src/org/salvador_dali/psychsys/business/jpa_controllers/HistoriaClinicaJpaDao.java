@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.HistoriaClinicaDao;
@@ -59,26 +60,39 @@ public class HistoriaClinicaJpaDao extends JpaDao implements HistoriaClinicaDao 
 
     @Override
     public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante) {
+        EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createQuery("SELECT hc FROM HistoriaClinica hc WHERE hc.estudiante = :hicEstudiante");
             q.setParameter("hicEstudiante", estudiante);
             return (HistoriaClinica) q.getSingleResult();
         } catch (NoResultException nre) {
             return null;
+        } finally {
+            entityManager.close();
         }
     }
 
     @Override
     public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion) {
-        Query q = entityManager.createNamedQuery("HistoriaClinica.findByHicFechaCreacion");
-        q.setParameter("hicFechaCreacion", fechaCreacion);
-        return (List<HistoriaClinica>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("HistoriaClinica.findByHicFechaCreacion");
+            q.setParameter("hicFechaCreacion", fechaCreacion);
+            return (List<HistoriaClinica>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getHistoriasClinicasByStatus(char status) {
-        Query q = entityManager.createNamedQuery("HistoriaClinica.findByHicStatus");
-        q.setParameter("hicStatus", status);
-        return (List<HistoriaClinica>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("HistoriaClinica.findByHicStatus");
+            q.setParameter("hicStatus", status);
+            return (List<HistoriaClinica>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

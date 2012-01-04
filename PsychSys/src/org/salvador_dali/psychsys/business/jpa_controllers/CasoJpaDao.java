@@ -26,6 +26,7 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.CasoDao;
@@ -53,33 +54,51 @@ public class CasoJpaDao extends JpaDao implements CasoDao {
 
     @Override
     public List getCasosByFecha(Date fecha) {
-        Query q = entityManager.createNamedQuery("Caso.findByCsoFecha");
-        q.setParameter("csoFecha", fecha);
-        return (List<Caso>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Caso.findByCsoFecha");
+            q.setParameter("csoFecha", fecha);
+            return (List<Caso>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getCasosByAnioEscolar(String anioEscolar) {
-        Query q = entityManager.createNamedQuery("Caso.findByCsoAnioEscolar");
-        q.setParameter("csoAnioEscolar", anioEscolar);
-        return (List<Caso>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Caso.findByCsoAnioEscolar");
+            q.setParameter("csoAnioEscolar", anioEscolar);
+            return (List<Caso>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public Caso getCasoByReferimiento(Referimiento referimiento) {
+        EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createQuery("SELECT c FROM Caso c WHERE c.referimiento = :csoReferimiento");
             q.setParameter("csoReferimiento", referimiento);
             return (Caso) q.getSingleResult();
         } catch (NoResultException nre) {
             return null;
+        } finally {
+            entityManager.close();
         }
     }
 
     @Override
     public List getCasosByEstado(char estadoCaso) {
-        Query q = entityManager.createNamedQuery("Caso.findByCsoEstadoCaso");
-        q.setParameter("csoEstadoCaso", estadoCaso);
-        return (List<Caso>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Caso.findByCsoEstadoCaso");
+            q.setParameter("csoEstadoCaso", estadoCaso);
+            return (List<Caso>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }
