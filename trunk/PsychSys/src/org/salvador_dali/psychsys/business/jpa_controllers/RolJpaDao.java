@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.RolDao;
 import org.salvador_dali.psychsys.model.entities.Rol;
@@ -45,15 +46,25 @@ public class RolJpaDao extends JpaDao implements RolDao {
     
     @Override
     public Rol getRolByNombre(String nombre) {
-        Query q = entityManager.createNamedQuery("Rol.findByRolNombre");
-        q.setParameter("rolNombre", nombre);
-        return (Rol) q.getSingleResult();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Rol.findByRolNombre");
+            q.setParameter("rolNombre", nombre);
+            return (Rol) q.getSingleResult();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getRolesByStatus(char status) {
-        Query q = entityManager.createNamedQuery("Rol.findByRolStatus");
-        q.setParameter("rolStatus", status);
-        return q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Rol.findByRolStatus");
+            q.setParameter("rolStatus", status);
+            return q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

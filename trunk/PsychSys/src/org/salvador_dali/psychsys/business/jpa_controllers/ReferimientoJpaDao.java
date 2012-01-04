@@ -26,6 +26,7 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.ReferimientoDao;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
@@ -53,43 +54,74 @@ public class ReferimientoJpaDao extends JpaDao implements ReferimientoDao {
     
     @Override
     public List getReferimientosByFecha(Date fecha) {
-        Query q = entityManager.createNamedQuery("Referimiento.findByRefFecha");
-        q.setParameter("refFecha", fecha);
-        return (List<Referimiento>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Referimiento.findByRefFecha");
+            q.setParameter("refFecha", fecha);
+            return (List<Referimiento>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
+        
     }
 
     @Override
     public List getReferimientosByAnioEscolar(String anioEscolar) {
-        Query q = entityManager.createNamedQuery("Referimiento.findByRefAnioEscolar");
-        q.setParameter("refAnioEscolar", anioEscolar);
-        return (List<Referimiento>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Referimiento.findByRefAnioEscolar");
+            q.setParameter("refAnioEscolar", anioEscolar);
+            return (List<Referimiento>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getReferimientosByEstudiante(Estudiante estudiante) {
-        Query q = entityManager.createQuery("SELECT r FROM Referimiento r WHERE r.estudiante = :refEstudiante");
-        q.setParameter("refEstudiante", estudiante);
-        return (List<Referimiento>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createQuery("SELECT r FROM Referimiento r WHERE r.estudiante = :refEstudiante");
+            q.setParameter("refEstudiante", estudiante);
+            return (List<Referimiento>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getReferimientosByReferidor(String referidor) {
-        Query q = entityManager.createNamedQuery("Referimiento.findByRefNombreReferidor");
-        q.setParameter("refNombreReferidor", referidor);
-        return (List<Referimiento>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Referimiento.findByRefNombreReferidor");
+            q.setParameter("refNombreReferidor", referidor);
+            return (List<Referimiento>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
     
     @Override
     public List getReferimientosByUsuario(Usuario usuario) {
-        Query q = entityManager.createQuery("SELECT r FROM Referimiento r WHERE r.usuario = :refUsuario");
-        q.setParameter("refUsuario", usuario);
-        return (List<Referimiento>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createQuery("SELECT r FROM Referimiento r WHERE r.usuario = :refUsuario");
+            q.setParameter("refUsuario", usuario);
+            return (List<Referimiento>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getReferimientosByEstadoReferimiento(char status) {
-        Query q = entityManager.createNamedQuery("Referimiento.findByRefEstadoReferimiento");
-        q.setParameter("refEstadoReferimiento", status);
-        return (List<Referimiento>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Referimiento.findByRefEstadoReferimiento");
+            q.setParameter("refEstadoReferimiento", status);
+            return (List<Referimiento>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

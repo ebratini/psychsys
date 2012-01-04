@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -47,6 +48,7 @@ public class TutorJpaDao extends JpaDao implements TutorDao {
     
     @Override
     public void crearTutor(Tutor tutor) {
+        EntityManager entityManager = getEntityManager();
         EntityTransaction et = entityManager.getTransaction();
         try {
             et.begin();
@@ -55,38 +57,58 @@ public class TutorJpaDao extends JpaDao implements TutorDao {
         } catch (Exception exc) {
             et.rollback();
             throw new RuntimeException(exc);
+        } finally {
+            entityManager.close();
         }
     }
 
     @Override
     public Tutor getTutorByDNI(String dni) {
+        EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Tutor.findByTutDni");
             q.setParameter("tutDni", dni);
             return (Tutor) q.getSingleResult();
         } catch (NoResultException nre) {
             return null;
+        } finally {
+            entityManager.close();
         }
     }
 
     @Override
     public List getTutoresByPrimerApellido(String primerApellido) {
-        Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerApellido");
-        q.setParameter("tutPrimerApellido", primerApellido);
-        return (List<Tutor>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerApellido");
+            q.setParameter("tutPrimerApellido", primerApellido);
+            return (List<Tutor>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getTutoresByPrimerNombre(String primerNombre) {
-        Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerNombre");
-        q.setParameter("tutPrimerNombre", primerNombre);
-        return (List<Tutor>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerNombre");
+            q.setParameter("tutPrimerNombre", primerNombre);
+            return (List<Tutor>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getTutoresByStatus(char status) {
-        Query q = entityManager.createNamedQuery("Tutor.findByTutStatus");
-        q.setParameter("tutStatus", status);
-        return (List<Tutor>) q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Tutor.findByTutStatus");
+            q.setParameter("tutStatus", status);
+            return (List<Tutor>) q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

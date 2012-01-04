@@ -26,6 +26,7 @@ package org.salvador_dali.psychsys.business.jpa_controllers;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.UsuarioDao;
@@ -48,42 +49,63 @@ public class UsuarioJpaDao extends JpaDao implements UsuarioDao {
     
     @Override
     public List getUsuariosByRol(Rol rol) {
-        Query q = entityManager.createQuery("SELECT usr FROM Usuario usr WHERE usr.rol = :usrRol");
-        q.setParameter("usrRol", rol);
-        return q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createQuery("SELECT usr FROM Usuario usr WHERE usr.rol = :usrRol");
+            q.setParameter("usrRol", rol);
+            return q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public Usuario getUsuarioByLogin(String login) {
-        Usuario usr = null;
-        Query q = entityManager.createNamedQuery("Usuario.findByUsrLogin");
-        q.setParameter("usrLogin", login);
+        EntityManager entityManager = getEntityManager();
         try {
-            usr = (Usuario) q.getSingleResult();
+            Query q = entityManager.createNamedQuery("Usuario.findByUsrLogin");
+            q.setParameter("usrLogin", login);
+            return (Usuario) q.getSingleResult();
         } catch (NoResultException nre) {
+            return null;
+        } finally {
+            entityManager.close();
         }
-
-        return usr;
     }
 
     @Override
     public List getUsuariosByFechaCreacion(Date fechaCreacion) {
-        Query q = entityManager.createNamedQuery("Usuario.findByUsrFechaCreacion");
-        q.setParameter("usrFechaCreacion", fechaCreacion);
-        return q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Usuario.findByUsrFechaCreacion");
+            q.setParameter("usrFechaCreacion", fechaCreacion);
+            return q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getUsuariosByVerificado(char verificado) {
-        Query q = entityManager.createNamedQuery("Usuario.findByUsrVerificado");
-        q.setParameter("usrVerificado", verificado);
-        return q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Usuario.findByUsrVerificado");
+            q.setParameter("usrVerificado", verificado);
+            return q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override
     public List getUsuarioByStatus(char status) {
-        Query q = entityManager.createNamedQuery("Usuario.findByUsrStatus");
-        q.setParameter("usrStatus", status);
-        return q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createNamedQuery("Usuario.findByUsrStatus");
+            q.setParameter("usrStatus", status);
+            return q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 }

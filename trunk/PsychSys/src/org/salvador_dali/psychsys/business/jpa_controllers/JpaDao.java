@@ -42,7 +42,6 @@ public abstract class JpaDao implements Dao {
     public static final String PERSISTENCE_UNIT_NAME = "PsychSysPU";
     protected Class entityClass;
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-    protected EntityManager entityManager = emf.createEntityManager();
 
     // TODO: resolver problemas con el ParameterizedType
     public JpaDao() {
@@ -53,7 +52,6 @@ public abstract class JpaDao implements Dao {
     public JpaDao(Class entityClass, Map properties) {
         this(entityClass);
         emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME, properties);
-        entityManager = emf.createEntityManager(properties);
     }
     
     public JpaDao(Class entityClass) {
@@ -66,48 +64,69 @@ public abstract class JpaDao implements Dao {
     
     @Override
     public <E> void persist(E entity) {
-        EntityTransaction et = entityManager.getTransaction();
-        et.begin();
-        entityManager.persist(entity);
-        et.commit();
+        EntityManager entityManager = getEntityManager();
+        try {
+            EntityTransaction et = entityManager.getTransaction();
+            et.begin();
+            entityManager.persist(entity);
+            et.commit();
+        } finally {
+            entityManager.close();
+        }
     }
     
     @Override
     public List retrieve() {
-        Query q = entityManager.createQuery(String.format("SELECT e FROM %s e", entityClass.getSimpleName()));
-        return q.getResultList();
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query q = entityManager.createQuery(String.format("SELECT e FROM %s e", entityClass.getSimpleName()));
+            return q.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
     
     @Override
     public <E> E update(E entity) {
-        E updated = null;
-        EntityTransaction et = entityManager.getTransaction();
-        et.begin();
-        updated = entityManager.merge(entity);
-        et.commit();
-        return updated;
+        EntityManager entityManager = getEntityManager();
+        try {
+            E updated = null;
+            EntityTransaction et = entityManager.getTransaction();
+            et.begin();
+            updated = entityManager.merge(entity);
+            et.commit();
+            return updated;
+        } finally {
+            entityManager.close();
+        }
     }
     
     @Override
     public <E> void remove(E entity) {
-        EntityTransaction et = entityManager.getTransaction();
-        et.begin();
-        entityManager.remove(entity);
-        et.commit();
+        EntityManager entityManager = getEntityManager();
+        try {
+            EntityTransaction et = entityManager.getTransaction();
+            et.begin();
+            entityManager.remove(entity);
+            et.commit();
+        } finally {
+            entityManager.close();
+        }
     }
     
     @Override
     public <E, K> E findById(K id) {
-        return (E) entityManager.find(entityClass, id);
+        EntityManager entityManager = getEntityManager();
+        try {
+            return (E) entityManager.find(entityClass, id);
+        } finally {
+            entityManager.close();
+        }
     }
     
     public void close() {
         if (emf != null) {
             emf.close();
-        }
-        
-        if (entityManager != null) {
-            entityManager.close();
         }
     }
     
@@ -120,6 +139,7 @@ public abstract class JpaDao implements Dao {
     }
 
     private List findEntities(boolean all, int maxResults, int firstResult) {
+        EntityManager entityManager = getEntityManager();
         try {
             CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
             cq.select(cq.from(entityClass));
@@ -135,6 +155,7 @@ public abstract class JpaDao implements Dao {
     }
     
     public int getEntityCount() {
+        EntityManager entityManager = getEntityManager();
         try {
             CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
             Root rt = cq.from(entityClass);

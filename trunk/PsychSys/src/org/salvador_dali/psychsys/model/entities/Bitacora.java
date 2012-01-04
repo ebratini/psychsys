@@ -54,7 +54,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Bitacora.findByBitFuente", query = "SELECT b FROM Bitacora b WHERE b.bitFuente = :bitFuente"),
     @NamedQuery(name = "Bitacora.findByBitCategoria", query = "SELECT b FROM Bitacora b WHERE b.bitCategoria = :bitCategoria"),
     @NamedQuery(name = "Bitacora.findByBitDescripcion", query = "SELECT b FROM Bitacora b WHERE b.bitDescripcion = :bitDescripcion"),
-    @NamedQuery(name = "Bitacora.findByUsuario", query = "SELECT bit FROM Bitacora ubp WHERE bit.usuario = :bitUsuario")})
+    @NamedQuery(name = "Bitacora.findByUsuario", query = "SELECT bit FROM Bitacora bit WHERE bit.usuario = :bitUsuario")})
 public class Bitacora implements Serializable {
 
     private static final long serialVersionUID = 1L;
