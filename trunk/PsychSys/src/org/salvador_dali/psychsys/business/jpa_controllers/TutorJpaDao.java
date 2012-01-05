@@ -77,7 +77,7 @@ public class TutorJpaDao extends JpaDao implements TutorDao {
     }
 
     @Override
-    public List getTutoresByPrimerApellido(String primerApellido) {
+    public List<Tutor> getTutoresByPrimerApellido(String primerApellido) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerApellido");
@@ -89,7 +89,7 @@ public class TutorJpaDao extends JpaDao implements TutorDao {
     }
 
     @Override
-    public List getTutoresByPrimerNombre(String primerNombre) {
+    public List<Tutor> getTutoresByPrimerNombre(String primerNombre) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Tutor.findByTutPrimerNombre");
@@ -101,7 +101,7 @@ public class TutorJpaDao extends JpaDao implements TutorDao {
     }
 
     @Override
-    public List getTutoresByStatus(char status) {
+    public List<Tutor> getTutoresByStatus(char status) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Tutor.findByTutStatus");

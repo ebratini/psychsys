@@ -34,5 +34,5 @@ public interface PermisoDao extends Dao {
 
     public Permiso getPermisoByNombre(String nombre);
 
-    public List getPermisosByStatus(char status);
+    public List<Permiso> getPermisosByStatus(char status);
 }

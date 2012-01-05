@@ -63,7 +63,7 @@ public class PruebaPsicologicaJpaDao extends JpaDao implements PruebaPsicologica
     }
     
     @Override
-    public List getPruebasPsicologicasByEstudiante(Estudiante estudiante) {
+    public List<PruebaPsicologica> getPruebasPsicologicasByEstudiante(Estudiante estudiante) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createQuery("SELECT pps FROM PruebaPsicologica pps WHERE pps.estudiante = :ppsEstudiante");
@@ -75,7 +75,7 @@ public class PruebaPsicologicaJpaDao extends JpaDao implements PruebaPsicologica
     }
 
     @Override
-    public List getPruebasPsicologicasByCaso(Caso caso) {
+    public List<PruebaPsicologica> getPruebasPsicologicasByCaso(Caso caso) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createQuery("SELECT pps FROM PruebaPsicologica pps WHERE pps.caso = :ppsCaso");
@@ -87,7 +87,7 @@ public class PruebaPsicologicaJpaDao extends JpaDao implements PruebaPsicologica
     }
 
     @Override
-    public List getPruebasPsicologicasByFechaAplicacion(Date fechaAplicacion) {
+    public List<PruebaPsicologica> getPruebasPsicologicasByFechaAplicacion(Date fechaAplicacion) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("PruebaPsicologica.findByPpsFechaAplicacion");
@@ -99,7 +99,7 @@ public class PruebaPsicologicaJpaDao extends JpaDao implements PruebaPsicologica
     }
 
     @Override
-    public List getPruebasPsicologicasByNombrePrueba(String nombrePrueba) {
+    public List<PruebaPsicologica> getPruebasPsicologicasByNombrePrueba(String nombrePrueba) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("PruebaPsicologica.findByPpsNombrePrueba");
@@ -111,7 +111,7 @@ public class PruebaPsicologicaJpaDao extends JpaDao implements PruebaPsicologica
     }
 
     @Override
-    public List getPruebasPsicologicasByCorreccionAutomatica(char correcionAutomatica) {
+    public List<PruebaPsicologica> getPruebasPsicologicasByCorreccionAutomatica(char correcionAutomatica) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("PruebaPsicologica.findByPpsCorrecionAutomatica");

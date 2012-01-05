@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2011 Edwin Bratini <edwin.bratini@gmail.com>.
+ * Copyright 2012 Edwin Bratini <edwin.bratini@gmail.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,8 +31,8 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import org.salvador_dali.psychsys.business.exceptions.IllegalOrphanException;
-import org.salvador_dali.psychsys.business.exceptions.NonexistentEntityException;
+import org.salvador_dali.psychsys.business.validators.exceptions.IllegalOrphanException;
+import org.salvador_dali.psychsys.business.validators.exceptions.NonexistentEntityException;
 import org.salvador_dali.psychsys.model.entities.Tutor;
 import org.salvador_dali.psychsys.model.entities.TutorEstudiante;
 import java.util.ArrayList;
@@ -218,4 +218,5 @@ public class TutorJpaController implements Serializable {
             em.close();
         }
     }
+    
 }

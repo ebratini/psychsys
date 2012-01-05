@@ -25,6 +25,7 @@ package org.salvador_dali.psychsys.model;
 
 import java.util.List;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
+import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;
 
 /**
  *
@@ -32,5 +33,5 @@ import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
  */
 public interface UbicacionPruebaDao extends Dao {
 
-    public List getUbicacionesPruebasByPruebaPsicologica(PruebaPsicologica pruebaPsicologica);
+    public List<UbicacionPrueba> getUbicacionesPruebasByPruebaPsicologica(PruebaPsicologica pruebaPsicologica);
 }

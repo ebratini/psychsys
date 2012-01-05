@@ -57,12 +57,12 @@ public class RolJpaDao extends JpaDao implements RolDao {
     }
 
     @Override
-    public List getRolesByStatus(char status) {
+    public List<Rol> getRolesByStatus(char status) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Rol.findByRolStatus");
             q.setParameter("rolStatus", status);
-            return q.getResultList();
+            return (List<Rol>) q.getResultList();
         } finally {
             entityManager.close();
         }

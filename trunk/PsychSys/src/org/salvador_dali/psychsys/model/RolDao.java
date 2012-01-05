@@ -34,5 +34,5 @@ public interface RolDao extends Dao {
 
     public Rol getRolByNombre(String nombre);
 
-    public List getRolesByStatus(char status);
+    public List<Rol> getRolesByStatus(char status);
 }

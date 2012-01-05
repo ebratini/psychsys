@@ -23,6 +23,7 @@
  */
 package org.salvador_dali.psychsys.business.jpa_controllers;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -63,7 +64,7 @@ public abstract class JpaDao implements Dao {
     }
     
     @Override
-    public <E> void persist(E entity) {
+    public <E extends Serializable> void persist(E entity) {
         EntityManager entityManager = getEntityManager();
         try {
             EntityTransaction et = entityManager.getTransaction();
@@ -87,7 +88,7 @@ public abstract class JpaDao implements Dao {
     }
     
     @Override
-    public <E> E update(E entity) {
+    public <E extends Serializable> E update(E entity) {
         EntityManager entityManager = getEntityManager();
         try {
             E updated = null;
@@ -102,7 +103,7 @@ public abstract class JpaDao implements Dao {
     }
     
     @Override
-    public <E> void remove(E entity) {
+    public <E extends Serializable> void remove(E entity) {
         EntityManager entityManager = getEntityManager();
         try {
             EntityTransaction et = entityManager.getTransaction();
@@ -115,7 +116,7 @@ public abstract class JpaDao implements Dao {
     }
     
     @Override
-    public <E, K> E findById(K id) {
+    public <E extends Serializable, K> E findById(K id) {
         EntityManager entityManager = getEntityManager();
         try {
             return (E) entityManager.find(entityClass, id);

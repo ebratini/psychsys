@@ -62,7 +62,7 @@ public class HistoriaClinicaJpaDao extends JpaDao implements HistoriaClinicaDao 
     public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante) {
         EntityManager entityManager = getEntityManager();
         try {
-            Query q = entityManager.createQuery("SELECT hc FROM HistoriaClinica hc WHERE hc.estudiante = :hicEstudiante");
+            Query q = entityManager.createQuery("SELECT hic FROM HistoriaClinica hic WHERE hic.estudiante = :hicEstudiante");
             q.setParameter("hicEstudiante", estudiante);
             return (HistoriaClinica) q.getSingleResult();
         } catch (NoResultException nre) {
@@ -73,7 +73,7 @@ public class HistoriaClinicaJpaDao extends JpaDao implements HistoriaClinicaDao 
     }
 
     @Override
-    public List getHistoriasClinicasByFechaCreacion(Date fechaCreacion) {
+    public List<HistoriaClinica> getHistoriasClinicasByFechaCreacion(Date fechaCreacion) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("HistoriaClinica.findByHicFechaCreacion");
@@ -85,7 +85,7 @@ public class HistoriaClinicaJpaDao extends JpaDao implements HistoriaClinicaDao 
     }
 
     @Override
-    public List getHistoriasClinicasByStatus(char status) {
+    public List<HistoriaClinica> getHistoriasClinicasByStatus(char status) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("HistoriaClinica.findByHicStatus");

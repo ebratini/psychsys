@@ -34,9 +34,9 @@ import org.salvador_dali.psychsys.model.entities.TutorEstudiante;
  */
 public interface TutorEstudianteDao extends Dao {
 
-    public List getTutorEstudianteByTutId(int tutId);
+    public List<TutorEstudiante> getTutorEstudianteByTutId(int tutId);
 
-    public List getTutorEstudianteByEstId(int estId);
+    public List<TutorEstudiante> getTutorEstudianteByEstId(int estId);
     
     public TutorEstudiante getTutorEstudiante(Tutor tutor, Estudiante estudiante);
 }
