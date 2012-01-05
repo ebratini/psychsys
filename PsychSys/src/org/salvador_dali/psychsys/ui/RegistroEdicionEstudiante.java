@@ -35,11 +35,14 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import org.salvador_dali.psychsys.business.exceptions.PreexistingEntityException;
 import org.salvador_dali.psychsys.business.validators.DateFieldValidator;
 import org.salvador_dali.psychsys.business.DateUtils;
 import org.salvador_dali.psychsys.business.validators.EmptyFieldValidator;
@@ -404,7 +407,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
                                 .addComponent(spnLugarEntreHermanos, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                                 .addComponent(spnHermanos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, Short.MAX_VALUE))))
                     .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         pnlInfoPersonalLayout.setVerticalGroup(
             pnlInfoPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,11 +629,11 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 602, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 610, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -664,7 +667,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(651, Short.MAX_VALUE)
+                .addContainerGap(659, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelar)
@@ -1132,7 +1135,13 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
 
     private void agregarTutor() {
         Tutor tutAgregar = tutores.get(tutores.size() - 1);
-        new TutorEstudianteJpaDao().persist(new TutorEstudiante(new TutorEstudiantePK(tutAgregar.getTutId(), estAEditar.getEstId())));
+        try {
+            new TutorEstudianteJpaDao().persist(new TutorEstudiante(new TutorEstudiantePK(tutAgregar.getTutId(), estAEditar.getEstId())));
+        } catch (PreexistingEntityException ex) {
+            Logger.getLogger(RegistroEdicionEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(RegistroEdicionEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void removerTutores() {
