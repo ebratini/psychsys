@@ -33,8 +33,6 @@ import org.salvador_dali.psychsys.model.entities.Referimiento;
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public interface CasoDao extends Dao {
-
-    public void crearCaso(Caso caso);
     
     public List<Caso> getCasosByFecha(Date fecha);
 

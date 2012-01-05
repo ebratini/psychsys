@@ -25,15 +25,12 @@ package org.salvador_dali.psychsys.model;
 
 import java.util.List;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
-import org.salvador_dali.psychsys.model.entities.Tutor;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public interface EstudianteDao extends Dao {
-
-    public void crearEstudiante(Estudiante estudiante, List<Tutor> tutores);
     
     public Estudiante getEstudianteByDNI(String dni);
 

@@ -31,8 +31,6 @@ import org.salvador_dali.psychsys.model.entities.Tutor;
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public interface TutorDao extends Dao {
-
-    public void crearTutor(Tutor tutor);
     
     public Tutor getTutorByDNI(String dni);
 
