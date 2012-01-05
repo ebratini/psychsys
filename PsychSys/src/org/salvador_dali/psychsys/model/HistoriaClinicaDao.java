@@ -23,7 +23,6 @@
  */
 package org.salvador_dali.psychsys.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
@@ -34,10 +33,6 @@ import org.salvador_dali.psychsys.model.entities.HistoriaClinica;
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public interface HistoriaClinicaDao extends Dao {
-
-    public void crearHistoriaClinica(HistoriaClinica historiaClinica);
-    
-    public void crearHistoriaClinica(HistoriaClinica historiaClinica, List<Serializable> antecedentes);
     
     public HistoriaClinica getHistoriaClinicaByEstudiante(Estudiante estudiante);
     

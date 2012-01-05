@@ -23,6 +23,7 @@
  */
 package org.salvador_dali.psychsys.business.jpa_controllers;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +44,23 @@ public class UsuarioJpaDao extends JpaDao implements UsuarioDao {
         super(Usuario.class);
     }
 
-    public UsuarioJpaDao(Class entityClass, Map properties) {
+    public UsuarioJpaDao(Map properties) {
         super(Usuario.class, properties);
+    }
+    
+    @Override
+    public <E extends Serializable> void persist(E entity) {
+        super.persist(entity);
+    }
+
+    @Override
+    public <E extends Serializable> E update(E entity) {
+        return super.update(entity);
+    }
+
+    @Override
+    public <E extends Serializable> void remove(E entity) {
+        super.remove(entity);
     }
     
     @Override
