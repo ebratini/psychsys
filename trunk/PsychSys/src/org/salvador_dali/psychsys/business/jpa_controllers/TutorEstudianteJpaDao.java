@@ -23,7 +23,9 @@
  */
 package org.salvador_dali.psychsys.business.jpa_controllers;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.TutorEstudianteDao;
@@ -36,6 +38,29 @@ import org.salvador_dali.psychsys.model.entities.TutorEstudiante;
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public class TutorEstudianteJpaDao extends JpaDao implements TutorEstudianteDao {
+
+    public TutorEstudianteJpaDao() {
+        super(TutorEstudiante.class);
+    }
+
+    public TutorEstudianteJpaDao(Map properties) {
+        super(TutorEstudiante.class, properties);
+    }
+    
+    @Override
+    public <E extends Serializable> void persist(E entity) {
+        super.persist(entity);
+    }
+
+    @Override
+    public <E extends Serializable> E update(E entity) {
+        return super.update(entity);
+    }
+
+    @Override
+    public <E extends Serializable> void remove(E entity) {
+        super.remove(entity);
+    }
 
     @Override
     public List<TutorEstudiante> getTutorEstudianteByTutId(int tutId) {

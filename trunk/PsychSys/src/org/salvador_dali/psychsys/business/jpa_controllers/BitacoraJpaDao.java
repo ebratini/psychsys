@@ -23,8 +23,10 @@
  */
 package org.salvador_dali.psychsys.business.jpa_controllers;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.salvador_dali.psychsys.model.BitacoraDao;
@@ -37,6 +39,29 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  */
 public class BitacoraJpaDao extends JpaDao implements BitacoraDao {
 
+    public BitacoraJpaDao() {
+        super(Bitacora.class);
+    }
+
+    public BitacoraJpaDao(Map properties) {
+        super(Bitacora.class, properties);
+    }
+
+    @Override
+    public <E extends Serializable> void persist(E entity) {
+        super.persist(entity);
+    }
+
+    @Override
+    public <E extends Serializable> E update(E entity) {
+        return super.update(entity);
+    }
+
+    @Override
+    public <E extends Serializable> void remove(E entity) {
+        super.remove(entity);
+    }
+    
     @Override
     public List<Bitacora> getBitacorasByUsuario(Usuario usuario) {
         EntityManager entityManager = getEntityManager();

@@ -23,6 +23,7 @@
  */
 package org.salvador_dali.psychsys.business.jpa_controllers;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -40,8 +41,23 @@ public class RolJpaDao extends JpaDao implements RolDao {
         super(Rol.class);
     }
 
-    public RolJpaDao(Class entityClass, Map properties) {
-        super(entityClass, properties);
+    public RolJpaDao(Map properties) {
+        super(Rol.class, properties);
+    }
+    
+    @Override
+    public <E extends Serializable> void persist(E entity) {
+        super.persist(entity);
+    }
+
+    @Override
+    public <E extends Serializable> E update(E entity) {
+        return super.update(entity);
+    }
+
+    @Override
+    public <E extends Serializable> void remove(E entity) {
+        super.remove(entity);
     }
     
     @Override

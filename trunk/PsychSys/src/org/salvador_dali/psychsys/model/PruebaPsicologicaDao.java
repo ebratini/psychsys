@@ -28,17 +28,12 @@ import java.util.List;
 import org.salvador_dali.psychsys.model.entities.Caso;
 import org.salvador_dali.psychsys.model.entities.Estudiante;
 import org.salvador_dali.psychsys.model.entities.PruebaPsicologica;
-import org.salvador_dali.psychsys.model.entities.UbicacionPrueba;
 
 /**
  *
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public interface PruebaPsicologicaDao extends Dao {
-
-    public void crearPruebaPsicologica(PruebaPsicologica pruebaPsicologica);
-    
-    public void crearPruebaPsicologica(PruebaPsicologica pruebaPsicologica, List<UbicacionPrueba> ubicacionesPrueba);
     
     public List<PruebaPsicologica> getPruebasPsicologicasByEstudiante(Estudiante estudiante);
 

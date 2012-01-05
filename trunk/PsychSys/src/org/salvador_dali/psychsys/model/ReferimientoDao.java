@@ -34,8 +34,6 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public interface ReferimientoDao extends Dao {
-
-    public void crearReferimiento(Referimiento referimiento);
     
     public List<Referimiento> getReferimientosByFecha(Date fecha);
 
