@@ -41,8 +41,8 @@ import org.salvador_dali.psychsys.model.Dao;
  */
 public abstract class JpaDao implements Dao {
     public static final String PERSISTENCE_UNIT_NAME = "PsychSysPU";
-    protected Class entityClass;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    private Class entityClass;
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
     // TODO: resolver problemas con el ParameterizedType
     public JpaDao() {
