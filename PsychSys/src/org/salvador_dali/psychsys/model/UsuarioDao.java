@@ -34,13 +34,13 @@ import org.salvador_dali.psychsys.model.entities.Usuario;
  */
 public interface UsuarioDao extends Dao {
 
-    public List getUsuariosByRol(Rol rol);
+    public List<Usuario> getUsuariosByRol(Rol rol);
+    
+    public Usuario getUsuarioByLogin(String login);    
 
-    public Usuario getUsuarioByLogin(String login);
+    public List<Usuario> getUsuariosByFechaCreacion(Date fechaCreacion);
 
-    public List getUsuariosByFechaCreacion(Date fechaCreacion);
+    public List<Usuario> getUsuariosByVerificado(char verificado);
 
-    public List getUsuariosByVerificado(char verificado);
-
-    public List getUsuarioByStatus(char status);
+    public List<Usuario> getUsuarioByStatus(char status);
 }

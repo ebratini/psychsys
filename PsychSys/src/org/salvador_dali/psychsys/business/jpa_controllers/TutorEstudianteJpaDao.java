@@ -38,24 +38,24 @@ import org.salvador_dali.psychsys.model.entities.TutorEstudiante;
 public class TutorEstudianteJpaDao extends JpaDao implements TutorEstudianteDao {
 
     @Override
-    public List getTutorEstudianteByTutId(int tutId) {
+    public List<TutorEstudiante> getTutorEstudianteByTutId(int tutId) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("TutorEstudiante.findByTutId");
             q.setParameter("tutId", tutId);
-            return q.getResultList();
+            return (List<TutorEstudiante>) q.getResultList();
         } finally {
             entityManager.close();
         }
     }
 
     @Override
-    public List getTutorEstudianteByEstId(int estId) {
+    public List<TutorEstudiante> getTutorEstudianteByEstId(int estId) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("TutorEstudiante.findByEstId");
             q.setParameter("estId", estId);
-            return q.getResultList();
+            return (List<TutorEstudiante>) q.getResultList();
         } finally {
             entityManager.close();
         }

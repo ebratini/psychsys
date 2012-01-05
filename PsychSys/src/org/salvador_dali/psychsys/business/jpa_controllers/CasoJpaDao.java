@@ -53,7 +53,7 @@ public class CasoJpaDao extends JpaDao implements CasoDao {
     }
 
     @Override
-    public List getCasosByFecha(Date fecha) {
+    public List<Caso> getCasosByFecha(Date fecha) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Caso.findByCsoFecha");
@@ -65,7 +65,7 @@ public class CasoJpaDao extends JpaDao implements CasoDao {
     }
 
     @Override
-    public List getCasosByAnioEscolar(String anioEscolar) {
+    public List<Caso> getCasosByAnioEscolar(String anioEscolar) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Caso.findByCsoAnioEscolar");
@@ -91,7 +91,7 @@ public class CasoJpaDao extends JpaDao implements CasoDao {
     }
 
     @Override
-    public List getCasosByEstado(char estadoCaso) {
+    public List<Caso> getCasosByEstado(char estadoCaso) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Caso.findByCsoEstadoCaso");

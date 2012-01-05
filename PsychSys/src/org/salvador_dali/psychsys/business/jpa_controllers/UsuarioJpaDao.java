@@ -48,12 +48,12 @@ public class UsuarioJpaDao extends JpaDao implements UsuarioDao {
     }
     
     @Override
-    public List getUsuariosByRol(Rol rol) {
+    public List<Usuario> getUsuariosByRol(Rol rol) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createQuery("SELECT usr FROM Usuario usr WHERE usr.rol = :usrRol");
             q.setParameter("usrRol", rol);
-            return q.getResultList();
+            return (List<Usuario>) q.getResultList();
         } finally {
             entityManager.close();
         }
@@ -74,36 +74,36 @@ public class UsuarioJpaDao extends JpaDao implements UsuarioDao {
     }
 
     @Override
-    public List getUsuariosByFechaCreacion(Date fechaCreacion) {
+    public List<Usuario> getUsuariosByFechaCreacion(Date fechaCreacion) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Usuario.findByUsrFechaCreacion");
             q.setParameter("usrFechaCreacion", fechaCreacion);
-            return q.getResultList();
+            return (List<Usuario>) q.getResultList();
         } finally {
             entityManager.close();
         }
     }
 
     @Override
-    public List getUsuariosByVerificado(char verificado) {
+    public List<Usuario> getUsuariosByVerificado(char verificado) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Usuario.findByUsrVerificado");
             q.setParameter("usrVerificado", verificado);
-            return q.getResultList();
+            return (List<Usuario>) q.getResultList();
         } finally {
             entityManager.close();
         }
     }
 
     @Override
-    public List getUsuarioByStatus(char status) {
+    public List<Usuario> getUsuarioByStatus(char status) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Usuario.findByUsrStatus");
             q.setParameter("usrStatus", status);
-            return q.getResultList();
+            return (List<Usuario>) q.getResultList();
         } finally {
             entityManager.close();
         }

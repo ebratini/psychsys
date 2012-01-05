@@ -66,7 +66,7 @@ public class EstudianteJpaDao extends JpaDao implements EstudianteDao {
     }
 
     @Override
-    public List getEstudiantesByPrimerApellido(String primerApellido) {
+    public List<Estudiante> getEstudiantesByPrimerApellido(String primerApellido) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerApellido");
@@ -78,7 +78,7 @@ public class EstudianteJpaDao extends JpaDao implements EstudianteDao {
     }
 
     @Override
-    public List getEstudiantesByPrimerNombre(String primerNombre) {
+    public List<Estudiante> getEstudiantesByPrimerNombre(String primerNombre) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Estudiante.findByEstPrimerNombre");
@@ -90,7 +90,7 @@ public class EstudianteJpaDao extends JpaDao implements EstudianteDao {
     }
 
     @Override
-    public List getEstudiantesByStatus(char status) {
+    public List<Estudiante> getEstudiantesByStatus(char status) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Estudiante.findByEstStatus");
@@ -102,7 +102,7 @@ public class EstudianteJpaDao extends JpaDao implements EstudianteDao {
     }
 
     @Override
-    public List getEstudiantesByNombreCompleto(String primerNombre, String primerApellido) {
+    public List<Estudiante> getEstudiantesByNombreCompleto(String primerNombre, String primerApellido) {
         EntityManager entityManager = getEntityManager();
         try {
             String strQuery = "SELECT e FROM Estudiante e WHERE e.estPrimerNombre = :primerNombre";

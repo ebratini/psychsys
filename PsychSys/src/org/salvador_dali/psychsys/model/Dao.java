@@ -23,6 +23,7 @@
  */
 package org.salvador_dali.psychsys.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -30,13 +31,13 @@ import java.util.List;
  * @author Edwin Bratini <edwin.bratini@gmail.com>
  */
 public interface Dao {
-    public <E> void persist(E entity);
+    public <E extends Serializable> void persist(E entity);
 
     public List retrieve();
 
-    public <E> E update(E entity);
+    public <E extends Serializable> E update(E entity);
 
-    public <E> void remove(E entity);
+    public <E extends Serializable> void remove(E entity);
 
-    public <E, K> E findById(K id);
+    public <E extends Serializable, K> E findById(K id);
 }

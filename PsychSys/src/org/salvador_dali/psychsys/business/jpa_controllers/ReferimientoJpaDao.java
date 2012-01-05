@@ -53,7 +53,7 @@ public class ReferimientoJpaDao extends JpaDao implements ReferimientoDao {
     }
     
     @Override
-    public List getReferimientosByFecha(Date fecha) {
+    public List<Referimiento> getReferimientosByFecha(Date fecha) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Referimiento.findByRefFecha");
@@ -66,7 +66,7 @@ public class ReferimientoJpaDao extends JpaDao implements ReferimientoDao {
     }
 
     @Override
-    public List getReferimientosByAnioEscolar(String anioEscolar) {
+    public List<Referimiento> getReferimientosByAnioEscolar(String anioEscolar) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Referimiento.findByRefAnioEscolar");
@@ -78,7 +78,7 @@ public class ReferimientoJpaDao extends JpaDao implements ReferimientoDao {
     }
 
     @Override
-    public List getReferimientosByEstudiante(Estudiante estudiante) {
+    public List<Referimiento> getReferimientosByEstudiante(Estudiante estudiante) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createQuery("SELECT r FROM Referimiento r WHERE r.estudiante = :refEstudiante");
@@ -90,7 +90,7 @@ public class ReferimientoJpaDao extends JpaDao implements ReferimientoDao {
     }
 
     @Override
-    public List getReferimientosByReferidor(String referidor) {
+    public List<Referimiento> getReferimientosByReferidor(String referidor) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Referimiento.findByRefNombreReferidor");
@@ -102,7 +102,7 @@ public class ReferimientoJpaDao extends JpaDao implements ReferimientoDao {
     }
     
     @Override
-    public List getReferimientosByUsuario(Usuario usuario) {
+    public List<Referimiento> getReferimientosByUsuario(Usuario usuario) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createQuery("SELECT r FROM Referimiento r WHERE r.usuario = :refUsuario");
@@ -114,7 +114,7 @@ public class ReferimientoJpaDao extends JpaDao implements ReferimientoDao {
     }
 
     @Override
-    public List getReferimientosByEstadoReferimiento(char status) {
+    public List<Referimiento> getReferimientosByEstadoReferimiento(char status) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Referimiento.findByRefEstadoReferimiento");

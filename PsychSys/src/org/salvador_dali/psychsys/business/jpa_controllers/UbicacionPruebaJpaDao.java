@@ -46,12 +46,12 @@ public class UbicacionPruebaJpaDao extends JpaDao implements UbicacionPruebaDao 
     }
 
     @Override
-    public List getUbicacionesPruebasByPruebaPsicologica(PruebaPsicologica pruebaPsicologica) {
+    public List<UbicacionPrueba> getUbicacionesPruebasByPruebaPsicologica(PruebaPsicologica pruebaPsicologica) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createQuery("SELECT ubp FROM UbicacionPrueba ubp WHERE ubp.pruebaPsicologica = :ubpPruebaPsicologica");
             q.setParameter("ubpPruebaPsicologica", pruebaPsicologica);
-            return q.getResultList();
+            return (List<UbicacionPrueba>) q.getResultList();
         } finally {
             entityManager.close();
         }

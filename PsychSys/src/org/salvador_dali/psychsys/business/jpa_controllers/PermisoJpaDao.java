@@ -48,12 +48,12 @@ public class PermisoJpaDao extends JpaDao implements PermisoDao {
     }
 
     @Override
-    public List getPermisosByStatus(char status) {
+    public List<Permiso> getPermisosByStatus(char status) {
         EntityManager entityManager = getEntityManager();
         try {
             Query q = entityManager.createNamedQuery("Permiso.findByPerStatus");
             q.setParameter("perStatus", status);
-            return q.getResultList();
+            return (List<Permiso>) q.getResultList();
         } finally {
             entityManager.close();
         }
