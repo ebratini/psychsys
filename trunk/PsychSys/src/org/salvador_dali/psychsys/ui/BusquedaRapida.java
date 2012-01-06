@@ -32,13 +32,14 @@ package org.salvador_dali.psychsys.ui;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import org.salvador_dali.psychsys.business.EntitySearcher;
+import org.salvador_dali.psychsys.ui.EntitySearcher;
 import org.salvador_dali.psychsys.business.validators.NumberFieldValidator;
 
 /**
@@ -60,7 +61,7 @@ public class BusquedaRapida extends javax.swing.JDialog {
     public BusquedaRapida(EntitySearcher entitySearcher, Frame owner, boolean modal) {
         super(owner, modal);
         this.entitySearcher = entitySearcher;
-        initComponents();
+        //initComponents();
     }
     
     /** This method is called from within the constructor to
@@ -121,6 +122,7 @@ public class BusquedaRapida extends javax.swing.JDialog {
 
         lblEntidades.setText("Estudiantes");
 
+        scrEntidades.setAutoscrolls(true);
         scrEntidades.setName("scrEntidades"); // NOI18N
 
         tblEntidades.setModel(new javax.swing.table.DefaultTableModel(
@@ -263,6 +265,10 @@ public class BusquedaRapida extends javax.swing.JDialog {
     public void setEntitySearcher(EntitySearcher entitySearcher) {
         this.entitySearcher = entitySearcher;
     }
+    
+    public void setEntitySearcher(org.salvador_dali.psychsys.business.EntitySearcher entitySearcher) {
+        throw new UnsupportedOperationException();
+    }
 
     public Object getEntitySelectedId() {
         return entitySelectedId;
@@ -316,8 +322,35 @@ private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GE
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         // customizando el jtable y evitando que puedan mover las columnas
-        if (entitySearcher != null) {
+        /*if (entitySearcher != null) {
             cmbCampoBuscar.setModel(entitySearcher.getDefComboBoxModel());
+            tblEntidades.setColumnModel(entitySearcher.getDefTableColumnModel());
+            tblEntidades.setModel(entitySearcher.getDefTableModel());
+        } else {
+            tblEntidades.setColumnModel(new DefaultTableColumnModel() {
+
+                @Override
+                public void moveColumn(int columnIndex, int newIndex) {
+                    if (columnIndex == 0 || newIndex == 0) {
+                        return;
+                    }
+                    super.moveColumn(columnIndex, newIndex);
+                }
+            });
+
+            DefaultTableModel dtm = new DefaultTableModel(new Object[][]{{}},
+                    new Object[]{"Id", "Col 2", "Col 3"}) {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int mColIndex) {
+                    return false;
+                }                
+            };
+
+            tblEntidades.setModel(dtm);
+        }*/
+        if (entitySearcher != null) {
+            cmbCampoBuscar.setModel(new DefaultComboBoxModel(entitySearcher.getFieldsToSearch().toArray()));
             tblEntidades.setColumnModel(entitySearcher.getDefTableColumnModel());
             tblEntidades.setModel(entitySearcher.getDefTableModel());
         } else {
@@ -396,8 +429,10 @@ private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GE
                 JOptionPane.showMessageDialog(this, "Este campo solo acepta numeros", "Busqueda", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        }        
-        TableModel tm = getEntitySearcher().doSearch(cmbCampoBuscar.getSelectedItem().toString(), txtBusqueda.getText());
+        }
+        entitySearcher.doSearch(cmbCampoBuscar.getSelectedItem().toString(), txtBusqueda.getText());
+        //TableModel tm = getEntitySearcher().doSearch(cmbCampoBuscar.getSelectedItem().toString(), txtBusqueda.getText());
+        TableModel tm = entitySearcher.getTableModelFromSearch();
         if (tm != null) {
             tblEntidades.setModel(tm);
             tblEntidades.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
