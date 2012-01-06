@@ -955,7 +955,7 @@ public class RegistroEdicionEstudiante extends javax.swing.JFrame {
         // TODO add your handling code here:
         BusquedaRapida brt = new BusquedaRapida(this, true);
         brt.setTitle("Buscar Tutor");
-        brt.setEntitySearcher(new EntitySearcher.TutorBasicEntitySearcher());
+        brt.setEntitySearcher(new org.salvador_dali.psychsys.ui.EntitySearcher.TutorSearcher());
         brt.getLblEntidades().setText("Tutores");
         brt.setLocationRelativeTo(this);
         brt.setVisible(true);

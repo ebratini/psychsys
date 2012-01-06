@@ -153,6 +153,7 @@
         </Component>
         <Container class="javax.swing.JScrollPane" name="scrEntidades">
           <Properties>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="name" type="java.lang.String" value="scrEntidades" noResource="true"/>
           </Properties>
 
